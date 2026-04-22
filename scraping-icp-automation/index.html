@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scraping ICP Automation — bigbox · corpo</title>
+<style>
+  :root {
+    --teal: #2aa3b1;
+    --teal-dark: #1f8591;
+    --purple: #5f2c77;
+    --navy: #03035e;
+    --ink: #0f0f1a;
+    --gray: #6b7280;
+    --gray-soft: #f5f5f7;
+    --border: rgba(3, 3, 94, 0.08);
+    --card: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    height: 100%; overflow: hidden;
+    font-family: "Sofia Pro", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #000; color: var(--ink);
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  .deck { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: flex-start;
+    padding: 11vh 6vw 5vh;
+    opacity: 0; pointer-events: none; transition: opacity 0.45s ease;
+    background: #fff;
+  }
+  .slide.active { opacity: 1; pointer-events: auto; }
+  .slide.teal { background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%); color: #fff; }
+  .slide.purple { background: linear-gradient(135deg, var(--purple) 0%, #3f1b52 100%); color: #fff; }
+  .slide.white { background: #fff; color: var(--ink); }
+
+  .brand-mark {
+    position: absolute; top: 3vh; left: 6vw;
+    font-weight: 500; font-size: 1rem; letter-spacing: 0.02em; opacity: 0.85;
+  }
+  .brand-mark .dot {
+    display: inline-block; width: 5px; height: 5px; background: currentColor;
+    border-radius: 50%; margin: 0 8px; vertical-align: middle; transform: translateY(-2px);
+  }
+  .slide-num {
+    position: absolute; top: 3vh; right: 6vw;
+    font-weight: 400; font-size: 0.85rem; letter-spacing: 0.08em; opacity: 0.7;
+  }
+
+  .eyebrow {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; margin-bottom: 18px; opacity: 0.7;
+  }
+  h1.title {
+    font-size: clamp(1.9rem, 3.4vw, 2.9rem);
+    font-weight: 600; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 14px;
+  }
+  h1.title .accent { color: var(--teal); }
+  .teal h1.title .accent, .purple h1.title .accent {
+    color: #fff; border-bottom: 3px solid rgba(255,255,255,0.4); padding-bottom: 2px;
+  }
+  p.lead {
+    font-size: clamp(1rem, 1.35vw, 1.2rem); font-weight: 300; line-height: 1.5;
+    max-width: 900px; opacity: 0.88;
+  }
+
+  /* Hero */
+  .hero { display: flex; flex-direction: column; justify-content: center; flex: 1; }
+  .hero-eyebrow {
+    font-size: 0.85rem; letter-spacing: 0.22em; text-transform: uppercase;
+    opacity: 0.75; margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(2.8rem, 6.5vw, 5.2rem); font-weight: 700; line-height: 1.05;
+    letter-spacing: -0.03em; margin-bottom: 22px;
+  }
+  .hero h1 .hl { color: #fff; border-bottom: 4px solid rgba(255,255,255,0.45); padding-bottom: 4px; }
+  .hero-sub { font-size: clamp(1.1rem, 1.6vw, 1.4rem); font-weight: 300; line-height: 1.5; opacity: 0.88; max-width: 820px; }
+  .hero-meta { margin-top: 36px; display: flex; gap: 30px; opacity: 0.85; font-size: 0.9rem; }
+  .hero-meta span strong { display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.65; margin-bottom: 4px; }
+
+  /* Problem/Stats */
+  .two-col {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px;
+    align-items: center; margin-top: 24px;
+  }
+  .bignum {
+    font-size: clamp(5rem, 11vw, 8.5rem); font-weight: 700; line-height: 0.95;
+    color: var(--teal); letter-spacing: -0.04em; display: flex; align-items: flex-start; gap: 10px;
+  }
+  .bignum small { font-size: 0.25em; color: var(--navy); font-weight: 500; margin-top: 22px; opacity: 0.65; max-width: 260px; line-height: 1.3; }
+  .solution-points { display: flex; flex-direction: column; gap: 14px; }
+  .solution-points .pt { display: flex; gap: 12px; align-items: flex-start; }
+  .pt-icon {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: rgba(42, 163, 177, 0.12); color: var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.95rem; flex-shrink: 0; font-weight: 700;
+  }
+  .pt-text { font-size: 1rem; font-weight: 400; line-height: 1.45; color: var(--ink); padding-top: 4px; }
+  .pt-text strong { color: var(--navy); font-weight: 600; }
+
+  /* Flow 12 stages */
+  .stages-grid {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+  .stage-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 12px 10px 14px;
+    display: flex; flex-direction: column; gap: 6px;
+    position: relative;
+    min-height: 108px;
+  }
+  .stage-card .sc-num {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+    opacity: 0.55;
+  }
+  .stage-card .sc-title {
+    font-size: 0.78rem; font-weight: 600; line-height: 1.2;
+  }
+  .stage-card .sc-desc {
+    font-size: 0.65rem; font-weight: 400; line-height: 1.3; opacity: 0.75;
+  }
+  .stage-card.done {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .stage-card .sc-status {
+    position: absolute; top: 8px; right: 8px;
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em;
+    opacity: 0.9;
+  }
+  .stage-card.done .sc-status { color: #b8ffec; }
+  .stage-card.todo .sc-status { color: #ffd98a; }
+  .stage-card.human {
+    background: #fff; color: var(--purple);
+    border-color: #fff;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+  .stage-card.human .sc-status { color: var(--purple); }
+
+  .stages-legend {
+    margin-top: 18px;
+    display: flex; gap: 22px; font-size: 0.72rem; opacity: 0.85;
+    justify-content: center;
+  }
+  .stages-legend .lg-item { display: flex; align-items: center; gap: 8px; }
+  .lg-dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+  .lg-dot.done { background: rgba(255,255,255,0.5); }
+  .lg-dot.todo { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.4); }
+  .lg-dot.human { background: #fff; }
+
+  /* Bucket matrix */
+  .matrix-wrap { margin-top: 24px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 44px; }
+  .matrix-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    background: #fff; border-radius: 14px; overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+  }
+  .matrix-table th, .matrix-table td {
+    padding: 12px 14px; text-align: left; font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .matrix-table th {
+    background: var(--gray-soft); color: var(--navy);
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .matrix-table tr:last-child td { border-bottom: none; }
+  .matrix-table td:first-child { font-weight: 600; color: var(--navy); }
+  .matrix-table .chip {
+    display: inline-block;
+    font-size: 0.7rem; font-weight: 600;
+    padding: 3px 8px; border-radius: 6px;
+    background: rgba(42,163,177,0.12); color: var(--teal-dark);
+    margin-right: 4px; margin-bottom: 3px;
+  }
+
+  .phases-panel {
+    background: var(--gray-soft);
+    border-radius: 14px;
+    padding: 22px 24px;
+    border: 1px solid var(--border);
+  }
+  .phases-panel h3 {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--purple); margin-bottom: 14px;
+  }
+  .phase-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+  }
+  .phase-row:first-of-type { border-top: none; padding-top: 0; }
+  .phase-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--purple); color: #fff;
+    font-size: 0.8rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .phase-row.active .phase-num { background: var(--teal); }
+  .phase-text { flex: 1; }
+  .phase-text .pt-title { font-size: 0.95rem; font-weight: 600; color: var(--navy); line-height: 1.2; }
+  .phase-text .pt-sub { font-size: 0.78rem; color: var(--gray); line-height: 1.35; margin-top: 3px; }
+  .phase-row.active .pt-title::after {
+    content: "EN CONSTRUCCIÓN";
+    font-size: 0.55rem; font-weight: 700; letter-spacing: 0.15em;
+    background: var(--teal); color: #fff;
+    padding: 3px 7px; border-radius: 4px; margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  /* Sprints timeline */
+  .sprints-grid {
+    margin-top: 22px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .sprint-card {
+    background: #fff;
+    border: 1.5px solid var(--border); border-radius: 14px;
+    padding: 18px 20px;
+    display: flex; flex-direction: column; gap: 8px;
+    position: relative;
+  }
+  .sprint-card.active { border-color: var(--teal); background: rgba(42,163,177,0.04); }
+  .sprint-card .s-label {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--teal);
+  }
+  .sprint-card .s-title {
+    font-size: 1.05rem; font-weight: 600; color: var(--navy); line-height: 1.2;
+  }
+  .sprint-card .s-when { font-size: 0.78rem; color: var(--gray); margin-bottom: 6px; }
+  .sprint-card ul { list-style: none; }
+  .sprint-card li {
+    font-size: 0.82rem; line-height: 1.4; color: var(--ink);
+    padding-left: 16px; position: relative; margin-bottom: 3px;
+  }
+  .sprint-card li::before {
+    content: "→"; position: absolute; left: 0; color: var(--teal); font-weight: 700;
+  }
+  .sprint-card.active .s-label::after {
+    content: "AHORA"; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.15em;
+    background: var(--teal); color: #fff; padding: 2px 7px; border-radius: 4px; margin-left: 8px;
+  }
+
+  /* Stack / costos */
+  .impact-grid-4 {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 28px;
+  }
+  .impact-card {
+    background: #fff; border-radius: 14px; padding: 22px 22px 24px;
+    border: 1px solid var(--border); box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+    display: flex; flex-direction: column;
+  }
+  .i-label {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 10px;
+  }
+  .i-num {
+    font-size: clamp(1.9rem, 3.1vw, 2.6rem);
+    font-weight: 700; color: var(--navy); letter-spacing: -0.02em; line-height: 1;
+    margin-bottom: 10px;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .i-num small { font-size: 0.38em; font-weight: 500; opacity: 0.55; letter-spacing: 0.04em; }
+  .i-text { font-size: 0.85rem; color: var(--gray); line-height: 1.45; }
+
+  .stack-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px;
+  }
+  .stack-card {
+    background: var(--gray-soft);
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .stack-card .sc-label {
+    font-size: 0.64rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--purple); margin-bottom: 6px;
+  }
+  .stack-card .sc-name {
+    font-size: 1rem; font-weight: 600; color: var(--navy); line-height: 1.2;
+  }
+  .stack-card .sc-use {
+    font-size: 0.75rem; color: var(--gray); margin-top: 5px; line-height: 1.35;
+  }
+
+  /* Resources */
+  .section-heading {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--teal); margin: 24px 0 12px;
+  }
+  .resources-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .resource-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 18px;
+    text-decoration: none; color: inherit;
+    display: flex; flex-direction: column; gap: 4px;
+    transition: all 0.2s ease;
+  }
+  .resource-card:hover {
+    border-color: var(--teal); box-shadow: 0 4px 18px rgba(42,163,177,0.12);
+    transform: translateY(-2px);
+  }
+  .resource-flag { font-size: 1.3rem; }
+  .resource-country { font-size: 0.9rem; font-weight: 600; color: var(--navy); }
+  .resource-meta { font-size: 0.7rem; color: var(--gray); }
+  .resource-link {
+    font-size: 0.72rem; color: var(--teal); font-weight: 600;
+    letter-spacing: 0.08em; margin-top: 4px;
+  }
+
+  /* Countries */
+  .countries { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .country {
+    background: rgba(255,255,255,0.12); color: #fff;
+    padding: 7px 14px; border-radius: 100px; font-size: 0.85rem;
+    border: 1px solid rgba(255,255,255,0.25); font-weight: 500;
+  }
+  .country.active { background: #fff; color: var(--purple); font-weight: 700; }
+
+  /* Nav */
+  .nav {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 10px; z-index: 100;
+  }
+  .nav .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.15);
+    cursor: pointer; transition: all 0.2s ease;
+  }
+  .nav .dot.active { background: var(--teal); width: 24px; border-radius: 4px; }
+  .hint {
+    position: fixed; bottom: 8px; right: 12px;
+    font-size: 0.7rem; color: var(--gray); opacity: 0.5; letter-spacing: 0.05em;
+  }
+  body.cursor-hidden { cursor: none; }
+  body.cursor-hidden .nav, body.cursor-hidden .hint { opacity: 0; transition: opacity 0.5s ease; }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- Slide 1 — Hero -->
+  <section class="slide teal active" data-idx="0">
+    <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
+    <div class="slide-num">01 / 06</div>
+    <div class="hero">
+      <div class="hero-eyebrow">Piloto AR · Fase 1 Marketing</div>
+      <h1>Scraping <span class="hl">ICP</span> Automation</h1>
+      <div class="hero-sub">
+        Pipeline automatizado de outbound: de la búsqueda de contactos que cumplen el ICP
+        al primer reply del prospecto en su inbox. Objetivo anual: <strong>15% de los leads
+        calificados</strong> provenientes de esta fuente automatizada.
+      </div>
+      <div class="hero-meta">
+        <span><strong>Deadline piloto</strong>2026-04-23</span>
+        <span><strong>País</strong>Argentina</span>
+        <span><strong>Volumen target</strong>100-200 leads / semana</span>
+        <span><strong>Costo marginal</strong>~$0,12 / contacto</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 2 — Proceso de 12 etapas -->
+  <section class="slide white" data-idx="1">
+    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
+    <div class="slide-num" style="color: var(--gray)">02 / 06</div>
+    <div class="eyebrow" style="color: var(--teal)">El proceso</div>
+    <h1 class="title">12 etapas <span class="accent">end-to-end</span></h1>
+    <p class="lead" style="color: var(--gray)">
+      Desde que Apollo encuentra un candidato ICP hasta que un ejecutivo toma una conversación.
+      Cada etapa es modular, parametrizada por país, y se automatiza por sprints.
+    </p>
+
+    <div class="stages-grid" style="background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%); padding: 18px; border-radius: 14px; color: #fff;">
+      <div class="stage-card done"><div class="sc-status">✓ HECHO</div><div class="sc-num">01</div><div class="sc-title">Sourcing</div><div class="sc-desc">Apollo busca candidatos</div></div>
+      <div class="stage-card done"><div class="sc-status">✓ HECHO</div><div class="sc-num">02</div><div class="sc-title">Enrichment</div><div class="sc-desc">Revela email + LinkedIn</div></div>
+      <div class="stage-card done"><div class="sc-status">✓ HECHO</div><div class="sc-num">03</div><div class="sc-title">Dedupe</div><div class="sc-desc">Cruza vs HubSpot</div></div>
+      <div class="stage-card done"><div class="sc-status">✓ HECHO</div><div class="sc-num">04</div><div class="sc-title">Review Queue</div><div class="sc-desc">Carga al Google Sheet</div></div>
+      <div class="stage-card human"><div class="sc-status">★ MANUAL</div><div class="sc-num">05</div><div class="sc-title">Review humana</div><div class="sc-desc">Cesar aprueba / rechaza</div></div>
+      <div class="stage-card todo"><div class="sc-status">○ EN BUILD</div><div class="sc-num">06</div><div class="sc-title">Research signals</div><div class="sc-desc">Posts + news empresa</div></div>
+      <div class="stage-card todo"><div class="sc-status">○ EN BUILD</div><div class="sc-num">07</div><div class="sc-title">Copy generation</div><div class="sc-desc">4 emails personalizados</div></div>
+      <div class="stage-card human"><div class="sc-status">★ MANUAL</div><div class="sc-num">7.5</div><div class="sc-title">Copy QA</div><div class="sc-desc">Cesar valida copy</div></div>
+      <div class="stage-card todo"><div class="sc-status">○ EN BUILD</div><div class="sc-num">08</div><div class="sc-title">Sync HubSpot</div><div class="sc-desc">Round robin ejecutivos</div></div>
+      <div class="stage-card todo"><div class="sc-status">○ EN BUILD</div><div class="sc-num">09</div><div class="sc-title">Sequence</div><div class="sc-desc">4 emails D0/D3/D7/D14</div></div>
+      <div class="stage-card todo"><div class="sc-status">○ SPRINT 2</div><div class="sc-num">10</div><div class="sc-title">Handoff ventas</div><div class="sc-desc">Reply → stage activo</div></div>
+      <div class="stage-card todo"><div class="sc-status">○ SPRINT 3</div><div class="sc-num">11-12</div><div class="sc-title">Nurture + Report</div><div class="sc-desc">Rechazados + Dashboard</div></div>
+    </div>
+
+    <div class="stages-legend" style="color: var(--navy);">
+      <div class="lg-item"><span class="lg-dot done" style="background: rgba(0,0,0,0.12);"></span> Hecho</div>
+      <div class="lg-item"><span class="lg-dot human" style="background: var(--purple);"></span> Siempre manual</div>
+      <div class="lg-item"><span class="lg-dot todo" style="background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.2);"></span> Por construir</div>
+    </div>
+  </section>
+
+  <!-- Slide 3 — Segmento AR: matriz seniority × tamaño + fases -->
+  <section class="slide white" data-idx="2">
+    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
+    <div class="slide-num" style="color: var(--gray)">03 / 06</div>
+    <div class="eyebrow" style="color: var(--teal)">Segmentación</div>
+    <h1 class="title">Quién <span class="accent">targeteamos</span></h1>
+    <p class="lead" style="color: var(--gray)">
+      17 industrias ICP, 3 áreas funcionales en fases, matriz por tamaño de empresa que ajusta el seniority
+      para maximizar tasa de respuesta. C-suite queda fuera — los managers operativos son quienes responden.
+    </p>
+
+    <div class="matrix-wrap">
+      <div>
+        <div class="section-heading" style="margin-top: 0;">Matriz seniority × tamaño de empresa</div>
+        <table class="matrix-table">
+          <thead>
+            <tr><th>Bucket</th><th>Empleados</th><th>Seniorities targetables</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mid</td><td>250 – 500</td>
+              <td><span class="chip">Manager</span><span class="chip">Director</span><span class="chip">Head</span><span class="chip">VP</span></td>
+            </tr>
+            <tr>
+              <td>Upper-mid</td><td>501 – 2.000</td>
+              <td><span class="chip">Manager</span><span class="chip">Director</span><span class="chip">Head</span></td>
+            </tr>
+            <tr>
+              <td>Large</td><td>2.001 – 10.000</td>
+              <td><span class="chip">Manager</span><span class="chip">Head</span></td>
+            </tr>
+            <tr>
+              <td>Mega</td><td>10.001+</td>
+              <td><span class="chip">Manager operativo</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="phases-panel">
+        <h3>Fases de áreas funcionales</h3>
+        <div class="phase-row active">
+          <div class="phase-num">1</div>
+          <div class="phase-text">
+            <div class="pt-title">Marketing</div>
+            <div class="pt-sub">Trade, Brand, CRM, Digital, Loyalty, Marcom, Growth. 43 variantes de puestos.</div>
+          </div>
+        </div>
+        <div class="phase-row">
+          <div class="phase-num">2</div>
+          <div class="phase-text">
+            <div class="pt-title">RRHH</div>
+            <div class="pt-sub">Post Sprint 3. Compensación, Beneficios, Cultura, Engagement.</div>
+          </div>
+        </div>
+        <div class="phase-row">
+          <div class="phase-num">3</div>
+          <div class="phase-text">
+            <div class="pt-title">Ventas + CX</div>
+            <div class="pt-sub">Última fase. Trade Sales, Customer Success, Key Accounts.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-heading" style="color: var(--purple);">Industrias ICP (17)</div>
+    <div class="countries" style="margin-top: 0;">
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Banking</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Seguros</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Servicios Tecnológicos</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Consultoría y Auditoría</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Industria</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Agencia</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Petróleo y Energía</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Consumo Masivo</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Laboratorios y Farmacéuticas</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Software</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Salud</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Transporte y Logística</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Automotriz</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Cámaras</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Telecomunicaciones</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Cosmética</span>
+      <span class="country" style="background: rgba(42,163,177,0.08); color: var(--navy); border-color: var(--border);">Retail</span>
+    </div>
+  </section>
+
+  <!-- Slide 4 — Round robin + cold email strategy -->
+  <section class="slide purple" data-idx="3">
+    <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
+    <div class="slide-num">04 / 06</div>
+    <div class="eyebrow">Outreach</div>
+    <h1 class="title">Round robin y <span class="accent">reply-first</span></h1>
+    <p class="lead">
+      Cada lead aprobado se asigna por rotación a un ejecutivo comercial del país. HubSpot Sequence
+      envía desde su inbox. El reply cae directo en su casilla — el ejecutivo que hizo el first touch es
+      quien toma la conversación.
+    </p>
+
+    <div class="two-col" style="margin-top: 30px;">
+      <div>
+        <div class="section-heading" style="color: #fff; opacity: 0.8;">Los 4 emails de la secuencia</div>
+        <div class="solution-points">
+          <div class="pt"><div class="pt-icon" style="background: rgba(255,255,255,0.15); color: #fff;">D0</div><div class="pt-text" style="color: #fff;"><strong style="color: #fff;">Primer touch</strong> · Hook personalizado con signal del contacto o empresa + pregunta abierta.</div></div>
+          <div class="pt"><div class="pt-icon" style="background: rgba(255,255,255,0.15); color: #fff;">D3</div><div class="pt-text" style="color: #fff;"><strong style="color: #fff;">Follow-up 1</strong> · Nuevo ángulo: caso de uso similar en su industria.</div></div>
+          <div class="pt"><div class="pt-icon" style="background: rgba(255,255,255,0.15); color: #fff;">D7</div><div class="pt-text" style="color: #fff;"><strong style="color: #fff;">Follow-up 2</strong> · Prueba concreta: resultado de un cliente del mismo rubro.</div></div>
+          <div class="pt"><div class="pt-icon" style="background: rgba(255,255,255,0.15); color: #fff;">D14</div><div class="pt-text" style="color: #fff;"><strong style="color: #fff;">Breakup</strong> · Cierre honesto: "¿Lo dejamos acá o te mando info?"</div></div>
+        </div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; padding: 26px 28px;">
+        <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7; margin-bottom: 14px;">Reglas clave</div>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div>
+            <div style="font-size: 0.95rem; font-weight: 600; margin-bottom: 3px;">Objetivo = respuesta</div>
+            <div style="font-size: 0.82rem; opacity: 0.85; line-height: 1.4;">Sin links de calendario. Son contactos fríos — la conversación por email genera trust antes del meeting.</div>
+          </div>
+          <div>
+            <div style="font-size: 0.95rem; font-weight: 600; margin-bottom: 3px;">Research → personalización</div>
+            <div style="font-size: 0.82rem; opacity: 0.85; line-height: 1.4;">Cada email se escribe con señales reales del contacto (posts, milestones) y empresa (news, vacantes).</div>
+          </div>
+          <div>
+            <div style="font-size: 0.95rem; font-weight: 600; margin-bottom: 3px;">30 emails/día por ejecutivo</div>
+            <div style="font-size: 0.82rem; opacity: 0.85; line-height: 1.4;">Tope para proteger deliverability. A/B test de subject lines desde día 1.</div>
+          </div>
+          <div>
+            <div style="font-size: 0.95rem; font-weight: 600; margin-bottom: 3px;">SLA reply: 24hs hábiles</div>
+            <div style="font-size: 0.82rem; opacity: 0.85; line-height: 1.4;">Si el ejecutivo no responde, escalación a Cesar + Country Manager.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5 — Roadmap -->
+  <section class="slide white" data-idx="4">
+    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
+    <div class="slide-num" style="color: var(--gray)">05 / 06</div>
+    <div class="eyebrow" style="color: var(--teal)">Roadmap</div>
+    <h1 class="title">De <span class="accent">piloto manual</span> a pipeline automatizado multi-país</h1>
+    <p class="lead" style="color: var(--gray)">
+      6 sprints. Arrancamos con batches chicos corridos a mano para validar calidad. Automatización progresiva:
+      semana 3 el pipeline corre solo, la única intervención humana sigue siendo la review del sheet.
+    </p>
+
+    <div class="sprints-grid">
+      <div class="sprint-card active">
+        <div class="s-label">Sprint 1</div>
+        <div class="s-title">Piloto manual end-to-end</div>
+        <div class="s-when">Esta semana · AR Marketing</div>
+        <ul>
+          <li>Etapas 1-4 funcionando</li>
+          <li>Build 6-9: research, copy, sync HS, sequence</li>
+          <li>Primer batch real de 50 leads al inbox de prospectos</li>
+        </ul>
+      </div>
+      <div class="sprint-card">
+        <div class="s-label">Sprint 2</div>
+        <div class="s-title">Automatización básica</div>
+        <div class="s-when">Próxima semana</div>
+        <ul>
+          <li>n8n orquesta el pipeline</li>
+          <li>Handoff a ventas automático</li>
+          <li>Alerting en Gmail + Google Chat</li>
+        </ul>
+      </div>
+      <div class="sprint-card">
+        <div class="s-label">Sprint 3</div>
+        <div class="s-title">Recurrencia + reporting</div>
+        <div class="s-when">Semana 3</div>
+        <ul>
+          <li>Cron semanal lunes 08hs AR</li>
+          <li>Nurture rechazados + dashboard</li>
+          <li>Tab anual del sheet</li>
+        </ul>
+      </div>
+      <div class="sprint-card">
+        <div class="s-label">Sprint 4</div>
+        <div class="s-title">Fase 2 — RRHH</div>
+        <div class="s-when">Mes 2</div>
+        <ul>
+          <li>Segmento 02 AR con puestos RRHH</li>
+          <li>Mismo pipeline, nuevo batch_id</li>
+          <li>Marketing + RRHH en paralelo</li>
+        </ul>
+      </div>
+      <div class="sprint-card">
+        <div class="s-label">Sprint 5</div>
+        <div class="s-title">Fase 3 — Ventas + CX</div>
+        <div class="s-when">Mes 3</div>
+        <ul>
+          <li>Segmento 03 AR</li>
+          <li>3 áreas funcionales activas en AR</li>
+          <li>Round robin más denso</li>
+        </ul>
+      </div>
+      <div class="sprint-card">
+        <div class="s-label">Sprint 6+</div>
+        <div class="s-title">Multi-país</div>
+        <div class="s-when">Mes 4+</div>
+        <ul>
+          <li>Replicar a CL, MX, PE, UY</li>
+          <li>Sheet + spec + rotation por país</li>
+          <li>5 países × 3 áreas = pipeline regional</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6 — Stack, costos, accesos -->
+  <section class="slide white" data-idx="5">
+    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
+    <div class="slide-num" style="color: var(--gray)">06 / 06</div>
+    <div class="eyebrow" style="color: var(--teal)">Stack, costos y accesos</div>
+    <h1 class="title">Infraestructura <span class="accent">del pipeline</span></h1>
+
+    <div class="stack-row">
+      <div class="stack-card">
+        <div class="sc-label">Data source</div>
+        <div class="sc-name">Apollo.io</div>
+        <div class="sc-use">Search + enrichment + firmográficos. Plan Professional ya pago.</div>
+      </div>
+      <div class="stack-card">
+        <div class="sc-label">Signals enrichment</div>
+        <div class="sc-name">Vibe Prospecting</div>
+        <div class="sc-use">News empresa + eventos. ~$150/mes por país a full volumen.</div>
+      </div>
+      <div class="stack-card">
+        <div class="sc-label">LLM</div>
+        <div class="sc-name">Claude Haiku 4.5</div>
+        <div class="sc-use">Research + copy generation. ~$40/mes por país.</div>
+      </div>
+      <div class="stack-card">
+        <div class="sc-label">Orquestación</div>
+        <div class="sc-name">n8n + HubSpot</div>
+        <div class="sc-use">Pipeline + Sequences + Workflows. Sin costo adicional.</div>
+      </div>
+    </div>
+
+    <div class="impact-grid-4">
+      <div class="impact-card">
+        <div class="i-label">Costo por contacto</div>
+        <div class="i-num">$0,12<small>con research + copy completo</small></div>
+        <div class="i-text">Apollo cubierto por plan. Vibe + Claude Haiku son los costos variables.</div>
+      </div>
+      <div class="impact-card">
+        <div class="i-label">Volumen piloto</div>
+        <div class="i-num">100-200<small>leads / semana AR</small></div>
+        <div class="i-text">Primera fase. Escalable a 500/sem por país a full régimen.</div>
+      </div>
+      <div class="impact-card">
+        <div class="i-label">Tiempo humano</div>
+        <div class="i-num">2<small>horas semanales (multi-país)</small></div>
+        <div class="i-text">Solo review del sheet + validación sampling de copy. Sin tiempo operativo en sourcing ni envío.</div>
+      </div>
+      <div class="impact-card">
+        <div class="i-label">Target anual</div>
+        <div class="i-num">15%<small>de leads calificados 2026</small></div>
+        <div class="i-text">Objetivo anual #4 del equipo. Base de sustento para el crecimiento inbound del año.</div>
+      </div>
+    </div>
+
+    <div class="section-heading" style="color: var(--purple);">Accesos clave</div>
+    <div class="resources-grid">
+      <a class="resource-card" href="https://docs.google.com/spreadsheets/d/1WTIxAnzhJ506f45kFk0Iu6uI4C_wPN8GEqslD3eTglg/edit" target="_blank" rel="noopener">
+        <div class="resource-flag">📋</div>
+        <div class="resource-country">Review Queue — Argentina</div>
+        <div class="resource-meta">Google Sheet · 34 columnas con dropdowns</div>
+        <div class="resource-link">Abrir sheet →</div>
+      </a>
+      <a class="resource-card" href="https://github.com/marketingb2b-Bigbox/bigbox-presentaciones" target="_blank" rel="noopener">
+        <div class="resource-flag">📘</div>
+        <div class="resource-country">Runbook del proceso</div>
+        <div class="resource-meta">docs/process.md · fuente de verdad</div>
+        <div class="resource-link">Ver en repo →</div>
+      </a>
+      <a class="resource-card" href="https://app.hubspot.com/contacts/" target="_blank" rel="noopener">
+        <div class="resource-flag">🎯</div>
+        <div class="resource-country">HubSpot AR</div>
+        <div class="resource-meta">4 properties custom · Lead source + batch + industria</div>
+        <div class="resource-link">Abrir HubSpot →</div>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<nav class="nav" id="nav"></nav>
+<div class="hint">← → navegar · F fullscreen</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const nav = document.getElementById('nav');
+  let current = 0;
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    nav.appendChild(dot);
+  });
+  const dots = nav.querySelectorAll('.dot');
+  function goTo(i) {
+    if (i < 0 || i >= slides.length) return;
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    const isDark = slides[current].classList.contains('teal') || slides[current].classList.contains('purple');
+    dots.forEach(d => {
+      if (isDark) {
+        if (!d.classList.contains('active')) d.style.background = 'rgba(255,255,255,0.3)';
+        else d.style.background = '#fff';
+      } else {
+        if (!d.classList.contains('active')) d.style.background = 'rgba(0,0,0,0.15)';
+        else d.style.background = '#2aa3b1';
+      }
+    });
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+    else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+    else if (e.key === 'Home') goTo(0);
+    else if (e.key === 'End') goTo(slides.length - 1);
+  });
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.nav') || e.target.closest('.hint') || e.target.closest('a')) return;
+    goTo(current + 1);
+  });
+  document.addEventListener('dblclick', () => {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  });
+  let cursorTimer;
+  document.addEventListener('mousemove', () => {
+    document.body.classList.remove('cursor-hidden');
+    clearTimeout(cursorTimer);
+    cursorTimer = setTimeout(() => document.body.classList.add('cursor-hidden'), 3000);
+  });
+  goTo(0);
+</script>
+
+</body></html>
