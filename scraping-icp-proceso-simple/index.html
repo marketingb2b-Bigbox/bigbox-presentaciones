@@ -167,66 +167,104 @@
     content: "✓"; color: #fff; opacity: 1; font-weight: 700;
   }
 
-  /* === 5 pasos simples === */
-  .steps {
-    display: flex; flex-direction: column; gap: 18px;
+  /* === Pipeline 3 fases === */
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
-  .step {
+  .phase {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 18px;
-    padding: 28px 32px;
+    padding: 24px 24px 28px;
     box-shadow: var(--shadow-sm);
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 28px;
-    align-items: start;
-    transition: transform 0.2s ease;
+    display: flex; flex-direction: column;
+    position: relative;
   }
-  .step:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+  .phase-header {
+    display: flex; align-items: center; gap: 12px;
+    padding-bottom: 14px; margin-bottom: 16px;
+    border-bottom: 1px dashed var(--border);
   }
-  .step-num {
-    width: 80px; height: 80px;
+  .phase-tag {
     background: var(--teal-soft);
     color: var(--teal-dark);
-    border-radius: 20px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2.2rem; font-weight: 700;
-    letter-spacing: -0.02em;
-  }
-  .step.human .step-num {
-    background: var(--teal);
-    color: #fff;
-    box-shadow: 0 6px 16px rgba(42,163,177,0.30);
-  }
-  .step-body h3 {
-    font-size: 1.2rem; font-weight: 700;
-    color: var(--navy); margin-bottom: 6px;
-    line-height: 1.25;
-  }
-  .step-tag {
-    display: inline-block;
     font-size: 0.66rem; font-weight: 700;
     letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--teal); margin-bottom: 10px;
-    background: var(--teal-soft);
-    padding: 3px 10px; border-radius: 100px;
+    padding: 4px 10px; border-radius: 100px;
   }
-  .step-body p {
-    font-size: 0.98rem; color: var(--gray);
-    line-height: 1.6;
+  .phase-title {
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--navy); line-height: 1.2;
   }
-  .step-body .step-analogy {
-    margin-top: 12px;
-    padding: 12px 16px;
+  .phase-sub {
+    font-size: 0.78rem; color: var(--gray);
+    margin-top: 2px;
+  }
+  .stages { display: flex; flex-direction: column; gap: 14px; flex: 1; }
+  .stage {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .stage-num {
+    width: 36px; height: 36px;
     background: var(--gray-soft);
+    border: 1px solid var(--border);
     border-radius: 10px;
-    font-size: 0.88rem; color: var(--ink);
-    border-left: 3px solid var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: var(--navy);
+    font-size: 0.92rem;
   }
-  .step-body .step-analogy strong { color: var(--teal-dark); font-weight: 700; }
+  .stage.accent .stage-num {
+    background: var(--teal);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(42,163,177,0.25);
+  }
+  .stage.human .stage-num {
+    background: #fff;
+    color: var(--teal-dark);
+    border: 2px solid var(--teal);
+  }
+  .stage-body { padding-top: 4px; }
+  .stage-title {
+    font-size: 0.94rem; font-weight: 700;
+    color: var(--navy); line-height: 1.3;
+  }
+  .stage-desc {
+    font-size: 0.84rem; color: var(--gray);
+    line-height: 1.5; margin-top: 4px;
+  }
+
+  .review-banner {
+    margin-top: 24px;
+    background: linear-gradient(135deg, #fff 0%, var(--teal-soft) 100%);
+    border: 2px dashed var(--teal);
+    border-radius: 16px;
+    padding: 22px 28px;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+  .review-banner .rb-icon {
+    width: 56px; height: 56px;
+    background: var(--teal); color: #fff;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; font-weight: 700;
+  }
+  .review-banner h4 {
+    font-size: 1rem; font-weight: 700; color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .review-banner p {
+    font-size: 0.9rem; color: var(--gray); line-height: 1.5;
+  }
+  .review-banner strong { color: var(--teal-dark); font-weight: 700; }
 
   /* === Por qué importa === */
   .why-grid {
@@ -382,15 +420,16 @@
   @media (max-width: 720px) {
     .page { padding: 0 16px 60px; }
     .hero { margin: 0 -16px 40px; padding: 50px 24px 44px; border-radius: 0 0 20px 20px; }
-    .compare, .why-grid { grid-template-columns: 1fr; }
-    .step { grid-template-columns: 1fr; gap: 14px; }
-    .step-num { width: 64px; height: 64px; font-size: 1.8rem; }
+    .compare, .why-grid, .pipeline { grid-template-columns: 1fr; }
     .analogy-card, .sources-card { padding: 24px 22px; }
     .sources-grid { grid-template-columns: 1fr; }
+    .review-banner { grid-template-columns: 1fr; text-align: center; }
+    .review-banner .rb-icon { margin: 0 auto; }
     .closing { padding: 28px 22px; }
   }
   @media (max-width: 980px) and (min-width: 721px) {
     .sources-grid { grid-template-columns: repeat(2, 1fr); }
+    .pipeline { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -454,63 +493,110 @@
     </div>
   </section>
 
-  <!-- Sección 3: Cómo funciona en 5 pasos -->
+  <!-- Sección 3: Cómo funciona -->
   <section class="section">
     <div class="section-head">
-      <div class="section-eyebrow">El proceso, simple</div>
-      <h2>Cómo funciona en <span class="accent">5 pasos</span></h2>
-      <p class="lead">El sistema completo tiene varios pasos técnicos, pero acá está la versión que cualquiera puede entender. Lo importante es saber dónde participa una persona y dónde el sistema se ocupa solo.</p>
+      <div class="section-eyebrow">El proceso</div>
+      <h2>De cero a primer mensaje en <span class="accent">3 fases</span></h2>
+      <p class="lead">El proceso se agrupa en tres fases: identificación (encontrar a las empresas y contactos correctos), preparación (entender al contacto y escribir el mensaje) y envío (mandarlo y conectarlo con el ejecutivo del país).</p>
     </div>
 
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <span class="step-tag">El sistema busca</span>
-          <h3>Encuentra a las empresas y contactos que nos interesan</h3>
-          <p>El sistema accede a una base global de empresas de los 5 países donde operamos y filtra solo las que tienen el perfil ideal: del rubro correcto, del tamaño correcto. Después, dentro de cada una, identifica a las personas concretas que ocupan los cargos que toman las decisiones de compra (Marketing, RRHH, Ventas).</p>
-          <div class="step-analogy"><strong>El resultado:</strong> en vez de empezar de cero cada semana, el equipo recibe una lista lista para trabajar — empresas correctas, personas correctas, con nombre, mail y cargo.</div>
+    <div class="pipeline">
+
+      <!-- Fase 1: Identificación -->
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-tag">Fase 1</div>
+          <div>
+            <div class="phase-title">Identificación</div>
+            <div class="phase-sub">Empresas + contactos correctos</div>
+          </div>
+        </div>
+        <div class="stages">
+          <div class="stage accent">
+            <div class="stage-num">1</div>
+            <div class="stage-body">
+              <div class="stage-title">Encuentra las empresas que nos interesan</div>
+              <div class="stage-desc">Filtra una base global por los 5 países donde operamos y se queda solo con las del perfil correcto: rubro, tamaño y mercado.</div>
+            </div>
+          </div>
+          <div class="stage accent">
+            <div class="stage-num">2</div>
+            <div class="stage-body">
+              <div class="stage-title">Identifica a quién toma las decisiones</div>
+              <div class="stage-desc">Adentro de cada empresa, encuentra a las personas concretas con cargos de Marketing, RRHH y Ventas — con nombre, mail y cargo.</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <span class="step-tag">El sistema investiga</span>
-          <h3>Aprende algo real sobre cada contacto</h3>
-          <p>Para cada persona en la lista, el sistema lee sus posts recientes en LinkedIn, busca novedades de su empresa (lanzamientos, premios, fusiones) y revisa si están contratando gente. Eso le da material para escribir un mensaje que tenga sentido, no genérico.</p>
-          <div class="step-analogy"><strong>Como si fuera:</strong> antes de saludar a alguien en un evento, googlearlo rápido para tener algo concreto de qué hablar.</div>
+      <!-- Fase 2: Preparación -->
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-tag">Fase 2</div>
+          <div>
+            <div class="phase-title">Preparación</div>
+            <div class="phase-sub">Investigación + redacción 1:1</div>
+          </div>
+        </div>
+        <div class="stages">
+          <div class="stage accent">
+            <div class="stage-num">3</div>
+            <div class="stage-body">
+              <div class="stage-title">Investiga a cada contacto</div>
+              <div class="stage-desc">Lee sus posts recientes en LinkedIn, busca novedades de su empresa y revisa si están contratando. Junta material real para personalizar.</div>
+            </div>
+          </div>
+          <div class="stage human">
+            <div class="stage-num">4</div>
+            <div class="stage-body">
+              <div class="stage-title">Validación humana de la lista</div>
+              <div class="stage-desc">Una persona del equipo aprueba o rechaza cada contacto, una vez por semana. Filtro de calidad innegociable antes del envío.</div>
+            </div>
+          </div>
+          <div class="stage accent">
+            <div class="stage-num">5</div>
+            <div class="stage-body">
+              <div class="stage-title">Escribe 4 mails personalizados</div>
+              <div class="stage-desc">Una inteligencia artificial redacta 4 mails distintos por contacto usando el material del paso 3. Cortos, cálidos, sin plantillas genéricas.</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="step human">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <span class="step-tag">Acá entra la validación humana</span>
-          <h3>Una persona revisa la lista antes del envío</h3>
-          <p>Una vez por semana, una persona del equipo abre la lista y aprueba o rechaza cada contacto. Es lo único que hace una persona en todo el proceso. Toma cerca de 4 horas a la semana para los 5 países. Es el filtro de calidad: nada sale sin que un humano lo haya visto.</p>
-          <div class="step-analogy"><strong>Como si fuera:</strong> el editor que revisa el diario antes de que salga a la calle. El sistema escribe; la persona valida.</div>
+      <!-- Fase 3: Envío -->
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-tag">Fase 3</div>
+          <div>
+            <div class="phase-title">Envío</div>
+            <div class="phase-sub">Secuencia + handoff al ejecutivo</div>
+          </div>
+        </div>
+        <div class="stages">
+          <div class="stage accent">
+            <div class="stage-num">6</div>
+            <div class="stage-body">
+              <div class="stage-title">Manda los mails en el momento justo</div>
+              <div class="stage-desc">Los 4 mails salen en día 0, 3, 7 y 14 desde la casilla personal del ejecutivo asignado a esa empresa, no desde una casilla genérica.</div>
+            </div>
+          </div>
+          <div class="stage accent">
+            <div class="stage-num">7</div>
+            <div class="stage-body">
+              <div class="stage-title">Conecta el reply con el ejecutivo</div>
+              <div class="stage-desc">Cuando alguien responde, el mail cae directo al inbox del ejecutivo correcto. El sistema le avisa por mail y por chat para que conteste rápido.</div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <span class="step-tag">El sistema escribe</span>
-          <h3>Redacta 4 mails personalizados por contacto</h3>
-          <p>Una inteligencia artificial escribe 4 mails distintos para cada persona aprobada, usando lo que aprendió en el paso 2. Cada mail tiene un ángulo diferente y son cortos, cálidos y honestos. Nada de plantillas genéricas: cada mensaje habla de la empresa real del destinatario.</p>
-          <div class="step-analogy"><strong>Como si fuera:</strong> tener un redactor publicitario sentado al lado, escribiendo a medida para cada cliente potencial.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">5</div>
-        <div class="step-body">
-          <span class="step-tag">El sistema envía y conecta</span>
-          <h3>Mandan los mails y conectan al ejecutivo correcto</h3>
-          <p>Los mails salen en el tiempo justo (día 0, día 3, día 7 y día 14) desde la casilla personal del ejecutivo asignado a esa empresa. Cuando alguien responde, el mail entra directo al inbox del ejecutivo correcto y el sistema le avisa por mail y por chat para que conteste rápido.</p>
-          <div class="step-analogy"><strong>Como si fuera:</strong> una asistente que no solo manda las cartas sino que también te avisa apenas el cliente responde, para que no se enfríe la conversación.</div>
-        </div>
+    <div class="review-banner">
+      <div class="rb-icon">★</div>
+      <div>
+        <h4>El único punto humano del proceso</h4>
+        <p>La <strong>validación de la lista</strong> es el único paso donde interviene una persona. Toma <strong>~4 horas a la semana</strong> para los 5 países. Todo lo demás corre solo.</p>
       </div>
     </div>
   </section>
