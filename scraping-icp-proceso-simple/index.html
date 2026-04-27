@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scraping ICP — Explicado simple · bigbox · corpo</title>
+<title>Scraping ICP — Sistema de prospección · bigbox · corpo</title>
 <style>
   :root {
     --teal: #2aa3b1;
@@ -262,6 +262,74 @@
     line-height: 1.5;
   }
 
+  /* === Sources visual === */
+  .sources-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 32px 36px;
+    box-shadow: var(--shadow-sm);
+  }
+  .sources-tag {
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gray); margin-bottom: 18px;
+  }
+  .sources-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .source-item {
+    background: var(--gray-soft);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    display: flex; flex-direction: column; gap: 6px;
+    transition: transform 0.2s ease;
+  }
+  .source-item:hover { transform: translateY(-2px); }
+  .source-item.highlight {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: var(--shadow-teal);
+  }
+  .source-icon {
+    width: 38px; height: 38px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--teal-dark);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 6px;
+  }
+  .source-icon svg { width: 20px; height: 20px; }
+  .source-item.highlight .source-icon {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.30);
+    color: #fff;
+  }
+  .source-name {
+    font-size: 0.95rem; font-weight: 700; color: var(--navy);
+    line-height: 1.2;
+  }
+  .source-item.highlight .source-name { color: #fff; }
+  .source-note {
+    font-size: 0.78rem; color: var(--gray);
+    line-height: 1.4;
+  }
+  .source-item.highlight .source-note { color: rgba(255,255,255,0.92); }
+  .sources-conclusion {
+    margin-top: 24px;
+    padding: 18px 22px;
+    background: var(--teal-soft);
+    border-left: 3px solid var(--teal);
+    border-radius: 8px;
+    font-size: 0.98rem; color: var(--ink); line-height: 1.6;
+  }
+  .sources-conclusion strong { color: var(--teal-dark); font-weight: 700; }
+
   /* === Cierre === */
   .closing {
     background: var(--card);
@@ -317,8 +385,12 @@
     .compare, .why-grid { grid-template-columns: 1fr; }
     .step { grid-template-columns: 1fr; gap: 14px; }
     .step-num { width: 64px; height: 64px; font-size: 1.8rem; }
-    .analogy-card { padding: 24px 22px; }
+    .analogy-card, .sources-card { padding: 24px 22px; }
+    .sources-grid { grid-template-columns: 1fr; }
     .closing { padding: 28px 22px; }
+  }
+  @media (max-width: 980px) and (min-width: 721px) {
+    .sources-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
@@ -330,9 +402,9 @@
   <header class="hero">
     <div class="hero-content">
       <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
-      <div class="eyebrow">Outbound automatizado · Versión simple</div>
-      <h1>Cómo conseguimos clientes nuevos <span class="accent">sin levantar el teléfono</span></h1>
-      <p>Una explicación directa de lo que hace el nuevo sistema de outreach de Bigbox Corpo: qué es, cómo funciona y por qué cambia las reglas del equipo comercial. Sin tecnicismos.</p>
+      <div class="eyebrow">Outbound automatizado</div>
+      <h1>Un sistema de prospección <span class="accent">que trabaja por nosotros</span></h1>
+      <p>Una explicación directa de cómo Bigbox Corpo genera contactos comerciales nuevos en los 5 países donde operamos: qué es, cómo funciona y por qué cambia las reglas del equipo comercial.</p>
     </div>
   </header>
 
@@ -344,8 +416,7 @@
     </div>
 
     <div class="analogy-card">
-      <p>Es un <strong>asistente digital que trabaja 24/7</strong> buscando empresas que podrían ser clientes de Bigbox Corpo, averigua quién es la persona que decide adentro de cada una, le escribe un mensaje personalizado y se lo envía a su mail.</p>
-      <p>Pensalo como un <em>vendedor incansable</em> que nunca duerme, no toma vacaciones, conoce los 5 países donde operamos y escribe cada mensaje como si fuera el primero. La única persona del equipo que interviene es Cesar, una vez por semana, durante un par de horas, para revisar que la lista esté bien antes de que el sistema mande los mails.</p>
+      <p>Desarrollamos un <strong>sistema de prospección ad hoc que trabaja 24/7</strong>: busca empresas que podrían ser clientes de Bigbox Corpo, identifica a la persona que toma las decisiones adentro de cada una, le escribe un mensaje personalizado y se lo envía a su mail.</p>
     </div>
   </section>
 
@@ -354,29 +425,29 @@
     <div class="section-head">
       <div class="section-eyebrow">Por qué hace falta</div>
       <h2>Lo que hacíamos antes <span class="accent">vs lo que hacemos ahora</span></h2>
-      <p class="lead">Hasta hoy, conseguir clientes nuevos dependía de que cada vendedor armara su propia lista, su propio mensaje y se acordara de hacer seguimiento. Funciona, pero no escala.</p>
+      <p class="lead">Cada ejecutivo trabaja sus contactos y cuentas asignadas, y suma a eso prospección propia cuando puede. Es valioso, pero la prospección manual no escala y es difícil de seguir: depende del tiempo y la memoria de cada uno.</p>
     </div>
 
     <div class="compare">
       <div class="compare-card">
         <div class="compare-tag">Antes</div>
-        <div class="compare-title">Cada vendedor por su cuenta</div>
+        <div class="compare-title">Prospección artesanal de cada ejecutivo</div>
         <ul class="compare-list">
-          <li>Cada uno arma su lista de empresas a mano</li>
-          <li>Mismo mensaje copiado para todos los contactos</li>
-          <li>El seguimiento depende de la memoria de cada vendedor</li>
-          <li>Resultado parejo: 2 de cada 100 mails reciben respuesta</li>
-          <li>Imposible saber qué funciona y qué no</li>
+          <li>Cada uno suma prospección a sus cuentas asignadas cuando tiene tiempo</li>
+          <li>Las listas se arman a mano, una por una</li>
+          <li>El seguimiento depende de la memoria y la agenda de cada ejecutivo</li>
+          <li>El volumen y la calidad varían persona a persona</li>
+          <li>Difícil de medir, difícil de mejorar de forma sistemática</li>
         </ul>
       </div>
       <div class="compare-card after">
         <div class="compare-tag">Ahora</div>
-        <div class="compare-title">Un sistema que trabaja para todos</div>
+        <div class="compare-title">Un sistema que trabaja para todo el equipo</div>
         <ul class="compare-list">
-          <li>El sistema arma la lista solo, todos los días</li>
+          <li>El sistema arma la lista solo, todos los días, en los 5 países</li>
           <li>Cada mensaje habla específicamente de esa empresa</li>
           <li>El seguimiento es automático: 4 mails durante 2 semanas</li>
-          <li>Resultado proyectado: 8 de cada 100 mails reciben respuesta</li>
+          <li>Volumen constante y predecible cada semana</li>
           <li>Todo queda medido y se puede mejorar con datos reales</li>
         </ul>
       </div>
@@ -396,9 +467,9 @@
         <div class="step-num">1</div>
         <div class="step-body">
           <span class="step-tag">El sistema busca</span>
-          <h3>Encuentra a las empresas que nos interesan</h3>
-          <p>El sistema entra a una base gigante de empresas de los 5 países donde operamos y filtra solo las que tienen el perfil ideal: del rubro correcto, del tamaño correcto y con personas en los cargos que toman las decisiones de compra (Marketing, RRHH, Ventas).</p>
-          <div class="step-analogy"><strong>Como si fuera:</strong> ir a una guía telefónica gigante y marcar con resaltador solo a las empresas que cumplen exactamente con lo que buscamos.</div>
+          <h3>Encuentra a las empresas y contactos que nos interesan</h3>
+          <p>El sistema accede a una base global de empresas de los 5 países donde operamos y filtra solo las que tienen el perfil ideal: del rubro correcto, del tamaño correcto. Después, dentro de cada una, identifica a las personas concretas que ocupan los cargos que toman las decisiones de compra (Marketing, RRHH, Ventas).</p>
+          <div class="step-analogy"><strong>El resultado:</strong> en vez de empezar de cero cada semana, el equipo recibe una lista lista para trabajar — empresas correctas, personas correctas, con nombre, mail y cargo.</div>
         </div>
       </div>
 
@@ -415,9 +486,9 @@
       <div class="step human">
         <div class="step-num">3</div>
         <div class="step-body">
-          <span class="step-tag">Acá entra Cesar</span>
+          <span class="step-tag">Acá entra la validación humana</span>
           <h3>Una persona revisa la lista antes del envío</h3>
-          <p>Una vez por semana, Cesar abre la lista y aprueba o rechaza cada contacto. Esto es lo único que hace una persona en todo el proceso. Le toma cerca de 4 horas a la semana revisar los contactos de los 5 países. Es el filtro de calidad: nada sale sin que un humano lo haya visto.</p>
+          <p>Una vez por semana, una persona del equipo abre la lista y aprueba o rechaza cada contacto. Es lo único que hace una persona en todo el proceso. Toma cerca de 4 horas a la semana para los 5 países. Es el filtro de calidad: nada sale sin que un humano lo haya visto.</p>
           <div class="step-analogy"><strong>Como si fuera:</strong> el editor que revisa el diario antes de que salga a la calle. El sistema escribe; la persona valida.</div>
         </div>
       </div>
@@ -454,9 +525,9 @@
 
     <div class="why-grid">
       <div class="why-card">
-        <div class="why-num">4×<small>más respuestas</small></div>
-        <div class="why-title">Mejor conversión</div>
-        <div class="why-desc">Personalización real = 8 respuestas cada 100 mails, contra 2 que daba la herramienta anterior con mensajes copiados.</div>
+        <div class="why-num">5<small>países en simultáneo</small></div>
+        <div class="why-title">Cobertura regional</div>
+        <div class="why-desc">El mismo sistema corre en Argentina, Chile, México, Perú y Uruguay, con ICP, rubros y contactos propios de cada país.</div>
       </div>
       <div class="why-card">
         <div class="why-num">5.700<small>contactos / mes</small></div>
@@ -476,26 +547,63 @@
     <div class="section-head">
       <div class="section-eyebrow">El para qué</div>
       <h2>¿Qué resuelve esto <span class="accent">para Bigbox</span>?</h2>
+      <p class="lead">Hoy, los contactos comerciales nuevos vienen de varios lugares. Todos suman — pero ninguno es predecible ni escalable por sí solo.</p>
     </div>
 
-    <div class="analogy-card">
-      <p>Hoy, el equipo comercial de Bigbox Corpo recibe contactos de tres lugares: gente que entra a la web por su cuenta, contactos sueltos que cada vendedor consigue y eventos. Todo eso suma, pero ninguno es <strong>predecible ni escalable</strong>.</p>
-      <p>Este sistema resuelve eso: <strong>genera un flujo constante de contactos nuevos cada semana</strong>, en cada país, en los rubros y cargos que más nos compran. El equipo comercial deja de depender de la suerte de cuántos contactos entren por la web ese mes.</p>
-      <p>Y lo más importante: <em>uno de los objetivos anuales 2026 de Marketing</em> es que <strong>15% de todos los leads calificados del año vengan de un sistema automático</strong>. Este es ese sistema.</p>
-    </div>
-  </section>
-
-  <!-- Cierre -->
-  <section class="section">
-    <div class="closing">
-      <h3>En 30 segundos</h3>
-      <p>Bigbox Corpo construyó un asistente digital que <strong>busca, investiga y escribe</strong> mails personalizados a empresas potenciales todos los días. Una persona revisa la lista una vez por semana. El sistema manda los mails desde la casilla del vendedor correcto y avisa apenas alguien responde. <strong>Resultado: 4× más respuestas, a un décimo del costo, sin sumar headcount.</strong></p>
-      <a class="closing-cta" href="../scraping-icp-proceso-tecnico/">Ver versión técnica del proceso →</a>
+    <div class="sources-card">
+      <div class="sources-tag">Fuentes actuales de contactos</div>
+      <div class="sources-grid">
+        <div class="source-item">
+          <div class="source-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8h20"/></svg>
+          </div>
+          <div class="source-name">Web por ads</div>
+          <div class="source-note">Volumen depende del presupuesto del mes</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 8h16"/><path d="M8 12h8"/><path d="M8 16h6"/></svg>
+          </div>
+          <div class="source-name">Newsletter</div>
+          <div class="source-note">Conversión irregular mes a mes</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></svg>
+          </div>
+          <div class="source-name">Referrals</div>
+          <div class="source-note">Imposible de planificar</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5z"/><path d="M12 12l8-5"/><path d="M12 12L4 7"/><path d="M12 12v10"/></svg>
+          </div>
+          <div class="source-name">Eventos</div>
+          <div class="source-note">Concentrado en pocas fechas del año</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M12 3v18"/></svg>
+          </div>
+          <div class="source-name">Prospección manual</div>
+          <div class="source-note">Depende del tiempo de cada ejecutivo</div>
+        </div>
+        <div class="source-item highlight">
+          <div class="source-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+          </div>
+          <div class="source-name">Sistema de prospección</div>
+          <div class="source-note">Constante, predecible, escalable</div>
+        </div>
+      </div>
+      <div class="sources-conclusion">
+        Este sistema agrega la <strong>pieza que faltaba</strong>: un flujo constante de contactos nuevos cada semana, en cada país, en los rubros y cargos que más nos compran. El equipo comercial deja de depender de cuántos contactos entren por la web ese mes.
+      </div>
     </div>
   </section>
 
   <footer class="footer">
-    bigbox<span style="display:inline-block;width:4px;height:4px;background:currentColor;border-radius:50%;margin:0 6px;vertical-align:middle;transform:translateY(-2px);"></span>corpo · Scraping ICP Automation · Versión simple
+    bigbox<span style="display:inline-block;width:4px;height:4px;background:currentColor;border-radius:50%;margin:0 6px;vertical-align:middle;transform:translateY(-2px);"></span>corpo · Scraping ICP Automation
   </footer>
 
 </div>
