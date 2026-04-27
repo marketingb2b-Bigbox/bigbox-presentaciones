@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speed to Lead — Tiempo de respuesta del equipo · bigbox · corpo</title>
+<style>
+  :root {
+    --teal: #2aa3b1;
+    --teal-dark: #1f8591;
+    --teal-deep: #155b65;
+    --teal-soft: rgba(42,163,177,0.08);
+    --navy: #03035e;
+    --ink: #0f0f1a;
+    --gray: #6b7280;
+    --gray-soft: #f6f7f9;
+    --border: rgba(3, 3, 94, 0.08);
+    --card: #ffffff;
+    --green: #16a34a;
+    --amber: #d97706;
+    --shadow-sm: 0 2px 8px rgba(15,15,26,0.04);
+    --shadow-md: 0 8px 24px rgba(15,15,26,0.06);
+    --shadow-teal: 0 14px 40px rgba(42,163,177,0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    font-family: "Sofia Pro", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f9fafb;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.55;
+  }
+
+  .page { max-width: 1280px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* === Hero === */
+  .hero {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    color: #fff;
+    margin: 0 -32px 56px;
+    padding: 70px 64px 64px;
+    border-radius: 0 0 28px 28px;
+    box-shadow: var(--shadow-teal);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -50%; right: -10%;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 60%);
+  }
+  .hero-content { position: relative; max-width: 900px; }
+  .brand-mark {
+    font-size: 1rem; font-weight: 600; letter-spacing: 0.02em;
+    opacity: 0.92; margin-bottom: 28px;
+  }
+  .brand-mark .dot {
+    display: inline-block; width: 5px; height: 5px;
+    background: currentColor; border-radius: 50%;
+    margin: 0 8px; vertical-align: middle; transform: translateY(-2px);
+  }
+  .hero .eyebrow {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; opacity: 0.85; margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 600;
+    letter-spacing: -0.02em; line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .hero h1 .accent {
+    display: inline-block;
+    border-bottom: 4px solid rgba(255,255,255,0.4);
+    padding-bottom: 4px;
+  }
+  .hero p {
+    font-size: 1.18rem; font-weight: 300; opacity: 0.96;
+    max-width: 760px; line-height: 1.55;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 40px;
+  }
+  .stat {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 12px;
+    padding: 18px;
+    backdrop-filter: blur(6px);
+  }
+  .stat .stat-num {
+    font-size: 1.65rem; font-weight: 700;
+    line-height: 1.05; letter-spacing: -0.02em;
+  }
+  .stat .stat-num small {
+    font-size: 0.62em; font-weight: 500; opacity: 0.85; margin-left: 4px;
+  }
+  .stat .stat-label {
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    opacity: 0.82; margin-top: 6px;
+  }
+
+  /* === Section === */
+  .section { margin-bottom: 64px; }
+  .section-head { margin-bottom: 28px; max-width: 900px; }
+  .section-eyebrow {
+    font-size: 0.74rem; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 10px;
+  }
+  .section h2 {
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 600;
+    color: var(--navy); letter-spacing: -0.015em;
+    line-height: 1.18; margin-bottom: 12px;
+  }
+  .section h2 .accent { color: var(--teal); }
+  .section .lead {
+    font-size: 1.05rem; color: var(--gray); line-height: 1.6;
+    font-weight: 400;
+  }
+
+  /* === Antes / Después === */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .compare-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 30px;
+    box-shadow: var(--shadow-sm);
+  }
+  .compare-card.after {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: var(--shadow-teal);
+  }
+  .compare-tag {
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gray); margin-bottom: 12px;
+  }
+  .compare-card.after .compare-tag { color: rgba(255,255,255,0.85); }
+  .compare-title {
+    font-size: 1.25rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 16px; line-height: 1.25;
+  }
+  .compare-card.after .compare-title { color: #fff; }
+  .compare-list {
+    list-style: none; padding: 0;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .compare-list li {
+    font-size: 0.95rem; line-height: 1.5;
+    padding-left: 24px; position: relative;
+    color: var(--gray);
+  }
+  .compare-card.after .compare-list li { color: rgba(255,255,255,0.95); }
+  .compare-list li::before {
+    content: "—"; position: absolute; left: 0; top: 0;
+    color: var(--gray); opacity: 0.7;
+  }
+  .compare-card.after .compare-list li::before {
+    content: "✓"; color: #fff; opacity: 1; font-weight: 700;
+  }
+
+  /* === Pipeline 3 fases (brand rule: dark) === */
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .phase {
+    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 24px 24px 28px;
+    color: #fff;
+    box-shadow: 0 14px 40px rgba(15,15,26,0.18);
+    display: flex; flex-direction: column;
+  }
+  .phase-header {
+    display: flex; align-items: center; gap: 12px;
+    padding-bottom: 14px; margin-bottom: 16px;
+    border-bottom: 1px dashed rgba(255,255,255,0.12);
+  }
+  .phase-tag {
+    background: rgba(42,163,177,0.18);
+    color: #5ed4e0;
+    font-size: 0.66rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 100px;
+    border: 1px solid rgba(42,163,177,0.30);
+  }
+  .phase-title {
+    font-size: 1.05rem; font-weight: 700;
+    color: #fff; line-height: 1.2;
+  }
+  .phase-sub {
+    font-size: 0.78rem; color: rgba(255,255,255,0.6);
+    margin-top: 2px;
+  }
+  .stages { display: flex; flex-direction: column; gap: 14px; flex: 1; }
+  .stage {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .stage-num {
+    width: 36px; height: 36px;
+    background: var(--teal);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(42,163,177,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  .stage-body { padding-top: 4px; }
+  .stage-title {
+    font-size: 0.94rem; font-weight: 700;
+    color: #fff; line-height: 1.3;
+  }
+  .stage-desc {
+    font-size: 0.84rem; color: rgba(255,255,255,0.72);
+    line-height: 1.5; margin-top: 4px;
+  }
+  .stage-desc strong { color: #fff; font-weight: 700; }
+  .stage-desc code {
+    background: rgba(255,255,255,0.08);
+    color: #fde68a;
+    padding: 1px 5px; border-radius: 4px;
+    font-size: 0.82em;
+  }
+  .stage-desc em { color: rgba(255,255,255,0.85); font-style: italic; }
+
+  /* === KPIs grid === */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .kpi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 22px 20px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease;
+  }
+  .kpi-card:hover { transform: translateY(-3px); }
+  .kpi-icon {
+    width: 36px; height: 36px;
+    background: var(--teal-soft);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+    color: var(--teal-dark);
+  }
+  .kpi-icon svg { width: 18px; height: 18px; }
+  .kpi-title {
+    font-size: 0.95rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 6px;
+    line-height: 1.25;
+  }
+  .kpi-desc {
+    font-size: 0.84rem; color: var(--gray);
+    line-height: 1.45;
+  }
+
+  /* === Cobertura regional === */
+  .countries {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+  }
+  .country {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 16px 16px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease;
+    display: flex; flex-direction: column;
+  }
+  .country:hover { transform: translateY(-3px); border-color: var(--teal); }
+  .country-flag {
+    font-size: 1.6rem; line-height: 1;
+    margin-bottom: 8px;
+  }
+  .country-name {
+    font-size: 0.92rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 4px;
+  }
+  .country-status {
+    font-size: 0.72rem;
+    color: var(--green); font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .country-status.pending { color: var(--amber); }
+  .country-meta {
+    font-size: 0.76rem; color: var(--gray);
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  .country-link {
+    margin-top: auto;
+    font-size: 0.74rem; font-weight: 600;
+    color: var(--teal-dark); text-decoration: none;
+    padding: 7px 10px;
+    background: var(--teal-soft);
+    border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+    transition: background 0.15s ease;
+  }
+  .country-link:hover { background: rgba(42,163,177,0.20); }
+  .country-link.disabled {
+    background: var(--gray-soft);
+    color: var(--gray);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* === Footer === */
+  .footer {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--gray); font-size: 0.82rem;
+  }
+
+  @media (max-width: 1100px) {
+    .stats, .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .countries { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 720px) {
+    .page { padding: 0 16px 60px; }
+    .hero { margin: 0 -16px 40px; padding: 50px 24px 44px; border-radius: 0 0 20px 20px; }
+    .compare, .pipeline, .kpi-grid, .countries { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
+      <div class="eyebrow">Speed to Lead · Tiempo de respuesta</div>
+      <h1>Cuánto tarda el equipo en <span class="accent">responder un lead</span></h1>
+      <p>Cada lead nuevo arranca un cronómetro en HubSpot. El sistema mide cuánto tarda en pasar de "Nuevo Lead" a "Lead Calificado" — el primer toque del Country Manager — y arma un dashboard mensual por ejecutivo y por país.</p>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">5<small>países</small></div>
+          <div class="stat-label">AR · MX · PE · UY · CL</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">8<small>fechas / lead</small></div>
+          <div class="stat-label">Una por estadio del funnel</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">15.949<small>contactos</small></div>
+          <div class="stat-label">Histórico backfilled</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">1<small>dashboard / país</small></div>
+          <div class="stat-label">Refrescado mensualmente</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Por qué existe -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Por qué existe</div>
+      <h2>De percepción a <span class="accent">datos concretos</span></h2>
+      <p class="lead">Sabíamos que el equipo comercial se demoraba en responder algunos leads, pero no podíamos demostrarlo con datos. HubSpot, por defecto, no mide cuánto tiempo pasa un contacto en cada estadio del funnel. Lo construimos.</p>
+    </div>
+
+    <div class="compare">
+      <div class="compare-card">
+        <div class="compare-tag">Antes</div>
+        <div class="compare-title">Tiempos invisibles</div>
+        <ul class="compare-list">
+          <li>"Hay leads que se enfrían" — pero no sabíamos cuáles ni cuánto</li>
+          <li>HubSpot no mide nativamente "tiempo en estadio" para contactos</li>
+          <li>Imposible comparar performance entre ejecutivos del mismo equipo</li>
+          <li>Los leads estancados se descubrían tarde, cuando ya no tenían vida</li>
+          <li>Sin SLA medible, no había accountability</li>
+        </ul>
+      </div>
+      <div class="compare-card after">
+        <div class="compare-tag">Ahora</div>
+        <div class="compare-title">Velocidad medida al minuto</div>
+        <ul class="compare-list">
+          <li>Cada lead tiene una marca de tiempo por cada estadio</li>
+          <li>Tiempo promedio en "Nuevo Lead" calculado por ejecutivo</li>
+          <li>% de leads respondidos en menos de 24hs por país</li>
+          <li>Lista de leads estancados con link directo al CRM</li>
+          <li>Dashboard mensual con evolución de la velocidad por país</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo funciona -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Cómo funciona</div>
+      <h2>Tres fases para medir <span class="accent">cada paso del lead</span></h2>
+      <p class="lead">El sistema hace tres cosas: marca el tiempo cada vez que el lead avanza en el funnel, calcula la diferencia entre marcas, y arma un dashboard mensual con los resultados por ejecutivo.</p>
+    </div>
+
+    <div class="pipeline">
+
+      <!-- Fase 1: Marca de tiempo -->
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-tag">Fase 1</div>
+          <div>
+            <div class="phase-title">Marca de tiempo</div>
+            <div class="phase-sub">HubSpot stamping workflows</div>
+          </div>
+        </div>
+        <div class="stages">
+          <div class="stage">
+            <div class="stage-num">1</div>
+            <div class="stage-body">
+              <div class="stage-title">Lead entra al CRM</div>
+              <div class="stage-desc">Cuando un nuevo lead se crea en HubSpot, un workflow setea automáticamente <code>fecha_nuevo_lead</code>. Es el momento cero del cronómetro.</div>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="stage-num">2</div>
+            <div class="stage-body">
+              <div class="stage-title">El Country Manager lo califica</div>
+              <div class="stage-desc">Cuando el CM marca el lead como <em>Lead Calificado</em>, otro workflow setea <code>fecha_perfil_calificado</code>. Esta es la salida real del estadio "Nuevo Lead".</div>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="stage-num">3</div>
+            <div class="stage-body">
+              <div class="stage-title">Cada estadio posterior</div>
+              <div class="stage-desc">Contactado, En Conversación, Reunión Agendada, Oportunidad Validada, On Hold, No Calificado — cada uno tiene su propia <strong>fecha que se setea automáticamente</strong>.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fase 2: Cálculo del tiempo -->
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-tag">Fase 2</div>
+          <div>
+            <div class="phase-title">Cálculo del tiempo</div>
+            <div class="phase-sub">Propiedad calculada en HubSpot</div>
+          </div>
+        </div>
+        <div class="stages">
+          <div class="stage">
+            <div class="stage-num">4</div>
+            <div class="stage-body">
+              <div class="stage-title">Tiempo en Nuevo Lead (horas)</div>
+              <div class="stage-desc">HubSpot calcula automáticamente la diferencia entre <code>fecha_nuevo_lead</code> y <code>fecha_perfil_calificado</code>. <strong>Esa diferencia es la métrica clave</strong> que mide el SLA de respuesta.</div>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="stage-num">5</div>
+            <div class="stage-body">
+              <div class="stage-title">Detección de leads estancados</div>
+              <div class="stage-desc">Si un lead tiene <code>fecha_nuevo_lead</code> pero todavía no tiene <code>fecha_perfil_calificado</code>, está <strong>vivo y sin atender</strong>. El sistema los lista aparte para acción inmediata.</div>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="stage-num">6</div>
+            <div class="stage-body">
+              <div class="stage-title">Histórico cargado retroactivo</div>
+              <div class="stage-desc">Las 8 fechas se rellenaron para los leads pre-existentes leyendo el historial de HubSpot — <strong>15.949 contactos, 19.731 fechas</strong>. La medición arranca con base completa.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fase 3: Dashboard -->
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-tag">Fase 3</div>
+          <div>
+            <div class="phase-title">Dashboard mensual</div>
+            <div class="phase-sub">Google Sheets + cron diario</div>
+          </div>
+        </div>
+        <div class="stages">
+          <div class="stage">
+            <div class="stage-num">7</div>
+            <div class="stage-body">
+              <div class="stage-title">Tab del mes por ejecutivo</div>
+              <div class="stage-desc">Cada mes se crea una tab nueva (ej: <em>Abr-2026</em>) con leads procesados, tiempo promedio en horas/días y <strong>% respondidos en menos de 24/48hs</strong> por ejecutivo.</div>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="stage-num">8</div>
+            <div class="stage-body">
+              <div class="stage-title">Lista de leads estancados</div>
+              <div class="stage-desc">Snapshot refrescado de los leads que siguen en <em>Nuevo Lead</em> sin movimiento. Cada uno con un <strong>link directo al contacto en HubSpot</strong> para acción inmediata.</div>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="stage-num">9</div>
+            <div class="stage-body">
+              <div class="stage-title">Métricas globales del país</div>
+              <div class="stage-desc">Tab con la evolución mensual del tiempo promedio por ejecutivo. Permite ver <strong>tendencias y comparar performance</strong> entre meses y entre miembros del equipo.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué mide el dashboard -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">El dashboard</div>
+      <h2>Cuatro métricas que <span class="accent">cuentan toda la historia</span></h2>
+      <p class="lead">Cada sheet por país muestra estas métricas por ejecutivo, mes a mes. Diseñadas para que en 30 segundos sepas dónde estamos parados y a quién hay que ayudar.</p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="kpi-title">Tiempo promedio en Nuevo Lead</div>
+        <div class="kpi-desc">Horas / días que un ejecutivo deja pasar antes de calificar el lead. Ordenado de mayor a menor por persona.</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="kpi-title">% respondidos &lt; 24hs</div>
+        <div class="kpi-desc">Porcentaje de leads del mes calificados antes de las 24 horas — el SLA real al que apuntamos.</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="kpi-title">Leads estancados ahora</div>
+        <div class="kpi-desc">Lista viva de los leads en "Nuevo Lead" sin movimiento, con el nombre del ejecutivo asignado y link al CRM.</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="kpi-title">Evolución mensual del país</div>
+        <div class="kpi-desc">Tendencia del tiempo promedio mes a mes — para detectar mejoras o degradaciones en la velocidad del equipo.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cobertura regional -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Cobertura regional</div>
+      <h2>Cinco países, <span class="accent">un mismo modelo</span></h2>
+      <p class="lead">Cada país tiene sus 8 propiedades de fecha en HubSpot, su workflow de marcado activo y su dashboard mensual. Los enums internos varían entre cuentas pero el resultado es el mismo: tiempo medible al minuto.</p>
+    </div>
+
+    <div class="countries">
+      <div class="country">
+        <div class="country-flag">🇦🇷</div>
+        <div class="country-name">Argentina</div>
+        <div class="country-status">● Workflow activo</div>
+        <div class="country-meta">5.161 contactos<br/>backfill completo</div>
+        <a class="country-link" href="https://docs.google.com/spreadsheets/d/1xObE888Msk1VYKi4R8tJJfDESvUhWhgpD6Wmi3_EK00/edit" target="_blank" rel="noopener">📊 Dashboard</a>
+      </div>
+      <div class="country">
+        <div class="country-flag">🇲🇽</div>
+        <div class="country-name">México</div>
+        <div class="country-status">● Workflow activo</div>
+        <div class="country-meta">6.808 contactos<br/>backfill completo</div>
+        <a class="country-link" href="https://docs.google.com/spreadsheets/d/1AyFnVzI4E86q7zS0M-I6IhTGSRXdYkGJaibcCdL8C-Q/edit" target="_blank" rel="noopener">📊 Dashboard</a>
+      </div>
+      <div class="country">
+        <div class="country-flag">🇵🇪</div>
+        <div class="country-name">Perú</div>
+        <div class="country-status">● Workflow activo</div>
+        <div class="country-meta">3.179 contactos<br/>backfill completo</div>
+        <a class="country-link" href="https://docs.google.com/spreadsheets/d/1cl1QCiMwXxQOwcGl7B9LpYPxEQADaL2wGA7XdTSNyPQ/edit" target="_blank" rel="noopener">📊 Dashboard</a>
+      </div>
+      <div class="country">
+        <div class="country-flag">🇺🇾</div>
+        <div class="country-name">Uruguay</div>
+        <div class="country-status">● Workflow activo</div>
+        <div class="country-meta">801 contactos<br/>(team URUGUAY)</div>
+        <a class="country-link" href="https://docs.google.com/spreadsheets/d/1mLpzNxBiqjRswf76askneDHpQgGniCaYjbE56GGJwDI/edit" target="_blank" rel="noopener">📊 Dashboard</a>
+      </div>
+      <div class="country">
+        <div class="country-flag">🇨🇱</div>
+        <div class="country-name">Chile</div>
+        <div class="country-status pending">○ Setup en curso</div>
+        <div class="country-meta">Propiedades creadas<br/>workflow pendiente</div>
+        <a class="country-link" href="https://docs.google.com/spreadsheets/d/1HnUqN8fbTCJ1LjsFuj_Vylk2y_R9sXWXcYOxdDD-Qpw/edit" target="_blank" rel="noopener">📊 Dashboard</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    bigbox<span style="display:inline-block;width:4px;height:4px;background:currentColor;border-radius:50%;margin:0 6px;vertical-align:middle;transform:translateY(-2px);"></span>corpo · Speed to Lead
+  </footer>
+
+</div>
+
+</body>
+</html>
