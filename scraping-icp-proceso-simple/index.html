@@ -283,6 +283,42 @@
   }
   .review-banner strong { color: var(--teal-dark); font-weight: 700; }
 
+  /* === Rules card (round robin) === */
+  .rules-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 32px;
+    box-shadow: var(--shadow-sm);
+  }
+  .rules-card h3 {
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 4px;
+  }
+  .rules-card .rc-sub {
+    font-size: 0.92rem; color: var(--gray);
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+  .rule-row {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 18px;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+  .rule-row:first-of-type { border-top: 0; padding-top: 4px; }
+  .rule-case {
+    font-size: 0.92rem; color: var(--navy); font-weight: 600;
+    line-height: 1.4;
+  }
+  .rule-action {
+    font-size: 0.9rem; color: var(--gray);
+    line-height: 1.5;
+  }
+  .rule-action strong { color: var(--teal-dark); font-weight: 700; }
+
   /* === Por qué importa === */
   .why-grid {
     display: grid;
@@ -669,6 +705,33 @@
       <div>
         <h4>Doble validación humana antes del envío</h4>
         <p>El proceso tiene <strong>dos checkpoints humanos</strong> dentro de la review semanal: la <strong>etapa 5</strong> (validar la lista de contactos antes de gastar research) y la <strong>etapa 8</strong> (validar el copy generado antes de salir al inbox del prospect). Ambas suman <strong>~4 horas / semana</strong> para los 5 países. Todo lo demás corre solo: alertas, reintentos y escalación incluidas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Round robin de owners -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">La regla que sostiene el sistema</div>
+      <h2>Round robin de <span class="accent">owners</span></h2>
+      <p class="lead">Una regla crítica convierte al pipeline en algo escalable: cómo se distribuyen los leads entre ejecutivos sin pisar relaciones existentes.</p>
+    </div>
+
+    <div class="rules-card">
+      <h3>Asignación por round robin</h3>
+      <p class="rc-sub">Tres reglas en cascada para evitar que dos ejecutivos escriban a dos personas de la misma empresa.</p>
+
+      <div class="rule-row">
+        <div class="rule-case">Empresa ya existe<br><span style="color:var(--gray);font-weight:400;font-size:0.82rem;">y tiene owner</span></div>
+        <div class="rule-action">Asignar al contacto el mismo owner. <strong>No avanza la rotación.</strong></div>
+      </div>
+      <div class="rule-row">
+        <div class="rule-case">Empresa ya existe<br><span style="color:var(--gray);font-weight:400;font-size:0.82rem;">sin owner</span></div>
+        <div class="rule-action">Asignar rotación siguiente <strong>al contacto y a la empresa</strong>, para que futuros contactos del mismo dominio hereden.</div>
+      </div>
+      <div class="rule-row">
+        <div class="rule-case">Empresa nueva</div>
+        <div class="rule-action">Crear empresa con <strong>owner = rotación siguiente</strong>, asignar el mismo owner al contacto.</div>
       </div>
     </div>
   </section>
