@@ -222,19 +222,20 @@
   }
   .stage-num {
     width: 36px; height: 36px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.18);
+    background: var(--teal);
+    border: 1px solid transparent;
     border-radius: 10px;
     color: #fff;
+    box-shadow: 0 4px 10px rgba(42,163,177,0.25);
     display: flex; align-items: center; justify-content: center;
     font-weight: 700; color: var(--navy);
     font-size: 0.92rem;
   }
   .stage.accent .stage-num {
-    background: rgba(255,255,255,0.08);
+    background: var(--teal);
     color: #fff;
-    border: 1px solid rgba(255,255,255,0.18);
-    box-shadow: none;
+    border: 1px solid transparent;
+    box-shadow: 0 4px 10px rgba(42,163,177,0.25);
   }
   .stage-body { padding-top: 4px; }
   .stage-title {
