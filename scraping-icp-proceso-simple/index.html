@@ -283,20 +283,21 @@
   }
   .review-banner strong { color: var(--teal-dark); font-weight: 700; }
 
-  /* === Rules card (round robin) === */
+  /* === Rules card (round robin — dark) === */
   .rules-card {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 18px;
     padding: 28px 32px;
-    box-shadow: var(--shadow-sm);
+    color: #fff;
+    box-shadow: 0 14px 40px rgba(15,15,26,0.18);
   }
   .rules-card h3 {
     font-size: 1.1rem; font-weight: 700;
-    color: var(--navy); margin-bottom: 4px;
+    color: #fff; margin-bottom: 4px;
   }
   .rules-card .rc-sub {
-    font-size: 0.92rem; color: var(--gray);
+    font-size: 0.92rem; color: rgba(255,255,255,0.65);
     margin-bottom: 18px;
     line-height: 1.5;
   }
@@ -305,19 +306,68 @@
     grid-template-columns: 1fr 1.4fr;
     gap: 18px;
     padding: 14px 0;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(255,255,255,0.10);
     align-items: start;
   }
   .rule-row:first-of-type { border-top: 0; padding-top: 4px; }
   .rule-case {
-    font-size: 0.92rem; color: var(--navy); font-weight: 600;
+    font-size: 0.92rem; color: #fff; font-weight: 600;
     line-height: 1.4;
   }
+  .rule-case .rc-sub-label {
+    color: rgba(255,255,255,0.55); font-weight: 400; font-size: 0.82rem;
+  }
   .rule-action {
-    font-size: 0.9rem; color: var(--gray);
+    font-size: 0.9rem; color: rgba(255,255,255,0.78);
     line-height: 1.5;
   }
-  .rule-action strong { color: var(--teal-dark); font-weight: 700; }
+  .rule-action strong { color: #5ed4e0; font-weight: 700; }
+
+  /* === Volume table (15 contactos / día) === */
+  .volume-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+  }
+  .volume-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 6px;
+  }
+  .volume-table th, .volume-table td {
+    padding: 12px 12px;
+    text-align: right;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .volume-table th {
+    color: var(--gray); font-weight: 600;
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    border-bottom: 2px solid var(--border);
+  }
+  .volume-table th:first-child, .volume-table td:first-child {
+    text-align: left;
+  }
+  .volume-table td:first-child {
+    font-weight: 600; color: var(--navy);
+  }
+  .volume-table tr.total td {
+    background: var(--teal-soft);
+    color: var(--teal-deep);
+    font-weight: 700;
+    border-top: 2px solid var(--teal);
+  }
+  .volume-table tr.total td:first-child { border-radius: 8px 0 0 8px; }
+  .volume-table tr.total td:last-child { border-radius: 0 8px 8px 0; }
+  .volume-table code {
+    background: var(--gray-soft);
+    color: var(--navy);
+    padding: 1px 5px; border-radius: 4px;
+    font-size: 0.85em;
+  }
 
   /* === Por qué importa === */
   .why-grid {
@@ -722,17 +772,48 @@
       <p class="rc-sub">Tres reglas en cascada para evitar que dos ejecutivos escriban a dos personas de la misma empresa.</p>
 
       <div class="rule-row">
-        <div class="rule-case">Empresa ya existe<br><span style="color:var(--gray);font-weight:400;font-size:0.82rem;">y tiene owner</span></div>
+        <div class="rule-case">Empresa ya existe<br><span class="rc-sub-label">y tiene owner</span></div>
         <div class="rule-action">Asignar al contacto el mismo owner. <strong>No avanza la rotación.</strong></div>
       </div>
       <div class="rule-row">
-        <div class="rule-case">Empresa ya existe<br><span style="color:var(--gray);font-weight:400;font-size:0.82rem;">sin owner</span></div>
+        <div class="rule-case">Empresa ya existe<br><span class="rc-sub-label">sin owner</span></div>
         <div class="rule-action">Asignar rotación siguiente <strong>al contacto y a la empresa</strong>, para que futuros contactos del mismo dominio hereden.</div>
       </div>
       <div class="rule-row">
         <div class="rule-case">Empresa nueva</div>
         <div class="rule-action">Crear empresa con <strong>owner = rotación siguiente</strong>, asignar el mismo owner al contacto.</div>
       </div>
+    </div>
+  </section>
+
+  <!-- Volumen diario -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Volumen diario · setup oficial</div>
+      <h2>15 contactos por ejecutivo por día, <span class="accent">cada día hábil</span></h2>
+      <p class="lead">El sourcing corre con cron de lunes a viernes a las 08:00 hora local. Cada día genera <code>cantidad_ejecutivos × 15</code> contactos pending review. La cantidad se toma de <code>HUBSPOT_ROTATION_{COUNTRY}_EMAILS</code> en <code>.env</code>.</p>
+    </div>
+
+    <div class="volume-card">
+      <table class="volume-table">
+        <thead>
+          <tr>
+            <th>País</th>
+            <th>Ejecutivos (incl. CM)</th>
+            <th>Diario</th>
+            <th>Semanal (5d)</th>
+            <th>Mensual (4 sem)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Argentina</td><td>5</td><td>75</td><td>375</td><td>1.500</td></tr>
+          <tr><td>México</td><td>4</td><td>60</td><td>300</td><td>1.200</td></tr>
+          <tr><td>Perú</td><td>4</td><td>60</td><td>300</td><td>1.200</td></tr>
+          <tr><td>Uruguay</td><td>3</td><td>45</td><td>225</td><td>900</td></tr>
+          <tr><td>Chile</td><td>3</td><td>45</td><td>225</td><td>900</td></tr>
+          <tr class="total"><td>Total 5 países</td><td>19</td><td>285</td><td>1.425</td><td>5.700</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
