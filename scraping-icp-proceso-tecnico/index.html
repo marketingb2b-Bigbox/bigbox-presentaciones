@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scraping ICP Automation — Proceso end-to-end · bigbox · corpo</title>
+<style>
+  :root {
+    --teal: #2aa3b1;
+    --teal-dark: #1f8591;
+    --teal-deep: #155b65;
+    --teal-soft: rgba(42,163,177,0.08);
+    --teal-line: rgba(42,163,177,0.22);
+    --navy: #03035e;
+    --ink: #0f0f1a;
+    --gray: #6b7280;
+    --gray-2: #9aa1ad;
+    --gray-soft: #f6f7f9;
+    --border: rgba(3, 3, 94, 0.08);
+    --card: #ffffff;
+    --green: #16a34a;
+    --amber: #d97706;
+    --shadow-sm: 0 2px 8px rgba(15,15,26,0.04);
+    --shadow-md: 0 8px 24px rgba(15,15,26,0.06);
+    --shadow-teal: 0 14px 40px rgba(42,163,177,0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    font-family: "Sofia Pro", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f9fafb;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.5;
+  }
+
+  .page { max-width: 1280px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* === Hero === */
+  .hero {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    color: #fff;
+    margin: 0 -32px 56px;
+    padding: 70px 64px 64px;
+    border-radius: 0 0 28px 28px;
+    box-shadow: var(--shadow-teal);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -50%; right: -10%;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 60%);
+  }
+  .hero-content { position: relative; max-width: 900px; }
+  .brand-mark {
+    font-size: 1rem; font-weight: 600; letter-spacing: 0.02em;
+    opacity: 0.92; margin-bottom: 28px;
+  }
+  .brand-mark .dot {
+    display: inline-block; width: 5px; height: 5px;
+    background: currentColor; border-radius: 50%;
+    margin: 0 8px; vertical-align: middle; transform: translateY(-2px);
+  }
+  .hero .eyebrow {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; opacity: 0.85; margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 600;
+    letter-spacing: -0.02em; line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .hero h1 .accent {
+    display: inline-block;
+    border-bottom: 4px solid rgba(255,255,255,0.4);
+    padding-bottom: 4px;
+  }
+  .hero p {
+    font-size: 1.15rem; font-weight: 300; opacity: 0.95;
+    max-width: 760px; line-height: 1.55;
+  }
+
+  /* === Stats row === */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 40px;
+    position: relative;
+  }
+  .stat {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 12px;
+    padding: 18px 18px;
+    backdrop-filter: blur(6px);
+  }
+  .stat .stat-num {
+    font-size: 1.65rem; font-weight: 700;
+    line-height: 1.05; letter-spacing: -0.02em;
+  }
+  .stat .stat-num small {
+    font-size: 0.62em; font-weight: 500; opacity: 0.85; margin-left: 4px;
+  }
+  .stat .stat-label {
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    opacity: 0.82; margin-top: 6px;
+  }
+
+  /* === Section === */
+  .section { margin-bottom: 72px; }
+  .section-head { margin-bottom: 28px; max-width: 900px; }
+  .section-eyebrow {
+    font-size: 0.74rem; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 10px;
+  }
+  .section h2 {
+    font-size: clamp(1.6rem, 2.4vw, 2.1rem); font-weight: 600;
+    color: var(--navy); letter-spacing: -0.015em;
+    line-height: 1.18; margin-bottom: 12px;
+  }
+  .section h2 .accent { color: var(--teal); }
+  .section .lead {
+    font-size: 1.02rem; color: var(--gray); line-height: 1.55;
+    font-weight: 400;
+  }
+
+  /* === Pipeline 12 stages === */
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .phase {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px 24px 28px;
+    box-shadow: var(--shadow-sm);
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .phase-header {
+    display: flex; align-items: center; gap: 12px;
+    padding-bottom: 14px; margin-bottom: 16px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .phase-tag {
+    background: var(--teal-soft);
+    color: var(--teal-dark);
+    font-size: 0.66rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 100px;
+  }
+  .phase-title {
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--navy); line-height: 1.2;
+  }
+  .phase-sub {
+    font-size: 0.78rem; color: var(--gray);
+    margin-top: 2px;
+  }
+  .stages { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .stage {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .stage-num {
+    width: 36px; height: 36px;
+    background: var(--gray-soft);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: var(--navy);
+    font-size: 0.92rem;
+  }
+  .stage.done .stage-num {
+    background: var(--teal);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(42,163,177,0.25);
+  }
+  .stage.review .stage-num {
+    background: #fff;
+    color: var(--teal-dark);
+    border: 2px solid var(--teal);
+  }
+  .stage-body { padding-top: 4px; }
+  .stage-title {
+    font-size: 0.94rem; font-weight: 700;
+    color: var(--navy); line-height: 1.25;
+  }
+  .stage-status {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 0.66rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-left: 8px;
+    padding: 2px 7px; border-radius: 4px;
+    vertical-align: middle;
+  }
+  .status-done { background: rgba(22,163,74,0.10); color: var(--green); }
+  .status-build { background: rgba(217,119,6,0.10); color: var(--amber); }
+  .status-manual { background: var(--teal-soft); color: var(--teal-dark); }
+  .stage-desc {
+    font-size: 0.84rem; color: var(--gray);
+    line-height: 1.5; margin-top: 4px;
+  }
+  .stage-cost {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.72rem; font-weight: 600;
+    color: var(--teal-dark);
+    background: var(--teal-soft);
+    padding: 2px 8px; border-radius: 4px;
+  }
+
+  /* === Review checkpoint banner === */
+  .review-banner {
+    margin: 24px 0 0;
+    background: linear-gradient(135deg, #fff 0%, var(--teal-soft) 100%);
+    border: 2px dashed var(--teal);
+    border-radius: 16px;
+    padding: 22px 28px;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+  .review-banner .rb-icon {
+    width: 56px; height: 56px;
+    background: var(--teal); color: #fff;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; font-weight: 700;
+  }
+  .review-banner h4 {
+    font-size: 1rem; font-weight: 700; color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .review-banner p {
+    font-size: 0.9rem; color: var(--gray); line-height: 1.5;
+  }
+  .review-banner strong { color: var(--teal-dark); font-weight: 700; }
+
+  /* === Round robin / rules === */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+  }
+  .rules-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+  }
+  .rules-card h3 {
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 4px;
+  }
+  .rules-card .rc-sub {
+    font-size: 0.85rem; color: var(--gray);
+    margin-bottom: 18px;
+  }
+
+  .rule-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+  .rule-row:first-of-type { border-top: 0; padding-top: 4px; }
+  .rule-case {
+    font-size: 0.86rem; color: var(--navy); font-weight: 600;
+    line-height: 1.4;
+  }
+  .rule-action {
+    font-size: 0.84rem; color: var(--gray);
+    line-height: 1.45;
+  }
+
+  .sla-list {
+    list-style: none;
+    display: flex; flex-direction: column;
+    gap: 10px;
+  }
+  .sla-item {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 14px;
+    align-items: start;
+    padding: 14px 16px;
+    background: var(--gray-soft);
+    border-radius: 10px;
+    border-left: 3px solid var(--teal);
+  }
+  .sla-item.urgent { border-left-color: var(--amber); }
+  .sla-item.critical { border-left-color: #dc2626; }
+  .sla-time {
+    font-size: 0.84rem; font-weight: 700;
+    color: var(--navy); letter-spacing: -0.01em;
+  }
+  .sla-action {
+    font-size: 0.84rem; color: var(--gray);
+    line-height: 1.45;
+  }
+
+  /* === Volumen tabla === */
+  .volume-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+  }
+  .volume-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 14px;
+  }
+  .volume-table th, .volume-table td {
+    padding: 11px 12px;
+    text-align: right;
+    font-size: 0.88rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .volume-table th {
+    color: var(--gray); font-weight: 600;
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    border-bottom: 2px solid var(--border);
+  }
+  .volume-table th:first-child, .volume-table td:first-child {
+    text-align: left;
+  }
+  .volume-table td:first-child {
+    font-weight: 600; color: var(--navy);
+  }
+  .volume-table tr.total td {
+    background: var(--teal-soft);
+    color: var(--teal-deep);
+    font-weight: 700;
+    border-top: 2px solid var(--teal);
+  }
+  .volume-table tr.total td:first-child { border-radius: 8px 0 0 8px; }
+  .volume-table tr.total td:last-child { border-radius: 0 8px 8px 0; }
+
+  /* === Costos === */
+  .cost-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .cost-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px 28px;
+    box-shadow: var(--shadow-sm);
+  }
+  .cost-num {
+    font-size: 2.4rem; font-weight: 700;
+    color: var(--teal-dark); letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .cost-num small {
+    font-size: 0.4em; font-weight: 500; color: var(--gray);
+    margin-left: 6px;
+  }
+  .cost-label {
+    font-size: 0.74rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 10px;
+  }
+  .cost-breakdown {
+    margin-top: 16px;
+    display: flex; flex-direction: column;
+    gap: 8px;
+  }
+  .cost-line {
+    display: flex; justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.85rem;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .cost-line:last-child { border-bottom: 0; }
+  .cost-line .cl-name { color: var(--gray); }
+  .cost-line .cl-val { color: var(--navy); font-weight: 600; }
+
+  /* === Roadmap timeline === */
+  .roadmap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+  }
+  .sprint-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 24px;
+    padding: 18px 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+  .sprint-row:first-of-type { border-top: 0; padding-top: 4px; }
+  .sprint-tag {
+    display: flex; flex-direction: column;
+    gap: 2px;
+  }
+  .sprint-num {
+    font-size: 0.66rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--teal);
+  }
+  .sprint-when {
+    font-size: 0.92rem; font-weight: 700;
+    color: var(--navy); line-height: 1.2;
+  }
+  .sprint-body h4 {
+    font-size: 0.96rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 8px;
+  }
+  .sprint-list {
+    list-style: none; padding: 0;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .sprint-list li {
+    font-size: 0.86rem; color: var(--gray);
+    line-height: 1.5; padding-left: 22px; position: relative;
+  }
+  .sprint-list li::before {
+    content: "→"; position: absolute; left: 0; top: 0;
+    color: var(--teal); font-weight: 700;
+  }
+  .sprint-list li strong { color: var(--navy); font-weight: 600; }
+
+  /* === Roles === */
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .role-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: var(--shadow-sm);
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .role-card.cesar {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: var(--shadow-teal);
+  }
+  .role-name {
+    font-size: 1rem; font-weight: 700; color: var(--navy);
+    line-height: 1.2;
+  }
+  .role-card.cesar .role-name { color: #fff; }
+  .role-tag {
+    font-size: 0.66rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--teal);
+  }
+  .role-card.cesar .role-tag { color: rgba(255,255,255,0.85); }
+  .role-list {
+    list-style: none; padding: 0;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .role-list li {
+    font-size: 0.83rem; line-height: 1.45;
+    color: var(--gray); padding-left: 14px; position: relative;
+  }
+  .role-list li::before {
+    content: "·"; position: absolute; left: 4px; top: -2px;
+    font-size: 1.2rem; line-height: 1;
+  }
+  .role-card.cesar .role-list li { color: rgba(255,255,255,0.92); }
+
+  /* === Footer === */
+  .footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+    align-items: center;
+    color: var(--gray); font-size: 0.82rem;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer .src {
+    font-size: 0.78rem; opacity: 0.8;
+  }
+  .footer a {
+    color: var(--teal-dark); text-decoration: none;
+    font-weight: 600;
+  }
+
+  @media (max-width: 1100px) {
+    .pipeline, .stats, .roles-grid { grid-template-columns: 1fr 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .rules-grid, .cost-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .page { padding: 0 16px 60px; }
+    .hero { margin: 0 -16px 40px; padding: 50px 24px 44px; border-radius: 0 0 20px 20px; }
+    .pipeline, .stats, .roles-grid { grid-template-columns: 1fr; }
+    .sprint-row { grid-template-columns: 1fr; gap: 8px; }
+    .review-banner { grid-template-columns: 1fr; text-align: center; }
+    .review-banner .rb-icon { margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
+      <div class="eyebrow">Outbound automatizado · Proceso end-to-end</div>
+      <h1>Cómo funciona el pipeline de <span class="accent">Scraping ICP</span></h1>
+      <p>12 etapas que sourcean, enriquecen, escriben y secuencian outbound al ICP exacto de Bigbox Corpo. Toda la operativa corre sola; el único punto humano es la revisión semanal del batch antes del envío.</p>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">12<small>etapas</small></div>
+          <div class="stat-label">Pipeline</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5.700<small>/mes</small></div>
+          <div class="stat-label">Contactos a régimen pleno</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">$0,13<small>/contacto</small></div>
+          <div class="stat-label">Costo all-in</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">~4hs<small>/sem</small></div>
+          <div class="stat-label">Review humana multipaís</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5<small>países</small></div>
+          <div class="stat-label">AR · CL · MX · PE · UY</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Pipeline 12 etapas -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">El pipeline</div>
+      <h2>De ICP spec a inbox del prospect en <span class="accent">12 etapas</span></h2>
+      <p class="lead">El proceso se agrupa en tres fases: sourcing y dedupe (donde se construye el batch), personalización (donde se genera copy único por contacto), y activación (donde el lead entra al funnel comercial). Las etapas marcadas en color están en producción; las pálidas siguen en construcción.</p>
+    </div>
+
+    <div class="pipeline">
+
+      <!-- Fase 1: Sourcing -->
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-tag">Fase 1</div>
+          <div>
+            <div class="phase-title">Sourcing & Dedupe</div>
+            <div class="phase-sub">Apollo + cruce con HubSpot</div>
+          </div>
+        </div>
+        <div class="stages">
+          <div class="stage done">
+            <div class="stage-num">1</div>
+            <div class="stage-body">
+              <div class="stage-title">Sourcing<span class="stage-status status-done">Live</span></div>
+              <div class="stage-desc">Apollo busca candidatos según spec: área × industria × tamaño × matriz de seniority. 17 industrias activas en AR Marketing.</div>
+              <span class="stage-cost">$0 / contacto</span>
+            </div>
+          </div>
+          <div class="stage done">
+            <div class="stage-num">2</div>
+            <div class="stage-body">
+              <div class="stage-title">Enrichment<span class="stage-status status-done">Live</span></div>
+              <div class="stage-desc">Apollo revela email + LinkedIn + firmográficos completos (revenue, headcount, industria refinada).</div>
+              <span class="stage-cost">~$0 plan actual</span>
+            </div>
+          </div>
+          <div class="stage done">
+            <div class="stage-num">3</div>
+            <div class="stage-body">
+              <div class="stage-title">Dedupe<span class="stage-status status-done">Live</span></div>
+              <div class="stage-desc">Cruza candidatos contra HubSpot. Marca cada contacto como <em>new</em>, <em>enrich</em> o <em>existing</em> para no pisar relaciones.</div>
+              <span class="stage-cost">$0 / contacto</span>
+            </div>
+          </div>
+          <div class="stage done">
+            <div class="stage-num">4</div>
+            <div class="stage-body">
+              <div class="stage-title">Carga a Review Queue<span class="stage-status status-done">Live</span></div>
+              <div class="stage-desc">Escribe filas al Google Sheet de Argentina con columna <code>decision</code> vacía, lista para revisión humana.</div>
+              <span class="stage-cost">$0 / contacto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fase 2: Personalización -->
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-tag">Fase 2</div>
+          <div>
+            <div class="phase-title">Personalización</div>
+            <div class="phase-sub">Research + copy 1:1 con LLM</div>
+          </div>
+        </div>
+        <div class="stages">
+          <div class="stage review">
+            <div class="stage-num">5</div>
+            <div class="stage-body">
+              <div class="stage-title">Review humana<span class="stage-status status-manual">Manual · siempre</span></div>
+              <div class="stage-desc">Cesar marca Aprobar / Rechazar / Skip + motivo. Único punto de contacto humano. Checkpoint de calidad innegociable.</div>
+              <span class="stage-cost">~4hs / semana</span>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="stage-num">6</div>
+            <div class="stage-body">
+              <div class="stage-title">Research signals<span class="stage-status status-build">Por construir</span></div>
+              <div class="stage-desc">Extrae señales del perfil (posts LinkedIn) y empresa (news Vibe, vacantes Apollo) para personalizar el copy. Si no hay signals → flag <code>low_personalization</code>.</div>
+              <span class="stage-cost">~$0,10 / contacto</span>
+            </div>
+          </div>
+          <div class="stage done">
+            <div class="stage-num">7</div>
+            <div class="stage-body">
+              <div class="stage-title">Copy generation<span class="stage-status status-done">Live</span></div>
+              <div class="stage-desc">Claude Haiku genera 4 emails personalizados con hooks reales. CTA = respuesta directa, sin links de calendario. Reglas en skill <code>cold-email v2.0.0</code>.</div>
+              <span class="stage-cost">~$0,02 / contacto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fase 3: Activación -->
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-tag">Fase 3</div>
+          <div>
+            <div class="phase-title">Activación</div>
+            <div class="phase-sub">HubSpot, secuencia y handoff</div>
+          </div>
+        </div>
+        <div class="stages">
+          <div class="stage">
+            <div class="stage-num">8</div>
+            <div class="stage-body">
+              <div class="stage-title">Sync HubSpot<span class="stage-status status-build">Por construir</span></div>
+              <div class="stage-desc">Crea contact + company con tags + <strong>owner por round robin</strong>. Si la empresa ya tiene owner, lo respeta. <code>estadio_del_lead</code> queda vacío hasta que haya reply.</div>
+              <span class="stage-cost">$0 / contacto</span>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="stage-num">9</div>
+            <div class="stage-body">
+              <div class="stage-title">Sequence enrollment<span class="stage-status status-build">Por construir</span></div>
+              <div class="stage-desc">HubSpot Sequence D0 / D3 / D7 / D14 con <em>Send as contact owner</em>. Cada email sale del inbox del ejecutivo asignado. Máx 30/día por inbox.</div>
+              <span class="stage-cost">$0 / contacto</span>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="stage-num">10</div>
+            <div class="stage-body">
+              <div class="stage-title">Handoff a ventas<span class="stage-status status-build">Por construir</span></div>
+              <div class="stage-desc">Reply detectado → stage pasa a <em>2. Contacto Iniciado</em>. Como el owner rotó, el reply ya cae en su inbox. SLA 24hs.</div>
+              <span class="stage-cost">$0 / contacto</span>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="stage-num">11</div>
+            <div class="stage-body">
+              <div class="stage-title">Nurture rechazados<span class="stage-status status-build">Por construir</span></div>
+              <div class="stage-desc">Lista separada <em>Nurture — Scraping AR</em> con newsletter mensual. Salida al dar reply, unsubscribe o cambio de empresa.</div>
+              <span class="stage-cost">$0 / contacto</span>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="stage-num">12</div>
+            <div class="stage-body">
+              <div class="stage-title">Reporting<span class="stage-status status-build">Por construir</span></div>
+              <div class="stage-desc">Dashboard HubSpot + tab resumen en Google Sheet. KPIs diarios / semanales / mensuales del funnel completo.</div>
+              <span class="stage-cost">$0 / contacto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-banner">
+      <div class="rb-icon">★</div>
+      <div>
+        <h4>El único checkpoint humano del pipeline</h4>
+        <p>La <strong>review semanal</strong> de la etapa 5 nunca se automatiza. Garantiza calidad antes del envío y consume <strong>~4 horas / semana</strong> para los 5 países. Todo lo demás corre solo: alertas, reintentos y escalación incluidas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Round Robin & SLA -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Las reglas que sostienen el sistema</div>
+      <h2>Round robin de owners <span class="accent">+ SLA de handoff</span></h2>
+      <p class="lead">Dos reglas críticas convierten al pipeline en algo escalable: cómo se distribuyen los leads entre ejecutivos sin pisar relaciones existentes, y qué pasa cuando llega un reply a sus inboxes.</p>
+    </div>
+
+    <div class="rules-grid">
+      <div class="rules-card">
+        <h3>Asignación por round robin</h3>
+        <p class="rc-sub">Tres reglas en cascada para evitar que dos ejecutivos escriban a dos personas de la misma empresa.</p>
+
+        <div class="rule-row">
+          <div class="rule-case">Empresa ya existe<br><span style="color:var(--gray);font-weight:400;font-size:0.78rem;">y tiene owner</span></div>
+          <div class="rule-action">Asignar al contacto el mismo owner. <strong>No avanza la rotación.</strong></div>
+        </div>
+        <div class="rule-row">
+          <div class="rule-case">Empresa ya existe<br><span style="color:var(--gray);font-weight:400;font-size:0.78rem;">sin owner</span></div>
+          <div class="rule-action">Asignar rotación siguiente <strong>al contacto y a la empresa</strong>, para que futuros contactos del mismo dominio hereden.</div>
+        </div>
+        <div class="rule-row">
+          <div class="rule-case">Empresa nueva</div>
+          <div class="rule-action">Crear empresa con owner = rotación siguiente, asignar el mismo owner al contacto.</div>
+        </div>
+      </div>
+
+      <div class="rules-card">
+        <h3>SLA del handoff</h3>
+        <p class="rc-sub">Una respuesta en cold outreach pierde 50% de conversión cada 24hs. Por eso el sistema fuerza acción rápida.</p>
+
+        <ul class="sla-list">
+          <li class="sla-item">
+            <div class="sla-time">0 min</div>
+            <div class="sla-action">n8n detecta reply → notifica al owner por <strong>Gmail + Google Chat personal</strong> + mueve stage a <em>2. Contacto Iniciado</em>.</div>
+          </li>
+          <li class="sla-item urgent">
+            <div class="sla-time">24hs</div>
+            <div class="sla-action">Si el owner no respondió al lead → escalación a <strong>Cesar + Country Manager</strong>.</div>
+          </li>
+          <li class="sla-item critical">
+            <div class="sla-time">48hs</div>
+            <div class="sla-action">Contacto marcado como <strong>urgente</strong> en el funnel comercial.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Volumen -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Volumen diario · setup oficial</div>
+      <h2>15 contactos por ejecutivo por día, <span class="accent">cada día hábil</span></h2>
+      <p class="lead">El sourcing corre con cron de lunes a viernes a las 08:00 hora local. Cada día genera <code>cantidad_ejecutivos × 15</code> contactos pending review. La cantidad se toma de <code>HUBSPOT_ROTATION_{COUNTRY}_EMAILS</code> en <code>.env</code>.</p>
+    </div>
+
+    <div class="volume-card">
+      <table class="volume-table">
+        <thead>
+          <tr>
+            <th>País</th>
+            <th>Ejecutivos (incl. CM)</th>
+            <th>Diario</th>
+            <th>Semanal (5d)</th>
+            <th>Mensual (4 sem)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Argentina</td><td>5</td><td>75</td><td>375</td><td>1.500</td></tr>
+          <tr><td>México</td><td>4</td><td>60</td><td>300</td><td>1.200</td></tr>
+          <tr><td>Perú</td><td>4</td><td>60</td><td>300</td><td>1.200</td></tr>
+          <tr><td>Uruguay</td><td>3</td><td>45</td><td>225</td><td>900</td></tr>
+          <tr><td>Chile</td><td>3</td><td>45</td><td>225</td><td>900</td></tr>
+          <tr class="total"><td>Total 5 países</td><td>19</td><td>285</td><td>1.425</td><td>5.700</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Costos -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Economía del pipeline</div>
+      <h2>El costo unitario que hace todo esto <span class="accent">imposible de ignorar</span></h2>
+      <p class="lead">Stack LLM: <strong>Claude Haiku 4.5</strong> (mejor costo/calidad para summarization + copy gen). El costo total por contacto incluye sourcing, enrichment, research de señales y generación de los 4 emails.</p>
+    </div>
+
+    <div class="cost-grid">
+      <div class="cost-card">
+        <div class="cost-label">Costo por contacto</div>
+        <div class="cost-num">~$0,13<small>USD all-in</small></div>
+        <div class="cost-breakdown">
+          <div class="cost-line"><span class="cl-name">Apollo sourcing + enrichment</span><span class="cl-val">$0 (plan actual)</span></div>
+          <div class="cost-line"><span class="cl-name">Apollo job postings (hiring signal)</span><span class="cl-val">$0 (plan actual)</span></div>
+          <div class="cost-line"><span class="cl-name">Vibe — news de empresa</span><span class="cl-val">~$0,30 / empresa única</span></div>
+          <div class="cost-line"><span class="cl-name">Claude Haiku — research + 4 emails</span><span class="cl-val">~$0,02</span></div>
+        </div>
+      </div>
+
+      <div class="cost-card">
+        <div class="cost-label">Régimen pleno · 5 países</div>
+        <div class="cost-num">~$1.000<small>USD / mes total</small></div>
+        <div class="cost-breakdown">
+          <div class="cost-line"><span class="cl-name">Apollo (upgrade plan)</span><span class="cl-val">+$50-100 / mes</span></div>
+          <div class="cost-line"><span class="cl-name">Vibe Prospecting (multi-país)</span><span class="cl-val">~$750 / mes</span></div>
+          <div class="cost-line"><span class="cl-name">Claude Haiku (multi-país)</span><span class="cl-val">~$200 / mes</span></div>
+          <div class="cost-line"><span class="cl-name"><strong>vs SDR in-house ($1.500-2.500)</strong></span><span class="cl-val" style="color:var(--teal-dark)">8x-20x más eficiente</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Roadmap por sprints</div>
+      <h2>Cuándo se automatiza <span class="accent">cada cosa</span></h2>
+      <p class="lead">El pipeline se construye en 6 sprints. Sprint 1 ya está cerrando; el régimen pleno multi-país llega en Sprint 6+ con las 3 áreas funcionales activas (Marketing, RRHH, Ventas + CX).</p>
+    </div>
+
+    <div class="roadmap">
+      <div class="sprint-row">
+        <div class="sprint-tag">
+          <div class="sprint-num">Sprint 1</div>
+          <div class="sprint-when">Semana actual</div>
+        </div>
+        <div class="sprint-body">
+          <h4>Piloto manual end-to-end</h4>
+          <ul class="sprint-list">
+            <li><strong>Ya funcionan:</strong> etapas 1 a 4 (sourcing → sheet)</li>
+            <li><strong>Por construir:</strong> 6 a 9 (research, copy, sync HS con round robin, sequence con Send as owner)</li>
+            <li>Workflow HubSpot que sincroniza <code>Company.industry</code> → <code>Contact.empresa_industria</code></li>
+            <li>Setup SPF / DKIM / DMARC en los inboxes de los ejecutivos</li>
+            <li><strong>Resultado:</strong> primer batch real (50 leads) llega a inboxes de prospects</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sprint-row">
+        <div class="sprint-tag">
+          <div class="sprint-num">Sprint 2</div>
+          <div class="sprint-when">Próxima semana</div>
+        </div>
+        <div class="sprint-body">
+          <h4>Automatización básica</h4>
+          <ul class="sprint-list">
+            <li>n8n workflow encadenando 1 → 4 (trigger manual: botón "Run weekly batch")</li>
+            <li>n8n workflow encadenando 6 → 9 (trigger: <code>decision = Aprobar</code> en sheet)</li>
+            <li>Construir etapa 10: handoff a ventas con SLA + escalación automática</li>
+            <li>Setup alerting: n8n → email + Google Chat cuando el pipeline rompe</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sprint-row">
+        <div class="sprint-tag">
+          <div class="sprint-num">Sprint 3</div>
+          <div class="sprint-when">Semana 3</div>
+        </div>
+        <div class="sprint-body">
+          <h4>Recurrencia automática</h4>
+          <ul class="sprint-list">
+            <li>Cron n8n: lunes 08hs AR corre Sourcing → Sheet (100-200 leads)</li>
+            <li>Cron n8n: cada 4hs lee filas aprobadas del sheet y dispara 6 → 9</li>
+            <li>Construir 11 (nurture rechazados) y 12 (dashboard HubSpot + tab resumen)</li>
+            <li>Tab anual en el sheet para data retention</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sprint-row">
+        <div class="sprint-tag">
+          <div class="sprint-num">Sprint 4+</div>
+          <div class="sprint-when">Fase 2 — RRHH</div>
+        </div>
+        <div class="sprint-body">
+          <h4>Segunda área funcional en producción</h4>
+          <ul class="sprint-list">
+            <li>Nuevo <code>argentina_segment_02.json</code> con puestos de RRHH</li>
+            <li>Mismo pipeline, nuevo <code>batch_id</code>, mismo sheet</li>
+            <li><strong>Resultado:</strong> RRHH corre en paralelo a Marketing en producción</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sprint-row">
+        <div class="sprint-tag">
+          <div class="sprint-num">Sprint 5+</div>
+          <div class="sprint-when">Fase 3 — Ventas + CX</div>
+        </div>
+        <div class="sprint-body">
+          <h4>Tercera área funcional en producción</h4>
+          <ul class="sprint-list">
+            <li>Nuevo segment spec con puestos Ventas + CX</li>
+            <li><strong>Resultado:</strong> las 3 áreas de AR activas (Marketing · RRHH · Ventas + CX)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sprint-row">
+        <div class="sprint-tag">
+          <div class="sprint-num">Sprint 6+</div>
+          <div class="sprint-when">Replicación regional</div>
+        </div>
+        <div class="sprint-body">
+          <h4>Pipeline multinacional — 5 países × 3 áreas</h4>
+          <ul class="sprint-list">
+            <li>Nuevo segment JSON por país (CL, MX, PE, UY)</li>
+            <li>Nuevo sheet o tab por país + lista rotation propia</li>
+            <li>Credenciales HubSpot por país (ya en <code>.env</code>)</li>
+            <li><strong>Resultado:</strong> 5 países × 3 áreas = pipeline regional completo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roles -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Quién hace qué</div>
+      <h2>Roles del pipeline en producción</h2>
+      <p class="lead">El proceso reparte responsabilidades claras entre Cesar (definición + checkpoint), Claude/n8n (toda la operativa), los ejecutivos comerciales (responder los replies que llegan a su inbox) y el Country Manager (segunda línea de escalación).</p>
+    </div>
+
+    <div class="roles-grid">
+      <div class="role-card cesar">
+        <div class="role-tag">Owner del proceso</div>
+        <div class="role-name">Cesar</div>
+        <ul class="role-list">
+          <li>Define segmentos por fase y país</li>
+          <li>Revisa el sheet (~4hs / semana multi-país)</li>
+          <li>Valida samples de copy en primeros batches</li>
+          <li>Revisa el dashboard de KPIs</li>
+        </ul>
+      </div>
+
+      <div class="role-card">
+        <div class="role-tag">Operativa</div>
+        <div class="role-name">Claude + n8n</div>
+        <ul class="role-list">
+          <li>Sourcing, enrichment, dedupe</li>
+          <li>Research de signals + generación de copy</li>
+          <li>Sync a HubSpot + sequence enrollment</li>
+          <li>Handoff, alertas, escalación automática</li>
+        </ul>
+      </div>
+
+      <div class="role-card">
+        <div class="role-tag">Equipo comercial</div>
+        <div class="role-name">Ejecutivos AR</div>
+        <ul class="role-list">
+          <li>Reciben leads asignados por round robin</li>
+          <li>Responden los replies en su inbox</li>
+          <li>SLA 24hs por reply recibido</li>
+          <li>Trabajan el funnel desde "Contacto Iniciado"</li>
+        </ul>
+      </div>
+
+      <div class="role-card">
+        <div class="role-tag">Escalación</div>
+        <div class="role-name">Country Manager AR</div>
+        <ul class="role-list">
+          <li>Segunda línea si un ejecutivo no responde</li>
+          <li>Recibe alerta a las 24hs sin acción</li>
+          <li>Reasigna manualmente si hace falta</li>
+          <li>Visibilidad sobre el funnel de su país</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>bigbox<span style="display:inline-block;width:4px;height:4px;background:currentColor;border-radius:50%;margin:0 6px;vertical-align:middle;transform:translateY(-2px);"></span>corpo · Scraping ICP Automation</div>
+    <div class="src">Fuente: <code>scraping-icp-automation/docs/process.md</code> · Última actualización del proceso: 2026-04-16</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
