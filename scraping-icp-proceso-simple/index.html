@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scraping ICP — Explicado simple · bigbox · corpo</title>
+<style>
+  :root {
+    --teal: #2aa3b1;
+    --teal-dark: #1f8591;
+    --teal-deep: #155b65;
+    --teal-soft: rgba(42,163,177,0.08);
+    --navy: #03035e;
+    --ink: #0f0f1a;
+    --gray: #6b7280;
+    --gray-soft: #f6f7f9;
+    --border: rgba(3, 3, 94, 0.08);
+    --card: #ffffff;
+    --green: #16a34a;
+    --shadow-sm: 0 2px 8px rgba(15,15,26,0.04);
+    --shadow-md: 0 8px 24px rgba(15,15,26,0.06);
+    --shadow-teal: 0 14px 40px rgba(42,163,177,0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    font-family: "Sofia Pro", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f9fafb;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.55;
+  }
+
+  .page { max-width: 980px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* === Hero === */
+  .hero {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    color: #fff;
+    margin: 0 -32px 56px;
+    padding: 70px 64px 64px;
+    border-radius: 0 0 28px 28px;
+    box-shadow: var(--shadow-teal);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -50%; right: -10%;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 60%);
+  }
+  .hero-content { position: relative; max-width: 800px; }
+  .brand-mark {
+    font-size: 1rem; font-weight: 600; letter-spacing: 0.02em;
+    opacity: 0.92; margin-bottom: 28px;
+  }
+  .brand-mark .dot {
+    display: inline-block; width: 5px; height: 5px;
+    background: currentColor; border-radius: 50%;
+    margin: 0 8px; vertical-align: middle; transform: translateY(-2px);
+  }
+  .hero .eyebrow {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; opacity: 0.85; margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 4.2vw, 3.2rem); font-weight: 600;
+    letter-spacing: -0.02em; line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .hero h1 .accent {
+    display: inline-block;
+    border-bottom: 4px solid rgba(255,255,255,0.4);
+    padding-bottom: 4px;
+  }
+  .hero p {
+    font-size: 1.18rem; font-weight: 300; opacity: 0.96;
+    max-width: 720px; line-height: 1.55;
+  }
+
+  /* === Section === */
+  .section { margin-bottom: 64px; }
+  .section-head { margin-bottom: 28px; max-width: 800px; }
+  .section-eyebrow {
+    font-size: 0.74rem; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 10px;
+  }
+  .section h2 {
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 600;
+    color: var(--navy); letter-spacing: -0.015em;
+    line-height: 1.18; margin-bottom: 12px;
+  }
+  .section h2 .accent { color: var(--teal); }
+  .section .lead {
+    font-size: 1.05rem; color: var(--gray); line-height: 1.6;
+    font-weight: 400;
+  }
+
+  /* === Analogía / qué es === */
+  .analogy-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 32px 36px;
+    box-shadow: var(--shadow-sm);
+    border-left: 5px solid var(--teal);
+  }
+  .analogy-card p {
+    font-size: 1.08rem; color: var(--ink); line-height: 1.65;
+    margin-bottom: 14px;
+  }
+  .analogy-card p:last-child { margin-bottom: 0; }
+  .analogy-card strong { color: var(--teal-dark); font-weight: 700; }
+  .analogy-card em { color: var(--navy); font-style: normal; font-weight: 600; }
+
+  /* === Comparación antes/después === */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .compare-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 30px;
+    box-shadow: var(--shadow-sm);
+  }
+  .compare-card.after {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: var(--shadow-teal);
+  }
+  .compare-tag {
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gray); margin-bottom: 12px;
+  }
+  .compare-card.after .compare-tag { color: rgba(255,255,255,0.85); }
+  .compare-title {
+    font-size: 1.25rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 16px; line-height: 1.25;
+  }
+  .compare-card.after .compare-title { color: #fff; }
+  .compare-list {
+    list-style: none; padding: 0;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .compare-list li {
+    font-size: 0.95rem; line-height: 1.5;
+    padding-left: 24px; position: relative;
+    color: var(--gray);
+  }
+  .compare-card.after .compare-list li { color: rgba(255,255,255,0.95); }
+  .compare-list li::before {
+    content: "—"; position: absolute; left: 0; top: 0;
+    color: var(--gray); opacity: 0.7;
+  }
+  .compare-card.after .compare-list li::before {
+    content: "✓"; color: #fff; opacity: 1; font-weight: 700;
+  }
+
+  /* === 5 pasos simples === */
+  .steps {
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .step {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 32px;
+    box-shadow: var(--shadow-sm);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 28px;
+    align-items: start;
+    transition: transform 0.2s ease;
+  }
+  .step:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .step-num {
+    width: 80px; height: 80px;
+    background: var(--teal-soft);
+    color: var(--teal-dark);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.2rem; font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .step.human .step-num {
+    background: var(--teal);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(42,163,177,0.30);
+  }
+  .step-body h3 {
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 6px;
+    line-height: 1.25;
+  }
+  .step-tag {
+    display: inline-block;
+    font-size: 0.66rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 10px;
+    background: var(--teal-soft);
+    padding: 3px 10px; border-radius: 100px;
+  }
+  .step-body p {
+    font-size: 0.98rem; color: var(--gray);
+    line-height: 1.6;
+  }
+  .step-body .step-analogy {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: var(--gray-soft);
+    border-radius: 10px;
+    font-size: 0.88rem; color: var(--ink);
+    border-left: 3px solid var(--teal);
+  }
+  .step-body .step-analogy strong { color: var(--teal-dark); font-weight: 700; }
+
+  /* === Por qué importa === */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .why-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 26px;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+  }
+  .why-num {
+    font-size: 2.6rem; font-weight: 700;
+    color: var(--teal-dark); letter-spacing: -0.02em;
+    line-height: 1; margin-bottom: 8px;
+  }
+  .why-num small {
+    font-size: 0.36em; font-weight: 500;
+    color: var(--gray); margin-left: 4px;
+    display: block; margin-top: 6px;
+    letter-spacing: 0.05em;
+  }
+  .why-title {
+    font-size: 1.02rem; font-weight: 700;
+    color: var(--navy); margin: 14px 0 8px;
+  }
+  .why-desc {
+    font-size: 0.88rem; color: var(--gray);
+    line-height: 1.5;
+  }
+
+  /* === Cierre === */
+  .closing {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 36px 40px;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+  }
+  .closing h3 {
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .closing p {
+    font-size: 1.02rem; color: var(--gray);
+    line-height: 1.6; max-width: 640px;
+    margin: 0 auto 18px;
+  }
+  .closing strong { color: var(--teal-dark); font-weight: 700; }
+  .closing .closing-cta {
+    display: inline-block;
+    margin-top: 8px;
+    background: var(--teal);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-size: 0.9rem; font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .closing .closing-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-teal);
+  }
+
+  /* === Footer === */
+  .footer {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--gray); font-size: 0.82rem;
+  }
+  .footer a {
+    color: var(--teal-dark); text-decoration: none;
+    font-weight: 600;
+  }
+
+  @media (max-width: 720px) {
+    .page { padding: 0 16px 60px; }
+    .hero { margin: 0 -16px 40px; padding: 50px 24px 44px; border-radius: 0 0 20px 20px; }
+    .compare, .why-grid { grid-template-columns: 1fr; }
+    .step { grid-template-columns: 1fr; gap: 14px; }
+    .step-num { width: 64px; height: 64px; font-size: 1.8rem; }
+    .analogy-card { padding: 24px 22px; }
+    .closing { padding: 28px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
+      <div class="eyebrow">Outbound automatizado · Versión simple</div>
+      <h1>Cómo conseguimos clientes nuevos <span class="accent">sin levantar el teléfono</span></h1>
+      <p>Una explicación directa de lo que hace el nuevo sistema de outreach de Bigbox Corpo: qué es, cómo funciona y por qué cambia las reglas del equipo comercial. Sin tecnicismos.</p>
+    </div>
+  </header>
+
+  <!-- Sección 1: Qué es -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Empecemos por lo básico</div>
+      <h2>¿Qué es <span class="accent">esto</span>, en una frase?</h2>
+    </div>
+
+    <div class="analogy-card">
+      <p>Es un <strong>asistente digital que trabaja 24/7</strong> buscando empresas que podrían ser clientes de Bigbox Corpo, averigua quién es la persona que decide adentro de cada una, le escribe un mensaje personalizado y se lo envía a su mail.</p>
+      <p>Pensalo como un <em>vendedor incansable</em> que nunca duerme, no toma vacaciones, conoce los 5 países donde operamos y escribe cada mensaje como si fuera el primero. La única persona del equipo que interviene es Cesar, una vez por semana, durante un par de horas, para revisar que la lista esté bien antes de que el sistema mande los mails.</p>
+    </div>
+  </section>
+
+  <!-- Sección 2: Antes vs Después -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Por qué hace falta</div>
+      <h2>Lo que hacíamos antes <span class="accent">vs lo que hacemos ahora</span></h2>
+      <p class="lead">Hasta hoy, conseguir clientes nuevos dependía de que cada vendedor armara su propia lista, su propio mensaje y se acordara de hacer seguimiento. Funciona, pero no escala.</p>
+    </div>
+
+    <div class="compare">
+      <div class="compare-card">
+        <div class="compare-tag">Antes</div>
+        <div class="compare-title">Cada vendedor por su cuenta</div>
+        <ul class="compare-list">
+          <li>Cada uno arma su lista de empresas a mano</li>
+          <li>Mismo mensaje copiado para todos los contactos</li>
+          <li>El seguimiento depende de la memoria de cada vendedor</li>
+          <li>Resultado parejo: 2 de cada 100 mails reciben respuesta</li>
+          <li>Imposible saber qué funciona y qué no</li>
+        </ul>
+      </div>
+      <div class="compare-card after">
+        <div class="compare-tag">Ahora</div>
+        <div class="compare-title">Un sistema que trabaja para todos</div>
+        <ul class="compare-list">
+          <li>El sistema arma la lista solo, todos los días</li>
+          <li>Cada mensaje habla específicamente de esa empresa</li>
+          <li>El seguimiento es automático: 4 mails durante 2 semanas</li>
+          <li>Resultado proyectado: 8 de cada 100 mails reciben respuesta</li>
+          <li>Todo queda medido y se puede mejorar con datos reales</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 3: Cómo funciona en 5 pasos -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">El proceso, simple</div>
+      <h2>Cómo funciona en <span class="accent">5 pasos</span></h2>
+      <p class="lead">El sistema completo tiene varios pasos técnicos, pero acá está la versión que cualquiera puede entender. Lo importante es saber dónde participa una persona y dónde el sistema se ocupa solo.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <span class="step-tag">El sistema busca</span>
+          <h3>Encuentra a las empresas que nos interesan</h3>
+          <p>El sistema entra a una base gigante de empresas de los 5 países donde operamos y filtra solo las que tienen el perfil ideal: del rubro correcto, del tamaño correcto y con personas en los cargos que toman las decisiones de compra (Marketing, RRHH, Ventas).</p>
+          <div class="step-analogy"><strong>Como si fuera:</strong> ir a una guía telefónica gigante y marcar con resaltador solo a las empresas que cumplen exactamente con lo que buscamos.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <span class="step-tag">El sistema investiga</span>
+          <h3>Aprende algo real sobre cada contacto</h3>
+          <p>Para cada persona en la lista, el sistema lee sus posts recientes en LinkedIn, busca novedades de su empresa (lanzamientos, premios, fusiones) y revisa si están contratando gente. Eso le da material para escribir un mensaje que tenga sentido, no genérico.</p>
+          <div class="step-analogy"><strong>Como si fuera:</strong> antes de saludar a alguien en un evento, googlearlo rápido para tener algo concreto de qué hablar.</div>
+        </div>
+      </div>
+
+      <div class="step human">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <span class="step-tag">Acá entra Cesar</span>
+          <h3>Una persona revisa la lista antes del envío</h3>
+          <p>Una vez por semana, Cesar abre la lista y aprueba o rechaza cada contacto. Esto es lo único que hace una persona en todo el proceso. Le toma cerca de 4 horas a la semana revisar los contactos de los 5 países. Es el filtro de calidad: nada sale sin que un humano lo haya visto.</p>
+          <div class="step-analogy"><strong>Como si fuera:</strong> el editor que revisa el diario antes de que salga a la calle. El sistema escribe; la persona valida.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <span class="step-tag">El sistema escribe</span>
+          <h3>Redacta 4 mails personalizados por contacto</h3>
+          <p>Una inteligencia artificial escribe 4 mails distintos para cada persona aprobada, usando lo que aprendió en el paso 2. Cada mail tiene un ángulo diferente y son cortos, cálidos y honestos. Nada de plantillas genéricas: cada mensaje habla de la empresa real del destinatario.</p>
+          <div class="step-analogy"><strong>Como si fuera:</strong> tener un redactor publicitario sentado al lado, escribiendo a medida para cada cliente potencial.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <span class="step-tag">El sistema envía y conecta</span>
+          <h3>Mandan los mails y conectan al ejecutivo correcto</h3>
+          <p>Los mails salen en el tiempo justo (día 0, día 3, día 7 y día 14) desde la casilla personal del ejecutivo asignado a esa empresa. Cuando alguien responde, el mail entra directo al inbox del ejecutivo correcto y el sistema le avisa por mail y por chat para que conteste rápido.</p>
+          <div class="step-analogy"><strong>Como si fuera:</strong> una asistente que no solo manda las cartas sino que también te avisa apenas el cliente responde, para que no se enfríe la conversación.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 4: Por qué importa -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">El impacto</div>
+      <h2>Por qué esto <span class="accent">cambia las reglas</span></h2>
+      <p class="lead">Tres números que resumen por qué este proyecto vale la pena, comparados con cualquier otra forma de generar contactos nuevos.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-num">4×<small>más respuestas</small></div>
+        <div class="why-title">Mejor conversión</div>
+        <div class="why-desc">Personalización real = 8 respuestas cada 100 mails, contra 2 que daba la herramienta anterior con mensajes copiados.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">5.700<small>contactos / mes</small></div>
+        <div class="why-title">A escala regional</div>
+        <div class="why-desc">Una vez en régimen pleno, llegamos a casi 6.000 empresas por mes en los 5 países. Sin contratar a nadie nuevo.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">10×<small>más barato</small></div>
+        <div class="why-title">Costo bajo</div>
+        <div class="why-desc">Cuesta unos USD 1.000 por mes para los 5 países. Un vendedor dedicado a esta tarea costaría 10 veces más.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 5: Para qué nos sirve -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">El para qué</div>
+      <h2>¿Qué resuelve esto <span class="accent">para Bigbox</span>?</h2>
+    </div>
+
+    <div class="analogy-card">
+      <p>Hoy, el equipo comercial de Bigbox Corpo recibe contactos de tres lugares: gente que entra a la web por su cuenta, contactos sueltos que cada vendedor consigue y eventos. Todo eso suma, pero ninguno es <strong>predecible ni escalable</strong>.</p>
+      <p>Este sistema resuelve eso: <strong>genera un flujo constante de contactos nuevos cada semana</strong>, en cada país, en los rubros y cargos que más nos compran. El equipo comercial deja de depender de la suerte de cuántos contactos entren por la web ese mes.</p>
+      <p>Y lo más importante: <em>uno de los objetivos anuales 2026 de Marketing</em> es que <strong>15% de todos los leads calificados del año vengan de un sistema automático</strong>. Este es ese sistema.</p>
+    </div>
+  </section>
+
+  <!-- Cierre -->
+  <section class="section">
+    <div class="closing">
+      <h3>En 30 segundos</h3>
+      <p>Bigbox Corpo construyó un asistente digital que <strong>busca, investiga y escribe</strong> mails personalizados a empresas potenciales todos los días. Una persona revisa la lista una vez por semana. El sistema manda los mails desde la casilla del vendedor correcto y avisa apenas alguien responde. <strong>Resultado: 4× más respuestas, a un décimo del costo, sin sumar headcount.</strong></p>
+      <a class="closing-cta" href="../scraping-icp-proceso-tecnico/">Ver versión técnica del proceso →</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    bigbox<span style="display:inline-block;width:4px;height:4px;background:currentColor;border-radius:50%;margin:0 6px;vertical-align:middle;transform:translateY(-2px);"></span>corpo · Scraping ICP Automation · Versión simple
+  </footer>
+
+</div>
+
+</body>
+</html>
