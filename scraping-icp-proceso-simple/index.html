@@ -174,32 +174,34 @@
     gap: 20px;
   }
   .phase {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 18px;
     padding: 24px 24px 28px;
-    box-shadow: var(--shadow-sm);
+    color: #fff;
+    box-shadow: 0 14px 40px rgba(15,15,26,0.18);
     display: flex; flex-direction: column;
     position: relative;
   }
   .phase-header {
     display: flex; align-items: center; gap: 12px;
     padding-bottom: 14px; margin-bottom: 16px;
-    border-bottom: 1px dashed var(--border);
+    border-bottom: 1px dashed rgba(255,255,255,0.12);
   }
   .phase-tag {
-    background: var(--teal-soft);
-    color: var(--teal-dark);
+    background: rgba(42,163,177,0.18);
+    color: #5ed4e0;
     font-size: 0.66rem; font-weight: 700;
     letter-spacing: 0.18em; text-transform: uppercase;
     padding: 4px 10px; border-radius: 100px;
+    border: 1px solid rgba(42,163,177,0.30);
   }
   .phase-title {
     font-size: 1.05rem; font-weight: 700;
-    color: var(--navy); line-height: 1.2;
+    color: #fff; line-height: 1.2;
   }
   .phase-sub {
-    font-size: 0.78rem; color: var(--gray);
+    font-size: 0.78rem; color: rgba(255,255,255,0.6);
     margin-top: 2px;
   }
   .stages { display: flex; flex-direction: column; gap: 12px; flex: 1; }
@@ -211,39 +213,46 @@
   }
   .stage-num {
     width: 36px; height: 36px;
-    background: var(--gray-soft);
-    border: 1px solid var(--border);
+    background: var(--teal);
+    border: 1px solid transparent;
     border-radius: 10px;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(42,163,177,0.25);
     display: flex; align-items: center; justify-content: center;
-    font-weight: 700; color: var(--navy);
+    font-weight: 700;
     font-size: 0.92rem;
   }
-  .stage.done .stage-num {
+  .stage.done .stage-num,
+  .stage.review .stage-num {
     background: var(--teal);
     color: #fff;
-    border-color: transparent;
+    border: 1px solid transparent;
     box-shadow: 0 4px 10px rgba(42,163,177,0.25);
-  }
-  .stage.review .stage-num {
-    background: #fff;
-    color: var(--teal-dark);
-    border: 2px solid var(--teal);
   }
   .stage-body { padding-top: 4px; }
   .stage-title {
     font-size: 0.94rem; font-weight: 700;
-    color: var(--navy); line-height: 1.25;
+    color: #fff; line-height: 1.25;
   }
   .stage-desc {
-    font-size: 0.84rem; color: var(--gray);
+    font-size: 0.84rem; color: rgba(255,255,255,0.72);
     line-height: 1.5; margin-top: 4px;
   }
+  .stage-desc strong { color: #fff; font-weight: 700; }
+  .stage-desc code {
+    background: rgba(255,255,255,0.08);
+    color: #fde68a;
+    padding: 1px 5px; border-radius: 4px;
+    font-size: 0.82em;
+  }
+  .stage-desc em { color: rgba(255,255,255,0.85); font-style: italic; }
   .stage-cost {
     display: inline-block;
     margin-top: 6px;
     font-size: 0.72rem; font-weight: 600;
-    color: var(--teal-dark);
-    background: var(--teal-soft);
+    color: #5ed4e0;
+    background: rgba(42,163,177,0.18);
+    border: 1px solid rgba(42,163,177,0.30);
     padding: 2px 8px; border-radius: 4px;
   }
 
