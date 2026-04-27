@@ -505,8 +505,8 @@
   <section class="section">
     <div class="section-head">
       <div class="section-eyebrow">El proceso</div>
-      <h2>De ICP spec a inbox del prospect en <span class="accent">12 etapas</span></h2>
-      <p class="lead">El proceso se agrupa en tres fases: sourcing y dedupe (donde se construye el batch), personalización (donde se genera copy único por contacto), y activación (donde el lead entra al funnel comercial).</p>
+      <h2>De la base de datos al inbox del cliente, <span class="accent">en 13 etapas</span></h2>
+      <p class="lead">El proceso se agrupa en tres fases: <strong>sourcing y dedupe</strong> (donde se arma la lista de empresas y contactos), <strong>personalización</strong> (donde se investiga y se escribe el mensaje, con doble revisión humana en el medio), y <strong>activación</strong> (donde el contacto entra al sistema comercial).</p>
     </div>
 
     <div class="pipeline">
@@ -590,6 +590,14 @@
               <span class="stage-cost">~$0,02 / contacto</span>
             </div>
           </div>
+          <div class="stage review">
+            <div class="stage-num">8</div>
+            <div class="stage-body">
+              <div class="stage-title">Review humana del copy</div>
+              <div class="stage-desc">Una persona del equipo revisa los 4 emails generados antes del envío. Valida tono, personalización real y coherencia con la propuesta. Segunda y última instancia humana antes de salir al inbox.</div>
+              <span class="stage-cost">incluido en review semanal</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -604,7 +612,7 @@
         </div>
         <div class="stages">
           <div class="stage">
-            <div class="stage-num">8</div>
+            <div class="stage-num">9</div>
             <div class="stage-body">
               <div class="stage-title">Sync HubSpot</div>
               <div class="stage-desc">Crea contact + company con tags + <strong>owner por round robin</strong>. Si la empresa ya tiene owner, lo respeta. <code>estadio_del_lead</code> queda vacío hasta que haya reply.</div>
@@ -612,7 +620,7 @@
             </div>
           </div>
           <div class="stage">
-            <div class="stage-num">9</div>
+            <div class="stage-num">10</div>
             <div class="stage-body">
               <div class="stage-title">Sequence enrollment</div>
               <div class="stage-desc">HubSpot Sequence D0 / D3 / D7 / D14 con <em>Send as contact owner</em>. Cada email sale del inbox del ejecutivo asignado. Máx 30/día por inbox.</div>
@@ -620,7 +628,7 @@
             </div>
           </div>
           <div class="stage">
-            <div class="stage-num">10</div>
+            <div class="stage-num">11</div>
             <div class="stage-body">
               <div class="stage-title">Handoff a ventas</div>
               <div class="stage-desc">Reply detectado → stage pasa a <em>2. Contacto Iniciado</em>. Como el owner rotó, el reply ya cae en su inbox. SLA 24hs.</div>
@@ -628,7 +636,7 @@
             </div>
           </div>
           <div class="stage">
-            <div class="stage-num">11</div>
+            <div class="stage-num">12</div>
             <div class="stage-body">
               <div class="stage-title">Nurture rechazados</div>
               <div class="stage-desc">Lista separada <em>Nurture — Scraping AR</em> con newsletter mensual. Salida al dar reply, unsubscribe o cambio de empresa.</div>
@@ -636,7 +644,7 @@
             </div>
           </div>
           <div class="stage">
-            <div class="stage-num">12</div>
+            <div class="stage-num">13</div>
             <div class="stage-body">
               <div class="stage-title">Reporting</div>
               <div class="stage-desc">Dashboard HubSpot + tab resumen en Google Sheet. KPIs diarios / semanales / mensuales del funnel completo.</div>
@@ -650,8 +658,8 @@
     <div class="review-banner">
       <div class="rb-icon">★</div>
       <div>
-        <h4>El único checkpoint humano del pipeline</h4>
-        <p>La <strong>review semanal</strong> de la etapa 5 nunca se automatiza. Garantiza calidad antes del envío y consume <strong>~4 horas / semana</strong> para los 5 países. Todo lo demás corre solo: alertas, reintentos y escalación incluidas.</p>
+        <h4>Doble validación humana antes del envío</h4>
+        <p>El proceso tiene <strong>dos checkpoints humanos</strong> dentro de la review semanal: la <strong>etapa 5</strong> (validar la lista de contactos antes de gastar research) y la <strong>etapa 8</strong> (validar el copy generado antes de salir al inbox del prospect). Ambas suman <strong>~4 horas / semana</strong> para los 5 países. Todo lo demás corre solo: alertas, reintentos y escalación incluidas.</p>
       </div>
     </div>
   </section>
