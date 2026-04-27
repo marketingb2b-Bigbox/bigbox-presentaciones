@@ -366,6 +366,51 @@
     line-height: 1.4;
   }
   .country-meta strong { color: var(--teal-dark); font-weight: 700; }
+  .country-links {
+    display: flex; flex-direction: column; gap: 4px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+  }
+  .country-link {
+    font-size: 0.72rem; font-weight: 600;
+    color: var(--teal-dark); text-decoration: none;
+    padding: 5px 8px;
+    background: var(--teal-soft);
+    border-radius: 6px;
+    transition: background 0.15s ease;
+    display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+  }
+  .country-link:hover { background: rgba(42,163,177,0.20); }
+  .country-link .cl-icon { font-size: 0.85rem; }
+
+  .n8n-link-row {
+    margin-top: 16px;
+    display: flex; justify-content: center;
+  }
+  .n8n-link-row a {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 0.86rem; font-weight: 600;
+    color: var(--navy); text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .n8n-link-row a:hover {
+    transform: translateY(-2px);
+    border-color: var(--teal);
+  }
+  .n8n-link-row .nl-icon {
+    width: 20px; height: 20px;
+    background: var(--teal); color: #fff;
+    border-radius: 6px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.78rem; font-weight: 700;
+  }
+  .n8n-link-row .nl-arrow { color: var(--teal-dark); }
 
   .coverage-banner {
     margin-top: 22px;
@@ -575,12 +620,13 @@
     <div class="compare">
       <div class="compare-card">
         <div class="compare-tag">Antes</div>
-        <div class="compare-title">Encuestas que se acumulan</div>
+        <div class="compare-title">Encuestas con consolidación y análisis manual</div>
         <ul class="compare-list">
-          <li>Respuestas en un Google Form sin lectura sistemática</li>
-          <li>Detractores invisibles hasta que el ejecutivo los descubría tarde</li>
-          <li>NPS sin trazabilidad por país, mes ni año</li>
-          <li>Sin insights cualitativos sobre qué cambiar del proceso comercial</li>
+          <li>Las encuestas existían — pero la consolidación se hacía a mano cada mes</li>
+          <li>El análisis cualitativo de verbatims dependía de que alguien tuviera tiempo</li>
+          <li>Horas operativas mensuales dedicadas a armar reportes que ya deberían estar listos</li>
+          <li>Detractores tardaban en hacerse visibles para el equipo comercial</li>
+          <li>NPS sin trazabilidad sistemática por país, mes ni año</li>
           <li>Cero visibilidad para liderazgo entre cierres trimestrales</li>
         </ul>
       </div>
@@ -794,27 +840,55 @@
         <div class="country-flag">🇦🇷</div>
         <div class="country-name">Argentina</div>
         <div class="country-meta"><strong>2 workflows</strong><br/>Fuente de verdad de templates</div>
+        <div class="country-links">
+          <a class="country-link" href="https://docs.google.com/spreadsheets/d/1G9rNhtbz-fpwPxeUow0qc8D2PNFYFCl84PmiA1HEKII/edit" target="_blank" rel="noopener"><span class="cl-icon">📥</span> Sheet fuente</a>
+          <a class="country-link" href="https://docs.google.com/spreadsheets/d/1_gLtetYeQloUpmSq7eawkPak9b4jKCKUDq1Y7yhH-7g/edit" target="_blank" rel="noopener"><span class="cl-icon">📊</span> Sheet reporte</a>
+        </div>
       </div>
       <div class="country">
         <div class="country-flag">🇨🇱</div>
         <div class="country-name">Chile</div>
         <div class="country-meta"><strong>2 workflows</strong><br/>Tono "tú"</div>
+        <div class="country-links">
+          <a class="country-link" href="https://docs.google.com/spreadsheets/d/1SG4uZeV8H55ORw85Y5u5tFn_8Bp_pm4b8HZK6N6L0C4/edit" target="_blank" rel="noopener"><span class="cl-icon">📥</span> Sheet fuente</a>
+          <a class="country-link" href="https://docs.google.com/spreadsheets/d/14Q6xI64ycDFvlBU9W3gg53TLYXuHSxdx0vKgnqdyiZg/edit" target="_blank" rel="noopener"><span class="cl-icon">📊</span> Sheet reporte</a>
+        </div>
       </div>
       <div class="country">
         <div class="country-flag">🇲🇽</div>
         <div class="country-name">México</div>
         <div class="country-meta"><strong>2 workflows</strong><br/>Tono "tú"</div>
+        <div class="country-links">
+          <a class="country-link" href="https://docs.google.com/spreadsheets/d/1i8iXCqwL3ypjFUa8xk0BtKNKnli_MF9dFuMfW-PnnLs/edit" target="_blank" rel="noopener"><span class="cl-icon">📥</span> Sheet fuente</a>
+          <a class="country-link" href="https://docs.google.com/spreadsheets/d/16PWwRi_C_pH8vjlsgbS2A4n4tfrLZRf2ts08sFCZj8A/edit" target="_blank" rel="noopener"><span class="cl-icon">📊</span> Sheet reporte</a>
+        </div>
       </div>
       <div class="country">
         <div class="country-flag">🇵🇪</div>
         <div class="country-name">Perú</div>
         <div class="country-meta"><strong>2 workflows</strong><br/>Tono "tú"</div>
+        <div class="country-links">
+          <a class="country-link" href="https://docs.google.com/spreadsheets/d/1KMpHQyNCQsXAe_6JLZwQuthxKQmWltdA0BAb7riyT2o/edit" target="_blank" rel="noopener"><span class="cl-icon">📥</span> Sheet fuente</a>
+          <a class="country-link" href="https://docs.google.com/spreadsheets/d/1l8XG9AEsh2jbiwuHt0JZRSXyIkf6qP04hqR6OJLzbeY/edit" target="_blank" rel="noopener"><span class="cl-icon">📊</span> Sheet reporte</a>
+        </div>
       </div>
       <div class="country">
         <div class="country-flag">🇺🇾</div>
         <div class="country-name">Uruguay</div>
         <div class="country-meta"><strong>2 workflows</strong><br/>Tono "vos"</div>
+        <div class="country-links">
+          <a class="country-link" href="https://docs.google.com/spreadsheets/d/1tCjTWzgfmMU_AsBIb8nbQZWFnWc7ArPTrL7pidmtJXs/edit" target="_blank" rel="noopener"><span class="cl-icon">📥</span> Sheet fuente</a>
+          <a class="country-link" href="https://docs.google.com/spreadsheets/d/1cyz3sTDdGnIeAXjV0deu2FTFVGkJiGbGXLTZQWakCuk/edit" target="_blank" rel="noopener"><span class="cl-icon">📊</span> Sheet reporte</a>
+        </div>
       </div>
+    </div>
+
+    <div class="n8n-link-row">
+      <a href="https://marketingb2b.app.n8n.cloud/workflow/IelmdlsbgvDy86Ba" target="_blank" rel="noopener">
+        <span class="nl-icon">n8n</span>
+        Abrir workflow de automatización
+        <span class="nl-arrow">→</span>
+      </a>
     </div>
 
     <div class="coverage-banner">
