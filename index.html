@@ -8,8 +8,9 @@
   :root {
     --teal: #2aa3b1;
     --teal-dark: #1f8591;
-    --purple: #5f2c77;
+    --teal-deep: #155b65;
     --navy: #03035e;
+    --gray: #6b7280;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -65,8 +66,110 @@
     opacity: 0.85;
     max-width: 640px;
     line-height: 1.5;
-    margin-bottom: 50px;
     font-weight: 300;
+  }
+
+  /* === Pillars section === */
+  .pillars-block {
+    margin: 60px 0 50px;
+    max-width: 1200px;
+  }
+  .pillars-block .section-eyebrow {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 12px;
+  }
+  .pillars-block h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  .pillars-block .pillars-lead {
+    font-size: 1rem;
+    opacity: 0.88;
+    max-width: 720px;
+    line-height: 1.55;
+    font-weight: 300;
+    margin-bottom: 30px;
+  }
+  .pillars-block .pillars-lead strong { font-weight: 600; opacity: 1; }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .pillars-col {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 14px;
+    padding: 22px 24px 24px;
+    backdrop-filter: blur(6px);
+  }
+  .pillars-col-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 16px;
+  }
+  .pillar-item {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 14px;
+    padding: 12px 0;
+    border-top: 1px dashed rgba(255,255,255,0.14);
+    align-items: start;
+  }
+  .pillar-item:first-of-type { border-top: 0; padding-top: 4px; }
+  .pillar-num {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #fff;
+  }
+  .pillar-text {
+    font-size: 0.92rem;
+    line-height: 1.45;
+    padding-top: 4px;
+  }
+  .pillar-text strong { font-weight: 700; }
+  .pillar-text .pillar-sub {
+    display: block;
+    font-size: 0.82rem;
+    opacity: 0.75;
+    margin-top: 2px;
+    font-weight: 300;
+  }
+
+  /* === Decks === */
+  .decks-section {
+    margin-top: 30px;
+  }
+  .decks-section .section-eyebrow {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 12px;
+  }
+  .decks-section h2 {
+    font-size: clamp(1.6rem, 2.6vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 24px;
   }
 
   .deck-list {
@@ -88,12 +191,26 @@
     flex-direction: column;
     gap: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+    position: relative;
   }
   .deck-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 48px rgba(0,0,0,0.20);
   }
 
+  .deck-pillar {
+    position: absolute;
+    top: 14px; right: 14px;
+    background: rgba(42,163,177,0.12);
+    color: var(--teal-deep);
+    border: 1px solid rgba(42,163,177,0.25);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 100px;
+  }
   .deck-date {
     font-size: 0.72rem;
     letter-spacing: 0.18em;
@@ -108,6 +225,7 @@
     line-height: 1.25;
     color: var(--teal);
     margin-bottom: 4px;
+    padding-right: 80px;
   }
   .deck-desc {
     font-size: 0.92rem;
@@ -137,6 +255,12 @@
     text-decoration: underline;
     opacity: 0.9;
   }
+
+  @media (max-width: 760px) {
+    .pillars-grid { grid-template-columns: 1fr; }
+    .deck-title { padding-right: 0; }
+    .deck-pillar { position: static; align-self: flex-start; margin-bottom: 4px; }
+  }
 </style>
 </head>
 <body>
@@ -145,28 +269,70 @@
 
 <div class="eyebrow">Marketing B2B</div>
 <h1>Presentaciones</h1>
-<p class="subtitle">Decks del equipo de Marketing B2B de Bigbox Corpo. Proyectos, procesos y resultados.</p>
+<p class="subtitle">Procesos, sistemas y resultados del equipo de Marketing B2B de Bigbox Corpo. Cada deck explica un proyecto que aporta a uno de los pilares estratégicos del año.</p>
 
-<div class="deck-list">
-  <a class="deck-card" href="scraping-icp-proceso-simple/">
-    <div class="deck-date">Abril 2026</div>
-    <div class="deck-title">Scraping ICP — Sistema de prospección</div>
-    <div class="deck-desc">Cómo Bigbox Corpo genera contactos comerciales nuevos en los 5 países. Qué es, cómo funciona en 5 pasos y por qué cambia las reglas del equipo comercial.</div>
-    <div class="deck-link">Ver explicador →</div>
-  </a>
-  <a class="deck-card" href="encuestas-satisfaccion-proceso/">
-    <div class="deck-date">Abril 2026</div>
-    <div class="deck-title">Encuestas de Satisfacción — Proceso</div>
-    <div class="deck-desc">Explicador del flujo de medición de NPS: 3 fases 100% automáticas, los 3 reportes (semanal, mensual, anual YTD) y cómo se distribuye al equipo comercial.</div>
-    <div class="deck-link">Ver explicador →</div>
-  </a>
-  <a class="deck-card" href="speed-to-lead/">
-    <div class="deck-date">Abril 2026</div>
-    <div class="deck-title">Speed to Lead — Tiempo de respuesta</div>
-    <div class="deck-desc">Cómo medimos el tiempo que tarda el equipo comercial en responder cada lead nuevo. 8 fechas por contacto, dashboard mensual por ejecutivo y país.</div>
-    <div class="deck-link">Ver explicador →</div>
-  </a>
-</div>
+<!-- Pilares B2B 2026 -->
+<section class="pillars-block">
+  <div class="section-eyebrow">Plan estratégico 2026</div>
+  <h2>Los pilares B2B para 2026</h2>
+  <p class="pillars-lead">A principios de año nos pusimos <strong>cuatro desafíos</strong> para encarar todo el año, organizados en dos frentes: <strong>traer clientes nuevos</strong> y <strong>capturar más valor de los actuales</strong>. Cada proyecto del equipo se mapea a uno de estos pilares.</p>
+
+  <div class="pillars-grid">
+    <div class="pillars-col">
+      <div class="pillars-col-tag">Adquisición</div>
+      <div class="pillar-item">
+        <div class="pillar-num">1</div>
+        <div class="pillar-text"><strong>Desarrollo de canales comerciales complementarios</strong><span class="pillar-sub">Partnership B2B2C, whitelabel</span></div>
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-num">2</div>
+        <div class="pillar-text"><strong>Incrementar ventas del segmento MKTG</strong><span class="pillar-sub">Ciclo de vinculación, sponsorship, generación de oportunidades</span></div>
+      </div>
+    </div>
+
+    <div class="pillars-col">
+      <div class="pillars-col-tag">Recurrencia</div>
+      <div class="pillar-item">
+        <div class="pillar-num">3</div>
+        <div class="pillar-text"><strong>Incrementar la Percepción de Valor de clientes actuales</strong><span class="pillar-sub">Medir entrega de valor, detectar dolores, accionar</span></div>
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-num">4</div>
+        <div class="pillar-text"><strong>Programa Upselling TOP 100</strong><span class="pillar-sub">Cross-sell y nuevas ocasiones de compra</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Decks -->
+<section class="decks-section">
+  <div class="section-eyebrow">Proyectos del equipo</div>
+  <h2>Explicadores</h2>
+
+  <div class="deck-list">
+    <a class="deck-card" href="scraping-icp-proceso-simple/">
+      <span class="deck-pillar">Pilar 2</span>
+      <div class="deck-date">Abril 2026</div>
+      <div class="deck-title">Scraping ICP — Sistema de prospección</div>
+      <div class="deck-desc">Cómo Bigbox Corpo genera contactos comerciales nuevos en los 5 países. Qué es, cómo funciona en 5 pasos y por qué cambia las reglas del equipo comercial.</div>
+      <div class="deck-link">Ver explicador →</div>
+    </a>
+    <a class="deck-card" href="speed-to-lead/">
+      <span class="deck-pillar">Pilar 2</span>
+      <div class="deck-date">Abril 2026</div>
+      <div class="deck-title">Speed to Lead — Tiempo de respuesta</div>
+      <div class="deck-desc">Cómo medimos el tiempo que tarda el equipo comercial en responder cada lead nuevo. 8 fechas por contacto, dashboard mensual por ejecutivo y país.</div>
+      <div class="deck-link">Ver explicador →</div>
+    </a>
+    <a class="deck-card" href="encuestas-satisfaccion-proceso/">
+      <span class="deck-pillar">Pilar 3</span>
+      <div class="deck-date">Abril 2026</div>
+      <div class="deck-title">Encuestas de Satisfacción — Proceso</div>
+      <div class="deck-desc">Explicador del flujo de medición de NPS: 3 fases 100% automáticas, los 3 reportes (semanal, mensual, anual YTD) y cómo se distribuye al equipo comercial.</div>
+      <div class="deck-link">Ver explicador →</div>
+    </a>
+  </div>
+</section>
 
 <footer>
   Código en <a href="https://github.com/marketingb2b-Bigbox/bigbox-presentaciones" target="_blank" rel="noopener">github.com/marketingb2b-Bigbox/bigbox-presentaciones</a>
