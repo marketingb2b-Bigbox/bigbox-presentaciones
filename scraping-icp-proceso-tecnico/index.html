@@ -754,7 +754,7 @@
         <ul class="sla-list">
           <li class="sla-item">
             <div class="sla-time">0 min</div>
-            <div class="sla-action">n8n detecta reply → notifica al owner por <strong>Gmail + Google Chat personal</strong> + mueve stage a <em>2. Contacto Iniciado</em>.</div>
+            <div class="sla-action">HubSpot detecta reply → notifica al owner por <strong>Gmail + Google Chat personal</strong> + mueve stage a <em>2. Contacto Iniciado</em>.</div>
           </li>
           <li class="sla-item urgent">
             <div class="sla-time">24hs</div>
@@ -867,10 +867,10 @@
         <div class="sprint-body">
           <h4>Automatización básica</h4>
           <ul class="sprint-list">
-            <li>n8n workflow encadenando 1 → 4 (trigger manual: botón "Run weekly batch")</li>
-            <li>n8n workflow encadenando 6 → 9 (trigger: <code>decision = Aprobar</code> en sheet)</li>
+            <li>GitHub Actions <code>daily-source.yml</code> encadenando 1 → 4 (cron L-V 07:00 ART)</li>
+            <li>GitHub Actions <code>cron-4h.yml</code> encadenando 6 → 9 (cron cada 4hs lee filas aprobadas del sheet)</li>
             <li>Construir etapa 10: handoff a ventas con SLA + escalación automática</li>
-            <li>Setup alerting: n8n → email + Google Chat cuando el pipeline rompe</li>
+            <li>Setup alerting: GitHub Actions → Google Chat MKT cuando el pipeline rompe</li>
           </ul>
         </div>
       </div>
@@ -883,8 +883,8 @@
         <div class="sprint-body">
           <h4>Recurrencia automática</h4>
           <ul class="sprint-list">
-            <li>Cron n8n: lunes 08hs AR corre Sourcing → Sheet (100-200 leads)</li>
-            <li>Cron n8n: cada 4hs lee filas aprobadas del sheet y dispara 6 → 9</li>
+            <li>Cron GitHub Actions: L-V 07:00 ART corre Sourcing → Sheet (75/día por país)</li>
+            <li>Cron GitHub Actions: L-V 09/13/17 ART lee filas aprobadas del sheet y dispara 6 → 9</li>
             <li>Construir 11 (nurture rechazados) y 12 (dashboard HubSpot + tab resumen)</li>
             <li>Tab anual en el sheet para data retention</li>
           </ul>
@@ -943,7 +943,7 @@
     <div class="section-head">
       <div class="section-eyebrow">Quién hace qué</div>
       <h2>Roles del pipeline en producción</h2>
-      <p class="lead">El proceso reparte responsabilidades claras entre Cesar (definición + checkpoint), Claude/n8n (toda la operativa), los ejecutivos comerciales (responder los replies que llegan a su inbox) y el Country Manager (segunda línea de escalación).</p>
+      <p class="lead">El proceso reparte responsabilidades claras entre Cesar (definición + checkpoint), Claude + GitHub Actions (toda la operativa), los ejecutivos comerciales (responder los replies que llegan a su inbox) y el Country Manager (segunda línea de escalación).</p>
     </div>
 
     <div class="roles-grid">
@@ -960,12 +960,12 @@
 
       <div class="role-card">
         <div class="role-tag">Operativa</div>
-        <div class="role-name">Claude + n8n</div>
+        <div class="role-name">Claude + GitHub Actions</div>
         <ul class="role-list">
-          <li>Sourcing, enrichment, dedupe</li>
+          <li>Sourcing, enrichment, dedupe (vs sheet + HubSpot)</li>
           <li>Research de signals + generación de copy</li>
           <li>Sync a HubSpot + sequence enrollment</li>
-          <li>Handoff, alertas, escalación automática</li>
+          <li>Handoff, alertas al canal MKT, escalación automática</li>
         </ul>
       </div>
 
