@@ -223,25 +223,37 @@
     margin-bottom: 18px;
   }
   .funnel-row {
-    display: flex; align-items: center; gap: 14px;
-    padding: 12px 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 16px;
+    align-items: center;
+    padding: 14px 0;
     border-bottom: 1px dashed rgba(255,255,255,0.10);
   }
   .funnel-row:last-child { border-bottom: 0; padding-bottom: 0; }
   .funnel-row:first-child { padding-top: 0; }
-  .funnel-bar {
-    height: 14px; border-radius: 100px;
-    background: linear-gradient(90deg, var(--teal) 0%, var(--teal-deep) 100%);
-    flex-shrink: 0;
+  .funnel-content {
+    display: flex; flex-direction: column; gap: 8px;
+    min-width: 0;
   }
   .funnel-label {
-    flex: 1; font-size: 0.88rem; color: rgba(255,255,255,0.92);
+    font-size: 0.88rem; color: rgba(255,255,255,0.92); line-height: 1.4;
   }
   .funnel-label strong { color: #fff; font-weight: 700; }
+  .funnel-label .lbl-sub { color: rgba(255,255,255,0.65); }
+  .funnel-track {
+    height: 10px; border-radius: 100px;
+    background: rgba(255,255,255,0.06);
+    overflow: hidden;
+  }
+  .funnel-bar {
+    height: 100%; border-radius: inherit;
+    background: linear-gradient(90deg, var(--teal) 0%, var(--teal-deep) 100%);
+  }
   .funnel-num {
-    font-size: 0.95rem; font-weight: 700; color: var(--teal-text-dark);
+    font-size: 1.1rem; font-weight: 700; color: var(--teal-text-dark);
     font-variant-numeric: tabular-nums;
-    min-width: 48px; text-align: right;
+    min-width: 64px; text-align: right;
   }
 
   /* === Mermaid diagram === */
@@ -822,28 +834,38 @@
         <div class="funnel-title">Funnel típico semanal · piloto AR</div>
 
         <div class="funnel-row">
-          <div class="funnel-bar" style="width: 100%"></div>
-          <div class="funnel-label"><strong>Empresas relevadas</strong><br/>Banca, seguros, software, etc.</div>
+          <div class="funnel-content">
+            <div class="funnel-label"><strong>Empresas relevadas</strong> <span class="lbl-sub">· Banca, seguros, software, etc.</span></div>
+            <div class="funnel-track"><div class="funnel-bar" style="width: 100%"></div></div>
+          </div>
           <div class="funnel-num">~2.000</div>
         </div>
         <div class="funnel-row">
-          <div class="funnel-bar" style="width: 70%"></div>
-          <div class="funnel-label"><strong>Contactos extraídos</strong><br/>Marketing, Ventas, CX (manager+)</div>
+          <div class="funnel-content">
+            <div class="funnel-label"><strong>Contactos extraídos</strong> <span class="lbl-sub">· Marketing, Ventas, CX (manager+)</span></div>
+            <div class="funnel-track"><div class="funnel-bar" style="width: 70%"></div></div>
+          </div>
           <div class="funnel-num">~600</div>
         </div>
         <div class="funnel-row">
-          <div class="funnel-bar" style="width: 35%"></div>
-          <div class="funnel-label"><strong>Aprobados en review</strong><br/>Cesar valida calidad antes de enviar</div>
+          <div class="funnel-content">
+            <div class="funnel-label"><strong>Aprobados en review</strong> <span class="lbl-sub">· Cesar valida calidad antes de enviar</span></div>
+            <div class="funnel-track"><div class="funnel-bar" style="width: 35%"></div></div>
+          </div>
           <div class="funnel-num">150</div>
         </div>
         <div class="funnel-row">
-          <div class="funnel-bar" style="width: 22%"></div>
-          <div class="funnel-label"><strong>Emails enviados</strong><br/>Cold email + 2 follow-ups</div>
+          <div class="funnel-content">
+            <div class="funnel-label"><strong>Emails enviados</strong> <span class="lbl-sub">· Cold email + 2 follow-ups</span></div>
+            <div class="funnel-track"><div class="funnel-bar" style="width: 22%"></div></div>
+          </div>
           <div class="funnel-num">100</div>
         </div>
         <div class="funnel-row">
-          <div class="funnel-bar" style="width: 8%"></div>
-          <div class="funnel-label"><strong>Respuestas</strong><br/>Asignación round robin a ejecutivos</div>
+          <div class="funnel-content">
+            <div class="funnel-label"><strong>Respuestas</strong> <span class="lbl-sub">· Asignación round robin a ejecutivos</span></div>
+            <div class="funnel-track"><div class="funnel-bar" style="width: 8%"></div></div>
+          </div>
           <div class="funnel-num">~5–10</div>
         </div>
       </div>
