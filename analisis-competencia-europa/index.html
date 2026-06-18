@@ -76,7 +76,7 @@
   .toc-list li { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18); border-radius: 11px; padding: 12px 13px; font-size: 0.84rem; font-weight: 500; line-height: 1.28; display: flex; flex-direction: column; gap: 7px; backdrop-filter: blur(6px); }
   .toc-num { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.2em; opacity: 0.7; }
 
-  /* === Thesis (slide 2) === */
+  /* === Thesis === */
   .thesis-grid { margin-top: 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 1240px; }
   .thesis-card { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 22px 24px; backdrop-filter: blur(6px); display: flex; flex-direction: column; gap: 10px; }
   .thesis-card .t-ic { font-size: 1.5rem; }
@@ -171,37 +171,6 @@
   .dd-list li strong { font-weight: 600; }
   .dd-list li.warn::before { background: #d97706; }
 
-  /* === VS / matrix grid === */
-  .vs-grid { margin-top: 20px; display: grid; grid-template-columns: 1fr 56px 1fr; align-items: stretch; gap: 14px; }
-  .vs-col { display: flex; flex-direction: column; gap: 11px; }
-  .vs-head { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
-  .vs-head.have { color: var(--teal); }
-  .vs-head.gap { color: var(--teal-dark); }
-  .vs-head .rule { flex: 1; height: 1.5px; background: currentColor; opacity: 0.3; }
-  .vs-card { border-radius: 13px; padding: 14px 16px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
-  .vs-card.tinted { background: linear-gradient(135deg, rgba(42,163,177,0.1) 0%, rgba(42,163,177,0.03) 100%); border: 1.5px solid rgba(42,163,177,0.25); }
-  .vs-card.dark { background: linear-gradient(135deg, rgba(31,133,145,0.1) 0%, rgba(31,133,145,0.03) 100%); border: 1.5px solid rgba(31,133,145,0.3); }
-  .vs-card h4 { font-size: 0.96rem; font-weight: 600; color: var(--navy); line-height: 1.2; }
-  .vs-card p { font-size: 0.8rem; color: var(--gray); line-height: 1.42; }
-  .vs-card p strong { color: var(--navy); font-weight: 600; }
-  .vs-arrow { display: flex; align-items: center; justify-content: center; }
-  .vs-arrow svg { width: 36px; height: 36px; color: var(--navy); opacity: 0.3; }
-
-  /* === Mechanics (3 cards) + screens === */
-  .mech-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .mech { background: linear-gradient(135deg, rgba(31,133,145,0.09) 0%, rgba(31,133,145,0.02) 100%); border: 1.5px solid rgba(31,133,145,0.28); border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 7px; }
-  .mech .me-n { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--teal-dark), var(--teal-deep)); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; }
-  .mech h4 { font-size: 0.98rem; font-weight: 700; color: var(--navy); line-height: 1.2; }
-  .mech p { font-size: 0.8rem; color: var(--gray); line-height: 1.42; }
-  .mech .src { font-size: 0.68rem; font-weight: 600; color: var(--teal-dark); letter-spacing: 0.03em; }
-
-  .screens { margin-top: 16px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
-  .scr { background: var(--gray-soft); border: 1px solid rgba(42,163,177,0.18); border-radius: 10px; padding: 10px 9px; display: flex; flex-direction: column; gap: 4px; }
-  .scr .sn { font-size: 0.66rem; font-weight: 700; color: var(--teal); }
-  .scr .st { font-size: 0.74rem; font-weight: 600; color: var(--navy); line-height: 1.18; }
-  .scr.cut { background: rgba(217,119,6,0.08); border-color: rgba(217,119,6,0.3); }
-  .scr.cut .sn { color: #b45309; }
-
   /* === Impact (numbers + plays) === */
   .impact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; margin-top: 18px; }
   .impact-card { background: #fff; border: 1px solid rgba(42,163,177,0.18); border-radius: 15px; padding: 17px 16px; box-shadow: 0 6px 22px rgba(3,3,94,0.07); }
@@ -231,9 +200,8 @@
   body.cursor-hidden * { cursor: none !important; }
 
   @media (max-width: 900px) {
-    .toc-list, .motor-grid, .players-grid, .impact-grid, .plays-grid, .mech-grid, .thesis-grid { grid-template-columns: 1fr 1fr; }
-    .vs-grid, .split { grid-template-columns: 1fr; }
-    .screens { grid-template-columns: repeat(3, 1fr); }
+    .toc-list, .motor-grid, .players-grid, .impact-grid, .plays-grid, .thesis-grid { grid-template-columns: 1fr 1fr; }
+    .split { grid-template-columns: 1fr; }
     .dtable { font-size: 0.74rem; }
   }
 </style>
@@ -245,7 +213,7 @@
   <!-- 0 · Cover -->
   <section class="slide teal cover active" data-idx="0">
     <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num">01 / 16</div>
+    <div class="slide-num">01 / 14</div>
     <div class="eyebrow">Inteligencia competitiva · Junio 2026</div>
     <h1 class="title">Análisis de competencia <span class="accent">— Europa</span></h1>
     <p class="lead">Diagnóstico profundo de los líderes europeos de experiencias, gift cards, beneficios y viajes: qué ofrecen, cuánto facturan, cómo monetizan y cómo escalaron. Y qué de todo eso es replicable, defendible o irrelevante para Bigbox.</p>
@@ -256,8 +224,8 @@
         <li><span class="toc-num">02</span>Gigantes de vouchers</li>
         <li><span class="toc-num">03</span>Plataformas SaaS de incentivos</li>
         <li><span class="toc-num">04</span>Experience boxes (deep dive)</li>
-        <li><span class="toc-num">05</span>Infra de gift cards + el gap digital</li>
-        <li><span class="toc-num">06</span>MVP + las 4 jugadas</li>
+        <li><span class="toc-num">05</span>Infra de gift cards</li>
+        <li><span class="toc-num">06</span>Mapeo + las 4 jugadas</li>
       </ul>
     </div>
   </section>
@@ -265,7 +233,7 @@
   <!-- 1 · Tesis -->
   <section class="slide teal" data-idx="1">
     <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num">02 / 16</div>
+    <div class="slide-num">02 / 14</div>
     <div class="eyebrow">La lectura de altitud</div>
     <h1 class="title">Tres verdades que ordenan <span class="accent">todo el resto</span></h1>
     <p class="lead">Antes de los números: la conclusión de cruzar las 5 capas. Si te llevás solo esto, alcanza.</p>
@@ -276,13 +244,13 @@
         <p>Los negocios de miles de millones (Edenred €3B, Pluxee €1.3B) son <strong>redes de pago recurrentes</strong>, no catálogos. Venden el mismo flujo prefondeado y lo monetizan cuatro veces.</p>
       </div>
       <div class="thesis-card">
-        <div class="t-ic">🎯</div>
-        <h3>Dos gaps abiertos = tus objetivos 2026</h3>
-        <p>Ningún líder europeo tiene <strong>canal corpo 100% self-service</strong>, y la <strong>capa recurrente</strong> (Plataforma de Incentivos) es la de alto múltiplo. Tenés el activo que a todos les falta: experiencias propias.</p>
+        <div class="t-ic">📈</div>
+        <h3>El dinero de alto múltiplo está en la recurrencia</h3>
+        <p>La capa de Plataforma de Incentivos es la pegajosa y valiosa — Edenred pagó <strong>£1.15B por Reward Gateway</strong>. Y Bigbox tiene el activo que a todos les falta: <strong>experiencias propias en 5 países</strong>.</p>
       </div>
       <div class="thesis-card">
         <div class="t-ic">⚰️</div>
-        <h3>Experiencias sin suscripción = frágil</h3>
+        <h3>Experiencias sin recurrencia = frágil</h3>
         <p>Blueboard (US), análogo casi exacto de Bigbox, quebró en 2024. El breakage —el margen oculto del modelo caja— se está apagando por regulación. El motor tiene que ser otro.</p>
       </div>
     </div>
@@ -291,7 +259,7 @@
   <!-- 2 · Mapa 5 capas -->
   <section class="slide white" data-idx="2">
     <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">03 / 16</div>
+    <div class="slide-num" style="color: var(--gray)">03 / 14</div>
     <div class="eyebrow" style="color: var(--teal)">El mapa del mercado</div>
     <h1 class="title">Cinco capas — y los gigantes <span class="accent">no están donde parece</span></h1>
     <p class="lead" style="color: var(--gray)">El mercado de "regalos e incentivos corporativos" no es uno solo: son cinco negocios con economías distintas. Bigbox juega de lleno en una y puede entrar a otra.</p>
@@ -332,7 +300,7 @@
   <!-- 3 · Capa 1 financials -->
   <section class="slide white dense" data-idx="3">
     <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">04 / 16</div>
+    <div class="slide-num" style="color: var(--gray)">04 / 14</div>
     <div class="eyebrow" style="color: var(--teal)">Capa 1 · Gigantes de vouchers</div>
     <h1 class="title sm">La liga mayor: cuatro players, <span class="accent">la misma máquina</span></h1>
     <table class="dtable compact">
@@ -356,7 +324,7 @@
   <!-- 4 · Capa 1 motores -->
   <section class="slide white" data-idx="4">
     <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">05 / 16</div>
+    <div class="slide-num" style="color: var(--gray)">05 / 14</div>
     <div class="eyebrow" style="color: var(--teal)">Capa 1 · El motor de monetización</div>
     <h1 class="title sm">El empleador prefondea. Ellos ganan <span class="accent">cuatro veces</span></h1>
     <p class="lead" style="color: var(--gray); max-width: 1100px;">El empleador paga el valor facial completo por adelantado. El emisor lo monetiza antes y después de que el empleado gaste — cada palanca es margen casi puro.</p>
@@ -392,7 +360,7 @@
   <!-- 5 · Capa 1 recurrencia + M&A -->
   <section class="slide white" data-idx="5">
     <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">06 / 16</div>
+    <div class="slide-num" style="color: var(--gray)">06 / 14</div>
     <div class="eyebrow" style="color: var(--teal)">Capa 1 · Recurrencia + cómo escalaron</div>
     <h1 class="title sm">Facturan todos los meses — y <span class="accent">compran para crecer</span></h1>
     <div class="split wide-l">
@@ -422,7 +390,7 @@
   <!-- 6 · Capa 2 SaaS -->
   <section class="slide white" data-idx="6">
     <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">07 / 16</div>
+    <div class="slide-num" style="color: var(--gray)">07 / 14</div>
     <div class="eyebrow" style="color: var(--teal)">Capa 2 · Plataformas SaaS de incentivos</div>
     <h1 class="title sm">La capa recurrente — <span class="accent">la que Bigbox ya tiene a medias</span></h1>
     <p class="lead" style="color: var(--gray); max-width: 1100px;">Software de reconocimiento + beneficios por empleado. Es donde fluye el capital de alto múltiplo. El modelo: <strong>doble capa de ingreso</strong>.</p>
@@ -436,7 +404,7 @@
             <tr><td class="rl">Perkbox</td><td>Perks + descuentos</td><td>Independiente</td></tr>
           </tbody>
         </table>
-        <div class="tnote">SSO + sync con HRIS (Workday, BambooHR) para alta/baja automática. El self-service es <b>para el empleado que canjea</b>, no para la empresa que compra (la venta es sales-led / demo).</div>
+        <div class="tnote">SSO + sync con HRIS (Workday, BambooHR) para alta/baja automática de empleados. La pegajosidad nace de esa integración con el stack de RRHH del cliente.</div>
       </div>
       <div>
         <div class="sub-h dark">El modelo de doble capa a copiar</div>
@@ -459,7 +427,7 @@
   <!-- 7 · Capa 3 tabla maestra -->
   <section class="slide white dense" data-idx="7">
     <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">08 / 16</div>
+    <div class="slide-num" style="color: var(--gray)">08 / 14</div>
     <div class="eyebrow" style="color: var(--teal)">Capa 3 · Experience boxes — el panorama</div>
     <h1 class="title sm">Tu modelo exacto: <span class="accent">siete players, dos polos franceses</span></h1>
     <table class="dtable compact">
@@ -467,11 +435,11 @@
         <tr><th>Empresa</th><th>HQ</th><th>Catálogo</th><th>Revenue</th><th>Canal B2B</th><th>Dueño / estado</th></tr>
       </thead>
       <tbody>
-        <tr class="hi"><td class="rl" style="color:var(--teal-dark)">Smartbox</td><td>FR/IE</td><td>40-45k partners</td><td><b>~€550M</b></td><td>Sales-led + self-service tercerizado a GoGift</td><td>Otium / Stérin</td></tr>
+        <tr class="hi"><td class="rl" style="color:var(--teal-dark)">Smartbox</td><td>FR/IE</td><td>40-45k partners</td><td><b>~€550M</b></td><td>Sales-led + compra online tercerizada (GoGift)</td><td>Otium / Stérin</td></tr>
         <tr class="hi"><td class="rl" style="color:var(--teal-dark)">Wonderbox</td><td>FR</td><td>140k actividades</td><td><b>~€325M</b></td><td>Extranet + equipo de ventas (híbrido)</td><td>Privado · dueña de Smartbox</td></tr>
-        <tr><td class="rl">Tinggly</td><td>LT</td><td>10k exp.</td><td>~$5M marca</td><td><b>Self-service + concierge</b> (el más cercano)</td><td>Bootstrapped</td></tr>
+        <tr><td class="rl">Tinggly</td><td>LT</td><td>10k exp.</td><td>~$5M marca</td><td>Compra online + concierge</td><td>Bootstrapped</td></tr>
         <tr><td class="rl">Virgin Exp. Days</td><td>UK</td><td>+4.000</td><td>£83.6M</td><td>Virgin Incentives: formulario + account mgr</td><td>Equistone PE</td></tr>
-        <tr><td class="rl">Buyagift</td><td>UK</td><td>5.000+</td><td>grupo £44M</td><td>Híbrido: account mgr + "Buy Now"</td><td>Moonpig (£124M, 2022)</td></tr>
+        <tr><td class="rl">Buyagift</td><td>UK</td><td>5.000+</td><td>grupo £44M</td><td>Híbrido: account mgr + compra online</td><td>Moonpig (£124M, 2022)</td></tr>
         <tr><td class="rl">Activity Superstore</td><td>UK</td><td>1.200+</td><td>~£20M</td><td>Sales-led · foco white-label retailers</td><td>Days of Your Life</td></tr>
         <tr><td class="rl">J. Schweizer mydays</td><td>DE</td><td>Líder DACH</td><td>n/d</td><td>Corporate dedicado + Regiondo (software)</td><td>ProSiebenSat.1</td></tr>
       </tbody>
@@ -482,7 +450,7 @@
   <!-- 8 · Smartbox + Wonderbox deep -->
   <section class="slide white" data-idx="8">
     <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">09 / 16</div>
+    <div class="slide-num" style="color: var(--gray)">09 / 14</div>
     <div class="eyebrow" style="color: var(--teal)">Capa 3 · Los líderes, en detalle</div>
     <h1 class="title sm">Smartbox y Wonderbox: <span class="accent">escalaron comprando + góndola</span></h1>
     <div class="split">
@@ -497,8 +465,8 @@
         <ul class="dd-list">
           <li>Pionera del concepto (Pierre-Edouard Stérin). Roll-up M&A pan-europeo: Buyagift, La Vida es Bella, Dakotabox, Emozione3.</li>
           <li><strong>2022:</strong> vendió su negocio UK (Buyagift + Red Letter Days) a <strong>Moonpig por £124M</strong> (~4.2× facturación).</li>
-          <li>Su self-service B2B real lo <strong>terceriza a GoGift</strong> — no lo construyó in-house.</li>
-          <li class="warn">Talón de Aquiles: dependencia histórica del breakage + fricción de canje (queja recurrente en reviews).</li>
+          <li>Su compra B2B por autogestión la <strong>terceriza a GoGift</strong> — no la construyó in-house.</li>
+          <li class="warn">Talón de Aquiles: dependencia del breakage + fricción de canje (queja recurrente en reviews).</li>
         </ul>
       </div>
       <div class="dd-card dark">
@@ -522,21 +490,21 @@
   <!-- 9 · Tinggly + UK/DACH -->
   <section class="slide white" data-idx="9">
     <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">10 / 16</div>
+    <div class="slide-num" style="color: var(--gray)">10 / 14</div>
     <div class="eyebrow" style="color: var(--teal)">Capa 3 · El espejo + los regionales</div>
     <h1 class="title sm">Tinggly es tu espejo invertido — <span class="accent">y su debilidad es tu fuerza</span></h1>
     <div class="players-grid">
       <div class="player-card mirror">
         <div class="p-meta">Lituania · el más parecido a Bigbox</div>
         <div class="p-name">Tinggly</div>
-        <div class="p-desc">Experiencias, el destinatario elige, "sin vencimiento", canje en 100+ países. El <strong>mejor B2B del segmento</strong>: sin mínimo, reasignación gratis, pay-as-you-go (paga solo lo enviado en 30d), refund 14d, co-branding. Clientes: Google, IKEA, EA, GitLab.</div>
-        <div class="p-badge">Debilidad: catálogo poco profundo por país + empuja a "Get a quote"</div>
+        <div class="p-desc">Experiencias, el destinatario elige, "sin vencimiento", canje en 100+ países. Modelo B2B ágil: sin mínimo, reasignación gratis, pay-as-you-go, refund 14d, co-branding. Clientes: Google, IKEA, EA, GitLab.</div>
+        <div class="p-badge">Debilidad: catálogo poco profundo por país</div>
       </div>
       <div class="player-card">
         <div class="p-meta">UK · marca licenciada</div>
         <div class="p-name">Virgin / Buyagift</div>
-        <div class="p-desc">Virgin Experience Days (£83.6M, <strong>revenue estancado</strong> 3 años) usa la marca Virgin bajo licencia; B2B vía Virgin Incentives, account-led con formulario de cotización. Buyagift (de Moonpig) tiene "Buy Now" self-service desde 15 unidades, hasta 25% off.</div>
-        <div class="p-badge">Account-led · sin checkout corpo real</div>
+        <div class="p-desc">Virgin Experience Days (£83.6M, <strong>revenue estancado</strong> 3 años) usa la marca Virgin bajo licencia; B2B vía Virgin Incentives, account-led con cotización. Buyagift (de Moonpig) vende online desde 15 unidades, hasta 25% off.</div>
+        <div class="p-badge">Account-led · marca prestada</div>
       </div>
       <div class="player-card">
         <div class="p-meta">UK + DACH · los especialistas</div>
@@ -545,13 +513,13 @@
         <div class="p-badge">White-label + booking digital</div>
       </div>
     </div>
-    <div class="callout"><strong>Lo que ninguno resolvió:</strong> un checkout corporativo 100% self-service propio sobre experiencias. Tinggly tiene el producto pero pasa por ventas; Goody/Tremendous tienen el flujo pero sobre gift cards genéricas. <strong>El cruce está vacío.</strong></div>
+    <div class="callout"><strong>Lo que ninguno tiene:</strong> catálogo de experiencias propio <em>+</em> operación local profunda en varios países a la vez. Tinggly es global pero poco profundo por país; los franceses son profundos pero solo europeos. Es justo la intersección donde Bigbox es fuerte en LATAM.</div>
   </section>
 
   <!-- 10 · Breakage + Blueboard -->
   <section class="slide teal" data-idx="10">
     <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num">11 / 16</div>
+    <div class="slide-num">11 / 14</div>
     <div class="eyebrow">La palanca que se apaga</div>
     <h1 class="title">El breakage se muere — <span class="accent">no construyas el negocio ahí</span></h1>
     <p class="lead">El margen del modelo caja vivía de los vouchers que vencen sin usarse. La regulación europea de caducidad lo está erosionando estructuralmente, y los líderes ya migran el margen.</p>
@@ -573,9 +541,9 @@
         <div class="impact-card" style="background:#fff;">
           <div class="i-label">Blueboard (US) · quiebra marzo 2024</div>
           <div class="i-num" style="color:var(--teal-dark)">500+<small>clientes</small></div>
-          <div class="i-text">Análogo casi exacto de Bigbox (experiencias-como-premio). No quebró por falta de demanda: por <strong>economía unitaria frágil sin SaaS recurrente debajo</strong>.</div>
+          <div class="i-text">Análogo casi exacto de Bigbox (experiencias-como-premio). No quebró por falta de demanda: por <strong>economía unitaria frágil sin recurrencia debajo</strong>.</div>
         </div>
-        <div class="callout"><strong>La lección literal:</strong> experiencias sin suscripción recurrente = negocio financieramente frágil. Bigbox puede ganar donde Blueboard perdió, justamente porque puede envolver su catálogo en plataforma recurrente.</div>
+        <div class="callout"><strong>La lección literal:</strong> experiencias sin un motor recurrente = negocio financieramente frágil. Bigbox puede ganar donde Blueboard perdió, justamente porque puede envolver su catálogo en una plataforma recurrente.</div>
       </div>
     </div>
   </section>
@@ -583,7 +551,7 @@
   <!-- 11 · Capa 4 infra -->
   <section class="slide white dense" data-idx="11">
     <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">12 / 16</div>
+    <div class="slide-num" style="color: var(--gray)">12 / 14</div>
     <div class="eyebrow" style="color: var(--teal)">Capa 4 · Infra de rewards / gift cards</div>
     <h1 class="title sm">Las "rails" — gift cards de marcas: <span class="accent">partner, no build</span></h1>
     <table class="dtable compact">
@@ -601,135 +569,39 @@
     </div>
   </section>
 
-  <!-- 12 · Gap self-service -->
-  <section class="slide white" data-idx="12">
+  <!-- 12 · Mapeo oferta vs Bigbox + moat -->
+  <section class="slide white dense" data-idx="12">
     <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">13 / 16</div>
-    <div class="eyebrow" style="color: var(--teal)">El gap · Objetivo 2026 #3</div>
-    <h1 class="title sm">El canal corpo 100% self-service <span class="accent">está vacío</span></h1>
-    <p class="lead" style="color: var(--gray); max-width: 1100px;">El mercado se parte en dos: quien tiene el producto (experiencias) no resolvió el self-service, y quien resolvió el self-service lo hizo sobre gift cards. Nadie cruzó ambos.</p>
-    <div class="vs-grid">
-      <div class="vs-col">
-        <div class="vs-head have"><span>Lo que ya existe</span><span class="rule"></span></div>
-        <div class="vs-card tinted">
-          <h4>Tinggly — tiene el producto</h4>
-          <p>Experiencias, el destinatario elige, sin vencimiento. <strong>Pero empuja todo lo corporativo a "Get a quote"</strong> — sigue siendo venta asistida con concierge.</p>
-        </div>
-        <div class="vs-card tinted">
-          <h4>Goody / Tremendous / Tango — tienen el flujo</h4>
-          <p>Self-service real: registro en 1 minuto, address-less, se cobra solo lo aceptado. <strong>Pero sobre gift cards genéricas, no experiencias curadas.</strong></p>
-        </div>
-      </div>
-      <div class="vs-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
-      <div class="vs-col">
-        <div class="vs-head gap"><span>El espacio de Bigbox</span><span class="rule"></span></div>
-        <div class="vs-card dark">
-          <h4>Experiencias premium + checkout self-service</h4>
-          <p>La combinación que nadie tiene. Catálogo profundo en 5 países (lo que a Tinggly le falta) + el flujo PLG de Goody. <strong>Primero en LATAM.</strong></p>
-        </div>
-        <div class="vs-card dark">
-          <h4>El playbook a copiar</h4>
-          <p>Sin mínimo · branding · reasignación gratis · pay-as-you-go · dashboard de redención. Corte humano <strong>arriba</strong> (cuentas grandes), no en cada venta.</p>
-        </div>
-      </div>
-    </div>
+    <div class="slide-num" style="color: var(--gray)">13 / 14</div>
+    <div class="eyebrow" style="color: var(--teal)">Mapeo · dónde compite Bigbox</div>
+    <h1 class="title sm">Línea por línea: <span class="accent">dónde Bigbox es uno más y dónde es único</span></h1>
+    <table class="dtable compact">
+      <thead><tr><th>Línea Bigbox</th><th>Quién la cubre en Europa</th><th>Lectura estratégica</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td class="rl" style="color:var(--teal-dark)">Experiencias / boxes</td><td>Smartbox, Wonderbox, Tinggly</td><td><b>Tu core.</b> Los gigantes de vouchers NO lo tienen. Acá Bigbox es par de los líderes europeos.</td></tr>
+        <tr class="hi"><td class="rl" style="color:var(--teal-dark)">Plataforma de Incentivos</td><td>Reward Gateway, Inspirus, Benifex</td><td><b>El oro recurrente.</b> Bigbox la tiene pero le falta el wrapper de suscripción que la hace pegajosa.</td></tr>
+        <tr><td class="rl">Gift cards de marcas</td><td>Runa, Tillo, BHN</td><td>Commodity. Mejor tercerizar vía API que negociar marca por marca.</td></tr>
+        <tr><td class="rl">Viajes corporativos</td><td>BCD, CWT (MICE)</td><td>Adyacencia fragmentada — sin gigante europeo consolidado.</td></tr>
+        <tr><td class="rl">Team building / deporte</td><td>Fragmentado, sin líder</td><td>Refuerza el vínculo; no es el motor económico del negocio.</td></tr>
+        <tr><td class="rl" style="opacity:0.6">Meal vouchers <span class="sub">(no lo tiene)</span></td><td>Edenred, Pluxee, Swile</td><td>El producto recurrente de ellos. Bigbox no juega (regulado, low-margin).</td></tr>
+      </tbody>
+    </table>
+    <div class="callout"><strong>El moat:</strong> Bigbox es el único que combina <strong>catálogo de experiencias propias + operación local en 5 países LATAM</strong>. Los SaaS marquesina (Reward Gateway, Workhuman) son UK/US y no tienen experiencias; los gigantes de vouchers en LATAM (Edenred, Pluxee) no tienen experiencias. Esa intersección es el foso defendible.</div>
   </section>
 
-  <!-- 13 · Teardown mecánicas + pantallas -->
-  <section class="slide white" data-idx="13">
-    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">14 / 16</div>
-    <div class="eyebrow" style="color: var(--teal)">Teardown · cómo se construye</div>
-    <h1 class="title sm">Tres mecánicas + diez pantallas <span class="accent">= el MVP</span></h1>
-    <div class="mech-grid">
-      <div class="mech">
-        <div class="me-n">1</div>
-        <h4>Registro sin fricción</h4>
-        <p>Email + empresa, sin tarjeta upfront. &lt;1 min. Goody regala $20 de crédito para forzar el primer envío real.</p>
-        <span class="src">Goody · Tremendous · Tango</span>
-      </div>
-      <div class="mech">
-        <div class="me-n">2</div>
-        <h4>Address-less / gift-of-choice</h4>
-        <p>Mandás solo un email. El destinatario elige del catálogo y <strong>carga su propia dirección</strong>. Cero logística para el comprador.</p>
-        <span class="src">Goody (núcleo) · Tinggly</span>
-      </div>
-      <div class="mech">
-        <div class="me-n">3</div>
-        <h4>"Solo pagás lo redimido"</h4>
-        <p>Saldo prepago; lo no aceptado se cancela y vuelve al saldo. Es el principal generador de confianza para autogestionarse sin riesgo.</p>
-        <span class="src">Tremendous · Goody</span>
-      </div>
-    </div>
-    <div class="sub-h" style="margin-top:20px;">El flujo mínimo — 10 pasos</div>
-    <div class="screens">
-      <div class="scr"><span class="sn">01</span><span class="st">Registro</span></div>
-      <div class="scr"><span class="sn">02</span><span class="st">Dashboard + saldo</span></div>
-      <div class="scr"><span class="sn">03</span><span class="st">Budget / catálogo</span></div>
-      <div class="scr"><span class="sn">04</span><span class="st">Branding + mensaje</span></div>
-      <div class="scr"><span class="sn">05</span><span class="st">Destinatarios (CSV)</span></div>
-      <div class="scr"><span class="sn">06</span><span class="st">Pago (prepago)</span></div>
-      <div class="scr"><span class="sn">07</span><span class="st">Envío de links</span></div>
-    </div>
-    <div class="screens" style="margin-top:8px; grid-template-columns: repeat(7,1fr);">
-      <div class="scr"><span class="sn">08</span><span class="st">Canje (elige + datos)</span></div>
-      <div class="scr"><span class="sn">09</span><span class="st">Tracking redención</span></div>
-      <div class="scr"><span class="sn">10</span><span class="st">Cancelar → recupera saldo</span></div>
-      <div class="scr cut"><span class="sn">corte</span><span class="st">Box físico → ejecutivo</span></div>
-      <div class="scr cut"><span class="sn">corte</span><span class="st">Multipaís → ejecutivo</span></div>
-      <div class="scr cut"><span class="sn">corte</span><span class="st">Co-branding → ejecutivo</span></div>
-      <div class="scr cut"><span class="sn">corte</span><span class="st">Viajes/TB → ejecutivo</span></div>
-    </div>
-  </section>
-
-  <!-- 14 · MVP ya tenés vs falta -->
-  <section class="slide white" data-idx="14">
-    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">15 / 16</div>
-    <div class="eyebrow" style="color: var(--teal)">El MVP · qué tenés y qué falta</div>
-    <h1 class="title sm">La pieza cara ya está construida — <span class="accent">falta la capa de compra</span></h1>
-    <div class="split">
-      <div>
-        <div class="sub-h">✅ Ya existe (el activo diferenciador)</div>
-        <ul class="dd-list" style="gap:8px;">
-          <li><strong>Catálogo +4.000 experiencias</strong> — lo más caro de armar</li>
-          <li><strong>E-voucher + página de canje</strong> — mecánica address-less ya operativa en B2C</li>
-          <li><strong>HubSpot (5 países) + n8n</strong> — para sync de la venta y orquestación de emails/reembolsos</li>
-          <li><strong>Operación multipaís</strong> + estética premium (landings)</li>
-        </ul>
-      </div>
-      <div>
-        <div class="sub-h dark">🔨 Falta construir (la capa de compra B2B)</div>
-        <ul class="dd-list" style="gap:8px;">
-          <li><strong>Frontend de checkout self-service</strong> (pasos 1-7)</li>
-          <li><strong>Saldo prepago + pasarela</strong> multimoneda</li>
-          <li><strong>CSV de destinatarios</strong> + envío masivo de links</li>
-          <li><strong>Branding del email/landing</strong> (logo + mensaje)</li>
-          <li><strong>Lógica cancelar → recuperar saldo</strong> + tracking dashboard</li>
-        </ul>
-      </div>
-    </div>
-    <div class="split" style="margin-top:14px;">
-      <div class="callout" style="margin-top:0;"><strong>Criterio de corte Fase 1 (= OKR #3 literal):</strong> que una empresa compre e-vouchers de experiencias para N empleados, en 1 país, con saldo prepago, <strong>sin hablar con nadie</strong>, y cada empleado elija y canjee solo.</div>
-      <div class="callout" style="margin-top:0; background:rgba(217,119,6,0.08); border-left-color:#d97706;"><strong style="color:#b45309;">⚠️ El gotcha #1:</strong> la <strong style="color:#b45309;">facturación fiscal del saldo prepago por país</strong>. El flujo de pago puede estar listo pero la factura formal traba el go-live. Validar con finanzas/legales antes de cualquier build.</div>
-    </div>
-  </section>
-
-  <!-- 15 · Las 4 jugadas + cierre -->
-  <section class="slide teal" data-idx="15">
+  <!-- 13 · Las 4 jugadas + cierre -->
+  <section class="slide teal" data-idx="13">
     <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num">16 / 16</div>
+    <div class="slide-num">14 / 14</div>
     <div class="eyebrow">Qué hacemos con esto</div>
     <h1 class="title">Cuatro jugadas <span class="accent">para Bigbox</span></h1>
     <div class="plays-grid">
-      <div class="play"><div class="pl-num">1</div><div><div class="pl-title">Doblar la apuesta en la Plataforma de Incentivos</div><div class="pl-desc">La capa recurrente (suscripción PEPM + margen sobre canje). El puente de "vendor de regalos" a "plataforma con anualidad" — donde está el múltiplo alto y donde Blueboard murió.</div></div></div>
-      <div class="play"><div class="pl-num">2</div><div><div class="pl-title">Construir el canal digital self-service</div><div class="pl-desc">Objetivo 2026 #3. Copiar el flujo PLG de Goody/Tinggly sobre el catálogo profundo multi-país. Gap real del sector: primeros en LATAM.</div></div></div>
-      <div class="play"><div class="pl-num">3</div><div><div class="pl-title">No apoyar el modelo en el breakage</div><div class="pl-desc">La regulación lo está matando. Canje sin fricción + validez generosa como ventaja de marca — el talón de Aquiles #1 de Smartbox y Wonderbox en reviews.</div></div></div>
-      <div class="play"><div class="pl-num">4</div><div><div class="pl-title">Tercerizar gift cards vía Runa / BHN</div><div class="pl-desc">Sumar inventario de marcas sin negociar una por una. Y doblar inversión en lo no replicable: experiencias propias, curaduría y logística regional.</div></div></div>
+      <div class="play"><div class="pl-num">1</div><div><div class="pl-title">Doblar la apuesta en la Plataforma de Incentivos</div><div class="pl-desc">La capa recurrente (suscripción PEPM + margen sobre canje). El puente de "vendor de regalos" a "plataforma con anualidad" — donde está el múltiplo alto y donde Blueboard murió por no tenerla.</div></div></div>
+      <div class="play"><div class="pl-num">2</div><div><div class="pl-title">Capturar la recurrencia y el float</div><div class="pl-desc">El motor de los gigantes: puntos/saldos prepagos recargables que generan recurrencia y float — margen casi puro, especialmente relevante con las tasas altas de LATAM (ARS, BRL, MXN).</div></div></div>
+      <div class="play"><div class="pl-num">3</div><div><div class="pl-title">Canje sin fricción como ventaja, no breakage como pilar</div><div class="pl-desc">La regulación está matando el breakage. La fricción de canje es el talón de Aquiles #1 de Smartbox y Wonderbox en reviews — resolverlo (e-gift + booking ágil) es ventaja de marca directa.</div></div></div>
+      <div class="play"><div class="pl-num">4</div><div><div class="pl-title">Tercerizar gift cards vía Runa / BHN</div><div class="pl-desc">Sumar inventario de marcas sin negociar una por una. Y doblar inversión en lo no replicable: experiencias propias, curaduría y logística regional — el verdadero moat.</div></div></div>
     </div>
-    <div class="closing"><p><strong>La conclusión de fondo:</strong> tenemos el activo que a los gigantes les falta (experiencias propias en 5 países). Nos falta el motor que los hace máquinas de recurrencia. La Plataforma de Incentivos + el canal digital son ese motor.</p></div>
+    <div class="closing"><p><strong>La conclusión de fondo:</strong> tenemos el activo que a los gigantes les falta (experiencias propias en 5 países). Nos falta el motor que los hace máquinas de recurrencia. La Plataforma de Incentivos —recurrente, con float— es ese motor.</p></div>
   </section>
 
 </div>
