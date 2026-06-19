@@ -123,6 +123,35 @@
   .play .pl-title { font-size: .98rem; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 3px; }
   .play .pl-desc { font-size: .79rem; color: var(--gray); line-height: 1.42; }
 
+  /* Scaling deep-dive */
+  .scol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+  .scol { background: #fff; border: 1.5px solid rgba(42,163,177,.22); border-radius: 16px; padding: 18px 22px; box-shadow: 0 6px 22px rgba(3,3,94,.06); display: flex; flex-direction: column; gap: 9px; }
+  .scol.dark { border-color: rgba(31,133,145,.4); box-shadow: 0 10px 30px rgba(31,133,145,.12); }
+  .scol h3 { font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+  .scol .s-meta { font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--teal); margin-top: -6px; }
+  .scol.dark .s-meta { color: var(--teal-dark); }
+  .scol ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .scol li { position: relative; padding-left: 15px; font-size: .82rem; line-height: 1.4; color: var(--navy); }
+  .scol li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+  .scol.dark li::before { background: var(--teal-dark); }
+  .scol li b { color: var(--teal-dark); font-weight: 600; }
+  .scol li.warn::before { background: #d97706; }
+
+  /* Engine + emulable (teal slide) */
+  .eng-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+  .eng-card { border-radius: 14px; padding: 18px 22px; }
+  .eng-card.t { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); }
+  .eng-card.w { background: #fff; color: var(--navy); }
+  .eng-card h4 { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 12px; }
+  .eng-card.w h4 { color: var(--teal); }
+  .eng-card ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+  .eng-card li { font-size: .86rem; line-height: 1.42; }
+  .eng-card.t li { font-weight: 300; }
+  .eng-card.t li b { font-weight: 700; }
+  .eng-card.w li { color: var(--navy); padding-left: 24px; position: relative; }
+  .eng-card.w li .mk { position: absolute; left: 0; top: 0; font-weight: 700; }
+  .eng-card.w li b { color: var(--teal-dark); }
+
   /* Fuentes */
   .src-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; margin-top: 16px; }
   .src-cols .sc-h { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
@@ -152,7 +181,7 @@
   <!-- 1 · Cover -->
   <section class="slide teal cover active">
     <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num">01 / 09</div>
+    <div class="slide-num">01 / 11</div>
     <div class="eyebrow">Inteligencia competitiva · Junio 2026</div>
     <h1 class="title">Mercado de regalos, gift cards e incentivos <span class="accent">— Europa</span></h1>
     <p class="lead">Foto global segmentada del ecosistema europeo: tamaño por segmento, quién vende qué, ranking por facturación y quiénes venden gift cards de terceros. Cada dato con su fuente.</p>
@@ -172,7 +201,7 @@
   <!-- 2 · Foto global -->
   <section class="slide teal">
     <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num">02 / 09</div>
+    <div class="slide-num">02 / 11</div>
     <div class="eyebrow">La foto global</div>
     <h1 class="title sm">El mercado europeo de gift cards: <span class="accent">~US$74–79B</span> (2025)</h1>
     <p class="lead">Crece ~7% anual. Se parte en dos mitades; el corporativo y lo digital ya dominan.</p>
@@ -197,7 +226,7 @@
   <!-- 3 · Los 5 segmentos -->
   <section class="slide white">
     <div class="brand-mark" style="color:var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color:var(--gray)">03 / 09</div>
+    <div class="slide-num" style="color:var(--gray)">03 / 11</div>
     <div class="eyebrow" style="color:var(--teal)">La taxonomía</div>
     <h1 class="title sm">Cinco segmentos — <span class="accent">tres son lo nuestro</span></h1>
     <div class="rows">
@@ -213,7 +242,7 @@
   <!-- 4 · Mapa qué vende cada empresa -->
   <section class="slide white">
     <div class="brand-mark" style="color:var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color:var(--gray)">04 / 09</div>
+    <div class="slide-num" style="color:var(--gray)">04 / 11</div>
     <div class="eyebrow" style="color:var(--teal)">Mapa por segmento</div>
     <h1 class="title sm">Quién vende qué <span class="accent">en cada segmento</span></h1>
     <div class="rows">
@@ -229,7 +258,7 @@
   <!-- 5 · Ranking -->
   <section class="slide white dense">
     <div class="brand-mark" style="color:var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color:var(--gray)">05 / 09</div>
+    <div class="slide-num" style="color:var(--gray)">05 / 11</div>
     <div class="eyebrow" style="color:var(--teal)">Ranking por facturación</div>
     <h1 class="title sm">Todo el ecosistema <span class="accent">ordenado por facturación</span></h1>
     <table class="dtable">
@@ -260,7 +289,7 @@
   <!-- 6 · Gift cards de terceros -->
   <section class="slide teal">
     <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num">06 / 09</div>
+    <div class="slide-num">06 / 11</div>
     <div class="eyebrow">El dato pedido por dirección</div>
     <h1 class="title sm">Quién vende gift cards <span class="accent">de otras marcas</span></h1>
     <p class="lead">"Gift card de otras marcas" = el segmento 3 (clásicas / retail). Sobre las 17 empresas líderes del ecosistema:</p>
@@ -290,7 +319,7 @@
   <!-- 7 · Dónde juega Bigbox -->
   <section class="slide white">
     <div class="brand-mark" style="color:var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color:var(--gray)">07 / 09</div>
+    <div class="slide-num" style="color:var(--gray)">07 / 11</div>
     <div class="eyebrow" style="color:var(--teal)">Dónde juega Bigbox</div>
     <h1 class="title sm">Bigbox juega en <span class="accent">3 de los 5 segmentos</span></h1>
     <p class="lead" style="color:var(--gray); max-width:1100px;">GC clásicas (gift cards de marcas) + experiencias (su núcleo) + plataforma de incentivos. No juega en plata ni en vales.</p>
@@ -302,10 +331,72 @@
     <div class="bx-callout" style="margin-top:18px;"><strong>El moat:</strong> ser de los pocos que combinan experiencias propias + gift cards de terceros + capa de incentivos, con operación regional. Eso es lo no replicable.</div>
   </section>
 
-  <!-- 8 · Jugadas -->
+  <!-- 8 · Deep dive: cómo escalaron -->
+  <section class="slide white">
+    <div class="brand-mark" style="color:var(--navy)">bigbox<span class="dot"></span>corpo</div>
+    <div class="slide-num" style="color:var(--gray)">08 / 11</div>
+    <div class="eyebrow" style="color:var(--teal)">Deep dive · el benchmark</div>
+    <h1 class="title sm">Cómo escalaron a €500M: <span class="accent">góndola + roll-up</span></h1>
+    <div class="scol-grid">
+      <div class="scol">
+        <h3>Smartbox</h3>
+        <div class="s-meta">Francia/Irlanda · fundada 2003 · ~€550M</div>
+        <ul>
+          <li><b>0 → €100M en ~4 años:</b> góndola física (super, FNAC, librerías).</li>
+          <li><b>€100M → €500M = roll-up:</b> Buyagift (UK '09), La Vida es Bella (ES '12), Dakotabox ('15), Emozione3 (IT '16), Truestory + Live It (Nordics '23).</li>
+          <li>Capital: fondo Naxicap (2007-15) → Stérin recompra el 100% + deuda.</li>
+          <li class="warn">Hoy deteriorándose: pérdidas, despidos, +€100M de deuda nueva (2024-25).</li>
+        </ul>
+      </div>
+      <div class="scol dark">
+        <h3>Wonderbox</h3>
+        <div class="s-meta">Francia · fundada 2004 · ~€325M</div>
+        <ul>
+          <li><b>0 → €136M (2014) 100% orgánico:</b> ~2.600 puntos de venta físicos.</li>
+          <li><b>Roll-up desde 2015:</b> Vivabox (BE), Gift for You (NL), Lifecooler (PT), Cofre VIP (ES) + ticketing (Travel Stadium).</li>
+          <li>Controlada por los fundadores, sin PE: caja propia + deuda.</li>
+          <li class="warn">2022: quiso comprar Smartbox → lo frenó el antitrust francés (2023).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout"><strong>El patrón común:</strong> comprar al #1 o #2 local de cada país en vez de construir. El 0→€100M fue góndola física; el €100M→€500M fue M&A. La tecnología no fue el diferencial de escala.</div>
+    <div class="srcline">Fuentes: Wikipedia FR (Smartbox / Wonderbox); Autorité de la concurrence (deal fallido); L'Informé; L'Écho touristique. Revenues recientes = estimaciones de agregadores (orden de magnitud).</div>
+  </section>
+
+  <!-- 9 · El motor + qué emular -->
   <section class="slide teal">
     <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num">08 / 09</div>
+    <div class="slide-num">09 / 11</div>
+    <div class="eyebrow">El motor real · qué emular</div>
+    <h1 class="title sm">El combustible fue <span class="accent">breakage + float</span></h1>
+    <p class="lead">No escalaron por el margen del catálogo. El motor fue financiero — y esa parte sí es emulable.</p>
+    <div class="eng-grid">
+      <div class="eng-card t">
+        <h4>El motor económico</h4>
+        <ul>
+          <li><b>Breakage:</b> 10-30% de las cajas vencen sin canjear = margen casi puro (no le pagás al proveedor de la experiencia).</li>
+          <li><b>Float:</b> cobrás hoy, pagás al canje (6-12 meses) o nunca = capital de trabajo gratis.</li>
+          <li><b>Se recicla:</b> esa caja financia el roll-up. Smartbox subió €69M + €93M de dividendos en dos años.</li>
+        </ul>
+      </div>
+      <div class="eng-card w">
+        <h4>Qué puede emular Bigbox</h4>
+        <ul>
+          <li><span class="mk" style="color:#16a34a">✓</span> <b>Roll-up de líderes locales</b> en los 5 países donde ya opera.</li>
+          <li><span class="mk" style="color:#16a34a">✓</span> <b>Profesionalizar breakage + float</b> como fuente de capital.</li>
+          <li><span class="mk" style="color:#16a34a">✓</span> Cross-sell de adyacencias (ticketing, plataforma de puntos).</li>
+          <li><span class="mk" style="color:#d97706">!</span> Capital PE, pero <b>sin sobre-apalancar</b> (lección Smartbox 2024-25).</li>
+          <li><span class="mk" style="color:#dc2626">✕</span> Góndola B2C masiva (ya en declive) · €500M en 4 años.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="srcline">Mecanismo breakage/float y dividendos (€69M/€93M): multinationales.org (cuentas analizadas). Antitrust: Autorité de la concurrence, décision 23-DEX-02.</div>
+  </section>
+
+  <!-- 10 · Jugadas -->
+  <section class="slide teal">
+    <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
+    <div class="slide-num">10 / 11</div>
     <div class="eyebrow">Qué hacemos con esto</div>
     <h1 class="title">Cuatro jugadas <span class="accent">para Bigbox</span></h1>
     <div class="plays-grid">
@@ -317,10 +408,10 @@
     <div class="callout"><strong>Y el norte de fondo:</strong> el 3x ($30M → $90M) no es orgánico — es buy-and-build (comprar líderes locales) + mix recurrente, financiado con growth equity, independiente. Detalle en el proyecto "estrategia-3x".</div>
   </section>
 
-  <!-- 9 · Fuentes -->
+  <!-- 11 · Fuentes -->
   <section class="slide white dense">
     <div class="brand-mark" style="color:var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color:var(--gray)">09 / 09</div>
+    <div class="slide-num" style="color:var(--gray)">11 / 11</div>
     <div class="eyebrow" style="color:var(--teal)">Trazabilidad</div>
     <h1 class="title sm">Fuentes</h1>
     <div class="src-cols">
