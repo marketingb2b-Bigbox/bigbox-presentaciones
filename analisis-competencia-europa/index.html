@@ -101,16 +101,13 @@
   .slide.teal .callout strong { color: #fff; }
 
   /* GC terceros slide */
-  .gc-wrap { display: grid; grid-template-columns: 0.9fr 1.4fr; gap: 32px; align-items: center; margin-top: 16px; }
-  .gc-stat { text-align: center; }
-  .gc-stat .gs-frac { font-size: clamp(3.4rem, 8vw, 6rem); font-weight: 700; line-height: .9; }
-  .gc-stat .gs-sub { font-size: 1rem; font-weight: 500; opacity: .9; margin-top: 8px; }
-  .gc-list { display: flex; flex-direction: column; gap: 12px; }
-  .gc-card { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 13px; padding: 14px 18px; }
-  .gc-card h4 { font-size: .98rem; font-weight: 700; margin-bottom: 4px; }
-  .gc-card p { font-size: .84rem; line-height: 1.45; opacity: .92; font-weight: 300; }
+  .gc-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+  .gc-card { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; }
+  .gc-card .gc-count { font-size: 2.2rem; font-weight: 700; line-height: 1; }
+  .gc-card h4 { font-size: 1.05rem; font-weight: 700; }
+  .gc-card p { font-size: .92rem; line-height: 1.5; opacity: .94; font-weight: 300; }
   .gc-card.white-card { background: #fff; color: var(--navy); }
-  .gc-card.white-card h4 { color: var(--teal-dark); }
+  .gc-card.white-card .gc-count, .gc-card.white-card h4 { color: var(--teal-dark); }
   .gc-card.white-card p { color: var(--gray); }
 
   /* Implicancias / jugadas */
@@ -266,18 +263,28 @@
     <div class="slide-num">06 / 09</div>
     <div class="eyebrow">El dato pedido por dirección</div>
     <h1 class="title sm">Quién vende gift cards <span class="accent">de otras marcas</span></h1>
-    <div class="gc-wrap">
-      <div class="gc-stat">
-        <div class="gs-frac">13<small style="font-size:.5em; font-weight:500; opacity:.7;">/17</small></div>
-        <div class="gs-sub">venden gift cards de terceros (76%)</div>
+    <p class="lead">"Gift card de otras marcas" = el segmento 3 (clásicas / retail). Sobre las 17 empresas líderes del ecosistema:</p>
+
+    <div class="bar" style="margin-top:20px;">
+      <div class="bar-seg closed" style="width:76.4%"><span class="bs-pct">13 de 17 · 76%</span><span class="bs-lbl">venden gift cards de TERCEROS (de otras marcas)</span></div>
+      <div class="bar-seg open" style="width:23.6%"><span class="bs-pct">4</span><span class="bs-lbl">solo experiencias propias</span></div>
+    </div>
+
+    <div class="gc-2col">
+      <div class="gc-card">
+        <div class="gc-count">13 →</div>
+        <h4>Venden gift cards de terceros</h4>
+        <p>Los 4 de vales (Edenred, Pluxee, Up, Swile), las 3 plataformas SaaS (Reward Gateway, Benifex, Perkbox), la infraestructura (BHN, Runa, Tillo) — y 3 experience boxes que ya escalaron: <strong>Wonderbox, Virgin, Buyagift</strong>.</p>
       </div>
-      <div class="gc-list">
-        <div class="gc-card"><h4>Las 4 que NO → solo gift card propia de experiencias</h4><p>Smartbox (marca), Tinggly, Activity Superstore y Jochen Schweizer mydays. Su voucher es cerrado: solo canjeable por experiencias propias.</p></div>
-        <div class="gc-card white-card"><h4>El patrón</h4><p>Vales, plataformas SaaS e infraestructura venden terceros casi al 100%. Los experience boxes que escalan a corporativo SÍ suman multimarca: Wonderbox (+300 marcas), Buyagift ("Experience More", 100+), Virgin Incentives.</p></div>
+      <div class="gc-card white-card">
+        <div class="gc-count">4 →</div>
+        <h4>Solo gift card propia de experiencias</h4>
+        <p><strong>Smartbox</strong> (marca), Tinggly, Activity Superstore y Jochen Schweizer mydays. Voucher cerrado: solo canjeable por experiencias propias ("give stories, not stuff").</p>
       </div>
     </div>
-    <div class="callout"><strong>Conclusión:</strong> cuando un experience box crece en corporativo, suma la gift card de terceros para dar flexibilidad. Bigbox ya tiene ambas patas (experiencias propias + Gift Cards de Marcas) → del lado correcto de la tendencia.</div>
-    <div class="srcline">Clasificación verificada por empresa. Fuentes: catálogos oficiales + Dealroom, City AM, Moonpig, getLatka, Tracxn — refs [8]–[24].</div>
+
+    <div class="callout"><strong>El patrón:</strong> vales, plataformas e infraestructura venden terceros casi al 100%. Entre los experience boxes, los que crecen en corporativo SÍ suman multimarca (Wonderbox +300 marcas, Buyagift "Experience More" 100+, Virgin Incentives). <strong>Bigbox ya tiene ambas patas (experiencias propias + Gift Cards de Marcas) → del lado correcto de la tendencia.</strong></div>
+    <div class="srcline">Clasificación verificada por empresa (catálogos oficiales + Dealroom, City AM, Moonpig, getLatka, Tracxn) — refs [8]–[24].</div>
   </section>
 
   <!-- 7 · Dónde juega Bigbox -->
