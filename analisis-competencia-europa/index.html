@@ -3,206 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Análisis de Competencia — Europa · bigbox · corpo</title>
+<title>Mercado de regalos, gift cards e incentivos — Europa · bigbox · corpo</title>
 <style>
   :root {
-    --teal: #2aa3b1;
-    --teal-dark: #1f8591;
-    --teal-deep: #155b65;
-    --navy: #03035e;
-    --ink: #0f0f1a;
-    --gray: #6b7280;
-    --gray-soft: #f5f5f7;
-    --border: rgba(3, 3, 94, 0.08);
-    --card: #ffffff;
+    --teal: #2aa3b1; --teal-dark: #1f8591; --teal-deep: #155b65;
+    --navy: #03035e; --ink: #0f0f1a; --gray: #6b7280; --gray-soft: #f5f5f7;
+    --border: rgba(3,3,94,0.08); --card: #fff;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html, body {
-    height: 100%;
-    overflow: hidden;
-    font-family: "Sofia Pro", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #000;
-    color: var(--ink);
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-
+  html, body { height: 100%; overflow: hidden; font-family: "Sofia Pro","Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background: #000; color: var(--ink); -webkit-font-smoothing: antialiased; }
   .deck { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
-
-  .slide {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 12vh 7vw 5vh;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.45s ease;
-    background: #fff;
-    overflow: hidden;
-  }
+  .slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-start; padding: 12vh 7vw 5vh; opacity: 0; pointer-events: none; transition: opacity .45s ease; background: #fff; overflow: hidden; }
   .slide.active { opacity: 1; pointer-events: auto; }
-  .slide.dense { padding: 8vh 6vw 4vh; }
-
+  .slide.dense { padding: 7vh 6vw 4vh; }
   .slide.teal { background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%); color: #fff; }
   .slide.white { background: #fff; color: var(--ink); }
 
-  .brand-mark { position: absolute; top: 3vh; left: 7vw; font-weight: 500; font-size: 1rem; letter-spacing: 0.02em; opacity: 0.85; }
+  .brand-mark { position: absolute; top: 3vh; left: 7vw; font-weight: 500; font-size: 1rem; letter-spacing: .02em; opacity: .85; }
   .brand-mark .dot { display: inline-block; width: 5px; height: 5px; background: currentColor; border-radius: 50%; margin: 0 8px; vertical-align: middle; transform: translateY(-2px); }
-  .slide-num { position: absolute; top: 3vh; right: 7vw; font-weight: 400; font-size: 0.85rem; letter-spacing: 0.08em; opacity: 0.7; }
+  .slide-num { position: absolute; top: 3vh; right: 7vw; font-weight: 400; font-size: .85rem; letter-spacing: .08em; opacity: .7; }
 
-  .eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 16px; opacity: 0.7; }
-  h1.title { font-size: clamp(1.7rem, 3vw, 2.6rem); font-weight: 600; line-height: 1.14; letter-spacing: -0.02em; margin-bottom: 14px; }
-  h1.title .accent { color: var(--teal); }
-  .teal h1.title .accent { color: #fff; border-bottom: 3px solid rgba(255,255,255,0.4); padding-bottom: 2px; }
+  .eyebrow { font-size: .78rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 16px; opacity: .7; }
+  h1.title { font-size: clamp(1.7rem, 3vw, 2.6rem); font-weight: 600; line-height: 1.14; letter-spacing: -.02em; margin-bottom: 14px; }
   h1.title.sm { font-size: clamp(1.5rem, 2.5vw, 2.1rem); }
-
-  p.lead { font-size: clamp(0.95rem, 1.3vw, 1.18rem); font-weight: 300; line-height: 1.5; max-width: 1000px; opacity: 0.85; }
+  h1.title .accent { color: var(--teal); }
+  .teal h1.title .accent { color: #fff; border-bottom: 3px solid rgba(255,255,255,.4); padding-bottom: 2px; }
+  p.lead { font-size: clamp(.95rem, 1.3vw, 1.18rem); font-weight: 300; line-height: 1.5; max-width: 1000px; opacity: .85; }
   p.lead strong { font-weight: 600; }
 
-  /* === Cover === */
+  .srcline { margin-top: auto; padding-top: 14px; font-size: .68rem; line-height: 1.4; color: var(--gray); opacity: .9; }
+  .slide.teal .srcline { color: rgba(255,255,255,.8); }
+
+  /* Cover */
   .slide.cover { justify-content: center; padding-top: 11vh; }
-  .slide.cover .brand-mark { font-size: 1.45rem; font-weight: 600; opacity: 0.95; }
+  .slide.cover .brand-mark { font-size: 1.45rem; font-weight: 600; opacity: .95; }
   .slide.cover .brand-mark .dot { width: 7px; height: 7px; margin: 0 10px; transform: translateY(-3px); }
-  .slide.cover h1.title { font-size: clamp(2.3rem, 4.4vw, 3.7rem); max-width: 1100px; margin-bottom: 20px; }
-  .slide.cover p.lead { max-width: 900px; font-size: clamp(1.02rem, 1.5vw, 1.28rem); font-weight: 400; opacity: 0.95; margin-bottom: 40px; }
+  .slide.cover h1.title { font-size: clamp(2.2rem, 4.2vw, 3.5rem); max-width: 1150px; margin-bottom: 20px; }
+  .slide.cover p.lead { max-width: 920px; font-size: clamp(1.02rem, 1.5vw, 1.28rem); font-weight: 400; opacity: .95; margin-bottom: 40px; }
+  .toc { max-width: 1240px; }
+  .toc-label { font-size: .7rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; opacity: .78; margin-bottom: 12px; }
+  .toc-list { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; list-style: none; }
+  .toc-list li { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); border-radius: 11px; padding: 12px 13px; font-size: .82rem; font-weight: 500; line-height: 1.28; display: flex; flex-direction: column; gap: 7px; backdrop-filter: blur(6px); }
+  .toc-num { font-size: .64rem; font-weight: 700; letter-spacing: .2em; opacity: .7; }
 
-  .toc { margin-top: 6px; max-width: 1240px; }
-  .toc-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.78; margin-bottom: 12px; }
-  .toc-list { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; list-style: none; padding: 0; }
-  .toc-list li { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18); border-radius: 11px; padding: 12px 13px; font-size: 0.84rem; font-weight: 500; line-height: 1.28; display: flex; flex-direction: column; gap: 7px; backdrop-filter: blur(6px); }
-  .toc-num { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.2em; opacity: 0.7; }
+  /* Big stat */
+  .bignum { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700; line-height: .95; letter-spacing: -.03em; }
+  .teal .bignum { color: #fff; }
+  .bignum small { font-size: .26em; font-weight: 500; opacity: .7; margin-left: 6px; }
 
-  /* === Thesis === */
-  .thesis-grid { margin-top: 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 1240px; }
-  .thesis-card { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 22px 24px; backdrop-filter: blur(6px); display: flex; flex-direction: column; gap: 10px; }
-  .thesis-card .t-ic { font-size: 1.5rem; }
-  .thesis-card h3 { font-size: 1.12rem; font-weight: 700; line-height: 1.2; }
-  .thesis-card p { font-size: 0.9rem; line-height: 1.5; font-weight: 300; opacity: 0.92; }
-  .thesis-card p strong { font-weight: 700; }
+  /* Stacked bar (la torta) */
+  .bar { display: flex; height: 88px; border-radius: 14px; overflow: hidden; margin-top: 22px; max-width: 1180px; box-shadow: 0 10px 30px rgba(0,0,0,.18); }
+  .bar-seg { display: flex; flex-direction: column; justify-content: center; padding: 0 24px; color: #fff; }
+  .bar-seg .bs-pct { font-size: 1.5rem; font-weight: 700; line-height: 1; }
+  .bar-seg .bs-lbl { font-size: .82rem; font-weight: 500; opacity: .95; margin-top: 4px; }
+  .bar-seg.closed { background: #fff; color: var(--navy); }
+  .bar-seg.closed .bs-pct { color: var(--teal-dark); }
+  .bar-seg.open { background: rgba(255,255,255,.22); }
+  .splits { display: flex; gap: 28px; margin-top: 16px; }
+  .split-fact { font-size: .95rem; font-weight: 500; }
+  .split-fact b { font-size: 1.2rem; font-weight: 700; }
 
-  /* === Layers list === */
-  .layers { margin-top: 24px; display: flex; flex-direction: column; gap: 9px; max-width: 1280px; }
-  .layer { display: grid; grid-template-columns: 28px 1.4fr 2.1fr 1fr; align-items: center; gap: 16px; background: linear-gradient(135deg, rgba(42,163,177,0.07) 0%, rgba(42,163,177,0.02) 100%); border: 1px solid rgba(42,163,177,0.2); border-radius: 13px; padding: 12px 18px; }
-  .layer.core { background: linear-gradient(135deg, rgba(31,133,145,0.13) 0%, rgba(31,133,145,0.04) 100%); border-color: rgba(31,133,145,0.4); box-shadow: 0 6px 22px rgba(31,133,145,0.1); }
-  .layer .l-num { font-size: 0.95rem; font-weight: 700; color: var(--teal); }
-  .layer.core .l-num { color: var(--teal-dark); }
-  .layer .l-name { font-size: 0.96rem; font-weight: 600; color: var(--navy); line-height: 1.2; }
-  .layer .l-players { font-size: 0.82rem; color: var(--gray); line-height: 1.32; }
-  .layer .l-tag { font-size: 0.8rem; font-weight: 600; color: var(--teal-dark); text-align: right; line-height: 1.28; }
-  .layer .l-tag.no { color: var(--gray); opacity: 0.7; }
-  .layer.core .l-tag { color: var(--teal-dark); font-weight: 700; }
+  .adj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; max-width: 1180px; }
+  .adj { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 14px; padding: 16px 18px; }
+  .adj .a-name { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
+  .adj .a-num { font-size: 1.7rem; font-weight: 700; margin: 4px 0; }
+  .adj .a-meta { font-size: .78rem; opacity: .85; line-height: 1.35; }
 
-  /* === Data table === */
-  .dtable { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.84rem; }
-  .dtable th { text-align: left; font-weight: 700; color: var(--teal); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 13px; border-bottom: 2px solid rgba(42,163,177,0.3); white-space: nowrap; }
+  /* Segments / mapa rows */
+  .rows { margin-top: 22px; display: flex; flex-direction: column; gap: 9px; max-width: 1280px; }
+  .row { display: grid; align-items: center; gap: 16px; border-radius: 13px; padding: 12px 18px; background: linear-gradient(135deg, rgba(42,163,177,.07) 0%, rgba(42,163,177,.02) 100%); border: 1px solid rgba(42,163,177,.2); }
+  .row.seg { grid-template-columns: 26px 1.5fr 1.5fr 1fr; }
+  .row.map { grid-template-columns: 26px 1.5fr 3fr; }
+  .row.core { background: linear-gradient(135deg, rgba(31,133,145,.13) 0%, rgba(31,133,145,.04) 100%); border-color: rgba(31,133,145,.4); box-shadow: 0 6px 22px rgba(31,133,145,.1); }
+  .row .r-num { font-size: .95rem; font-weight: 700; color: var(--teal); }
+  .row.core .r-num { color: var(--teal-dark); }
+  .row .r-name { font-size: .96rem; font-weight: 600; color: var(--navy); line-height: 1.2; }
+  .row .r-meta { font-size: .82rem; color: var(--gray); line-height: 1.32; }
+  .row .r-tag { font-size: .8rem; font-weight: 600; color: var(--teal-dark); text-align: right; }
+  .row .r-tag.no { color: var(--gray); opacity: .7; }
+
+  .bx-callout { margin-top: 16px; padding: 14px 20px; background: linear-gradient(135deg, rgba(31,133,145,.12), rgba(31,133,145,.04)); border: 1.5px solid rgba(31,133,145,.35); border-radius: 13px; font-size: .92rem; line-height: 1.5; color: var(--navy); max-width: 1280px; }
+  .bx-callout strong { color: var(--teal-dark); }
+
+  /* Data table */
+  .dtable { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: .76rem; }
+  .dtable th { text-align: left; font-weight: 700; color: var(--teal); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; padding: 7px 11px; border-bottom: 2px solid rgba(42,163,177,.3); white-space: nowrap; }
   .dtable th:first-child { color: var(--gray); }
-  .dtable th.hi { color: var(--teal-dark); background: rgba(31,133,145,0.08); border-radius: 6px 6px 0 0; }
-  .dtable td { padding: 8px 13px; border-bottom: 1px solid rgba(3,3,94,0.06); color: var(--navy); line-height: 1.3; vertical-align: top; }
-  .dtable td.rl { font-weight: 600; color: var(--gray); font-size: 0.78rem; white-space: nowrap; }
-  .dtable td.hi { background: rgba(31,133,145,0.05); }
+  .dtable td { padding: 5px 11px; border-bottom: 1px solid rgba(3,3,94,.06); color: var(--navy); line-height: 1.25; }
+  .dtable td.rl { font-weight: 600; }
   .dtable td b { color: var(--teal-dark); font-weight: 700; }
-  .dtable td .sub { display: block; font-size: 0.72rem; color: var(--gray); font-weight: 400; }
-  .dtable tbody tr:hover { background: rgba(42,163,177,0.035); }
-  .dtable.compact td { padding: 6px 13px; }
+  .dtable td.adj { color: var(--gray); }
+  .dtable tbody tr:hover { background: rgba(42,163,177,.035); }
 
-  .tnote { margin-top: 12px; font-size: 0.74rem; color: var(--gray); line-height: 1.4; max-width: 1100px; }
-  .tnote b { color: var(--teal-dark); }
-
-  /* === Motor cards === */
-  .motor-grid { margin-top: 22px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
-  .motor { background: linear-gradient(135deg, rgba(42,163,177,0.09) 0%, rgba(42,163,177,0.02) 100%); border: 1.5px solid rgba(42,163,177,0.25); border-radius: 14px; padding: 15px 17px; display: flex; flex-direction: column; gap: 7px; }
-  .motor.killer { background: linear-gradient(135deg, rgba(31,133,145,0.13) 0%, rgba(31,133,145,0.03) 100%); border-color: rgba(31,133,145,0.4); }
-  .motor .mo-label { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); }
-  .motor.killer .mo-label { color: var(--teal-dark); }
-  .motor h4 { font-size: 0.98rem; font-weight: 600; color: var(--navy); line-height: 1.18; }
-  .motor .mo-fig { font-size: 1.5rem; font-weight: 700; color: var(--teal); letter-spacing: -0.02em; line-height: 1; }
-  .motor.killer .mo-fig { color: var(--teal-dark); }
-  .motor p { font-size: 0.76rem; color: var(--gray); line-height: 1.38; }
-
-  .callout { margin-top: 18px; padding: 13px 20px; background: rgba(42,163,177,0.08); border-left: 4px solid var(--teal); border-radius: 10px; font-size: 0.9rem; line-height: 1.48; color: var(--navy); max-width: 1240px; }
+  .callout { margin-top: 16px; padding: 13px 20px; background: rgba(42,163,177,.08); border-left: 4px solid var(--teal); border-radius: 10px; font-size: .9rem; line-height: 1.48; color: var(--navy); max-width: 1240px; }
   .callout strong { color: var(--teal-dark); font-weight: 700; }
-  .slide.teal .callout { background: rgba(255,255,255,0.12); border-left-color: #fff; color: #fff; }
+  .slide.teal .callout { background: rgba(255,255,255,.12); border-left-color: #fff; color: #fff; }
   .slide.teal .callout strong { color: #fff; }
 
-  /* === Two-col split === */
-  .split { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-  .split.wide-l { grid-template-columns: 1.3fr 1fr; }
-  .sub-h { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-  .sub-h::after { content: ""; flex: 1; height: 1.5px; background: rgba(42,163,177,0.25); }
-  .sub-h.dark { color: var(--teal-dark); }
-  .sub-h.dark::after { background: rgba(31,133,145,0.25); }
+  /* GC terceros slide */
+  .gc-wrap { display: grid; grid-template-columns: 0.9fr 1.4fr; gap: 32px; align-items: center; margin-top: 16px; }
+  .gc-stat { text-align: center; }
+  .gc-stat .gs-frac { font-size: clamp(3.4rem, 8vw, 6rem); font-weight: 700; line-height: .9; }
+  .gc-stat .gs-sub { font-size: 1rem; font-weight: 500; opacity: .9; margin-top: 8px; }
+  .gc-list { display: flex; flex-direction: column; gap: 12px; }
+  .gc-card { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 13px; padding: 14px 18px; }
+  .gc-card h4 { font-size: .98rem; font-weight: 700; margin-bottom: 4px; }
+  .gc-card p { font-size: .84rem; line-height: 1.45; opacity: .92; font-weight: 300; }
+  .gc-card.white-card { background: #fff; color: var(--navy); }
+  .gc-card.white-card h4 { color: var(--teal-dark); }
+  .gc-card.white-card p { color: var(--gray); }
 
-  /* === M&A milestones === */
-  .marow { margin-top: 8px; display: flex; flex-direction: column; gap: 8px; }
-  .mstone { display: grid; grid-template-columns: 78px 1fr; gap: 12px; align-items: start; background: linear-gradient(135deg, rgba(42,163,177,0.07) 0%, rgba(42,163,177,0.02) 100%); border: 1px solid rgba(42,163,177,0.18); border-radius: 11px; padding: 9px 14px; }
-  .mstone .yr { font-size: 0.82rem; font-weight: 700; color: var(--teal-dark); }
-  .mstone .ev { font-size: 0.82rem; color: var(--navy); line-height: 1.35; }
-  .mstone .ev b { color: var(--teal-dark); }
-
-  /* === Player cards === */
-  .players-grid { margin-top: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-  .player-card { background: #fff; border: 1.5px solid rgba(42,163,177,0.22); border-radius: 16px; padding: 18px 20px; box-shadow: 0 6px 22px rgba(3,3,94,0.06); display: flex; flex-direction: column; gap: 7px; }
-  .player-card.mirror { border-color: rgba(31,133,145,0.45); box-shadow: 0 10px 30px rgba(31,133,145,0.14); }
-  .player-card .p-name { font-size: 1.2rem; font-weight: 700; color: var(--navy); }
-  .player-card .p-meta { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--teal); }
-  .player-card .p-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.42; }
-  .player-card .p-desc strong { color: var(--navy); font-weight: 600; }
-  .player-card .p-badge { align-self: flex-start; margin-top: auto; font-size: 0.7rem; font-weight: 700; background: rgba(42,163,177,0.12); color: var(--teal-dark); padding: 5px 11px; border-radius: 100px; }
-  .player-card.mirror .p-badge { background: var(--teal-dark); color: #fff; }
-
-  /* metric strip inside deep dives */
-  .mstrip { display: flex; gap: 16px; flex-wrap: wrap; margin: 4px 0 2px; }
-  .mstat { display: flex; flex-direction: column; }
-  .mstat .v { font-size: 1.35rem; font-weight: 700; color: var(--teal); letter-spacing: -0.02em; line-height: 1; }
-  .mstat .k { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray); margin-top: 4px; }
-  .dd-card { background: linear-gradient(135deg, rgba(42,163,177,0.06) 0%, rgba(42,163,177,0.015) 100%); border: 1.5px solid rgba(42,163,177,0.22); border-radius: 16px; padding: 20px 22px; display: flex; flex-direction: column; gap: 11px; }
-  .dd-card.dark { background: linear-gradient(135deg, rgba(31,133,145,0.08) 0%, rgba(31,133,145,0.02) 100%); border-color: rgba(31,133,145,0.3); }
-  .dd-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--navy); }
-  .dd-card .dd-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--teal); margin-top: -6px; }
-  .dd-card.dark .mstat .v { color: var(--teal-dark); }
-  .dd-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-  .dd-list li { position: relative; padding-left: 16px; font-size: 0.82rem; line-height: 1.4; color: var(--navy); }
-  .dd-list li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
-  .dd-card.dark .dd-list li::before { background: var(--teal-dark); }
-  .dd-list li strong { font-weight: 600; }
-  .dd-list li.warn::before { background: #d97706; }
-
-  /* === Impact (numbers + plays) === */
-  .impact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; margin-top: 18px; }
-  .impact-card { background: #fff; border: 1px solid rgba(42,163,177,0.18); border-radius: 15px; padding: 17px 16px; box-shadow: 0 6px 22px rgba(3,3,94,0.07); }
-  .impact-card .i-label { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); opacity: 0.85; margin-bottom: 7px; }
-  .impact-card .i-num { font-size: 2rem; font-weight: 700; line-height: 1; color: var(--teal); letter-spacing: -0.03em; margin-bottom: 7px; }
-  .impact-card .i-num small { font-size: 0.78rem; font-weight: 500; color: var(--navy); opacity: 0.65; margin-left: 4px; }
-  .impact-card .i-text { font-size: 0.78rem; line-height: 1.38; color: var(--navy); opacity: 0.8; font-weight: 400; }
-  .slide.teal .impact-card { border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+  /* Implicancias / jugadas */
+  .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+  .impact-card { background: #fff; border: 1px solid rgba(42,163,177,.18); border-radius: 15px; padding: 17px 18px; box-shadow: 0 6px 22px rgba(3,3,94,.07); }
+  .impact-card .i-label { font-size: .66rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); margin-bottom: 7px; }
+  .impact-card .i-text { font-size: .85rem; line-height: 1.45; color: var(--navy); }
+  .impact-card .i-text b { color: var(--teal-dark); }
 
   .plays-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; max-width: 1240px; }
-  .play { background: #fff; border-radius: 15px; padding: 16px 20px; box-shadow: 0 12px 40px rgba(0,0,0,0.14); display: flex; gap: 15px; align-items: flex-start; }
-  .play .pl-num { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; background: linear-gradient(135deg, var(--teal), var(--teal-dark)); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; }
-  .play .pl-title { font-size: 0.98rem; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 3px; }
-  .play .pl-desc { font-size: 0.79rem; color: var(--gray); line-height: 1.42; }
+  .play { background: #fff; border-radius: 15px; padding: 16px 20px; box-shadow: 0 12px 40px rgba(0,0,0,.14); display: flex; gap: 15px; align-items: flex-start; }
+  .play .pl-num { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; background: linear-gradient(135deg, var(--teal), var(--teal-dark)); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+  .play .pl-title { font-size: .98rem; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 3px; }
+  .play .pl-desc { font-size: .79rem; color: var(--gray); line-height: 1.42; }
 
-  .closing { margin-top: 18px; padding: 13px 20px; background: rgba(255,255,255,0.12); border-left: 4px solid #fff; border-radius: 10px; max-width: 1240px; }
-  .closing p { font-size: 0.94rem; font-weight: 400; line-height: 1.5; }
-  .closing strong { font-weight: 700; }
+  /* Fuentes */
+  .src-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; margin-top: 16px; }
+  .src-cols .sc-h { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
+  .src-cols ol { margin: 0; padding-left: 0; list-style: none; }
+  .src-cols li { font-size: .68rem; line-height: 1.5; color: var(--navy); margin-bottom: 2px; }
+  .src-cols li b { color: var(--teal-dark); font-weight: 600; }
 
-  /* === Nav === */
+  /* Nav */
   .nav { position: fixed; bottom: 2.4vh; left: 50%; transform: translateX(-50%); display: flex; gap: 7px; z-index: 100; }
-  .nav .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(0,0,0,0.15); cursor: pointer; transition: all 0.3s ease; }
+  .nav .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(0,0,0,.15); cursor: pointer; transition: all .3s ease; }
   .nav .dot.active { background: var(--teal); width: 24px; border-radius: 4px; }
-  .hint { position: fixed; bottom: 2.4vh; right: 3vw; font-size: 0.68rem; opacity: 0.45; letter-spacing: 0.1em; z-index: 100; color: var(--gray); }
-
+  .hint { position: fixed; bottom: 2.4vh; right: 3vw; font-size: .68rem; opacity: .45; letter-spacing: .1em; z-index: 100; color: var(--gray); }
   body.cursor-hidden { cursor: none; }
   body.cursor-hidden * { cursor: none !important; }
 
   @media (max-width: 900px) {
-    .toc-list, .motor-grid, .players-grid, .impact-grid, .plays-grid, .thesis-grid { grid-template-columns: 1fr 1fr; }
-    .split { grid-template-columns: 1fr; }
-    .dtable { font-size: 0.74rem; }
+    .toc-list, .impact-grid, .plays-grid, .adj-grid { grid-template-columns: 1fr 1fr; }
+    .gc-wrap, .src-cols { grid-template-columns: 1fr; }
+    .dtable { font-size: .68rem; }
   }
 </style>
 </head>
@@ -210,398 +152,197 @@
 
 <div class="deck" id="deck">
 
-  <!-- 0 · Cover -->
-  <section class="slide teal cover active" data-idx="0">
+  <!-- 1 · Cover -->
+  <section class="slide teal cover active">
     <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num">01 / 14</div>
+    <div class="slide-num">01 / 09</div>
     <div class="eyebrow">Inteligencia competitiva · Junio 2026</div>
-    <h1 class="title">Análisis de competencia <span class="accent">— Europa</span></h1>
-    <p class="lead">Diagnóstico profundo de los líderes europeos de experiencias, gift cards, beneficios y viajes: qué ofrecen, cuánto facturan, cómo monetizan y cómo escalaron. Y qué de todo eso es replicable, defendible o irrelevante para Bigbox.</p>
+    <h1 class="title">Mercado de regalos, gift cards e incentivos <span class="accent">— Europa</span></h1>
+    <p class="lead">Foto global segmentada del ecosistema europeo: tamaño por segmento, quién vende qué, ranking por facturación y quiénes venden gift cards de terceros. Cada dato con su fuente.</p>
     <div class="toc">
       <div class="toc-label">Recorrido</div>
       <ul class="toc-list">
-        <li><span class="toc-num">01</span>Tesis + mapa de 5 capas</li>
-        <li><span class="toc-num">02</span>Gigantes de vouchers</li>
-        <li><span class="toc-num">03</span>Plataformas SaaS de incentivos</li>
-        <li><span class="toc-num">04</span>Experience boxes (deep dive)</li>
-        <li><span class="toc-num">05</span>Infra de gift cards</li>
-        <li><span class="toc-num">06</span>Mapeo + las 4 jugadas</li>
+        <li><span class="toc-num">01</span>La foto global</li>
+        <li><span class="toc-num">02</span>Los 5 segmentos</li>
+        <li><span class="toc-num">03</span>Mapa de empresas</li>
+        <li><span class="toc-num">04</span>Ranking por facturación</li>
+        <li><span class="toc-num">05</span>Gift cards de terceros</li>
+        <li><span class="toc-num">06</span>Dónde juega Bigbox</li>
       </ul>
     </div>
   </section>
 
-  <!-- 1 · Tesis -->
-  <section class="slide teal" data-idx="1">
+  <!-- 2 · Foto global -->
+  <section class="slide teal">
     <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num">02 / 14</div>
-    <div class="eyebrow">La lectura de altitud</div>
-    <h1 class="title">Tres verdades que ordenan <span class="accent">todo el resto</span></h1>
-    <p class="lead">Antes de los números: la conclusión de cruzar las 5 capas. Si te llevás solo esto, alcanza.</p>
-    <div class="thesis-grid">
-      <div class="thesis-card">
-        <div class="t-ic">💸</div>
-        <h3>Nadie escaló vendiendo regalos por ocasión</h3>
-        <p>Los negocios de miles de millones (Edenred €3B, Pluxee €1.3B) son <strong>redes de pago recurrentes</strong>, no catálogos. Venden el mismo flujo prefondeado y lo monetizan cuatro veces.</p>
-      </div>
-      <div class="thesis-card">
-        <div class="t-ic">📈</div>
-        <h3>El dinero de alto múltiplo está en la recurrencia</h3>
-        <p>La capa de Plataforma de Incentivos es la pegajosa y valiosa — Edenred pagó <strong>£1.15B por Reward Gateway</strong>. Y Bigbox tiene el activo que a todos les falta: <strong>experiencias propias en 5 países</strong>.</p>
-      </div>
-      <div class="thesis-card">
-        <div class="t-ic">⚰️</div>
-        <h3>Experiencias sin recurrencia = frágil</h3>
-        <p>Blueboard (US), análogo casi exacto de Bigbox, quebró en 2024. El breakage —el margen oculto del modelo caja— se está apagando por regulación. El motor tiene que ser otro.</p>
-      </div>
+    <div class="slide-num">02 / 09</div>
+    <div class="eyebrow">La foto global</div>
+    <h1 class="title sm">El mercado europeo de gift cards: <span class="accent">~US$74–79B</span> (2025)</h1>
+    <p class="lead">Crece ~7% anual. Se parte en dos mitades; el corporativo y lo digital ya dominan.</p>
+
+    <div class="bar">
+      <div class="bar-seg closed" style="width:58.7%"><span class="bs-pct">58,7%</span><span class="bs-lbl">GC clásicas / retail (closed-loop) · ~US$43,7B</span></div>
+      <div class="bar-seg open" style="width:41.3%"><span class="bs-pct">41,3%</span><span class="bs-lbl">GC de plata / prepago (open-loop) · ~US$30,7B</span></div>
     </div>
+    <div class="splits">
+      <div class="split-fact"><b>66,8%</b> es B2B (vs 33,2% B2C)</div>
+      <div class="split-fact"><b>58,2%</b> es digital (vs 41,8% físico)</div>
+    </div>
+
+    <div class="adj-grid">
+      <div class="adj"><div class="a-name">Vales / tickets / despensa</div><div class="a-num">~US$30B</div><div class="a-meta">Adyacente · oligopolio regulado (Edenred, Pluxee…). No es lo nuestro.</div></div>
+      <div class="adj"><div class="a-name">Experiencias</div><div class="a-num">~US$46B</div><div class="a-meta">Proxy europeo (39% del global). El núcleo de Bigbox.</div></div>
+      <div class="adj"><div class="a-name">Plataformas de incentivos</div><div class="a-num">~US$1,7–4,1B</div><div class="a-meta">SaaS · +11% anual, el que más crece.</div></div>
+    </div>
+    <div class="srcline">Mercados adyacentes se miden aparte (no se suman a la torta de gift cards). Fuentes: Mordor Intelligence (2025) [1]; Research and Markets (2025) [2]; Fortune Business Insights (2025) [3]; Arizton (2024) [4]; Growth Market Reports (2024) [5].</div>
   </section>
 
-  <!-- 2 · Mapa 5 capas -->
-  <section class="slide white" data-idx="2">
-    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">03 / 14</div>
-    <div class="eyebrow" style="color: var(--teal)">El mapa del mercado</div>
-    <h1 class="title">Cinco capas — y los gigantes <span class="accent">no están donde parece</span></h1>
-    <p class="lead" style="color: var(--gray)">El mercado de "regalos e incentivos corporativos" no es uno solo: son cinco negocios con economías distintas. Bigbox juega de lleno en una y puede entrar a otra.</p>
-    <div class="layers">
-      <div class="layer">
-        <div class="l-num">1</div>
-        <div class="l-name">Benefits / vouchers</div>
-        <div class="l-players">Edenred · Pluxee · Swile · Up Coop — €0.2–3B rev, EBITDA 36-46%, red de pago recurrente</div>
-        <div class="l-tag no">No jugamos (regulado)</div>
-      </div>
-      <div class="layer">
-        <div class="l-num">2</div>
-        <div class="l-name">Plataformas de incentivos SaaS</div>
-        <div class="l-players">Reward Gateway · Benifex · Perkbox — modelo PEPM recurrente, M&A de $264M a £1.15B</div>
-        <div class="l-tag">✅ Plataforma de Incentivos</div>
-      </div>
-      <div class="layer core">
-        <div class="l-num">3</div>
-        <div class="l-name">Experience boxes</div>
-        <div class="l-players">Smartbox · Wonderbox · Tinggly · Virgin · JSMD — €500-550M los líderes, retail + M&A</div>
-        <div class="l-tag">★ Nuestro core exacto</div>
-      </div>
-      <div class="layer">
-        <div class="l-num">4</div>
-        <div class="l-name">Infra de rewards / gift cards</div>
-        <div class="l-players">Runa · Tillo · BHN ($2.9B) · Tremendous — las "rails" B2B2C, API + catálogo de marcas</div>
-        <div class="l-tag">🔌 Proveedor, no rival</div>
-      </div>
-      <div class="layer">
-        <div class="l-num">5</div>
-        <div class="l-name">MICE / Team building</div>
-        <div class="l-players">BCD · CWT (Amex GBT $570M) · TeamOut — fragmentado, Europa = 50% del MICE global</div>
-        <div class="l-tag no">Adyacencia</div>
-      </div>
+  <!-- 3 · Los 5 segmentos -->
+  <section class="slide white">
+    <div class="brand-mark" style="color:var(--navy)">bigbox<span class="dot"></span>corpo</div>
+    <div class="slide-num" style="color:var(--gray)">03 / 09</div>
+    <div class="eyebrow" style="color:var(--teal)">La taxonomía</div>
+    <h1 class="title sm">Cinco segmentos — <span class="accent">tres son lo nuestro</span></h1>
+    <div class="rows">
+      <div class="row seg"><div class="r-num">1</div><div class="r-name">GC de plata / prepago</div><div class="r-meta">~US$30,7B · +9,1% · Visa/MC prepaid, Revolut, BHN, Runa</div><div class="r-tag no">No</div></div>
+      <div class="row seg"><div class="r-num">2</div><div class="r-name">Vales / tickets / despensa</div><div class="r-meta">~US$30B · +5,6% · Edenred, Pluxee, Up, Swile (&gt;90% share)</div><div class="r-tag no">No (regulado)</div></div>
+      <div class="row seg core"><div class="r-num">3</div><div class="r-name">GC clásicas / retail</div><div class="r-meta">~US$43,7B · +7% · Amazon, Carrefour, Zalando + rails BHN/Runa/Tillo</div><div class="r-tag">★ Sí</div></div>
+      <div class="row seg core"><div class="r-num">4</div><div class="r-name">Experiencias</div><div class="r-meta">~US$46B · +6,4% · Smartbox, Wonderbox, Virgin, Tinggly, JSMD</div><div class="r-tag">★ Núcleo</div></div>
+      <div class="row seg core"><div class="r-num">5</div><div class="r-name">Plataformas de incentivos</div><div class="r-meta">~US$1,7–4,1B · +11,2% · Reward Gateway, Benify, Workhuman</div><div class="r-tag">★ Sí</div></div>
     </div>
+    <div class="srcline">Fuentes: Mordor Intelligence (2025) [1]; Verified Market Research (2024) [6]; Fortune Business Insights (2025) [3]; Arizton (2024) [4]; Growth Market Reports (2024) [5].</div>
   </section>
 
-  <!-- 3 · Capa 1 financials -->
-  <section class="slide white dense" data-idx="3">
-    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">04 / 14</div>
-    <div class="eyebrow" style="color: var(--teal)">Capa 1 · Gigantes de vouchers</div>
-    <h1 class="title sm">La liga mayor: cuatro players, <span class="accent">la misma máquina</span></h1>
-    <table class="dtable compact">
-      <thead>
-        <tr><th>Métrica</th><th class="hi">Edenred</th><th>Pluxee</th><th>Swile</th><th>Up Coop</th></tr>
-      </thead>
+  <!-- 4 · Mapa qué vende cada empresa -->
+  <section class="slide white">
+    <div class="brand-mark" style="color:var(--navy)">bigbox<span class="dot"></span>corpo</div>
+    <div class="slide-num" style="color:var(--gray)">04 / 09</div>
+    <div class="eyebrow" style="color:var(--teal)">Mapa por segmento</div>
+    <h1 class="title sm">Quién vende qué <span class="accent">en cada segmento</span></h1>
+    <div class="rows">
+      <div class="row map"><div class="r-num">1</div><div class="r-name">Plata / prepago</div><div class="r-meta">Edenred, Pluxee, Swile, Blackhawk (BHN), Runa</div></div>
+      <div class="row map"><div class="r-num">2</div><div class="r-name">Vales / tickets / despensa</div><div class="r-meta">Edenred, Pluxee, Up Coop, Swile</div></div>
+      <div class="row map core"><div class="r-num">3</div><div class="r-name">GC clásicas / retail</div><div class="r-meta">Edenred, Pluxee, Up Coop, Swile, Reward Gateway, Benifex, Perkbox, Wonderbox, Virgin, Buyagift, BHN, Runa, Tillo</div></div>
+      <div class="row map core"><div class="r-num">4</div><div class="r-name">Experiencias</div><div class="r-meta">Smartbox, Wonderbox, Virgin Experience Days, Buyagift, Tinggly, Activity Superstore, Jochen Schweizer mydays</div></div>
+      <div class="row map core"><div class="r-num">5</div><div class="r-name">Plataformas de incentivos</div><div class="r-meta">Reward Gateway, Benifex, Perkbox</div></div>
+    </div>
+    <div class="bx-callout"><strong>Bigbox Corpo</strong> cubre los segmentos 3, 4 y 5 (gift cards de marcas + experiencias + plataforma de incentivos). De las pocas que combinan experiencias propias CON gift cards de terceros CON capa de incentivos — perfil "evolucionado", similar a Wonderbox pero sumando la plataforma.</div>
+  </section>
+
+  <!-- 5 · Ranking -->
+  <section class="slide white dense">
+    <div class="brand-mark" style="color:var(--navy)">bigbox<span class="dot"></span>corpo</div>
+    <div class="slide-num" style="color:var(--gray)">05 / 09</div>
+    <div class="eyebrow" style="color:var(--teal)">Ranking por facturación</div>
+    <h1 class="title sm">Todo el ecosistema <span class="accent">ordenado por facturación</span></h1>
+    <table class="dtable">
+      <thead><tr><th>#</th><th>Empresa</th><th>Segmento</th><th>Revenue (aprox. USD)</th><th>Conf.</th><th>Fuente</th></tr></thead>
       <tbody>
-        <tr><td class="rl">Revenue (FY25)</td><td class="hi"><b>€3.0B</b> <span class="sub">+5.7% LFL</span></td><td><b>€1.29B</b> <span class="sub">+10.6% org</span></td><td>€204M <span class="sub">+25%</span></td><td>€843M</td></tr>
-        <tr><td class="rl">Margen EBITDA</td><td class="hi"><b>45.9%</b></td><td>36.6%</td><td>~18%</td><td>bajo (coop.)</td></tr>
-        <tr><td class="rl">Volumen de negocio</td><td class="hi">€49B</td><td>€24.5B</td><td>&gt;€4B</td><td>€11B</td></tr>
-        <tr><td class="rl">Float / ing. financiero</td><td class="hi">€229M</td><td><b>€162M</b> <span class="sub">12.6% del rev.</span></td><td>sobre saldos</td><td>sobre flujos</td></tr>
-        <tr><td class="rl">Market cap</td><td class="hi">~€4.9B</td><td>~$1.9B</td><td>$1B+ <span class="sub">unicornio</span></td><td>cooperativa</td></tr>
-        <tr><td class="rl">Países / beneficiarios</td><td class="hi">44 · &gt;60M</td><td>29 · 37M</td><td>2 · ~5M</td><td>25 · ~23M</td></tr>
-        <tr><td class="rl">Comercios adheridos</td><td class="hi">&gt;2M</td><td>1.7M+</td><td>500k+</td><td>220k+</td></tr>
+        <tr><td>1</td><td class="rl">Edenred ◆</td><td class="adj">Vales</td><td><b>~$3.240M</b> (€3,0B, FY25)</td><td>Alta</td><td>Edenred FY25, oficial [8]</td></tr>
+        <tr><td>2</td><td class="rl">Blackhawk (BHN)</td><td class="adj">Infra (plata/clásicas)</td><td><b>~$2.500M</b> (2024)</td><td>Media</td><td>BHN, est. [19]</td></tr>
+        <tr><td>3</td><td class="rl">Pluxee ◆</td><td class="adj">Vales</td><td><b>~$1.310M</b> (€1,21B, FY24)</td><td>Alta</td><td>Pluxee FY24, oficial [9]</td></tr>
+        <tr><td>4</td><td class="rl">Up Coop ◆</td><td class="adj">Vales</td><td>~$910M (€843M, 2024)</td><td>Alta</td><td>Cuentas FR / Societe [10]</td></tr>
+        <tr><td>5</td><td class="rl">Smartbox</td><td>Experiencias</td><td><b>~$650M</b> (2025)</td><td>Media</td><td>Growjo, est. [13]</td></tr>
+        <tr><td>6</td><td class="rl">Wonderbox</td><td>Exp. + Clásicas</td><td>~$350M (€325M)</td><td>Baja</td><td>Dealroom [14]</td></tr>
+        <tr><td>7</td><td class="rl">Swile ◆</td><td class="adj">Vales</td><td>~$220M (€200M, 2024)</td><td>Media</td><td>Expert Market / FTJ [23]</td></tr>
+        <tr><td>8</td><td class="rl">Reward Gateway</td><td>Plataforma + Clásicas</td><td>~$120M (£95M, FY23)</td><td>Media</td><td>Employer News [11]</td></tr>
+        <tr><td>9</td><td class="rl">Virgin Experience Days</td><td>Exp. + Clásicas</td><td>~$105M (£81,8M, FY23)</td><td>Alta</td><td>City AM / Co. House [15]</td></tr>
+        <tr><td>10</td><td class="rl">Buyagift (Moonpig)</td><td>Exp. + Clásicas</td><td>~$56M (£44M)</td><td>Media</td><td>Moonpig Group [16]</td></tr>
+        <tr><td>11</td><td class="rl">Perkbox</td><td>Plataforma + Clásicas</td><td>~$46M (£36,1M, FY23)</td><td>Alta</td><td>Tracxn / Co. House [12]</td></tr>
+        <tr><td>12</td><td class="rl">Jochen Schweizer mydays</td><td>Experiencias</td><td>~$25M (est.)</td><td>Baja-Media</td><td>Prospeo / Crunchbase [18]</td></tr>
+        <tr><td>13</td><td class="rl">Activity Superstore</td><td>Experiencias</td><td>~$25M (est.)</td><td>Baja</td><td>Sitio oficial [22]</td></tr>
+        <tr><td>14</td><td class="rl">Runa (ex-WeGift)</td><td class="adj">Infra (plata/clásicas)</td><td>~$23M ARR (2024)</td><td>Media-Alta</td><td>getLatka [20]</td></tr>
+        <tr><td>15</td><td class="rl">Tinggly</td><td>Experiencias</td><td>~$5M (est.)</td><td>Baja</td><td>Sitio oficial [17]</td></tr>
+        <tr><td>16</td><td class="rl">Tillo</td><td class="adj">Infra (clásicas)</td><td>n/d (rentable, +50% YoY)</td><td>Baja</td><td>Sitio oficial [21]</td></tr>
+        <tr><td>17</td><td class="rl">Benifex (Benify+Benefex)</td><td>Plataforma</td><td>n/d</td><td>Baja</td><td>Sitio oficial [24]</td></tr>
       </tbody>
     </table>
-    <div class="callout"><strong>Cómo leerlo:</strong> Edenred es ~3.5× Pluxee pero con idéntica estructura económica. Los market caps están deprimidos ~60% vs. máximos por miedo a la baja de tasas (pega al float) y a topes regulatorios de comisión (FR 5%, BR 3.6%). El negocio es de altísima calidad; el ciclo macro está en contra.</div>
-    <div class="tnote"><b>Fuentes:</b> Edenred FY2025 · Pluxee FY2025 (Euronext) · Up annual report 2024 · FrenchTechJournal (Swile). Empresas privadas salvo Edenred/Pluxee (cotizadas) — cifras = órdenes de magnitud.</div>
+    <div class="callout" style="margin-top:12px;"><strong>Solo "lo nuestro" (segmentos 3-4-5):</strong> Smartbox $650M · Wonderbox $350M · Reward Gateway $120M · Virgin $105M · Buyagift $56M · Perkbox $46M… → <strong>Smartbox es el benchmark real de Bigbox.</strong> (◆ = vales: adyacente, no compite.)</div>
   </section>
 
-  <!-- 4 · Capa 1 motores -->
-  <section class="slide white" data-idx="4">
-    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">05 / 14</div>
-    <div class="eyebrow" style="color: var(--teal)">Capa 1 · El motor de monetización</div>
-    <h1 class="title sm">El empleador prefondea. Ellos ganan <span class="accent">cuatro veces</span></h1>
-    <p class="lead" style="color: var(--gray); max-width: 1100px;">El empleador paga el valor facial completo por adelantado. El emisor lo monetiza antes y después de que el empleado gaste — cada palanca es margen casi puro.</p>
-    <div class="motor-grid">
-      <div class="motor">
-        <div class="mo-label">Motor 1 · el descuento</div>
-        <div class="mo-fig">3-6%</div>
-        <h4>Comisión al comercio</h4>
-        <p>El comercio se reembolsa al valor facial menos comisión. Edenred blended ~6.2%. El más expuesto a topes regulatorios.</p>
-      </div>
-      <div class="motor">
-        <div class="mo-label">Motor 2 · el estable</div>
-        <div class="mo-fig">~16%</div>
-        <h4>Fee al empleador</h4>
-        <p>% del revenue en Edenred. Onboarding + plataforma + features. La capa más SaaS-like y el hedge contra los topes de comisión.</p>
-      </div>
-      <div class="motor killer">
-        <div class="mo-label">Motor 3 · el killer</div>
-        <div class="mo-fig">~100%</div>
-        <h4>Float</h4>
-        <p>Cobran hoy, pagan al comercio en 4-7 semanas, invierten el dinero. Pluxee: €162M a margen casi puro. Escala con volumen Y con tasas.</p>
-      </div>
-      <div class="motor">
-        <div class="mo-label">Motor 4 · el oculto</div>
-        <div class="mo-fig">3-15%</div>
-        <h4>Breakage</h4>
-        <p>Vouchers que vencen sin usarse = margen puro. No se divulga. Mismo motor que toda gift card o punto que Bigbox deja vencer.</p>
-      </div>
-    </div>
-    <div class="callout"><strong>El foso:</strong> red de doble lado auto-reforzante — más empleadores → más beneficiarios → los comercios <em>deben</em> adherir → más valor para el próximo empleador. Tan real que la autoridad francesa multó a los 4 emisores con <strong>~€415M</strong> por coordinar para bloquear el mercado.</div>
-  </section>
-
-  <!-- 5 · Capa 1 recurrencia + M&A -->
-  <section class="slide white" data-idx="5">
-    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">06 / 14</div>
-    <div class="eyebrow" style="color: var(--teal)">Capa 1 · Recurrencia + cómo escalaron</div>
-    <h1 class="title sm">Facturan todos los meses — y <span class="accent">compran para crecer</span></h1>
-    <div class="split wide-l">
-      <div>
-        <div class="sub-h">Por qué la recurrencia es estructural</div>
-        <ul class="dd-list" style="gap:9px;">
-          <li><strong>Recarga mensual por nómina</strong> × headcount. Demanda estructural, no one-off.</li>
-          <li><strong>Contratos multi-anuales</strong> pegajosos por integración con HRIS/nómina. Edenred: <strong>NRR 104%, churn de volumen &lt;5%</strong>.</li>
-          <li><strong>Indexación regulatoria:</strong> el valor facial sube con salario mínimo/inflación → el revenue crece sin vender nada nuevo.</li>
-          <li><strong>Tailwind fiscal:</strong> los meal vouchers son tax-advantaged o mandatorios en FR, BE, IT y BR. El gobierno subsidia la demanda.</li>
-        </ul>
-        <div class="callout" style="margin-top:16px;"><strong>El contraste con Bigbox:</strong> el negocio de cajas es venta por ocasión (se re-decide en cada campaña). El de ellos es anualidad recurrente — y eso justifica múltiplos de 10-12× revenue vs. los bajos de un negocio transaccional.</div>
-      </div>
-      <div>
-        <div class="sub-h dark">M&A que define la estrategia</div>
-        <div class="marow">
-          <div class="mstone"><div class="yr">2010</div><div class="ev"><b>Edenred</b> se separa de Accor. Digitaliza papel → tarjeta/app (habilita float + data).</div></div>
-          <div class="mstone"><div class="yr">2018-22</div><div class="ev">Edenred compra <b>CSI</b> e <b>IPS</b> → Edenred Pay (pagos B2B).</div></div>
-          <div class="mstone"><div class="yr">2023</div><div class="ev">Edenred paga <b>£1.15B por Reward Gateway</b> (~12× rev) para subir a la capa SaaS de engagement.</div></div>
-          <div class="mstone"><div class="yr">2024</div><div class="ev"><b>Pluxee</b> spin-off + IPO de Sodexo. Compra Cobee + Inspirus. LatAm = su región #1.</div></div>
-          <div class="mstone"><div class="yr">2021-22</div><div class="ev"><b>Swile</b> levanta $200M de SoftBank → unicornio; merger con Bimpli → ~35% del mercado francés.</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6 · Capa 2 SaaS -->
-  <section class="slide white" data-idx="6">
-    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">07 / 14</div>
-    <div class="eyebrow" style="color: var(--teal)">Capa 2 · Plataformas SaaS de incentivos</div>
-    <h1 class="title sm">La capa recurrente — <span class="accent">la que Bigbox ya tiene a medias</span></h1>
-    <p class="lead" style="color: var(--gray); max-width: 1100px;">Software de reconocimiento + beneficios por empleado. Es donde fluye el capital de alto múltiplo. El modelo: <strong>doble capa de ingreso</strong>.</p>
-    <div class="split">
-      <div>
-        <table class="dtable">
-          <thead><tr><th>Plataforma</th><th>Escala</th><th>Estado</th></tr></thead>
-          <tbody>
-            <tr><td class="rl">Benifex <span class="sub">Benify + Benefex</span></td><td>5M+ empleados<br>100+ países</td><td>Comprada por Zellis <b>$264M</b></td></tr>
-            <tr><td class="rl">Reward Gateway</td><td>4.000+ empresas<br>23 países</td><td>Comprada por Edenred <b>£1.15B</b></td></tr>
-            <tr><td class="rl">Perkbox</td><td>Perks + descuentos</td><td>Independiente</td></tr>
-          </tbody>
-        </table>
-        <div class="tnote">SSO + sync con HRIS (Workday, BambooHR) para alta/baja automática de empleados. La pegajosidad nace de esa integración con el stack de RRHH del cliente.</div>
-      </div>
-      <div>
-        <div class="sub-h dark">El modelo de doble capa a copiar</div>
-        <div class="dd-card dark">
-          <ul class="dd-list">
-            <li><strong>Capa 1 — suscripción PEPM:</strong> fee recurrente por empleado/mes (~$2-6 en US) por el software.</li>
-            <li><strong>Capa 2 — margen sobre canje:</strong> markup sobre las gift cards / experiencias que el empleado canjea.</li>
-          </ul>
-          <div class="mstrip" style="margin-top:8px;">
-            <div class="mstat"><span class="v">$60k</span><span class="k">rev. recurrente/año</span></div>
-            <div class="mstat"><span class="v">1.000</span><span class="k">empleados × $5 PEPM</span></div>
-            <div class="mstat"><span class="v">+margen</span><span class="k">antes de canje</span></div>
-          </div>
-          <p style="font-size:0.8rem; color:var(--gray); line-height:1.42;">Un cliente factura recurrente <em>antes</em> de que alguien canjee nada. Bigbox tiene el catálogo escaso; le falta el wrapper de suscripción.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7 · Capa 3 tabla maestra -->
-  <section class="slide white dense" data-idx="7">
-    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">08 / 14</div>
-    <div class="eyebrow" style="color: var(--teal)">Capa 3 · Experience boxes — el panorama</div>
-    <h1 class="title sm">Tu modelo exacto: <span class="accent">siete players, dos polos franceses</span></h1>
-    <table class="dtable compact">
-      <thead>
-        <tr><th>Empresa</th><th>HQ</th><th>Catálogo</th><th>Revenue</th><th>Canal B2B</th><th>Dueño / estado</th></tr>
-      </thead>
-      <tbody>
-        <tr class="hi"><td class="rl" style="color:var(--teal-dark)">Smartbox</td><td>FR/IE</td><td>40-45k partners</td><td><b>~€550M</b></td><td>Sales-led + compra online tercerizada (GoGift)</td><td>Otium / Stérin</td></tr>
-        <tr class="hi"><td class="rl" style="color:var(--teal-dark)">Wonderbox</td><td>FR</td><td>140k actividades</td><td><b>~€325M</b></td><td>Extranet + equipo de ventas (híbrido)</td><td>Privado · dueña de Smartbox</td></tr>
-        <tr><td class="rl">Tinggly</td><td>LT</td><td>10k exp.</td><td>~$5M marca</td><td>Compra online + concierge</td><td>Bootstrapped</td></tr>
-        <tr><td class="rl">Virgin Exp. Days</td><td>UK</td><td>+4.000</td><td>£83.6M</td><td>Virgin Incentives: formulario + account mgr</td><td>Equistone PE</td></tr>
-        <tr><td class="rl">Buyagift</td><td>UK</td><td>5.000+</td><td>grupo £44M</td><td>Híbrido: account mgr + compra online</td><td>Moonpig (£124M, 2022)</td></tr>
-        <tr><td class="rl">Activity Superstore</td><td>UK</td><td>1.200+</td><td>~£20M</td><td>Sales-led · foco white-label retailers</td><td>Days of Your Life</td></tr>
-        <tr><td class="rl">J. Schweizer mydays</td><td>DE</td><td>Líder DACH</td><td>n/d</td><td>Corporate dedicado + Regiondo (software)</td><td>ProSiebenSat.1</td></tr>
-      </tbody>
-    </table>
-    <div class="callout"><strong>Monetización idéntica a Bigbox:</strong> comisión a partners 15-30% + breakage + float (35-50% de las ventas caen en nov-dic) + mejor margen en e-voucher. Europa = <strong>39% del share global</strong> de experience gifting.</div>
-  </section>
-
-  <!-- 8 · Smartbox + Wonderbox deep -->
-  <section class="slide white" data-idx="8">
-    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">09 / 14</div>
-    <div class="eyebrow" style="color: var(--teal)">Capa 3 · Los líderes, en detalle</div>
-    <h1 class="title sm">Smartbox y Wonderbox: <span class="accent">escalaron comprando + góndola</span></h1>
-    <div class="split">
-      <div class="dd-card">
-        <h3>Smartbox</h3>
-        <div class="dd-tag">Francia/Irlanda · #1 Europa · fundada 2003</div>
-        <div class="mstrip">
-          <div class="mstat"><span class="v">7M</span><span class="k">cajas / año</span></div>
-          <div class="mstat"><span class="v">11</span><span class="k">países</span></div>
-          <div class="mstat"><span class="v">~18%</span><span class="k">EBITDA (digital)</span></div>
-        </div>
-        <ul class="dd-list">
-          <li>Pionera del concepto (Pierre-Edouard Stérin). Roll-up M&A pan-europeo: Buyagift, La Vida es Bella, Dakotabox, Emozione3.</li>
-          <li><strong>2022:</strong> vendió su negocio UK (Buyagift + Red Letter Days) a <strong>Moonpig por £124M</strong> (~4.2× facturación).</li>
-          <li>Su compra B2B por autogestión la <strong>terceriza a GoGift</strong> — no la construyó in-house.</li>
-          <li class="warn">Talón de Aquiles: dependencia del breakage + fricción de canje (queja recurrente en reviews).</li>
-        </ul>
-      </div>
-      <div class="dd-card dark">
-        <h3>Wonderbox</h3>
-        <div class="dd-tag" style="color:var(--teal-dark)">Francia · dueña de Smartbox · fundada 2004</div>
-        <div class="mstrip">
-          <div class="mstat"><span class="v">140k</span><span class="k">actividades</span></div>
-          <div class="mstat"><span class="v">10.000</span><span class="k">puntos de venta</span></div>
-          <div class="mstat"><span class="v">~13</span><span class="k">países</span></div>
-        </div>
-        <ul class="dd-list">
-          <li>Despegó por boca-a-boca + retail físico. M&A: Vivabox (BE), Gift for You (NL), Lifecooler (PT), Cofre VIP (ES).</li>
-          <li><strong>Compró Smartbox (2022-23)</strong> — pero la fusión total la frenó el antitrust francés (&gt;70% share combinado).</li>
-          <li>B2B maduro: división Solutions Entreprises + canal CE/CSE (#1, +5.000 clientes con extranet de gestión y facturación).</li>
-          <li class="warn">Mismo riesgo regulatorio sobre el breakage + disputas de consumidor por disponibilidad de canje.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- 9 · Tinggly + UK/DACH -->
-  <section class="slide white" data-idx="9">
-    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">10 / 14</div>
-    <div class="eyebrow" style="color: var(--teal)">Capa 3 · El espejo + los regionales</div>
-    <h1 class="title sm">Tinggly es tu espejo invertido — <span class="accent">y su debilidad es tu fuerza</span></h1>
-    <div class="players-grid">
-      <div class="player-card mirror">
-        <div class="p-meta">Lituania · el más parecido a Bigbox</div>
-        <div class="p-name">Tinggly</div>
-        <div class="p-desc">Experiencias, el destinatario elige, "sin vencimiento", canje en 100+ países. Modelo B2B ágil: sin mínimo, reasignación gratis, pay-as-you-go, refund 14d, co-branding. Clientes: Google, IKEA, EA, GitLab.</div>
-        <div class="p-badge">Debilidad: catálogo poco profundo por país</div>
-      </div>
-      <div class="player-card">
-        <div class="p-meta">UK · marca licenciada</div>
-        <div class="p-name">Virgin / Buyagift</div>
-        <div class="p-desc">Virgin Experience Days (£83.6M, <strong>revenue estancado</strong> 3 años) usa la marca Virgin bajo licencia; B2B vía Virgin Incentives, account-led con cotización. Buyagift (de Moonpig) vende online desde 15 unidades, hasta 25% off.</div>
-        <div class="p-badge">Account-led · marca prestada</div>
-      </div>
-      <div class="player-card">
-        <div class="p-meta">UK + DACH · los especialistas</div>
-        <div class="p-name">A. Superstore · JSMD</div>
-        <div class="p-desc">Activity Superstore: su moat no es el D2C sino ser el <strong>proveedor white-label</strong> detrás de Argos, Boots, M&S, John Lewis. Jochen Schweizer mydays: líder DACH con <strong>booking en tiempo real</strong> + software propio (Regiondo), dueño ProSiebenSat.1.</div>
-        <div class="p-badge">White-label + booking digital</div>
-      </div>
-    </div>
-    <div class="callout"><strong>Lo que ninguno tiene:</strong> catálogo de experiencias propio <em>+</em> operación local profunda en varios países a la vez. Tinggly es global pero poco profundo por país; los franceses son profundos pero solo europeos. Es justo la intersección donde Bigbox es fuerte en LATAM.</div>
-  </section>
-
-  <!-- 10 · Breakage + Blueboard -->
-  <section class="slide teal" data-idx="10">
+  <!-- 6 · Gift cards de terceros -->
+  <section class="slide teal">
     <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num">11 / 14</div>
-    <div class="eyebrow">La palanca que se apaga</div>
-    <h1 class="title">El breakage se muere — <span class="accent">no construyas el negocio ahí</span></h1>
-    <p class="lead">El margen del modelo caja vivía de los vouchers que vencen sin usarse. La regulación europea de caducidad lo está erosionando estructuralmente, y los líderes ya migran el margen.</p>
-    <div class="split" style="margin-top:18px;">
-      <div>
-        <div class="sub-h" style="color:#fff;">El cerco regulatorio sobre la validez</div>
-        <table class="dtable" style="color:#fff;">
-          <thead><tr><th style="color:#fff; border-color:rgba(255,255,255,0.4)">Mercado</th><th style="color:#fff; border-color:rgba(255,255,255,0.4)">Validez obligatoria</th></tr></thead>
-          <tbody>
-            <tr><td style="color:#fff; border-color:rgba(255,255,255,0.15)">Alemania</td><td style="color:#fff; border-color:rgba(255,255,255,0.15)">3 años</td></tr>
-            <tr><td style="color:#fff; border-color:rgba(255,255,255,0.15)">Irlanda / Smartbox</td><td style="color:#fff; border-color:rgba(255,255,255,0.15)">5 años</td></tr>
-            <tr><td style="color:#fff; border-color:rgba(255,255,255,0.15)">UK</td><td style="color:#fff; border-color:rgba(255,255,255,0.15)">"razonable" (~2 años)</td></tr>
-          </tbody>
-        </table>
-        <p style="font-size:0.85rem; opacity:0.9; margin-top:12px; line-height:1.5;">Más validez = menos breakage. Smartbox ya factura <strong>&gt;55% digital</strong>, 68% canjea por app — el margen se mueve hacia <strong>fee transaccional + comisión sobre canje real</strong>.</p>
+    <div class="slide-num">06 / 09</div>
+    <div class="eyebrow">El dato pedido por dirección</div>
+    <h1 class="title sm">Quién vende gift cards <span class="accent">de otras marcas</span></h1>
+    <div class="gc-wrap">
+      <div class="gc-stat">
+        <div class="gs-frac">13<small style="font-size:.5em; font-weight:500; opacity:.7;">/17</small></div>
+        <div class="gs-sub">venden gift cards de terceros (76%)</div>
       </div>
-      <div>
-        <div class="sub-h" style="color:#fff;">El cadáver aleccionador</div>
-        <div class="impact-card" style="background:#fff;">
-          <div class="i-label">Blueboard (US) · quiebra marzo 2024</div>
-          <div class="i-num" style="color:var(--teal-dark)">500+<small>clientes</small></div>
-          <div class="i-text">Análogo casi exacto de Bigbox (experiencias-como-premio). No quebró por falta de demanda: por <strong>economía unitaria frágil sin recurrencia debajo</strong>.</div>
-        </div>
-        <div class="callout"><strong>La lección literal:</strong> experiencias sin un motor recurrente = negocio financieramente frágil. Bigbox puede ganar donde Blueboard perdió, justamente porque puede envolver su catálogo en una plataforma recurrente.</div>
+      <div class="gc-list">
+        <div class="gc-card"><h4>Las 4 que NO → solo gift card propia de experiencias</h4><p>Smartbox (marca), Tinggly, Activity Superstore y Jochen Schweizer mydays. Su voucher es cerrado: solo canjeable por experiencias propias.</p></div>
+        <div class="gc-card white-card"><h4>El patrón</h4><p>Vales, plataformas SaaS e infraestructura venden terceros casi al 100%. Los experience boxes que escalan a corporativo SÍ suman multimarca: Wonderbox (+300 marcas), Buyagift ("Experience More", 100+), Virgin Incentives.</p></div>
       </div>
     </div>
+    <div class="callout"><strong>Conclusión:</strong> cuando un experience box crece en corporativo, suma la gift card de terceros para dar flexibilidad. Bigbox ya tiene ambas patas (experiencias propias + Gift Cards de Marcas) → del lado correcto de la tendencia.</div>
+    <div class="srcline">Clasificación verificada por empresa. Fuentes: catálogos oficiales + Dealroom, City AM, Moonpig, getLatka, Tracxn — refs [8]–[24].</div>
   </section>
 
-  <!-- 11 · Capa 4 infra -->
-  <section class="slide white dense" data-idx="11">
-    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">12 / 14</div>
-    <div class="eyebrow" style="color: var(--teal)">Capa 4 · Infra de rewards / gift cards</div>
-    <h1 class="title sm">Las "rails" — gift cards de marcas: <span class="accent">partner, no build</span></h1>
-    <table class="dtable compact">
-      <thead><tr><th>Player</th><th>Tipo</th><th>Marcas / países</th><th>Revenue / funding</th><th>LATAM</th><th>Para Bigbox</th></tr></thead>
-      <tbody>
-        <tr class="hi"><td class="rl" style="color:var(--teal-dark)">Runa <span class="sub">ex-WeGift</span></td><td>Rail B2B2C</td><td>~5.000 · hasta 190</td><td>~$23M rev · ~$65M VC</td><td><b>✅ Brasil</b></td><td>Shortlist</td></tr>
-        <tr class="hi"><td class="rl" style="color:var(--teal-dark)">BHN <span class="sub">Blackhawk</span></td><td>Rail + inventario</td><td>Miles · 28 (13 EU)</td><td><b>$2.9B</b> rev · buyout $3.5B</td><td><b>✅ BR + MX</b></td><td>Shortlist</td></tr>
-        <tr><td class="rl">Tillo</td><td>Rail gift cards</td><td>4.000+ · 37-40</td><td>rentable · PE Tenzing</td><td>❌</td><td>Solo marcas globales</td></tr>
-        <tr><td class="rl">Tremendous</td><td>Payout platform</td><td>Miles · 200+</td><td>~$8M · bootstrapped</td><td>vía payouts</td><td>Benchmark de pricing</td></tr>
-      </tbody>
-    </table>
-    <div class="split" style="margin-top:18px;">
-      <div class="callout" style="margin-top:0;"><strong>El modelo:</strong> venden con <em>discount</em> sobre el valor facial y te dejan capturar el spread. Bigbox podría integrar gift cards de marcas vía una sola API y revenderlas con margen — sumando inventario sin negociar marca por marca en 5 países.</div>
-      <div class="callout" style="margin-top:0; background:rgba(217,119,6,0.08); border-left-color:#d97706;"><strong style="color:#b45309;">⚠️ Dato falso a ignorar:</strong> "Runa comprada por Staples (2013)" circula en Tracxn/Owler — es colisión de nombre, anterior al rebrand WeGift→Runa. <strong style="color:#b45309;">Runa sigue independiente y activa.</strong></div>
+  <!-- 7 · Dónde juega Bigbox -->
+  <section class="slide white">
+    <div class="brand-mark" style="color:var(--navy)">bigbox<span class="dot"></span>corpo</div>
+    <div class="slide-num" style="color:var(--gray)">07 / 09</div>
+    <div class="eyebrow" style="color:var(--teal)">Dónde juega Bigbox</div>
+    <h1 class="title sm">Bigbox juega en <span class="accent">3 de los 5 segmentos</span></h1>
+    <p class="lead" style="color:var(--gray); max-width:1100px;">GC clásicas (gift cards de marcas) + experiencias (su núcleo) + plataforma de incentivos. No juega en plata ni en vales.</p>
+    <div class="impact-grid">
+      <div class="impact-card"><div class="i-label">Núcleo · Experiencias</div><div class="i-text">Mercado grande y en crecimiento, pero con margen presionado por la regulación de caducidad (el "breakage" se erosiona). Benchmark real: <b>Smartbox (~$650M)</b> [13].</div></div>
+      <div class="impact-card"><div class="i-label">La capa más valiosa · Incentivos</div><div class="i-text">+11,2% de crecimiento [5] y múltiplos altos (<b>Reward Gateway se vendió a ~12× revenue</b> [11]). Bigbox tiene el producto, sub-desarrollado como SaaS recurrente.</div></div>
+      <div class="impact-card"><div class="i-label">Commodity · GC de marcas</div><div class="i-text">Conviene <b>tercerizar el inventario</b> vía infraestructura (Runa [20] / BHN [19]) en vez de negociar marca por marca.</div></div>
     </div>
+    <div class="bx-callout" style="margin-top:18px;"><strong>El moat:</strong> ser de los pocos que combinan experiencias propias + gift cards de terceros + capa de incentivos, con operación regional. Eso es lo no replicable.</div>
   </section>
 
-  <!-- 12 · Mapeo oferta vs Bigbox + moat -->
-  <section class="slide white dense" data-idx="12">
-    <div class="brand-mark" style="color: var(--navy)">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num" style="color: var(--gray)">13 / 14</div>
-    <div class="eyebrow" style="color: var(--teal)">Mapeo · dónde compite Bigbox</div>
-    <h1 class="title sm">Línea por línea: <span class="accent">dónde Bigbox es uno más y dónde es único</span></h1>
-    <table class="dtable compact">
-      <thead><tr><th>Línea Bigbox</th><th>Quién la cubre en Europa</th><th>Lectura estratégica</th></tr></thead>
-      <tbody>
-        <tr class="hi"><td class="rl" style="color:var(--teal-dark)">Experiencias / boxes</td><td>Smartbox, Wonderbox, Tinggly</td><td><b>Tu core.</b> Los gigantes de vouchers NO lo tienen. Acá Bigbox es par de los líderes europeos.</td></tr>
-        <tr class="hi"><td class="rl" style="color:var(--teal-dark)">Plataforma de Incentivos</td><td>Reward Gateway, Inspirus, Benifex</td><td><b>El oro recurrente.</b> Bigbox la tiene pero le falta el wrapper de suscripción que la hace pegajosa.</td></tr>
-        <tr><td class="rl">Gift cards de marcas</td><td>Runa, Tillo, BHN</td><td>Commodity. Mejor tercerizar vía API que negociar marca por marca.</td></tr>
-        <tr><td class="rl">Viajes corporativos</td><td>BCD, CWT (MICE)</td><td>Adyacencia fragmentada — sin gigante europeo consolidado.</td></tr>
-        <tr><td class="rl">Team building / deporte</td><td>Fragmentado, sin líder</td><td>Refuerza el vínculo; no es el motor económico del negocio.</td></tr>
-        <tr><td class="rl" style="opacity:0.6">Meal vouchers <span class="sub">(no lo tiene)</span></td><td>Edenred, Pluxee, Swile</td><td>El producto recurrente de ellos. Bigbox no juega (regulado, low-margin).</td></tr>
-      </tbody>
-    </table>
-    <div class="callout"><strong>El moat:</strong> Bigbox es el único que combina <strong>catálogo de experiencias propias + operación local en 5 países LATAM</strong>. Los SaaS marquesina (Reward Gateway, Workhuman) son UK/US y no tienen experiencias; los gigantes de vouchers en LATAM (Edenred, Pluxee) no tienen experiencias. Esa intersección es el foso defendible.</div>
-  </section>
-
-  <!-- 13 · Las 4 jugadas + cierre -->
-  <section class="slide teal" data-idx="13">
+  <!-- 8 · Jugadas -->
+  <section class="slide teal">
     <div class="brand-mark">bigbox<span class="dot"></span>corpo</div>
-    <div class="slide-num">14 / 14</div>
+    <div class="slide-num">08 / 09</div>
     <div class="eyebrow">Qué hacemos con esto</div>
     <h1 class="title">Cuatro jugadas <span class="accent">para Bigbox</span></h1>
     <div class="plays-grid">
-      <div class="play"><div class="pl-num">1</div><div><div class="pl-title">Doblar la apuesta en la Plataforma de Incentivos</div><div class="pl-desc">La capa recurrente (suscripción PEPM + margen sobre canje). El puente de "vendor de regalos" a "plataforma con anualidad" — donde está el múltiplo alto y donde Blueboard murió por no tenerla.</div></div></div>
-      <div class="play"><div class="pl-num">2</div><div><div class="pl-title">Capturar la recurrencia y el float</div><div class="pl-desc">El motor de los gigantes: puntos/saldos prepagos recargables que generan recurrencia y float — margen casi puro, especialmente relevante con las tasas altas de LATAM (ARS, BRL, MXN).</div></div></div>
-      <div class="play"><div class="pl-num">3</div><div><div class="pl-title">Canje sin fricción como ventaja, no breakage como pilar</div><div class="pl-desc">La regulación está matando el breakage. La fricción de canje es el talón de Aquiles #1 de Smartbox y Wonderbox en reviews — resolverlo (e-gift + booking ágil) es ventaja de marca directa.</div></div></div>
-      <div class="play"><div class="pl-num">4</div><div><div class="pl-title">Tercerizar gift cards vía Runa / BHN</div><div class="pl-desc">Sumar inventario de marcas sin negociar una por una. Y doblar inversión en lo no replicable: experiencias propias, curaduría y logística regional — el verdadero moat.</div></div></div>
+      <div class="play"><div class="pl-num">1</div><div><div class="pl-title">Doblar la apuesta en la Plataforma de Incentivos</div><div class="pl-desc">La capa recurrente: el segmento que más crece (+11%) y de múltiplos más altos.</div></div></div>
+      <div class="play"><div class="pl-num">2</div><div><div class="pl-title">Capturar recurrencia + float</div><div class="pl-desc">Puntos / saldos prepagos — el motor económico que sostiene los múltiplos altos.</div></div></div>
+      <div class="play"><div class="pl-num">3</div><div><div class="pl-title">Canje sin fricción como ventaja, no breakage como pilar</div><div class="pl-desc">La regulación está matando el breakage; el canje ágil es ventaja de marca directa.</div></div></div>
+      <div class="play"><div class="pl-num">4</div><div><div class="pl-title">Tercerizar gift cards de marcas vía Runa / BHN</div><div class="pl-desc">Y doblar la inversión en lo no replicable: experiencias propias, curaduría y logística regional.</div></div></div>
     </div>
-    <div class="closing"><p><strong>La conclusión de fondo:</strong> tenemos el activo que a los gigantes les falta (experiencias propias en 5 países). Nos falta el motor que los hace máquinas de recurrencia. La Plataforma de Incentivos —recurrente, con float— es ese motor.</p></div>
+    <div class="callout"><strong>Y el norte de fondo:</strong> el 3x ($30M → $90M) no es orgánico — es buy-and-build (comprar líderes locales) + mix recurrente, financiado con growth equity, independiente. Detalle en el proyecto "estrategia-3x".</div>
+  </section>
+
+  <!-- 9 · Fuentes -->
+  <section class="slide white dense">
+    <div class="brand-mark" style="color:var(--navy)">bigbox<span class="dot"></span>corpo</div>
+    <div class="slide-num" style="color:var(--gray)">09 / 09</div>
+    <div class="eyebrow" style="color:var(--teal)">Trazabilidad</div>
+    <h1 class="title sm">Fuentes</h1>
+    <div class="src-cols">
+      <div>
+        <div class="sc-h">Mercado / sizing</div>
+        <ol>
+          <li><b>[1]</b> Mordor Intelligence — Europe Gift Card & Incentive Card Market (2025) · Alta</li>
+          <li><b>[2]</b> Research and Markets / GlobeNewswire — Europe Gift & Incentive Card Report (2025) · Alta</li>
+          <li><b>[3]</b> Fortune Business Insights — Meal Voucher Market Europe (2025) · Media-Alta</li>
+          <li><b>[4]</b> Arizton — Experience Gifting Market (2024) · Media (Europa = proxy 39%)</li>
+          <li><b>[5]</b> Growth Market Reports — Employee Recognition Software (2024) · Media</li>
+          <li><b>[6]</b> Verified Market Research — Europe Prepaid Card Market (2024) · Media</li>
+          <li><b>[7]</b> Growth Market Reports — Corporate Gifting Market (2024) · Media</li>
+        </ol>
+      </div>
+      <div>
+        <div class="sc-h">Empresas (facturación + gift cards)</div>
+        <ol>
+          <li><b>[8]</b> Edenred FY2025 · <b>[9]</b> Pluxee FY2024 · <b>[10]</b> Up Coop (Societe / Wikipedia)</li>
+          <li><b>[11]</b> Reward Gateway (Employer News) · <b>[12]</b> Perkbox (Tracxn / Companies House)</li>
+          <li><b>[13]</b> Smartbox (Growjo, est.) · <b>[14]</b> Wonderbox (Dealroom + multi-enseignes)</li>
+          <li><b>[15]</b> Virgin Exp. Days (City AM) + Virgin Incentives · <b>[16]</b> Buyagift / Moonpig</li>
+          <li><b>[17]</b> Tinggly · <b>[18]</b> Jochen Schweizer mydays (Prospeo / Crunchbase)</li>
+          <li><b>[19]</b> Blackhawk (BHN) · <b>[20]</b> Runa / WeGift (getLatka) · <b>[21]</b> Tillo</li>
+          <li><b>[22]</b> Activity Superstore · <b>[23]</b> Swile (Expert Market) · <b>[24]</b> Benifex</li>
+        </ol>
+      </div>
+    </div>
+    <div class="srcline">URLs completas y notas de confianza en el documento de respaldo (Google Doc "Informe de mercado — Regalos, gift cards e incentivos (Europa)"). Confianza Alta: tamaño de gift cards y cotizadas. Media/Baja: experiencias-Europa (proxy) y revenues de privadas (orden de magnitud).</div>
   </section>
 
 </div>
@@ -613,63 +354,29 @@
   const slides = document.querySelectorAll('.slide');
   const nav = document.getElementById('nav');
   let current = 0;
-
-  slides.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => goTo(i));
-    nav.appendChild(dot);
-  });
-
+  slides.forEach((_, i) => { const d = document.createElement('div'); d.className = 'dot' + (i===0?' active':''); d.addEventListener('click', () => goTo(i)); nav.appendChild(d); });
   const dots = nav.querySelectorAll('.dot');
-
   function goTo(i) {
     if (i < 0 || i >= slides.length) return;
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
+    slides[current].classList.remove('active'); dots[current].classList.remove('active');
     current = i;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
+    slides[current].classList.add('active'); dots[current].classList.add('active');
     const isDark = slides[current].classList.contains('teal');
     dots.forEach(d => {
-      if (isDark) {
-        if (!d.classList.contains('active')) d.style.background = 'rgba(255,255,255,0.3)';
-        else d.style.background = '#fff';
-      } else {
-        if (!d.classList.contains('active')) d.style.background = 'rgba(0,0,0,0.15)';
-        else d.style.background = '#2aa3b1';
-      }
+      if (isDark) { d.style.background = d.classList.contains('active') ? '#fff' : 'rgba(255,255,255,0.3)'; }
+      else { d.style.background = d.classList.contains('active') ? '#2aa3b1' : 'rgba(0,0,0,0.15)'; }
     });
   }
-
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
-    else if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
-    else if (e.key === 'f' || e.key === 'F') {
-      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-      else document.exitFullscreen();
-    }
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current+1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current-1); }
+    else if (e.key === 'f' || e.key === 'F') { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
     else if (e.key === 'Home') goTo(0);
-    else if (e.key === 'End') goTo(slides.length - 1);
+    else if (e.key === 'End') goTo(slides.length-1);
   });
-
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('.nav') || e.target.closest('.hint')) return;
-    goTo(current + 1);
-  });
-
-  document.addEventListener('dblclick', () => {
-    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-    else document.exitFullscreen();
-  });
-
-  let cursorTimer;
-  document.addEventListener('mousemove', () => {
-    document.body.classList.remove('cursor-hidden');
-    clearTimeout(cursorTimer);
-    cursorTimer = setTimeout(() => document.body.classList.add('cursor-hidden'), 3000);
-  });
-
+  document.addEventListener('click', (e) => { if (e.target.closest('.nav') || e.target.closest('.hint')) return; goTo(current+1); });
+  document.addEventListener('dblclick', () => { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); });
+  let ct; document.addEventListener('mousemove', () => { document.body.classList.remove('cursor-hidden'); clearTimeout(ct); ct = setTimeout(() => document.body.classList.add('cursor-hidden'), 3000); });
   goTo(0);
 </script>
 
