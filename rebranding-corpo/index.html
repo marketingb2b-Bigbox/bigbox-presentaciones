@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rebranding Bigbox Corpo — Más frescos, más vivos, más actuales · bigbox · corpo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Fraunces:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FC4C02; --orange-deep: #DC4202; --orange-bright: #FF6B33; --orange-tint: #FFE7DC;
+    --petrol: #103E4D; --petrol-deep: #0B2C37;
+    --paper: #FFFFFF; --paper-2: #F6F5F3;
+    --ink: #1C2A30; --ink-soft: #586A6F; --ink-faint: #93A0A2;
+    --gold: #C9A24B;
+    --old-teal: #2AA3B1; --old-purple: #6B4E9E;
+    --sans: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --serif: "Fraunces", Georgia, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; font-family: var(--body); background: #000; color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+  .deck { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+  .slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-start; padding: 11vh 6.5vw 5vh; opacity: 0; pointer-events: none; transition: opacity .4s ease; background: var(--paper); overflow: hidden; }
+  .slide.active { opacity: 1; pointer-events: auto; }
+  .slide.dense { padding: 8vh 5.5vw 4vh; }
+  .slide.dark { background: var(--petrol); color: #fff; }
+  .slide.dark h1.title .accent, .slide.dark .accent { color: var(--orange-bright); }
+  .slide.tinted { background: var(--paper-2); }
+
+  .brand-mark { position: absolute; top: 3.2vh; left: 6.5vw; font-family: var(--sans); font-size: 1rem; letter-spacing: -.01em; opacity: .9; }
+  .brand-mark b { font-weight: 700; }
+  .brand-mark span { font-weight: 500; color: var(--orange); }
+  .slide.dark .brand-mark span { color: var(--orange-bright); }
+  .slide-num { position: absolute; top: 3.4vh; right: 6.5vw; font-family: var(--sans); font-weight: 500; font-size: .8rem; letter-spacing: .08em; color: var(--ink-faint); }
+  .slide.dark .slide-num { color: rgba(255,255,255,.5); }
+
+  .eyebrow { font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--orange); margin-bottom: 14px; }
+  .slide.dark .eyebrow { color: var(--orange-bright); }
+  h1.title { font-family: var(--sans); font-size: clamp(1.6rem, 2.8vw, 2.4rem); font-weight: 500; line-height: 1.14; letter-spacing: -.025em; margin-bottom: 12px; }
+  h1.title .accent { color: var(--orange); }
+  h1.title em { font-family: var(--serif); font-style: italic; font-weight: 300; }
+  p.lead { font-size: clamp(.92rem, 1.15vw, 1.1rem); font-weight: 300; line-height: 1.55; max-width: 950px; color: var(--ink-soft); }
+  .slide.dark p.lead { color: rgba(255,255,255,.8); }
+  p.lead strong { font-weight: 600; color: var(--ink); }
+  .slide.dark p.lead strong { color: #fff; }
+  .footnote { margin-top: auto; padding-top: 16px; font-size: .7rem; line-height: 1.45; color: var(--ink-faint); }
+  .slide.dark .footnote { color: rgba(255,255,255,.5); }
+
+  /* Cover */
+  .slide.cover { justify-content: center; background: var(--paper); }
+  .cover .logo { font-family: var(--sans); font-size: 2rem; letter-spacing: -.02em; margin-bottom: 34px; }
+  .cover .logo b { font-weight: 700; color: var(--ink); }
+  .cover .logo span { font-weight: 500; color: var(--orange); }
+  .cover h1 { font-family: var(--sans); font-size: clamp(2.2rem, 4.4vw, 3.6rem); font-weight: 500; line-height: 1.06; letter-spacing: -.03em; max-width: 1100px; margin-bottom: 22px; }
+  .cover h1 em { font-family: var(--serif); font-style: italic; font-weight: 300; color: var(--orange); }
+  .cover p { font-size: clamp(1rem, 1.4vw, 1.2rem); font-weight: 300; line-height: 1.55; max-width: 760px; color: var(--ink-soft); margin-bottom: 40px; }
+  .cover .meta { display: flex; gap: 40px; font-family: var(--sans); font-size: .78rem; font-weight: 500; letter-spacing: .04em; color: var(--ink-faint); border-top: 1px solid rgba(28,42,48,.1); padding-top: 20px; max-width: 760px; }
+  .cover .meta b { display: block; color: var(--ink); font-weight: 600; margin-top: 4px; letter-spacing: 0; }
+  .cover-bar { position: absolute; top: 0; left: 0; width: 10px; height: 100%; background: var(--orange); }
+
+  /* Divider */
+  .slide.divider { justify-content: center; }
+  .divider .d-num { font-family: var(--serif); font-style: italic; font-size: 4rem; line-height: 1; color: var(--orange-bright); margin-bottom: 14px; }
+  .divider h1 { font-family: var(--sans); font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 500; letter-spacing: -.03em; line-height: 1.04; margin-bottom: 18px; max-width: 1000px; }
+  .divider p { font-size: clamp(1rem, 1.4vw, 1.2rem); font-weight: 300; max-width: 780px; color: rgba(255,255,255,.78); line-height: 1.5; }
+
+  /* Gap / two-column contrast */
+  .gap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 26px; max-width: 1240px; }
+  .gap-col { border-radius: 16px; padding: 26px 28px; border: 1px solid rgba(28,42,48,.1); background: var(--paper); }
+  .gap-col.is-them { background: var(--paper-2); }
+  .gap-col.is-us { background: linear-gradient(150deg, rgba(252,76,2,.06), rgba(252,76,2,.01)); border-color: rgba(252,76,2,.25); }
+  .gap-col h3 { font-family: var(--sans); font-size: .74rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 16px; }
+  .gap-col.is-us h3 { color: var(--orange); }
+  .gap-col .big { font-family: var(--sans); font-size: 1.5rem; font-weight: 500; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 14px; }
+  .gap-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .gap-col li { font-size: .92rem; font-weight: 300; line-height: 1.4; color: var(--ink-soft); padding-left: 18px; position: relative; }
+  .gap-col li::before { content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-faint); }
+  .gap-col.is-us li::before { background: var(--orange); }
+  .verdict { margin-top: 24px; font-family: var(--sans); font-size: 1.15rem; font-weight: 500; letter-spacing: -.02em; max-width: 1100px; line-height: 1.4; }
+  .verdict .accent { color: var(--orange); }
+
+  /* Vectores */
+  .vec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; max-width: 1280px; }
+  .vec { border-radius: 16px; padding: 26px 26px 28px; background: var(--paper-2); border: 1px solid rgba(28,42,48,.07); display: flex; flex-direction: column; }
+  .vec .v-word { font-family: var(--serif); font-style: italic; font-size: 2.1rem; color: var(--orange); line-height: 1; margin-bottom: 16px; }
+  .vec .v-not { font-size: .8rem; font-weight: 400; color: var(--ink-faint); margin-bottom: 12px; }
+  .vec .v-not b { font-weight: 600; }
+  .vec .v-is { font-size: .95rem; font-weight: 300; line-height: 1.5; color: var(--ink-soft); }
+  .vec .v-is b { font-weight: 600; color: var(--ink); }
+  .vec .v-tags { margin-top: auto; padding-top: 18px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .vec .v-tags span { font-family: var(--sans); font-size: .68rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; background: var(--orange-tint); color: var(--orange-deep); border-radius: 20px; padding: 5px 11px; }
+
+  /* Color swap */
+  .swap { display: grid; grid-template-columns: 1fr 60px 1fr; align-items: stretch; gap: 0; margin-top: 26px; max-width: 1240px; }
+  .sw { border-radius: 18px; overflow: hidden; box-shadow: 0 14px 40px rgba(16,62,77,.14); }
+  .sw .sw-fill { height: 210px; display: flex; align-items: flex-end; padding: 20px 24px; }
+  .sw .sw-fill.old { background: var(--old-teal); }
+  .sw .sw-fill.new { background: var(--orange); }
+  .sw .sw-hex { font-family: var(--sans); font-size: 1.5rem; font-weight: 600; color: #fff; letter-spacing: .02em; }
+  .sw .sw-body { background: #fff; border: 1px solid rgba(28,42,48,.08); border-top: none; padding: 18px 24px 22px; }
+  .sw .sw-label { font-family: var(--sans); font-size: .7rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+  .sw .sw-reads { font-size: .92rem; font-weight: 300; line-height: 1.45; color: var(--ink-soft); }
+  .sw .sw-reads b { font-weight: 600; color: var(--ink); }
+  .swap-arrow { display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--orange); }
+  .ramp { display: flex; gap: 10px; margin-top: 22px; max-width: 1240px; }
+  .ramp div { flex: 1; height: 46px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .06em; }
+
+  /* Razones */
+  .why { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 26px; max-width: 1260px; }
+  .why-card { border-radius: 14px; padding: 22px 24px; background: var(--paper-2); border-left: 4px solid var(--orange); display: flex; gap: 18px; }
+  .why-card .w-n { font-family: var(--serif); font-style: italic; font-size: 1.9rem; color: var(--orange); line-height: 1; }
+  .why-card h4 { font-family: var(--sans); font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em; margin-bottom: 7px; }
+  .why-card p { font-size: .89rem; font-weight: 300; line-height: 1.5; color: var(--ink-soft); }
+  .why-card p b { font-weight: 600; color: var(--ink); }
+
+  /* Categoría / competencia */
+  .cat-rows { display: flex; flex-direction: column; gap: 8px; margin-top: 22px; max-width: 1240px; }
+  .cat-row { display: grid; grid-template-columns: 26px 150px 1fr 92px; align-items: center; gap: 16px; padding: 10px 16px; border-radius: 11px; background: var(--paper-2); border: 1px solid rgba(28,42,48,.06); }
+  .cat-row.is-us { background: linear-gradient(135deg, rgba(252,76,2,.09), rgba(252,76,2,.02)); border-color: rgba(252,76,2,.3); }
+  .cat-dot { width: 22px; height: 22px; border-radius: 6px; }
+  .cat-name { font-family: var(--sans); font-size: .92rem; font-weight: 600; }
+  .cat-row.is-us .cat-name { color: var(--orange-deep); }
+  .cat-bar { height: 8px; border-radius: 6px; }
+  .cat-fam { font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-faint); text-align: right; }
+  .cat-row.is-us .cat-fam { color: var(--orange); }
+  .cat-note { margin-top: 20px; padding: 16px 20px; border-radius: 12px; background: var(--petrol); color: #fff; font-size: .95rem; font-weight: 300; line-height: 1.45; max-width: 1240px; }
+  .cat-note b { font-weight: 600; color: var(--orange-bright); }
+
+  /* Sistema */
+  .sys { display: grid; grid-template-columns: 1.15fr 1fr; gap: 22px; margin-top: 24px; max-width: 1260px; }
+  .sys-box { border-radius: 16px; border: 1px solid rgba(28,42,48,.09); padding: 22px 24px; }
+  .sys-box h3 { font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 16px; }
+  .pal { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .pal div { border-radius: 9px; height: 66px; padding: 8px 9px; display: flex; flex-direction: column; justify-content: flex-end; font-family: var(--sans); font-size: .62rem; font-weight: 600; letter-spacing: .02em; }
+  .pal div small { display: block; font-weight: 500; opacity: .8; font-size: .58rem; }
+  .type-row { padding: 12px 0; border-bottom: 1px dashed rgba(28,42,48,.12); }
+  .type-row:last-child { border: none; }
+  .type-row .t-name { font-family: var(--sans); font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; }
+  .type-row .t-sample { font-size: 1.35rem; letter-spacing: -.02em; }
+  .type-row .t-sample.p { font-family: var(--sans); font-weight: 500; }
+  .type-row .t-sample.i { font-family: var(--body); font-weight: 300; font-size: 1.05rem; color: var(--ink-soft); }
+  .type-row .t-sample.f { font-family: var(--serif); font-style: italic; font-weight: 300; color: var(--orange); }
+  .sys-kicker { margin-top: 22px; font-family: var(--sans); font-size: 1.1rem; font-weight: 500; letter-spacing: -.02em; max-width: 1100px; }
+  .sys-kicker .accent { color: var(--orange); }
+
+  /* Antes / después listas */
+  .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; max-width: 1260px; }
+  .ba-col { border-radius: 16px; padding: 24px 26px; }
+  .ba-col.out { background: var(--paper-2); border: 1px solid rgba(28,42,48,.08); }
+  .ba-col.in { background: var(--petrol); color: #fff; }
+  .ba-col h3 { font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 16px; }
+  .ba-col.out h3 { color: var(--ink-faint); }
+  .ba-col.in h3 { color: var(--orange-bright); }
+  .ba-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .ba-col li { font-size: .93rem; font-weight: 300; line-height: 1.42; padding-left: 22px; position: relative; }
+  .ba-col.out li { color: var(--ink-soft); }
+  .ba-col.out li::before { content: "✕"; position: absolute; left: 0; color: var(--ink-faint); font-size: .8rem; }
+  .ba-col.in li { color: rgba(255,255,255,.85); }
+  .ba-col.in li::before { content: "→"; position: absolute; left: 0; color: var(--orange-bright); }
+  .ba-col li b { font-weight: 600; }
+  .ba-col.in li b { color: #fff; }
+
+  /* Guardrails */
+  .rails { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; max-width: 1240px; }
+  .rail { display: grid; grid-template-columns: 210px 1fr; gap: 22px; align-items: center; padding: 15px 20px; border-radius: 12px; background: var(--paper-2); border-left: 4px solid var(--orange); }
+  .rail .r-risk { font-family: var(--sans); font-size: .95rem; font-weight: 600; letter-spacing: -.01em; color: var(--ink); }
+  .rail .r-fix { font-size: .9rem; font-weight: 300; line-height: 1.45; color: var(--ink-soft); }
+  .rail .r-fix b { font-weight: 600; color: var(--ink); }
+  .dose { display: flex; align-items: center; gap: 14px; margin-top: 22px; max-width: 1240px; }
+  .dose-bar { flex: 1; height: 34px; border-radius: 9px; overflow: hidden; display: flex; border: 1px solid rgba(28,42,48,.1); }
+  .dose-bar .d-white { flex: 78; background: #fff; }
+  .dose-bar .d-ink { flex: 12; background: var(--petrol); }
+  .dose-bar .d-or { flex: 10; background: var(--orange); }
+  .dose-lbl { font-family: var(--sans); font-size: .78rem; font-weight: 600; color: var(--ink-soft); white-space: nowrap; }
+  .dose-lbl b { color: var(--orange); }
+
+  /* Plan */
+  .waves { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 26px; max-width: 1280px; }
+  .wave { border-radius: 15px; padding: 22px 20px 24px; background: var(--paper-2); border: 1px solid rgba(28,42,48,.07); display: flex; flex-direction: column; }
+  .wave.done { background: linear-gradient(160deg, rgba(252,76,2,.08), rgba(252,76,2,.02)); border-color: rgba(252,76,2,.28); }
+  .wave .w-tag { font-family: var(--sans); font-size: .66rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 10px; }
+  .wave.done .w-tag { color: var(--orange); }
+  .wave h4 { font-family: var(--sans); font-size: 1.05rem; font-weight: 600; letter-spacing: -.01em; margin-bottom: 10px; }
+  .wave ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .wave li { font-size: .84rem; font-weight: 300; line-height: 1.4; color: var(--ink-soft); }
+  .wave .w-state { margin-top: auto; padding-top: 16px; font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .04em; color: var(--ink-faint); }
+  .wave.done .w-state { color: var(--orange-deep); }
+
+  /* Cierre */
+  .asks { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; max-width: 1080px; }
+  .ask { display: flex; gap: 18px; align-items: baseline; padding: 16px 22px; border-radius: 13px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); }
+  .ask .a-n { font-family: var(--serif); font-style: italic; font-size: 1.5rem; color: var(--orange-bright); line-height: 1; }
+  .ask .a-t { font-size: 1rem; font-weight: 300; line-height: 1.45; color: rgba(255,255,255,.88); }
+  .ask .a-t b { font-weight: 600; color: #fff; }
+
+  /* Nav */
+  .nav { position: fixed; bottom: 3vh; right: 6.5vw; display: flex; gap: 8px; z-index: 50; }
+  .nav button { width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(28,42,48,.14); background: rgba(255,255,255,.85); color: var(--ink); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .18s; backdrop-filter: blur(6px); }
+  .nav button:hover { background: var(--orange); color: #fff; border-color: var(--orange); }
+  .progress { position: fixed; bottom: 0; left: 0; height: 3px; background: var(--orange); z-index: 60; transition: width .35s ease; }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- 1 · Cover -->
+  <section class="slide cover active">
+    <div class="cover-bar"></div>
+    <div class="logo"><b>bigbox</b><span>·corpo</span></div>
+    <h1>Vendemos experiencias.<br>Nos vestimos como <em>un software de RRHH</em>.</h1>
+    <p>Propuesta de rebranding para la web y la identidad de Bigbox Corpo: pasar de un sistema visual frío y correcto a uno más fresco, más vivo y más actual — empezando por el color.</p>
+    <div class="meta">
+      <div>Para<b>Equipo de Diseño</b></div>
+      <div>De<b>Cesar Casanova · Marketing B2B</b></div>
+      <div>Alcance<b>Web B2B, identidad, materiales comerciales</b></div>
+    </div>
+  </section>
+
+  <!-- 2 · Diagnóstico -->
+  <section class="slide dense">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">02</div>
+    <div class="eyebrow">El diagnóstico</div>
+    <h1 class="title">La marca no miente sobre lo que hacemos.<br><span class="accent">Hoy sí lo hace.</span></h1>
+    <div class="gap-grid">
+      <div class="gap-col is-them">
+        <h3>Lo que dice nuestra identidad actual</h3>
+        <div class="big">Sobria. Fría. Correcta.</div>
+        <ul>
+          <li>Teal + púrpura: la paleta default del software corporativo</li>
+          <li>Gradientes y sombras de 2015 — se lee como una herramienta, no como una marca</li>
+          <li>Fotografía de stock: sala de reunión, apretón de manos, gente señalando una pantalla</li>
+          <li>Todo estático: nada se mueve, nada respira</li>
+        </ul>
+      </div>
+      <div class="gap-col is-us">
+        <h3>Lo que realmente vendemos</h3>
+        <div class="big">Emoción. Sorpresa. Algo que se vive.</div>
+        <ul>
+          <li>+4.000 experiencias: gastronomía, aventura, bienestar, escapadas</li>
+          <li>El producto es un momento — adrenalina, disfrute, un recuerdo</li>
+          <li>Compramos con la cabeza (RRHH, presupuesto) pero elegimos con la piel</li>
+          <li>Nuestro diferencial es que <b>se siente</b>, no que se administra</li>
+        </ul>
+      </div>
+    </div>
+    <div class="verdict">La brecha entre <b>lo que somos</b> y <b>cómo nos vemos</b> es el problema de marca. <span class="accent">El rebranding la cierra.</span></div>
+    <div class="footnote">Nota: esto no es un juicio sobre el trabajo hecho. La identidad actual resolvió bien la etapa de "que se nos tome en serio". La etapa siguiente es otra: que se nos recuerde.</div>
+  </section>
+
+  <!-- 3 · Vectores -->
+  <section class="slide dense">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">03</div>
+    <div class="eyebrow">La dirección</div>
+    <h1 class="title">Tres vectores. <em>Con definición operativa</em>, no adjetivos sueltos.</h1>
+    <p class="lead">"Más fresco, más vivo, más actual" solo sirve si se puede diseñar contra eso. Así lo traducimos a decisiones concretas.</p>
+    <div class="vec-grid">
+      <div class="vec">
+        <div class="v-word">Fresco</div>
+        <div class="v-not"><b>No es</b> "más lindo". Es <b>aire</b>.</div>
+        <div class="v-is">Blanco dominante, mucho espacio negativo, tipografía liviana, menos cajas y menos bordes. La página <b>respira</b>: menos elementos, más jerarquía.</div>
+        <div class="v-tags"><span>Blanco base</span><span>Espacio</span><span>Menos ruido</span></div>
+      </div>
+      <div class="vec">
+        <div class="v-word">Vivo</div>
+        <div class="v-not"><b>No es</b> "más colorido". Es <b>temperatura</b>.</div>
+        <div class="v-is">Un acento cálido y de alta energía que aparece poco pero pega fuerte. Y movimiento real: cosas que reaccionan al scroll, al hover, al click. <b>Vivo = se mueve y tiene pulso.</b></div>
+        <div class="v-tags"><span>Acento cálido</span><span>Movimiento</span><span>Contraste</span></div>
+      </div>
+      <div class="vec">
+        <div class="v-word">Actual</div>
+        <div class="v-not"><b>No es</b> "moderno". Es <b>editorial</b>.</div>
+        <div class="v-is">Lenguaje de revista, no de dashboard: fotografía protagonista, cursivas serif para lo emocional, tipografía grande y confiada. <b>Se lee como una marca, no como un producto SaaS.</b></div>
+        <div class="v-tags"><span>Foto real</span><span>Serif italic</span><span>Escala</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Divider color -->
+  <section class="slide divider dark">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">04</div>
+    <div class="d-num">01</div>
+    <h1>El color</h1>
+    <p>La decisión más visible y la más barata de tomar bien. Es lo primero que el mercado registra de nosotros y lo último que olvida.</p>
+  </section>
+
+  <!-- 5 · El swap -->
+  <section class="slide dense">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">05</div>
+    <div class="eyebrow">El cambio</div>
+    <h1 class="title">De un color que <span class="accent">nos ubica</span> a un color que <span class="accent">nos distingue</span>.</h1>
+    <div class="swap">
+      <div class="sw">
+        <div class="sw-fill old"><div class="sw-hex">#2AA3B1</div></div>
+        <div class="sw-body">
+          <div class="sw-label">Antes · Teal</div>
+          <div class="sw-reads">Se lee como <b>confiable, técnico, institucional</b>. Es el color con el que la categoría entera dice "somos una plataforma seria". Cumple — y desaparece.</div>
+        </div>
+      </div>
+      <div class="swap-arrow">→</div>
+      <div class="sw">
+        <div class="sw-fill new"><div class="sw-hex">#FC4C02</div></div>
+        <div class="sw-body">
+          <div class="sw-label">Ahora · Naranja</div>
+          <div class="sw-reads">Se lee como <b>energía, calidez, entusiasmo, acción</b>. Es la temperatura emocional del producto que vendemos: algo que se disfruta, no algo que se administra.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ramp">
+      <div style="background:#FFE7DC;color:#DC4202">TINT · #FFE7DC</div>
+      <div style="background:#FF6B33;color:#fff">BRIGHT · #FF6B33 · sobre oscuro</div>
+      <div style="background:#FC4C02;color:#fff">BASE · #FC4C02 · CTA y acentos</div>
+      <div style="background:#DC4202;color:#fff">DEEP · #DC4202 · hover</div>
+    </div>
+    <div class="footnote">El naranja no llega solo: llega con una rampa completa de 4 valores, para que nunca haya que "inventar" un naranja a ojo.</div>
+  </section>
+
+  <!-- 6 · Por qué naranja -->
+  <section class="slide dense tinted">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">06</div>
+    <div class="eyebrow">La justificación</div>
+    <h1 class="title">Por qué <span class="accent">naranja</span> y no cualquier otro color "más vivo".</h1>
+    <div class="why">
+      <div class="why-card">
+        <div class="w-n">1</div>
+        <div>
+          <h4>Coherencia con el producto</h4>
+          <p>El naranja es el color de la <b>energía y el entusiasmo</b>. Vendemos experiencias, reconocimiento y disfrute. El color tiene que estar a la temperatura del producto: <b>cálido, no frío</b>.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="w-n">2</div>
+        <div>
+          <h4>Distinción en una categoría monocroma</h4>
+          <p>Relevamos el CSS de 7 competidores directos: <b>los 7 usan un color frío y 5 usan el mismo violeta</b>. En un feed de LinkedIn o en una licitación con 4 propuestas, el naranja es lo único que no se confunde con lo demás. <b>Ser distinto es gratis; ser igual es caro.</b></p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="w-n">3</div>
+        <div>
+          <h4>Alineación con la casa madre</h4>
+          <p>Corpo deja de ser un satélite visual de Bigbox y pasa a ser <b>la misma marca hablándole a otro público</b>. Un solo territorio de color: coherencia entre B2C y B2B en los 5 países.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="w-n">4</div>
+        <div>
+          <h4>Funciona como acento, no como fondo</h4>
+          <p>Es un color de <b>alta señal y baja superficie</b>: sobre blanco, un 8-10% de naranja alcanza para dominar la jerarquía. Eso lo hace ideal para CTAs y para dirigir la mirada al lugar donde convertimos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · Mapa de la categoría -->
+  <section class="slide dense" id="slide-cat">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">07</div>
+    <div class="eyebrow">Mapa de color de la categoría</div>
+    <h1 class="title">Todos son fríos. Cinco son <span class="accent">el mismo violeta</span>.</h1>
+    <p class="lead">Color primario de marca de los competidores directos en beneficios, incentivos y gift cards corporativos en LATAM. <strong>Hex extraídos del CSS de producción de cada sitio</strong> — no son estimaciones a ojo.</p>
+    <div class="cat-rows" id="cat-rows"><!-- inyectado por JS --></div>
+    <div class="cat-note" id="cat-note"></div>
+    <div class="footnote">Fuentes: variables CSS de marca de bonda.com, runahr.com (<code>--e-global-color-primary</code>), minu.mx (<code>--mnu-brand</code>), maslow.hr, ohgiftcard.com.ar, happier.com.ar (<code>--c-primary</code>), fanbag.com.ar (<code>--c-primary</code>). Relevamiento julio 2026. HeyAtlas excluido: su sitio no expone el CSS de marca. Dato honesto: <b>Runa usa naranja #FFA200 como acento secundario</b> — nadie lo usa como color primario.</div>
+  </section>
+
+  <!-- 8 · Divider sistema -->
+  <section class="slide divider dark">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">08</div>
+    <div class="d-num">02</div>
+    <h1>No es pintar de naranja</h1>
+    <p>Un color suelto no cambia una marca. Lo que se propone es un sistema completo: paleta, tipografía, fotografía y movimiento trabajando en la misma dirección.</p>
+  </section>
+
+  <!-- 9 · Sistema -->
+  <section class="slide dense">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">09</div>
+    <div class="eyebrow">El sistema</div>
+    <h1 class="title">Paleta y tipografía: <em>lo que sostiene al naranja</em>.</h1>
+    <div class="sys">
+      <div class="sys-box">
+        <h3>Paleta completa</h3>
+        <div class="pal">
+          <div style="background:#FC4C02;color:#fff">NARANJA<small>#FC4C02</small></div>
+          <div style="background:#103E4D;color:#fff">PETRÓLEO<small>#103E4D</small></div>
+          <div style="background:#F6F5F3;color:#586A6F;border:1px solid rgba(28,42,48,.1)">OFF-WHITE<small>#F6F5F3</small></div>
+          <div style="background:#FFFFFF;color:#586A6F;border:1px solid rgba(28,42,48,.12)">BLANCO<small>#FFFFFF</small></div>
+          <div style="background:#1C2A30;color:#fff">INK<small>#1C2A30</small></div>
+          <div style="background:#586A6F;color:#fff">INK SOFT<small>#586A6F</small></div>
+          <div style="background:#FFE7DC;color:#DC4202">TINT<small>#FFE7DC</small></div>
+          <div style="background:#C9A24B;color:#fff">GOLD<small>#C9A24B</small></div>
+        </div>
+        <p style="margin-top:16px;font-size:.86rem;font-weight:300;line-height:1.5;color:var(--ink-soft)">El <b>petróleo</b> es la contraparte premium del naranja: aporta el peso institucional que el naranja solo no da. Blanco de base, petróleo para los bloques que tienen que pesar, naranja para lo que tiene que arder.</p>
+      </div>
+      <div class="sys-box">
+        <h3>Tipografía</h3>
+        <div class="type-row">
+          <div class="t-name">Poppins 500 · Títulos y logo</div>
+          <div class="t-sample p">Reconocer no es un trámite</div>
+        </div>
+        <div class="type-row">
+          <div class="t-name">Inter 300/400 · Cuerpo</div>
+          <div class="t-sample i">Elegís vos qué experiencia vivir, entre más de 4.000 opciones en 5 países.</div>
+        </div>
+        <div class="type-row">
+          <div class="t-name">Fraunces italic · Acentos emocionales</div>
+          <div class="t-sample f">algo que se vive</div>
+        </div>
+      </div>
+    </div>
+    <div class="sys-kicker">La cursiva serif es la que hace el trabajo emocional. <span class="accent">Es lo que nos saca del registro "software" sin perder profesionalismo.</span></div>
+  </section>
+
+  <!-- 10 · Imagen -->
+  <section class="slide dense tinted">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">10</div>
+    <div class="eyebrow">Imagen y fotografía</div>
+    <h1 class="title">De <span class="accent">stock corporativo</span> a <span class="accent">experiencia real</span>.</h1>
+    <p class="lead">Es el cambio que más mueve la aguja después del color. Nuestra foto tiene que dar ganas — no explicar un proceso.</p>
+    <div class="ba">
+      <div class="ba-col out">
+        <h3>Sale</h3>
+        <ul>
+          <li><b>Sala de reunión y apretón de manos.</b> Muestra la transacción, no el regalo.</li>
+          <li><b>Personas señalando una pantalla.</b> Foto de software, no de experiencias.</li>
+          <li><b>Stock genérico, sobre-producido, sobre-saturado.</b> Se nota que es comprado.</li>
+          <li><b>Producto sobre fondo blanco.</b> La caja no es el producto: lo que hay adentro sí.</li>
+          <li><b>Iconos planos como relleno visual.</b> Ocupan lugar, no dicen nada.</li>
+        </ul>
+      </div>
+      <div class="ba-col in">
+        <h3>Entra</h3>
+        <ul>
+          <li><b>El momento, no el objeto.</b> Alguien viviendo la experiencia: una mesa, una cumbre, un spa.</li>
+          <li><b>Luz natural y saturación media.</b> Verosímil, no publicitario.</li>
+          <li><b>Encuadres poco obvios.</b> Detalle, movimiento, gente real en contexto real.</li>
+          <li><b>Gastronomía y paisaje con calidad editorial.</b> Foto que te dan ganas de mirar.</li>
+          <li><b>Foto grande y protagonista.</b> Con aire alrededor, no cropeada en una card chiquita.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footnote">Bancos autorizados: iStock (paga, preferido), Pexels y Unsplash. Criterio de selección: si la foto podría estar en la web de un ERP, no va.</div>
+  </section>
+
+  <!-- 11 · Dinamismo -->
+  <section class="slide dense">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">11</div>
+    <div class="eyebrow">Dinamismo</div>
+    <h1 class="title">"Vivo" se demuestra con <span class="accent">movimiento</span>, no se declara.</h1>
+    <p class="lead">Una web estática comunica una empresa estática. El dinamismo no es decoración: es la prueba de que del otro lado hay algo pasando.</p>
+    <div class="ba">
+      <div class="ba-col out">
+        <h3>Hoy</h3>
+        <ul>
+          <li><b>Todo aparece de golpe.</b> Cero jerarquía temporal: no hay guion de lectura.</li>
+          <li><b>Hover sin respuesta.</b> Nada reacciona al usuario: se siente una imagen, no un producto.</li>
+          <li><b>Bloques que se repiten.</b> Mismo ritmo de arriba a abajo — se scrollea sin leer.</li>
+          <li><b>Números y datos como texto plano.</b> Desperdiciamos las pruebas que más convencen.</li>
+        </ul>
+      </div>
+      <div class="ba-col in">
+        <h3>Propuesta</h3>
+        <ul>
+          <li><b>Reveal al scroll.</b> El contenido entra a medida que se lee. Dirige la atención.</li>
+          <li><b>Micro-interacciones.</b> Botones, cards y pills que responden al hover y al click.</li>
+          <li><b>Ritmo alternado.</b> Bloques claros y oscuros, densos y aireados. La página tiene respiración.</li>
+          <li><b>Contadores y stats animados.</b> +4.000 experiencias, 5 países: que se sientan grandes.</li>
+          <li><b>Transiciones cortas (150-350ms) y con propósito.</b> Nunca animación por animación.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footnote">Regla: si una animación no ayuda a leer, a entender o a convertir, se saca. El objetivo es sentirse vivo, no ser una demo de CSS.</div>
+  </section>
+
+  <!-- 12 · Guardrails -->
+  <section class="slide dense">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">12</div>
+    <div class="eyebrow">Riesgos y guardrails</div>
+    <h1 class="title">Lo que puede salir mal — y <span class="accent">cómo lo blindamos</span>.</h1>
+    <div class="rails">
+      <div class="rail">
+        <div class="r-risk">Naranja = urgencia / descuento</div>
+        <div class="r-fix">Abusado, el naranja grita "liquidación". <b>Guardrail: regla de dosis.</b> Blanco domina, petróleo estructura, naranja no supera ~10% de la superficie. Nunca fondos naranjas masivos.</div>
+      </div>
+      <div class="rail">
+        <div class="r-risk">Contraste y accesibilidad</div>
+        <div class="r-fix">#FC4C02 sobre blanco no alcanza AA para <b>texto chico</b> (~3,4:1) — el teal tampoco (~3,0:1). <b>Guardrail: el naranja es color de acento, nunca de texto de cuerpo.</b> Sobre fondo oscuro se usa el bright #FF6B33.</div>
+      </div>
+      <div class="rail">
+        <div class="r-risk">Deriva entre países y piezas</div>
+        <div class="r-fix">5 países, decks, mails, social: sin sistema, cada uno inventa su naranja. <b>Guardrail: tokens únicos</b> (4 valores de naranja, 3 tipografías) y un solo documento canónico de marca.</div>
+      </div>
+      <div class="rail">
+        <div class="r-risk">Convivencia con el material viejo</div>
+        <div class="r-fix">Durante la transición van a coexistir piezas teal y naranjas. <b>Guardrail: migración por olas</b> con orden de prioridad definido — no un big-bang.</div>
+      </div>
+    </div>
+    <div class="dose">
+      <div class="dose-bar"><div class="d-white"></div><div class="d-ink"></div><div class="d-or"></div></div>
+      <div class="dose-lbl">Regla de dosis: ~78% blanco · 12% petróleo · <b>10% naranja</b></div>
+    </div>
+  </section>
+
+  <!-- 13 · Qué no cambia -->
+  <section class="slide dense tinted">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">13</div>
+    <div class="eyebrow">Alcance</div>
+    <h1 class="title">Esto no es tirar la marca a la basura.<br><span class="accent">Lo que no cambia:</span></h1>
+    <div class="vec-grid">
+      <div class="vec">
+        <div class="v-word">El nombre</div>
+        <div class="v-is">Seguimos siendo <b>bigbox·corpo</b>: minúsculas, punto medio separador, misma arquitectura de marca. No hay renombre ni submarca nueva.</div>
+      </div>
+      <div class="vec">
+        <div class="v-word">La voz</div>
+        <div class="v-is">Cálida, profesional, cercana. <b>Vos</b> en AR/UY, <b>tú</b> en CL/PE/MX. El tono ya estaba bien: el problema era que lo visual no lo acompañaba.</div>
+      </div>
+      <div class="vec">
+        <div class="v-word">La promesa</div>
+        <div class="v-is">Reconocer con experiencias que se eligen y se viven. <b>El rebranding no cambia qué prometemos: cambia si se nos cree.</b></div>
+      </div>
+    </div>
+    <div class="sys-kicker">Cambia <b>la piel</b>, no el esqueleto. <span class="accent">Es un reskin con criterio, no una refundación.</span></div>
+  </section>
+
+  <!-- 14 · Plan -->
+  <section class="slide dense">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">14</div>
+    <div class="eyebrow">Implementación</div>
+    <h1 class="title">Migración por olas. <em>Primero lo que ve el mercado.</em></h1>
+    <div class="waves">
+      <div class="wave done">
+        <div class="w-tag">Ola 1</div>
+        <h4>Web B2B</h4>
+        <ul>
+          <li>Landing corpo, 5 países</li>
+          <li>Paleta + tipografía + tokens</li>
+          <li>Movimiento y reveal al scroll</li>
+          <li>Favicon e identidad digital</li>
+        </ul>
+        <div class="w-state">✓ Implementada</div>
+      </div>
+      <div class="wave">
+        <div class="w-tag">Ola 2</div>
+        <h4>Materiales comerciales</h4>
+        <ul>
+          <li>Presentaciones del equipo (+25 decks en teal)</li>
+          <li>Propuestas y cotizaciones</li>
+          <li>One-pagers por producto</li>
+        </ul>
+        <div class="w-state">Diseño + Aldana</div>
+      </div>
+      <div class="wave">
+        <div class="w-tag">Ola 3</div>
+        <h4>Email y contenido</h4>
+        <ul>
+          <li>Plantillas de newsletter</li>
+          <li>Firmas de mail del equipo</li>
+          <li>Templates de outbound</li>
+        </ul>
+        <div class="w-state">Marketing</div>
+      </div>
+      <div class="wave">
+        <div class="w-tag">Ola 4</div>
+        <h4>Social y físico</h4>
+        <ul>
+          <li>Placas y templates LinkedIn</li>
+          <li>Presencia en eventos</li>
+          <li>Packaging y branding de cajas</li>
+        </ul>
+        <div class="w-state">Diseño</div>
+      </div>
+    </div>
+    <div class="footnote">Criterio de orden: cada ola se prioriza por <b>cantidad de ojos de ICP que la ven por mes</b>. La web va primero porque es el único activo que ven todos los leads, de todos los países, todo el tiempo.</div>
+  </section>
+
+  <!-- 15 · Cierre -->
+  <section class="slide divider dark">
+    <div class="brand-mark"><b>bigbox</b><span>·corpo</span></div>
+    <div class="slide-num">15</div>
+    <div class="eyebrow">Lo que necesito de ustedes</div>
+    <h1 style="font-size:clamp(2rem,3.8vw,3rem);margin-bottom:8px">No vengo a pedir permiso.<br>Vengo a pedir <em style="font-family:var(--serif);font-style:italic;color:var(--orange-bright)">criterio</em>.</h1>
+    <div class="asks">
+      <div class="ask"><div class="a-n">1</div><div class="a-t"><b>Validar la dirección, no el pixel.</b> ¿Están de acuerdo con que la marca tiene que leerse cálida, viva y editorial en vez de fría e institucional?</div></div>
+      <div class="ask"><div class="a-n">2</div><div class="a-t"><b>Tensionar el naranja.</b> Si ven un riesgo real de que se lea como "descuento", quiero escucharlo ahora — y resolverlo con dosis, no abandonando el color.</div></div>
+      <div class="ask"><div class="a-n">3</div><div class="a-t"><b>Ser dueños del sistema.</b> La web ya está migrada y funciona como prueba viva. Lo que sigue —decks, mails, social, físico— necesita que el sistema lo lleve diseño, no marketing.</div></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="nav">
+  <button id="prev" aria-label="Anterior">←</button>
+  <button id="next" aria-label="Siguiente">→</button>
+</div>
+<div class="progress" id="progress"></div>
+
+<script>
+  // Colores extraídos del CSS de producción de cada sitio (jul-2026). HeyAtlas excluido: no verificable.
+  const CATEGORY = [
+    { name: "Bonda",       hex: "#904AFF", family: "Violeta" },
+    { name: "Runa",        hex: "#7A6FF0", family: "Violeta" },
+    { name: "Minu",        hex: "#6C63FF", family: "Violeta" },
+    { name: "Maslow",      hex: "#664CDD", family: "Violeta" },
+    { name: "OhGiftCard",  hex: "#4E1297", family: "Violeta" },
+    { name: "Happier",     hex: "#387FED", family: "Azul" },
+    { name: "Fanbag",      hex: "#0265DE", family: "Azul" },
+    { name: "bigbox·corpo (antes)", hex: "#2AA3B1", family: "Teal", old: true },
+    { name: "bigbox·corpo (ahora)", hex: "#FC4C02", family: "Naranja", us: true }
+  ];
+
+  const rows = document.getElementById("cat-rows");
+  CATEGORY.forEach(c => {
+    const r = document.createElement("div");
+    r.className = "cat-row" + (c.us ? " is-us" : "");
+    r.style.opacity = c.old ? ".55" : "1";
+    r.innerHTML = `
+      <div class="cat-dot" style="background:${c.hex}"></div>
+      <div class="cat-name">${c.name}</div>
+      <div class="cat-bar" style="background:${c.hex};width:100%"></div>
+      <div class="cat-fam">${c.family}</div>`;
+    rows.appendChild(r);
+  });
+  const cold = CATEGORY.filter(c => !c.us && !c.old && ["Azul","Teal","Violeta","Verde"].includes(c.family)).length;
+  const total = CATEGORY.filter(c => !c.us && !c.old).length;
+  document.getElementById("cat-note").innerHTML =
+    `<b>${cold} de ${total}</b> competidores directos usan un color frío — y <b>5 de 7 son el mismo violeta</b>. Ninguno usa un color cálido como primario. El teal nos metía en la fila; el naranja nos saca de ella. <b>El espacio cálido de la categoría está literalmente vacío.</b>`;
+
+  // Nav
+  const slides = [...document.querySelectorAll(".slide")];
+  let i = 0;
+  const progress = document.getElementById("progress");
+  function go(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle("active", k === i));
+    progress.style.width = ((i + 1) / slides.length * 100) + "%";
+  }
+  document.getElementById("next").onclick = () => go(i + 1);
+  document.getElementById("prev").onclick = () => go(i - 1);
+  document.addEventListener("keydown", e => {
+    if (["ArrowRight", "ArrowDown", " ", "PageDown"].includes(e.key)) { e.preventDefault(); go(i + 1); }
+    if (["ArrowLeft", "ArrowUp", "PageUp"].includes(e.key)) { e.preventDefault(); go(i - 1); }
+    if (e.key === "Home") go(0);
+    if (e.key === "End") go(slides.length - 1);
+  });
+  go(0);
+</script>
+</body>
+</html>
