@@ -82,7 +82,8 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .picks.p2{grid-template-columns:1fr 1fr}
 .picks.p3{grid-template-columns:repeat(3,1fr)}
 .pick{background:var(--paper-2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-.pick figure{height:236px;background:#e6e6e6}
+.pick figure{height:272px;background:#e6e6e6}
+.picks.big .pick figure{height:334px}   /* la slide de la propuesta va con foto grande */
 .pick figure img{width:100%;height:100%;object-fit:cover;display:block}
 .pick .pbody{padding:28px 32px 32px;flex:1}
 .pick h3{font-size:31px;font-weight:700;line-height:1.15;margin-bottom:12px}
@@ -91,11 +92,20 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .pick li{font-size:20px;line-height:1.4;color:var(--mute);padding-left:22px;text-indent:-22px;margin-bottom:7px}
 .pick li:before{content:'• ';color:var(--accent);font-weight:700}
 
-/* banda del ticket */
-.pricebar{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:28px;
-  background:var(--accent);color:#fff;border-radius:14px;padding:24px 34px;font-size:27px;font-weight:600}
-.pricebar b{font-weight:800}
-.pricebar i{font-style:normal;opacity:.55}
+/* bloque de presupuesto: la escala de 4 a la izquierda, el numero grande a la derecha */
+.budget{display:flex;align-items:center;justify-content:space-between;gap:48px;margin-top:26px;
+  background:var(--accent);color:#fff;border-radius:16px;padding:24px 40px}
+.budget .btxt b{display:block;font-size:30px;font-weight:700;line-height:1.2}
+.budget .scale{display:flex;align-items:flex-end;gap:9px;height:36px;margin-top:14px}
+.budget .scale i{width:24px;border-radius:5px;background:rgba(255,255,255,.42)}
+.budget .scale i:nth-child(1){height:45%;background:#fff}
+.budget .scale i:nth-child(2){height:63%}
+.budget .scale i:nth-child(3){height:81%}
+.budget .scale i:nth-child(4){height:100%}
+.budget .bamount{display:flex;align-items:baseline;gap:14px;white-space:nowrap}
+.budget .bamount span{font-size:19px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.budget .bamount strong{font-size:62px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.budget .bamount i{font-style:normal;font-size:24px;font-weight:600;color:rgba(255,255,255,.85)}
 
 /* 10. STRIP — tira de categorías a sangre */
 .strip{position:absolute;left:0;right:0;bottom:0;height:606px;display:grid;grid-template-columns:repeat(6,1fr)}
@@ -169,7 +179,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .slide.on .lead{animation:fadeUp .6s .24s ease-out both}
 .slide.on .cobrand{animation:fadeIn .7s .1s ease both}
 .slide.on .kicker{animation:fadeUp .5s .62s ease-out both}
-.slide.on .pricebar{animation:fadeUp .5s .68s ease-out both}
+.slide.on .budget{animation:fadeUp .5s .68s ease-out both}
 
 .slide.on .cards>*,.slide.on .picks>*,.slide.on .strip>*{animation:fadeUp .5s ease-out both}
 .slide.on .cards>*:nth-child(1),.slide.on .picks>*:nth-child(1),.slide.on .strip>*:nth-child(1){animation-delay:.34s}
@@ -263,23 +273,29 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
     <div class="eyebrow"><span>La propuesta</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:30px">Cuatro regalos. Las mismas tres opciones adentro.</h2>
-    <p class="lead" style="margin-top:22px">Elegís el presupuesto y listo. Cada persona decide qué hacer con él, así que nadie recibe algo que no le sirve.</p>
-    <div class="picks p3">
+    <h2 class="h1" style="margin-top:28px">Cuatro regalos. Muchas opciones adentro.</h2>
+    <p class="lead" style="margin-top:20px">Todos incluyen experiencias, canastas navideñas y gift cards de marcas reconocidas.</p>
+    <div class="picks p3 big">
       <article class="pick">
-        <figure><img src="assets/cat-aventura.jpg" alt="Parapente sobre las sierras"></figure>
-        <div class="pbody"><h3>Experiencias</h3><p>Más de 4.000 para elegir en todo el país: gastronomía, estadías, aventura, bienestar y más.</p></div>
+        <figure><img src="assets/opt-experiencias.jpg" alt="Domos de glamping entre las montañas"></figure>
+        <div class="pbody"><h3>Experiencias</h3><p>Más de 4.000 en todo el país: gastronomía, estadías, aventura, bienestar y más.</p></div>
       </article>
       <article class="pick">
-        <figure><img src="assets/can-clasica.png" alt="Canasta navideña con productos de marcas"></figure>
-        <div class="pbody"><h3>Canastas navideñas</h3><p>El clásico de las fiestas, en tres versiones: clásica, artesanal y sin TACC.</p></div>
+        <figure><img src="assets/can-artesanal.png" alt="Canasta navideña artesanal"></figure>
+        <div class="pbody"><h3>Canastas navideñas</h3><p>Clásica, artesanal y sin TACC, con los productos típicos de las fiestas.</p></div>
       </article>
       <article class="pick">
-        <figure><img src="assets/gc-bigbox.png" alt="Gift Cards Bigbox Corpo"></figure>
-        <div class="pbody"><h3>Gift Cards</h3><p>Crédito para usar en el catálogo de Bigbox o en las principales marcas del país.</p></div>
+        <figure><img src="assets/gc-bigbox.png" alt="Gift Cards de Bigbox Corpo"></figure>
+        <div class="pbody"><h3>Gift Cards</h3><p>De Bigbox o de marcas reconocidas: supermercado, deco, deportes y electro.</p></div>
       </article>
     </div>
-    <p class="pricebar">Cuatro tickets para elegir <i>&rsaquo;</i> Desde <b>$40.000 + IVA</b></p>
+    <div class="budget">
+      <div class="btxt">
+        <b>Cuatro presupuestos para elegir</b>
+        <span class="scale"><i></i><i></i><i></i><i></i></span>
+      </div>
+      <div class="bamount"><span>Desde</span><strong>$40.000</strong><i>+ IVA</i></div>
+    </div>
   </div>
 </section>
 
