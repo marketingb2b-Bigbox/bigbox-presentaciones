@@ -32,8 +32,8 @@
 html,body{height:100%;background:#0d0d0f;overflow:hidden}
 body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
 
-#stage{position:fixed;inset:0;display:grid;place-items:center}
-#deck{width:1920px;height:1080px;position:relative;transform-origin:center center;box-shadow:0 30px 90px rgba(0,0,0,.5)}
+#stage{position:fixed;inset:0;overflow:hidden}
+#deck{position:absolute;top:0;left:0;width:1920px;height:1080px;transform-origin:0 0;box-shadow:0 30px 90px rgba(0,0,0,.5)}
 .slide{position:absolute;inset:0;background:var(--paper);overflow:hidden;display:none}
 .slide.on{display:block}
 
@@ -190,12 +190,19 @@ function go(n) {
   [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
 }
 
+// Centrado calculado a mano: place-items:center sobre un hijo de 1920px
+// desborda antes de escalar y descentra el deck. Esto no falla.
 function fit() {
-  const s = Math.min(innerWidth / 1920, innerHeight / 1080) * 0.94;
-  document.getElementById('deck').style.transform = `scale(${s})`;
+  const deck = document.getElementById('deck');
+  const pad = document.fullscreenElement ? 0 : 44;   // aire para los dots
+  const s = Math.min(innerWidth / 1920, (innerHeight - pad) / 1080);
+  deck.style.transform = `scale(${s})`;
+  deck.style.left = Math.round((innerWidth - 1920 * s) / 2) + 'px';
+  deck.style.top = Math.round((innerHeight - pad - 1080 * s) / 2) + 'px';
 }
 
 addEventListener('resize', fit);
+document.addEventListener('fullscreenchange', fit);
 addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(i + 1); }
   if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(i - 1);
