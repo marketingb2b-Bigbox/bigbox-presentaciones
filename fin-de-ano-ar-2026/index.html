@@ -92,6 +92,42 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .ph{background:linear-gradient(135deg,#0a2b06,#687c66 55%,#5c4a2e);display:grid;place-items:center;text-align:center;
   color:rgba(255,255,255,.55);font-size:22px;letter-spacing:.06em;padding:0 80px;line-height:1.6}
 
+/* ============================ TRANSICIONES =============================== */
+/* Sin JS: el slide pasa de display:none a display:block al recibir .on, y eso
+   relanza cada animation. Entrada escalonada — rótulo, titular, bajada, cards. */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes pillUp{from{opacity:0;transform:translate(-50%,100%)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes kenburns{from{transform:scale(1.07)}to{transform:scale(1)}}
+
+.slide.on{animation:fadeIn .3s ease both}
+.slide.on .eyebrow{animation:fadeUp .5s .06s ease-out both}
+.slide.on .h1{animation:fadeUp .6s .14s ease-out both}
+.slide.on .lead{animation:fadeUp .6s .24s ease-out both}
+.slide.on .cobrand{animation:fadeIn .7s .1s ease both}
+.slide.on .kicker{animation:fadeUp .5s .62s ease-out both}
+
+/* todo lo que va en grilla entra de a uno */
+.slide.on .cards>*,.slide.on .steps>*,.slide.on .metrics>*,.slide.on .tiles>*,
+.slide.on .compare>*,.slide.on .rows>*,.slide.on .quad>*,.slide.on .strip>*,
+.slide.on .panel>ul>li{animation:fadeUp .5s ease-out both}
+.slide.on .cards>*:nth-child(1),.slide.on .steps>*:nth-child(1),.slide.on .metrics>*:nth-child(1),.slide.on .tiles>*:nth-child(1),.slide.on .compare>*:nth-child(1),.slide.on .rows>*:nth-child(1),.slide.on .quad>*:nth-child(1),.slide.on .strip>*:nth-child(1),.slide.on .panel>ul>li:nth-child(1){animation-delay:.34s}
+.slide.on .cards>*:nth-child(2),.slide.on .steps>*:nth-child(2),.slide.on .metrics>*:nth-child(2),.slide.on .tiles>*:nth-child(2),.slide.on .compare>*:nth-child(2),.slide.on .rows>*:nth-child(2),.slide.on .quad>*:nth-child(2),.slide.on .strip>*:nth-child(2),.slide.on .panel>ul>li:nth-child(2){animation-delay:.42s}
+.slide.on .cards>*:nth-child(3),.slide.on .steps>*:nth-child(3),.slide.on .metrics>*:nth-child(3),.slide.on .tiles>*:nth-child(3),.slide.on .compare>*:nth-child(3),.slide.on .rows>*:nth-child(3),.slide.on .quad>*:nth-child(3),.slide.on .strip>*:nth-child(3),.slide.on .panel>ul>li:nth-child(3){animation-delay:.50s}
+.slide.on .cards>*:nth-child(4),.slide.on .steps>*:nth-child(4),.slide.on .metrics>*:nth-child(4),.slide.on .tiles>*:nth-child(4),.slide.on .quad>*:nth-child(4),.slide.on .strip>*:nth-child(4){animation-delay:.58s}
+.slide.on .tiles>*:nth-child(5),.slide.on .strip>*:nth-child(5){animation-delay:.66s}
+.slide.on .tiles>*:nth-child(6),.slide.on .strip>*:nth-child(6){animation-delay:.74s}
+
+/* portada: la foto respira, la pill sube desde el borde */
+.cover.on .bg{animation:kenburns 9s ease-out both}
+.cover.on .mark{animation:fadeIn .9s .15s ease both}
+.cover.on .pill{animation:pillUp .6s .4s cubic-bezier(.2,.8,.25,1) both}
+
+.halfphoto.on .shot{animation:fadeIn .8s .28s ease both}
+.statement.on .breadcrumb{animation:fadeUp .55s .5s ease-out both}
+
+@media (prefers-reduced-motion:reduce){.slide.on,.slide.on *{animation:none!important}}
+
 #dots{position:fixed;left:0;right:0;bottom:18px;display:flex;justify-content:center;gap:8px;z-index:10}
 #dots b{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:.2s}
 #dots b.on{background:#fff;width:22px;border-radius:4px}
