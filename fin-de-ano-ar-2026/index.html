@@ -22,12 +22,10 @@
   --mute:#6a6c70;
 
   /* ACENTO — muestreado del deck de Bigbox Sessions */
-  --accent:#5cb2bd;        /* teal — pill, pasos, círculos, punto del eyebrow */
-  --accent-tint:#cae6e9;   /* teal claro — cards secundarias */
-  --accent-soft:#9bcfd6;   /* teal medio — cards de métrica */
-  --accent-deep:#232427;   /* Sessions no tiene teal oscuro: sus superficies
-                              oscuras son el charcoal del sistema. Va acá para
-                              el manifiesto y las cards del desafío. */
+  --accent:#5cb2bd;
+  --accent-tint:#cae6e9;
+  --accent-soft:#9bcfd6;
+  --accent-deep:#232427;   /* Sessions no tiene teal oscuro: usa el charcoal */
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -44,12 +42,12 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 
 .h1{font-size:60px;font-weight:700;line-height:1.12;letter-spacing:-.02em}
 .h1.light{font-weight:400}
-.lead{font-size:28px;line-height:1.5;color:var(--mute);max-width:1300px}
+.lead{font-size:28px;line-height:1.5;color:var(--mute);max-width:1400px}
 
-.kicker{position:absolute;left:112px;right:112px;bottom:76px;font-size:26px;line-height:1.5;color:var(--mute)}
+.kicker{position:absolute;left:112px;right:112px;bottom:70px;font-size:26px;line-height:1.5;color:var(--mute)}
 .kicker b{color:var(--text);font-weight:700}
 
-.pad{position:absolute;inset:0;padding:96px 112px}
+.pad{position:absolute;inset:0;padding:92px 112px}
 .cobrand{position:absolute;top:64px;right:112px;height:46px;object-fit:contain}
 
 /* 1. COVER */
@@ -60,25 +58,44 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .cover .pill{position:absolute;left:50%;transform:translateX(-50%);bottom:0;background:var(--accent);color:#fff;
   padding:26px 76px 32px;border-radius:20px 20px 0 0;font-size:30px;font-weight:600;white-space:nowrap}
 
-/* 13. HALFPHOTO */
-.halfphoto .top{position:absolute;left:0;right:0;top:0;height:470px;padding:96px 112px}
-.halfphoto .shot{position:absolute;left:0;right:0;bottom:0;height:610px;width:100%;object-fit:cover}
-
 /* 5. CARDS */
-.cards{display:grid;gap:24px;margin-top:60px}
+.cards{display:grid;gap:24px;margin-top:52px}
 .cards.c3{grid-template-columns:repeat(3,1fr)}
-.card{background:var(--ink);color:#fff;border-radius:20px;padding:48px 40px;min-height:410px}   /* oscuras: son el problema */
-.card h3{font-size:34px;font-weight:700;line-height:1.15;margin-bottom:26px}
-.card p{font-size:23px;line-height:1.5;color:rgba(255,255,255,.9)}
+.cards.c4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--accent);color:#fff;border-radius:20px;padding:44px 38px;min-height:360px}
+.card.ink{background:var(--ink)}          /* oscuras = el problema */
+.card h3{font-size:32px;font-weight:700;line-height:1.15;margin-bottom:22px}
+.card p{font-size:22px;line-height:1.5;color:rgba(255,255,255,.9)}
 
-/* 7. PASOS NUMERADOS */
-.steps{display:grid;gap:22px;margin-top:84px}
-.steps.s4{grid-template-columns:repeat(4,1fr)}
-.step{position:relative;background:var(--accent);color:#fff;border-radius:16px;padding:66px 34px 40px;min-height:400px}
-.step h3{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:20px}
-.step p{font-size:22px;line-height:1.5;color:rgba(255,255,255,.86)}
-.step .n{position:absolute;top:-29px;left:34px;width:58px;height:58px;border-radius:50%;background:var(--paper);
-  border:2px solid var(--accent);color:var(--text);font-size:26px;font-weight:700;display:grid;place-items:center}
+/* 15. PICKS — cards con foto arriba y texto abajo. El caballito para presentar
+   opciones de producto: 2 o 3 por fila. */
+.picks{display:grid;gap:24px;margin-top:44px}
+.picks.p2{grid-template-columns:1fr 1fr}
+.picks.p3{grid-template-columns:repeat(3,1fr)}
+.pick{background:var(--paper-2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.pick figure{height:236px;background:#e6e6e6}
+.pick figure img{width:100%;height:100%;object-fit:cover;display:block}
+.pick .pbody{padding:28px 32px 32px;flex:1}
+.pick h3{font-size:31px;font-weight:700;line-height:1.15;margin-bottom:12px}
+.pick p{font-size:21px;line-height:1.5;color:var(--mute)}
+.pick ul{list-style:none;margin-top:14px}
+.pick li{font-size:20px;line-height:1.4;color:var(--mute);padding-left:22px;text-indent:-22px;margin-bottom:7px}
+.pick li:before{content:'• ';color:var(--accent);font-weight:700}
+
+/* banda del ticket */
+.pricebar{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:28px;
+  background:var(--accent);color:#fff;border-radius:14px;padding:24px 34px;font-size:27px;font-weight:600}
+.pricebar b{font-weight:800}
+.pricebar i{font-style:normal;opacity:.55}
+
+/* 10. STRIP — tira de categorías a sangre */
+.strip{position:absolute;left:0;right:0;bottom:0;height:606px;display:grid;grid-template-columns:repeat(6,1fr)}
+.strip figure{position:relative;overflow:hidden;background:#e6e6e6}
+.strip figure img{width:100%;height:100%;object-fit:cover;display:block}
+.strip figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 22px;color:#fff;
+  background:linear-gradient(180deg,rgba(16,18,20,0),rgba(16,18,20,.88))}
+.strip figcaption b{display:block;font-size:24px;font-weight:700;line-height:1.15;margin-bottom:6px}
+.strip figcaption em{font-style:normal;font-size:17px;line-height:1.35;color:rgba(255,255,255,.8)}
 
 /* 14. FLUJO CON BIFURCACIÓN — tramo común arriba, dos caminos abajo.
    Cada bloque lleva su propia imagen: sin fotos son cuatro rectángulos de color. */
@@ -90,21 +107,18 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .fstep h3{font-size:29px;font-weight:700;line-height:1.2}
 .fstep p{font-size:21px;line-height:1.45;color:rgba(255,255,255,.88);margin-top:10px}
 
-/* los dos formatos de entrega, con ícono */
 .ways{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:20px}
 .way{display:grid;grid-template-columns:50px 1fr;gap:16px;align-items:start}
 .way svg{width:46px;height:46px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .way b{display:block;font-size:21px;font-weight:700;line-height:1.2;margin-bottom:3px}
 .way em{font-style:normal;font-size:18px;line-height:1.35;color:rgba(255,255,255,.82)}
 
-/* variante del paso con foto a sangre: la imagen es el fondo de la card */
 .fstep.shotstep{padding:0;background:var(--ink)}
 .fstep.shotstep img,.fstep.shotstep .scrim{position:absolute;inset:0;width:100%;height:100%;border-radius:16px}
 .fstep.shotstep img{object-fit:cover}
 .fstep.shotstep .scrim{background:linear-gradient(90deg,rgba(16,18,20,.9),rgba(16,18,20,.55) 62%,rgba(16,18,20,.2))}
 .fstep.shotstep .ov{position:relative;z-index:2;padding:50px 36px 30px}
 
-/* el rótulo de la bifurcación, con filete a los costados */
 .fork{display:flex;align-items:center;gap:24px;margin:30px 0 26px;font-size:22px;color:var(--mute);white-space:nowrap}
 .fork:before,.fork:after{content:'';flex:1;height:1px;background:#dedede}
 
@@ -119,7 +133,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .branch li:last-child{margin-bottom:0}
 .branch li i{width:44px;height:44px;border-radius:50%;background:#fff;color:var(--text);font-style:normal;
   font-size:21px;font-weight:700;display:grid;place-items:center}
-.branch li p{font-size:21px;line-height:1.45;color:rgba(26,27,30,.75)}   /* --mute sobre el tint queda en 3,9:1 */
+.branch li p{font-size:21px;line-height:1.45;color:rgba(26,27,30,.75)}
 .branch li p b{display:block;font-size:24px;font-weight:700;line-height:1.25;color:var(--text);margin-bottom:5px}
 
 /* 8. MANIFIESTO */
@@ -131,10 +145,6 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .statement .breadcrumb i{font-style:normal;margin:0 18px;opacity:.55}
 .statement .eyebrow{position:absolute;top:96px;left:112px;color:rgba(255,255,255,.85)}
 .statement .eyebrow .dot{background:var(--accent)}
-
-/* PLACEHOLDER DE FOTO — reemplazar por <img> real (ver README.md) */
-.ph{background:linear-gradient(135deg,#232427,#5cb2bd 55%,#3f6f77);display:grid;place-items:center;text-align:center;
-  color:rgba(255,255,255,.55);font-size:22px;letter-spacing:.06em;padding:0 80px;line-height:1.6}
 
 /* ============================ TRANSICIONES =============================== */
 /* Sin JS: el slide pasa de display:none a display:block al recibir .on, y eso
@@ -150,17 +160,15 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .slide.on .lead{animation:fadeUp .6s .24s ease-out both}
 .slide.on .cobrand{animation:fadeIn .7s .1s ease both}
 .slide.on .kicker{animation:fadeUp .5s .62s ease-out both}
+.slide.on .pricebar{animation:fadeUp .5s .68s ease-out both}
 
-/* todo lo que va en grilla entra de a uno */
-.slide.on .cards>*,.slide.on .steps>*,.slide.on .metrics>*,.slide.on .tiles>*,
-.slide.on .compare>*,.slide.on .rows>*,.slide.on .quad>*,.slide.on .strip>*,
-.slide.on .panel>ul>li{animation:fadeUp .5s ease-out both}
-.slide.on .cards>*:nth-child(1),.slide.on .steps>*:nth-child(1),.slide.on .metrics>*:nth-child(1),.slide.on .tiles>*:nth-child(1),.slide.on .compare>*:nth-child(1),.slide.on .rows>*:nth-child(1),.slide.on .quad>*:nth-child(1),.slide.on .strip>*:nth-child(1),.slide.on .panel>ul>li:nth-child(1){animation-delay:.34s}
-.slide.on .cards>*:nth-child(2),.slide.on .steps>*:nth-child(2),.slide.on .metrics>*:nth-child(2),.slide.on .tiles>*:nth-child(2),.slide.on .compare>*:nth-child(2),.slide.on .rows>*:nth-child(2),.slide.on .quad>*:nth-child(2),.slide.on .strip>*:nth-child(2),.slide.on .panel>ul>li:nth-child(2){animation-delay:.42s}
-.slide.on .cards>*:nth-child(3),.slide.on .steps>*:nth-child(3),.slide.on .metrics>*:nth-child(3),.slide.on .tiles>*:nth-child(3),.slide.on .compare>*:nth-child(3),.slide.on .rows>*:nth-child(3),.slide.on .quad>*:nth-child(3),.slide.on .strip>*:nth-child(3),.slide.on .panel>ul>li:nth-child(3){animation-delay:.50s}
-.slide.on .cards>*:nth-child(4),.slide.on .steps>*:nth-child(4),.slide.on .metrics>*:nth-child(4),.slide.on .tiles>*:nth-child(4),.slide.on .quad>*:nth-child(4),.slide.on .strip>*:nth-child(4){animation-delay:.58s}
-.slide.on .tiles>*:nth-child(5),.slide.on .strip>*:nth-child(5){animation-delay:.66s}
-.slide.on .tiles>*:nth-child(6),.slide.on .strip>*:nth-child(6){animation-delay:.74s}
+.slide.on .cards>*,.slide.on .picks>*,.slide.on .strip>*{animation:fadeUp .5s ease-out both}
+.slide.on .cards>*:nth-child(1),.slide.on .picks>*:nth-child(1),.slide.on .strip>*:nth-child(1){animation-delay:.34s}
+.slide.on .cards>*:nth-child(2),.slide.on .picks>*:nth-child(2),.slide.on .strip>*:nth-child(2){animation-delay:.42s}
+.slide.on .cards>*:nth-child(3),.slide.on .picks>*:nth-child(3),.slide.on .strip>*:nth-child(3){animation-delay:.50s}
+.slide.on .cards>*:nth-child(4),.slide.on .strip>*:nth-child(4){animation-delay:.58s}
+.slide.on .strip>*:nth-child(5){animation-delay:.66s}
+.slide.on .strip>*:nth-child(6){animation-delay:.74s}
 
 /* el flujo entra en orden: tramo común, el rótulo de la bifurcación, y las dos ramas */
 .slide.on .flow-common>*,.slide.on .branches>*{animation:fadeUp .5s ease-out both}
@@ -177,8 +185,6 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .cover.on .bg{animation:kenburns 9s ease-out both}
 .cover.on .mark{animation:fadeIn .9s .15s ease both}
 .cover.on .pill{animation:pillUp .6s .4s cubic-bezier(.2,.8,.25,1) both}
-
-.halfphoto.on .shot{animation:fadeIn .8s .28s ease both}
 .statement.on .breadcrumb{animation:fadeUp .55s .5s ease-out both}
 
 @media (prefers-reduced-motion:reduce){.slide.on,.slide.on *{animation:none!important}}
@@ -192,7 +198,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 <body>
 <div id="stage"><div id="deck">
 
-<!-- 1 — PORTADA ------------------------------------------------------------ -->
+<!-- PORTADA ---------------------------------------------------------------- -->
 <section class="slide cover">
   <img class="bg" src="assets/portada.jpg" alt="Grupo celebrando al atardecer">
   <div class="scrim"></div>
@@ -200,56 +206,142 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <div class="pill">Fin de Año 2026 · Argentina</div>
 </section>
 
-<!-- 2 — PROPUESTA ---------------------------------------------------------- -->
-<section class="slide halfphoto">
-  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
-  <div class="top">
-    <div class="eyebrow"><span>Propuesta</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:34px">Un regalo que llega.<br>Una experiencia que queda.</h2>
-    <p class="lead" style="margin-top:26px">Cuatro catálogos para cerrar el año con tu equipo: experiencias, canastas y gift cards. Y viajes y team building para premiar lo que se destacó.</p>
-  </div>
-  <img class="shot" src="assets/propuesta.jpg" alt="Regalo envuelto en papel kraft con cinta de terciopelo verde">
-</section>
-
-<!-- 3 — EL DESAFÍO --------------------------------------------------------- -->
+<!-- 1 — EL DESAFÍO --------------------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
     <div class="eyebrow"><span>El desafío</span><i class="dot"></i></div>
-    <h2 class="h1 light" style="margin-top:34px">La tradición funcionó. <b>La logística, no tanto.</b></h2>
-    <p class="lead" style="margin-top:26px">Diciembre es el mes más cargado del año y la canasta se resuelve a pulmón.</p>
+    <h2 class="h1 light" style="margin-top:32px">Un solo regalo. <b>Cientos de gustos distintos.</b></h2>
+    <p class="lead" style="margin-top:24px">Todos los años la misma escena: elegir algo que le sirva a todo el mundo y que no termine guardado en un cajón.</p>
     <div class="cards c3">
-      <div class="card">
-        <h3>La canasta pesa.</h3>
-        <p>Un regalo generoso, pero incómodo de mover a mano.</p>
+      <div class="card ink">
+        <h3>El que elige no es el que recibe.</h3>
+        <p>Alguien de RRHH decide por cientos de personas que no conoce en detalle.</p>
       </div>
-      <div class="card">
-        <h3>El traslado queda del lado del colaborador.</h3>
-        <p>De la oficina al colectivo y del colectivo a casa, en pleno diciembre.</p>
+      <div class="card ink">
+        <h3>Lo mismo para todos no le queda bien a nadie.</h3>
+        <p>El que no toma, el celíaco, el que ya tiene tres sets de mate en el placard.</p>
       </div>
-      <div class="card">
-        <h3>La coordinación cae en RRHH.</h3>
+      <div class="card ink">
+        <h3>Y la logística la resolvés vos.</h3>
         <p>Listas, direcciones, faltantes y reclamos, justo en la semana más cargada del año.</p>
       </div>
     </div>
   </div>
-  <p class="kicker">Un regalo pensado para celebrar termina siendo <b>un problema de logística.</b></p>
+  <p class="kicker">Un regalo pensado para celebrar termina siendo <b>un problema de gestión.</b></p>
 </section>
 
-<!-- 4 — LA OPORTUNIDAD ----------------------------------------------------- -->
+<!-- 2 — LA OPORTUNIDAD ----------------------------------------------------- -->
 <section class="slide statement">
   <div class="eyebrow"><span>La oportunidad</span><i class="dot"></i></div>
   <div>
     <h2 class="h1">¿Y si mantenemos la tradición,<br>pero cambiamos la forma<br><b>de entregarla?</b></h2>
-    <p class="breadcrumb">El regalo llega a la oficina <i>&rsaquo;</i> La canasta llega a casa.</p>
+    <p class="breadcrumb">Vos elegís el presupuesto <i>&rsaquo;</i> Cada persona elige su regalo.</p>
   </div>
 </section>
 
-<!-- 5 — LA SOLUCIÓN -------------------------------------------------------- -->
+<!-- 3 — LA PROPUESTA ------------------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
-    <div class="eyebrow"><span>La solución</span><i class="dot"></i></div>
+    <div class="eyebrow"><span>La propuesta</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:30px">Cuatro regalos. Las mismas tres opciones adentro.</h2>
+    <p class="lead" style="margin-top:22px">Elegís el presupuesto y listo. Cada persona decide qué hacer con él, así que nadie recibe algo que no le sirve.</p>
+    <div class="picks p3">
+      <article class="pick">
+        <figure><img src="assets/cat-aventura.jpg" alt="Parapente sobre las sierras"></figure>
+        <div class="pbody"><h3>Experiencias</h3><p>Más de 4.000 para elegir en todo el país: gastronomía, estadías, aventura, bienestar y más.</p></div>
+      </article>
+      <article class="pick">
+        <figure><img src="assets/can-clasica.png" alt="Canasta navideña con productos de marcas"></figure>
+        <div class="pbody"><h3>Canastas navideñas</h3><p>El clásico de las fiestas, en tres versiones: clásica, artesanal y sin TACC.</p></div>
+      </article>
+      <article class="pick">
+        <figure><img src="assets/gc-bigbox.png" alt="Gift Cards Bigbox Corpo"></figure>
+        <div class="pbody"><h3>Gift Cards</h3><p>Crédito para usar en el catálogo de Bigbox o en las principales marcas del país.</p></div>
+      </article>
+    </div>
+    <p class="pricebar">Cuatro tickets para elegir <i>&rsaquo;</i> Desde <b>$40.000 + IVA</b></p>
+  </div>
+</section>
+
+<!-- 4 — EXPERIENCIAS ------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad" style="padding-bottom:0">
+    <div class="eyebrow"><span>Opción 1 · Experiencias</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Más de 4.000 experiencias para elegir.</h2>
+    <p class="lead" style="margin-top:20px">Rompé con los límites del regalo tradicional y ofrecé un catálogo donde cada persona elige qué quiere vivir.</p>
+  </div>
+  <div class="strip">
+    <figure><img src="assets/cat-gastro.png" alt="Mesa servida"><figcaption><b>Gastronomía</b><em>Desayunos, almuerzos, cenas…</em></figcaption></figure>
+    <figure><img src="assets/cat-estadias.png" alt="Hotel"><figcaption><b>Estadías</b><em>Hoteles, glampings, estancias…</em></figcaption></figure>
+    <figure><img src="assets/cat-aventura.jpg" alt="Parapente"><figcaption><b>Aventura</b><em>Paracaidismo, cabalgatas, rafting…</em></figcaption></figure>
+    <figure><img src="assets/cat-entretenimiento.jpg" alt="Música en vivo"><figcaption><b>Entretenimiento</b><em>Teatro, stand-up, música en vivo…</em></figcaption></figure>
+    <figure><img src="assets/cat-talleres.jpg" alt="Taller de fotografía"><figcaption><b>Talleres y cursos</b><em>Fotografía, meditación, automaquillaje…</em></figcaption></figure>
+    <figure><img src="assets/cat-bienestar.png" alt="Día de spa"><figcaption><b>Estar bien</b><em>Días de spa, cambios de look, espacios holísticos…</em></figcaption></figure>
+  </div>
+</section>
+
+<!-- 5 — GIFT CARDS --------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>Opción 2 · Gift Cards</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:30px">Una Gift Card, múltiples opciones.</h2>
+    <p class="lead" style="margin-top:22px">Para que cada persona elija el regalo que más se ajuste a sus gustos.</p>
+    <div class="picks p2">
+      <article class="pick">
+        <figure><img src="assets/gc-bigbox.png" alt="Gift Cards de experiencias Bigbox"></figure>
+        <div class="pbody">
+          <h3>De experiencias Bigbox</h3>
+          <p>Crédito para usar en todo el catálogo.</p>
+          <ul><li>Gastronomía y estadías</li><li>Entretenimiento</li><li>Cursos y talleres</li><li>Estar bien</li></ul>
+        </div>
+      </article>
+      <article class="pick">
+        <figure><img src="assets/gc-marcas.png" alt="Gift Cards de las principales marcas"></figure>
+        <div class="pbody">
+          <h3>De las principales marcas</h3>
+          <p>Crédito para usar donde ya compran.</p>
+          <ul><li>Supermercado</li><li>Homecenter y deco</li><li>Deportes e indumentaria</li><li>Electrodomésticos</li></ul>
+        </div>
+      </article>
+    </div>
+  </div>
+  <p class="kicker">Se acumulan con otros regalos de Bigbox, se usan total o parcialmente, y sirven <b>para uso propio o para regalar.</b></p>
+</section>
+
+<!-- 6 — CANASTAS NAVIDEÑAS ------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>Opción 3 · Canastas navideñas</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:30px">El clásico de fin de año.</h2>
+    <p class="lead" style="margin-top:22px">Tradición y emoción, con productos típicos de las fiestas. Tres versiones para elegir.</p>
+    <div class="picks p3">
+      <article class="pick">
+        <figure><img src="assets/can-clasica.png" alt="Canasta clásica"></figure>
+        <div class="pbody"><h3>Clásica</h3><p>Una selección de marcas destacadas: Bonafide, Georgalos, Nugatón, Vizzio, Musel, entre otras.</p></div>
+      </article>
+      <article class="pick">
+        <figure><img src="assets/can-artesanal.png" alt="Canasta artesanal de Nucha"></figure>
+        <div class="pbody"><h3>Artesanal</h3><p>Una propuesta de autor de Nucha, para un regalo cálido y hecho a mano.</p></div>
+      </article>
+      <article class="pick">
+        <figure><img src="assets/can-fiestas.png" alt="Canasta sin TACC"></figure>
+        <div class="pbody"><h3>Sin TACC</h3><p>La misma mesa de fiestas, apta para quienes no consumen gluten.</p></div>
+      </article>
+    </div>
+  </div>
+  <p class="kicker">Envío a todo el país <b>&rsaquo; Nosotros nos encargamos de la logística.</b></p>
+</section>
+
+<!-- 7 — CÓMO FUNCIONA ------------------------------------------------------ -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>Cómo funciona</span><i class="dot"></i></div>
     <h2 class="h1" style="margin-top:30px">¿Cómo funcionan nuestras boxes?</h2>
     <div class="flow">
       <div class="flow-common">
@@ -285,7 +377,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
             <figcaption>Si eligen experiencias o gift cards</figcaption>
           </figure>
           <ol>
-            <li><i>3</i><p><b>Eligen su regalo en el catálogo.</b>Más de 6.000 experiencias en todo el país, o saldo para usar donde quieran.</p></li>
+            <li><i>3</i><p><b>Eligen su regalo en el catálogo.</b>Más de 4.000 experiencias en todo el país, o saldo para usar donde quieran.</p></li>
             <li><i>4</i><p><b>Lo viven cuando quieran.</b>Coordinan la reserva directo desde el mail que reciben.</p></li>
           </ol>
         </div>
@@ -302,7 +394,35 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
       </div>
     </div>
   </div>
-  <p class="kicker">Cobertura en todo el país <b>&rsaquo; Cero logística interna para tu equipo.</b></p>
+</section>
+
+<!-- 8 — POR QUÉ ELEGIRNOS -------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>Por qué elegirnos</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:30px">Cuatro razones para cerrar el año con nosotros.</h2>
+    <p class="lead" style="margin-top:22px">No es solo el regalo: es todo lo que dejás de resolver vos.</p>
+    <div class="cards c4">
+      <div class="card">
+        <h3>Digital o físico.</h3>
+        <p>Vos elegís cómo llega el regalo a cada persona.</p>
+      </div>
+      <div class="card">
+        <h3>Cobertura en todo el país.</h3>
+        <p>Y también fuera de la Argentina, donde esté cada colaborador.</p>
+      </div>
+      <div class="card">
+        <h3>Todo se factura y es deducible.</h3>
+        <p>Con la documentación que administración necesita.</p>
+      </div>
+      <div class="card">
+        <h3>Nos encargamos del envío.</h3>
+        <p>La gestión logística corre por nuestra cuenta, no por la tuya.</p>
+      </div>
+    </div>
+  </div>
+  <p class="kicker">Elegís un presupuesto. <b>Nosotros resolvemos todo lo demás.</b></p>
 </section>
 
 </div></div>
