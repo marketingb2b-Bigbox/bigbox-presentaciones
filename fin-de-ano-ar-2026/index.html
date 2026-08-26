@@ -52,6 +52,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 
 /* 1. COVER */
 .cover .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover video.bg{background:var(--ink)}
 .cover .scrim{position:absolute;inset:0;background:rgba(0,0,0,.42)}
 .cover .mark{position:absolute;inset:0;display:grid;place-items:center}
 .cover .mark img{height:150px;object-fit:contain}
@@ -69,12 +70,12 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 
 /* variante con foto al pie: el texto arriba, la imagen cierra la card.
    El degradado la funde con el fondo para que no quede pegoteada. */
-.card.withshot{padding:0;display:flex;flex-direction:column;overflow:hidden;min-height:430px}
+.card.withshot{padding:0;display:flex;flex-direction:column;overflow:hidden;min-height:472px}
 .card.withshot .ctx{padding:42px 38px 26px}
-.card.withshot figure{margin-top:auto;height:210px;position:relative}
+.card.withshot figure{margin-top:auto;height:252px;position:relative}
 .card.withshot figure img{width:100%;height:100%;object-fit:cover;display:block}
 .card.withshot figure:after{content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,var(--ink),rgba(35,36,39,.35) 45%,rgba(35,36,39,.15))}
+  background:linear-gradient(180deg,var(--ink) 0%,rgba(35,36,39,.55) 26%,rgba(35,36,39,0) 62%)}
 
 /* 15. PICKS — cards con foto arriba y texto abajo. El caballito para presentar
    opciones de producto: 2 o 3 por fila. */
@@ -84,13 +85,26 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .pick{background:var(--paper-2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
 .pick figure{height:272px;background:#e6e6e6}
 .picks.big .pick figure{height:334px}   /* la slide de la propuesta va con foto grande */
-.pick figure img{width:100%;height:100%;object-fit:cover;display:block}
+.pick figure img,.pick figure video{width:100%;height:100%;object-fit:cover;display:block}
 .pick .pbody{padding:28px 32px 32px;flex:1}
 .pick h3{font-size:31px;font-weight:700;line-height:1.15;margin-bottom:12px}
 .pick p{font-size:21px;line-height:1.5;color:var(--mute)}
 .pick ul{list-style:none;margin-top:14px}
 .pick li{font-size:20px;line-height:1.4;color:var(--mute);padding-left:22px;text-indent:-22px;margin-bottom:7px}
 .pick li:before{content:'• ';color:var(--accent);font-weight:700}
+
+/* 16. EXPS — calcado de cómo presenta los productos b2b.bigboxcorpo.com:
+   foto, badge opcional, categoría en versalitas, nombre y una línea. */
+.exps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:42px}
+.exp{position:relative;background:var(--paper-2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.exp>img{width:100%;height:298px;object-fit:cover;display:block}
+.exp .badge{position:absolute;top:18px;left:18px;background:#fff;color:var(--text);border-radius:999px;
+  padding:8px 16px 8px 13px;font-size:17px;font-weight:700;display:flex;align-items:center;gap:7px}
+.exp .badge svg{width:15px;height:15px;fill:var(--accent)}
+.exp .body{padding:24px 26px 28px;flex:1}
+.exp .tag{font-size:17px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.exp h3{font-size:26px;font-weight:700;line-height:1.2;margin-bottom:8px}
+.exp .desc{font-size:19px;line-height:1.4;color:var(--mute)}
 
 /* bloque de presupuesto: la escala de 4 a la izquierda, el numero grande a la derecha */
 .budget{display:flex;align-items:center;justify-content:space-between;gap:48px;margin-top:26px;
@@ -181,11 +195,11 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .slide.on .kicker{animation:fadeUp .5s .62s ease-out both}
 .slide.on .budget{animation:fadeUp .5s .68s ease-out both}
 
-.slide.on .cards>*,.slide.on .picks>*,.slide.on .strip>*{animation:fadeUp .5s ease-out both}
-.slide.on .cards>*:nth-child(1),.slide.on .picks>*:nth-child(1),.slide.on .strip>*:nth-child(1){animation-delay:.34s}
-.slide.on .cards>*:nth-child(2),.slide.on .picks>*:nth-child(2),.slide.on .strip>*:nth-child(2){animation-delay:.42s}
-.slide.on .cards>*:nth-child(3),.slide.on .picks>*:nth-child(3),.slide.on .strip>*:nth-child(3){animation-delay:.50s}
-.slide.on .cards>*:nth-child(4),.slide.on .strip>*:nth-child(4){animation-delay:.58s}
+.slide.on .cards>*,.slide.on .picks>*,.slide.on .strip>*,.slide.on .exps>*{animation:fadeUp .5s ease-out both}
+.slide.on .cards>*:nth-child(1),.slide.on .picks>*:nth-child(1),.slide.on .exps>*:nth-child(1),.slide.on .strip>*:nth-child(1){animation-delay:.34s}
+.slide.on .cards>*:nth-child(2),.slide.on .picks>*:nth-child(2),.slide.on .exps>*:nth-child(2),.slide.on .strip>*:nth-child(2){animation-delay:.42s}
+.slide.on .cards>*:nth-child(3),.slide.on .picks>*:nth-child(3),.slide.on .exps>*:nth-child(3),.slide.on .strip>*:nth-child(3){animation-delay:.50s}
+.slide.on .cards>*:nth-child(4),.slide.on .exps>*:nth-child(4),.slide.on .strip>*:nth-child(4){animation-delay:.58s}
 .slide.on .strip>*:nth-child(5){animation-delay:.66s}
 .slide.on .strip>*:nth-child(6){animation-delay:.74s}
 
@@ -201,7 +215,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .slide.on .branches>*:nth-child(2){animation-delay:.66s}
 
 /* portada: la foto respira, la pill sube desde el borde */
-.cover.on .bg{animation:kenburns 9s ease-out both}
+.cover.on img.bg{animation:kenburns 9s ease-out both}
 .cover.on .mark{animation:fadeIn .9s .15s ease both}
 .cover.on .pill{animation:pillUp .6s .4s cubic-bezier(.2,.8,.25,1) both}
 .statement.on .breadcrumb{animation:fadeUp .55s .5s ease-out both}
@@ -219,7 +233,9 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 
 <!-- PORTADA ---------------------------------------------------------------- -->
 <section class="slide cover">
-  <img class="bg" src="assets/portada.jpg" alt="Grupo celebrando al atardecer">
+  <video class="bg" autoplay muted loop playsinline poster="assets/hero-poster.webp" aria-hidden="true">
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
   <div class="scrim"></div>
   <div class="mark"><img src="assets/logo-corpo-blanco.png" alt="Bigbox Corpo"></div>
   <div class="pill">Fin de Año 2026 · Argentina</div>
@@ -235,28 +251,28 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <div class="cards c3">
       <div class="card ink withshot">
         <div class="ctx">
-          <h3>El que elige no es el que recibe.</h3>
-          <p>Alguien de RRHH decide por cientos de personas que no conoce en detalle.</p>
+          <h3>Elegís por gente que no conocés.</h3>
+          <p>Cientos de personas, gustos y restricciones distintas. Y una sola decisión para todas.</p>
         </div>
         <figure><img src="assets/pain-elige.jpg" alt="Escritorio de oficina con notas y planillas"></figure>
       </div>
       <div class="card ink withshot">
         <div class="ctx">
-          <h3>Lo mismo para todos no le queda bien a nadie.</h3>
-          <p>El que no toma, el celíaco, el que ya tiene tres sets de mate en el placard.</p>
+          <h3>Lo mismo para todos no le sirve a nadie.</h3>
+          <p>El que no toma deja el vino sin abrir. El celíaco no puede comer nada de la caja.</p>
         </div>
         <figure><img src="assets/pain-iguales.jpg" alt="Dos regalos idénticos, uno al lado del otro"></figure>
       </div>
       <div class="card ink withshot">
         <div class="ctx">
-          <h3>Y la logística la resolvés vos.</h3>
-          <p>Listas, direcciones, faltantes y reclamos, justo en la semana más cargada del año.</p>
+          <h3>Y después hay que llevarla a casa.</h3>
+          <p>Cada uno se vuelve con la caja a cuestas, en el subte o en el colectivo, en pleno diciembre.</p>
         </div>
         <figure><img src="assets/pain-logistica.jpg" alt="Depósito lleno de cajas apiladas"></figure>
       </div>
     </div>
   </div>
-  <p class="kicker">Un regalo pensado para celebrar termina siendo <b>un problema de gestión.</b></p>
+  <p class="kicker">Lo que debería ser un gesto <b>termina siendo un trámite.</b></p>
 </section>
 
 <!-- 2 — LA OPORTUNIDAD ----------------------------------------------------- -->
@@ -277,8 +293,8 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <p class="lead" style="margin-top:20px">Todos incluyen experiencias, canastas navideñas y gift cards de marcas reconocidas.</p>
     <div class="picks p3 big">
       <article class="pick">
-        <figure><img src="assets/opt-experiencias.jpg" alt="Domos de glamping entre las montañas"></figure>
-        <div class="pbody"><h3>Experiencias</h3><p>Más de 4.000 en todo el país: gastronomía, estadías, aventura, bienestar y más.</p></div>
+        <figure><img src="assets/cats-estadias.webp" alt="Pileta de un hotel"></figure>
+        <div class="pbody"><h3>Experiencias</h3><p>Más de 6.000 en todo el país: gastronomía, estadías, aventura, bienestar y más.</p></div>
       </article>
       <article class="pick">
         <figure><img src="assets/can-artesanal.png" alt="Canasta navideña artesanal"></figure>
@@ -302,19 +318,48 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 <!-- 4 — EXPERIENCIAS ------------------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
-  <div class="pad" style="padding-bottom:0">
+  <div class="pad">
     <div class="eyebrow"><span>Opción 1 · Experiencias</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:28px">Más de 4.000 experiencias para elegir.</h2>
-    <p class="lead" style="margin-top:20px">Rompé con los límites del regalo tradicional y ofrecé un catálogo donde cada persona elige qué quiere vivir.</p>
+    <h2 class="h1" style="margin-top:28px">Más de 6.000 experiencias para elegir.</h2>
+    <p class="lead" style="margin-top:20px">Cada persona entra al catálogo y elige la que quiere vivir.</p>
+    <div class="exps">
+      <article class="exp">
+        <img src="assets/exp-duhau.webp" alt="Five O'Clock Tea en Palacio Duhau">
+        <span class="badge"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Top ventas</span>
+        <div class="body">
+          <p class="tag">Desayunos y tapeos</p>
+          <h3>Five O'Clock Tea en Palacio Duhau</h3>
+          <p class="desc">Merienda para dos en el Palacio Duhau, Park Hyatt.</p>
+        </div>
+      </article>
+      <article class="exp">
+        <img src="assets/exp-donjulio.webp" alt="Don Julio Parrilla">
+        <span class="badge"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Top ventas</span>
+        <div class="body">
+          <p class="tag">Gastronomía</p>
+          <h3>Don Julio Parrilla</h3>
+          <p class="desc">Cena para dos en la parrilla Don Julio.</p>
+        </div>
+      </article>
+      <article class="exp">
+        <img src="assets/exp-f1.webp" alt="Simulador Pro Fórmula 1">
+        <div class="body">
+          <p class="tag">Aventura</p>
+          <h3>Simulador Pro Fórmula 1</h3>
+          <p class="desc">Sesión en simulador profesional, con Irondriver.</p>
+        </div>
+      </article>
+      <article class="exp">
+        <img src="assets/exp-alvear.webp" alt="Alvear Icon Hotel">
+        <div class="body">
+          <p class="tag">Estar bien</p>
+          <h3>Alvear Icon Hotel</h3>
+          <p class="desc">Sesión de spa en el Alvear Icon Hotel.</p>
+        </div>
+      </article>
+    </div>
   </div>
-  <div class="strip">
-    <figure><img src="assets/cat-gastro.png" alt="Mesa servida"><figcaption><b>Gastronomía</b><em>Desayunos, almuerzos, cenas…</em></figcaption></figure>
-    <figure><img src="assets/cat-estadias.png" alt="Hotel"><figcaption><b>Estadías</b><em>Hoteles, glampings, estancias…</em></figcaption></figure>
-    <figure><img src="assets/cat-aventura.jpg" alt="Parapente"><figcaption><b>Aventura</b><em>Paracaidismo, cabalgatas, rafting…</em></figcaption></figure>
-    <figure><img src="assets/cat-entretenimiento.jpg" alt="Música en vivo"><figcaption><b>Entretenimiento</b><em>Teatro, stand-up, música en vivo…</em></figcaption></figure>
-    <figure><img src="assets/cat-talleres.jpg" alt="Taller de fotografía"><figcaption><b>Talleres y cursos</b><em>Fotografía, meditación, automaquillaje…</em></figcaption></figure>
-    <figure><img src="assets/cat-bienestar.png" alt="Día de spa"><figcaption><b>Estar bien</b><em>Días de spa, cambios de look, espacios holísticos…</em></figcaption></figure>
-  </div>
+  <p class="kicker">Gastronomía, estadías, aventura, entretenimiento y estar bien, <b>en todo el país.</b></p>
 </section>
 
 <!-- 5 — GIFT CARDS --------------------------------------------------------- -->
@@ -326,10 +371,14 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <p class="lead" style="margin-top:22px">Para que cada persona elija el regalo que más se ajuste a sus gustos.</p>
     <div class="picks p2">
       <article class="pick">
-        <figure><img src="assets/gc-bigbox.png" alt="Gift Cards de experiencias Bigbox"></figure>
+        <figure>
+          <video autoplay muted loop playsinline poster="assets/poster-giftcards.jpg" aria-hidden="true">
+            <source src="assets/sol-giftcards.mp4" type="video/mp4">
+          </video>
+        </figure>
         <div class="pbody">
           <h3>De experiencias Bigbox</h3>
-          <p>Crédito para usar en todo el catálogo.</p>
+          <p>Crédito para canjear en el catálogo de +6.000 experiencias.</p>
           <ul><li>Gastronomía y estadías</li><li>Entretenimiento</li><li>Cursos y talleres</li><li>Estar bien</li></ul>
         </div>
       </article>
@@ -411,7 +460,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
             <figcaption>Si eligen experiencias o gift cards</figcaption>
           </figure>
           <ol>
-            <li><i>3</i><p><b>Eligen su regalo en el catálogo.</b>Más de 4.000 experiencias en todo el país, o saldo para usar donde quieran.</p></li>
+            <li><i>3</i><p><b>Eligen su regalo en el catálogo.</b>Más de 6.000 experiencias en todo el país, o saldo para usar donde quieran.</p></li>
             <li><i>4</i><p><b>Lo viven cuando quieran.</b>Coordinan la reserva directo desde el mail que reciben.</p></li>
           </ol>
         </div>
