@@ -106,6 +106,13 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
    verticales con el nombre de la categoria rotado abajo a la izquierda. */
 .cats{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:46px}
 .cat{position:relative;height:524px;border-radius:16px;overflow:hidden;background:var(--ink)}
+.cats.low .cat{height:290px}
+.cats.low .cat b{font-size:23px;left:20px;bottom:22px}   /* etiqueta mas corta: cabe Electrodomesticos */
+
+/* tira de logos de comercios */
+.gclogos{margin-top:24px;text-align:center}
+.gclogos p{font-size:20px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.gclogos img{max-height:320px;width:auto;height:auto;display:block;margin:0 auto}   /* la tira son 3 filas: manda el alto */
 .cat img{width:100%;height:100%;object-fit:cover;display:block}
 .cat:after{content:'';position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(16,18,20,0) 42%,rgba(16,18,20,.78))}
@@ -344,32 +351,20 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
     <div class="eyebrow"><span>Gift Cards</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:30px">Una Gift Card, múltiples opciones.</h2>
-    <p class="lead" style="margin-top:22px">Para que cada persona elija el regalo que más se ajuste a sus gustos.</p>
-    <div class="picks p2">
-      <article class="pick">
-        <figure>
-          <video autoplay muted loop playsinline poster="assets/poster-giftcards.jpg" aria-hidden="true">
-            <source src="assets/sol-giftcards.mp4" type="video/mp4">
-          </video>
-        </figure>
-        <div class="pbody">
-          <h3>De experiencias Bigbox</h3>
-          <p>Crédito para canjear en el catálogo de +6.000 experiencias.</p>
-          <ul><li>Gastronomía y estadías</li><li>Entretenimiento</li><li>Cursos y talleres</li><li>Estar bien</li></ul>
-        </div>
-      </article>
-      <article class="pick">
-        <figure><img src="assets/gc-marcas.png" alt="Gift Cards de las principales marcas"></figure>
-        <div class="pbody">
-          <h3>De las principales marcas</h3>
-          <p>Crédito para usar donde ya compran.</p>
-          <ul><li>Supermercado</li><li>Homecenter y deco</li><li>Deportes e indumentaria</li><li>Electrodomésticos</li></ul>
-        </div>
-      </article>
+    <h2 class="h1" style="margin-top:26px">Gift Cards de las principales marcas.</h2>
+    <p class="lead" style="margin-top:18px">Crédito para usar en el e-commerce de cada marca, dentro de estas categorías.</p>
+    <div class="cats low">
+      <article class="cat"><img src="assets/gcat-supermercado.webp" alt="Góndola de supermercado"><b>Supermercado</b></article>
+      <article class="cat"><img src="assets/gcat-homecenter-deco.webp" alt="Plantas y deco en el living"><b>Homecenter &amp; Deco</b></article>
+      <article class="cat"><img src="assets/gcat-deportes.webp" alt="Gimnasio"><b>Deportes</b></article>
+      <article class="cat"><img src="assets/gcat-indumentaria.webp" alt="Eligiendo ropa en un local"><b>Indumentaria</b></article>
+      <article class="cat"><img src="assets/gcat-electrodomesticos.webp" alt="Cocina equipada"><b>Electrodomésticos</b></article>
+    </div>
+    <div class="gclogos">
+      <p>Algunos ejemplos de comercios</p>
+      <img src="assets/gc-logos.webp" alt="Carrefour, Frávega, Dia, Vital, Solo Deportes, Coppel, Cabify, Mimo &amp; Co, Arredo, Prüne y Cheeky">
     </div>
   </div>
-  <p class="kicker">Se acumulan con otros regalos de Bigbox, se usan total o parcialmente, y sirven <b>para uso propio o para regalar.</b></p>
 </section>
 
 <!-- 6 — CANASTAS NAVIDEÑAS ------------------------------------------------- -->
