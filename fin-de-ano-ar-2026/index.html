@@ -70,13 +70,12 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 
 /* variante con foto al pie: el texto arriba, la imagen cierra la card.
    El degradado la funde con el fondo para que no quede pegoteada. */
-.card.withshot{position:relative;padding:0;overflow:hidden;min-height:506px;
+.card.withshot{padding:0;overflow:hidden;display:flex;flex-direction:column;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
-.card.withshot>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.card.withshot .veil{position:absolute;inset:0;background:linear-gradient(180deg,
-  rgba(24,25,28,.95) 0%,rgba(24,25,28,.9) 34%,rgba(24,25,28,.62) 55%,rgba(24,25,28,.22) 78%,rgba(24,25,28,.05) 100%)}
-.card.withshot .ctx{position:relative;z-index:2;padding:42px 38px 0}
-.card.withshot .ctx h3{letter-spacing:-.01em}
+.card.withshot>img{width:100%;height:214px;object-fit:cover;display:block;
+  filter:brightness(1.14) saturate(1.05)}   /* las fotos de archivo vienen apagadas */
+.card.withshot .ctx{padding:30px 34px 32px;flex:1}
+.card.withshot .ctx h3{letter-spacing:-.01em;margin-bottom:16px}
 
 /* 15. PICKS — cards con foto arriba y texto abajo. El caballito para presentar
    opciones de producto: 2 o 3 por fila. */
@@ -252,7 +251,6 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <div class="cards c3">
       <div class="card ink withshot">
         <img src="assets/pain-elige.jpg" alt="Escritorio de oficina con notas y planillas">
-        <div class="veil"></div>
         <div class="ctx">
           <h3>Elegís por gente cuyos gustos no conocés.</h3>
           <p>Cientos de personas, con restricciones y preferencias distintas. Y una sola decisión para todas.</p>
@@ -260,15 +258,13 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
       </div>
       <div class="card ink withshot">
         <img src="assets/pain-iguales.jpg" alt="Dos regalos idénticos, uno al lado del otro">
-        <div class="veil"></div>
         <div class="ctx">
           <h3>Lo mismo para todos no le sirve a nadie.</h3>
-          <p>El que no toma deja el vino sin abrir. El celíaco no toca la caja. Y lo que elige alguien de 25 no es lo que quiere alguien de 55.</p>
+          <p>El que no toma deja el vino sin abrir. El celíaco no toca la caja. Y a los 25 no se elige lo mismo que a los 55.</p>
         </div>
       </div>
       <div class="card ink withshot">
         <img src="assets/pain-logistica.jpg" alt="Depósito lleno de cajas apiladas">
-        <div class="veil"></div>
         <div class="ctx">
           <h3>Y el dolor de cabeza de la logística.</h3>
           <p>La oficina llena de canastas. Y después cada uno se vuelve con la caja a cuestas, en el subte o en el colectivo, en pleno diciembre.</p>
