@@ -109,13 +109,22 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
    verticales con el nombre de la categoria rotado abajo a la izquierda. */
 .cats{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:46px}
 .cat{position:relative;height:524px;border-radius:16px;overflow:hidden;background:var(--ink)}
-.cats.low .cat{height:290px}
-.cats.low .cat b{font-size:23px;left:20px;bottom:22px}   /* etiqueta mas corta: cabe Electrodomesticos */
+/* 17. GCSPLIT — mitad categorías, mitad comercios.
+   Las categorías van apiladas en barras horizontales (no columnas), así que la
+   etiqueta va horizontal sobre un degradado desde la izquierda. Eso libera la
+   otra mitad para que la tira de logos entre grande. */
+.gcsplit{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:38px}
+.gccats{display:grid;grid-template-rows:repeat(5,1fr);gap:14px;height:706px}
+.gcbar{position:relative;border-radius:14px;overflow:hidden;background:var(--ink)}
+.gcbar img{width:100%;height:100%;object-fit:cover;display:block}
+.gcbar:after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(16,18,20,.85),rgba(16,18,20,.4) 52%,rgba(16,18,20,.08))}
+.gcbar b{position:absolute;left:30px;top:50%;transform:translateY(-50%);z-index:2;
+  color:#fff;font-size:29px;font-weight:600;letter-spacing:.01em}
+.gcbrands{height:706px;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.gcbrands p{font-size:20px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:26px}
+.gcbrands img{width:100%;height:auto;display:block}
 
-/* tira de logos de comercios */
-.gclogos{margin-top:24px;text-align:center}
-.gclogos p{font-size:20px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
-.gclogos img{max-height:320px;width:auto;height:auto;display:block;margin:0 auto}   /* la tira son 3 filas: manda el alto */
 .cat img{width:100%;height:100%;object-fit:cover;display:block}
 .cat:after{content:'';position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(16,18,20,0) 42%,rgba(16,18,20,.78))}
@@ -211,7 +220,13 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .slide.on .rows>*:nth-child(2),.slide.on .cards>*:nth-child(2),.slide.on .picks>*:nth-child(2),.slide.on .cats>*:nth-child(2),.slide.on .strip>*:nth-child(2){animation-delay:.42s}
 .slide.on .rows>*:nth-child(3),.slide.on .cards>*:nth-child(3),.slide.on .picks>*:nth-child(3),.slide.on .cats>*:nth-child(3),.slide.on .strip>*:nth-child(3){animation-delay:.50s}
 .slide.on .cards>*:nth-child(4),.slide.on .cats>*:nth-child(4),.slide.on .strip>*:nth-child(4){animation-delay:.58s}
-.slide.on .cats>*:nth-child(5),.slide.on .strip>*:nth-child(5){animation-delay:.66s}
+.slide.on .cats>*:nth-child(5),.slide.on .strip>*:nth-child(5),.slide.on .gccats>*:nth-child(5){animation-delay:.66s}
+.slide.on .gccats>*{animation:fadeUp .5s ease-out both}
+.slide.on .gccats>*:nth-child(1){animation-delay:.34s}
+.slide.on .gccats>*:nth-child(2){animation-delay:.42s}
+.slide.on .gccats>*:nth-child(3){animation-delay:.50s}
+.slide.on .gccats>*:nth-child(4){animation-delay:.58s}
+.slide.on .gcbrands{animation:fadeUp .5s .5s ease-out both}
 .slide.on .strip>*:nth-child(6){animation-delay:.74s}
 
 /* el flujo entra en orden: tramo común, el rótulo de la bifurcación, y las dos ramas */
@@ -352,16 +367,18 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <div class="eyebrow"><span>Gift Cards</span><i class="dot"></i></div>
     <h2 class="h1" style="margin-top:26px">Gift Cards de las principales marcas.</h2>
     <p class="lead" style="margin-top:18px">Crédito para usar en el e-commerce de cada marca, dentro de estas categorías.</p>
-    <div class="cats low">
-      <article class="cat"><img src="assets/gcat-supermercado.webp" alt="Góndola de supermercado"><b>Supermercado</b></article>
-      <article class="cat"><img src="assets/gcat-homecenter-deco.webp" alt="Plantas y deco en el living"><b>Homecenter &amp; Deco</b></article>
-      <article class="cat"><img src="assets/gcat-deportes.webp" alt="Gimnasio"><b>Deportes</b></article>
-      <article class="cat"><img src="assets/gcat-indumentaria.webp" alt="Eligiendo ropa en un local"><b>Indumentaria</b></article>
-      <article class="cat"><img src="assets/gcat-electrodomesticos.webp" alt="Cocina equipada"><b>Electrodomésticos</b></article>
-    </div>
-    <div class="gclogos">
-      <p>Algunos ejemplos de comercios</p>
-      <img src="assets/gc-logos.webp" alt="Carrefour, Frávega, Dia, Vital, Solo Deportes, Coppel, Cabify, Mimo &amp; Co, Arredo, Prüne y Cheeky">
+    <div class="gcsplit">
+      <div class="gccats">
+        <article class="gcbar"><img src="assets/gcat-supermercado.webp" alt="Góndola de supermercado"><b>Supermercado</b></article>
+        <article class="gcbar"><img src="assets/gcat-homecenter-deco.webp" alt="Living con plantas y deco"><b>Homecenter &amp; Deco</b></article>
+        <article class="gcbar"><img src="assets/gcat-deportes.webp" alt="Entrenando en el gimnasio"><b>Deportes</b></article>
+        <article class="gcbar"><img src="assets/gcat-indumentaria.webp" alt="Local de indumentaria"><b>Indumentaria</b></article>
+        <article class="gcbar"><img src="assets/gcat-electrodomesticos.webp" alt="Cocina equipada"><b>Electrodomésticos</b></article>
+      </div>
+      <div class="gcbrands">
+        <p>Algunos ejemplos de comercios</p>
+        <img src="assets/gc-logos.webp" alt="Carrefour, Frávega, Dia, Vital, Solo Deportes, Coppel, Cabify, Mimo &amp; Co, Arredo, Prüne y Cheeky">
+      </div>
     </div>
   </div>
 </section>
