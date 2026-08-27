@@ -92,11 +92,12 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .picks{display:grid;gap:24px;margin-top:44px}
 .picks.p2{grid-template-columns:1fr 1fr}
 .picks.p3{grid-template-columns:repeat(3,1fr)}
+.picks.p3.wide1{grid-template-columns:1.42fr 1fr 1fr}
 .pick{background:var(--paper-2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
 .pick figure{height:272px;background:#e6e6e6}
 .picks.big .pick figure{height:292px}   /* la slide de la propuesta va con foto grande */
 .picks.shot .pick{background:#fff;box-shadow:0 6px 28px rgba(16,18,20,.10),0 2px 6px rgba(16,18,20,.05)}
-.picks.shot .pick figure{height:416px;background:#fff;padding:30px 32px 0}
+.picks.shot .pick figure{height:372px;background:#fff;padding:30px 32px 0}
 .picks.shot .pick figure img{object-fit:contain}
 .picks.shot.tall .pick figure{height:462px}
 
@@ -446,10 +447,10 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <div class="eyebrow"><span>Personalización</span><i class="dot"></i></div>
     <h2 class="h1" style="margin-top:28px">Cada envío lleva tu marca.</h2>
     <p class="lead" style="margin-top:20px">Del packaging al saludo en video: todo sale con tu identidad.</p>
-    <div class="picks p3 shot">
+    <div class="picks p3 shot wide1">
       <article class="pick">
-        <figure><img src="assets/fmt-logo-box.png" alt="Box con tu logo"></figure>
-        <div class="pbody"><h3>Tu logo en la box.</h3><p>El packaging sale con la identidad de tu empresa.</p></div>
+        <figure><img src="assets/fmt-dentro.webp" alt="Box, díptico y catálogo con tu logo"></figure>
+        <div class="pbody"><h3>Tu logo en todo.</h3><p>Box, díptico y catálogo salen con la identidad de tu empresa.</p></div>
       </article>
       <article class="pick">
         <figure><img src="assets/landing-cobrand.png" alt="Landing co-branded con video de saludo"></figure>
