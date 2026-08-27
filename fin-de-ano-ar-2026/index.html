@@ -123,14 +123,14 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.01em}
 
 /* bloque de precio: ancla "desde", unidad explicita y que incluye */
-.budget{display:flex;align-items:center;justify-content:space-between;gap:56px;margin-top:24px;
+.budget{display:flex;align-items:center;justify-content:center;gap:56px;margin-top:24px;
   background:var(--accent-tint);color:var(--text);border-radius:16px;padding:26px 40px}
 .budget .btxt b{display:block;font-size:27px;font-weight:700;line-height:1.2;margin-bottom:6px}
 .budget .btxt em{font-style:normal;font-size:21px;line-height:1.4;color:rgba(26,27,30,.72)}
 .budget .bamount{display:flex;align-items:baseline;gap:14px;white-space:nowrap}
 .budget .bamount span{font-size:19px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(26,27,30,.6)}
 .budget .bamount strong{font-size:58px;font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--ink)}
-.budget .bamount u{text-decoration:none;font-size:20px;font-weight:600;line-height:1.25;color:rgba(26,27,30,.72)}
+.budget .bamount u{text-decoration:none;font-size:22px;font-weight:600;color:rgba(26,27,30,.72)}
 
 /* 10. STRIP — tira de categorías a sangre */
 .strip{position:absolute;left:0;right:0;bottom:0;height:606px;display:grid;grid-template-columns:repeat(6,1fr)}
@@ -298,7 +298,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <div class="pad">
     <div class="eyebrow"><span>¿Qué te proponemos?</span><i class="dot"></i></div>
     <h2 class="h1" style="margin-top:28px">Todo el fin de año, en un solo catálogo.</h2>
-    <p class="lead" style="margin-top:20px"><b>Cuatro regalos diferentes con diferentes tickets.</b><br>Todos incluyen <b>experiencias, canastas navideñas y gift cards de marcas reconocidas.</b></p>
+    <p class="lead" style="margin-top:20px"><b>Cuatro regalos, cada uno con su presupuesto.</b><br>Los cuatro incluyen <b>experiencias, canastas navideñas y gift cards de marcas reconocidas.</b></p>
     <div class="picks p3 big">
       <article class="pick">
         <figure>
@@ -322,11 +322,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
       </article>
     </div>
     <div class="budget">
-      <div class="btxt">
-        <b>Cuatro presupuestos para elegir.</b>
-        <em>Cambia el ticket, no lo que incluyen. Todos tienen estas 3 opciones.</em>
-      </div>
-      <div class="bamount"><span>Desde</span><strong>$40.000</strong><u>+ IVA<br>por regalo</u></div>
+      <div class="bamount"><span>Desde</span><strong>$40.000</strong><u>+ IVA por regalo</u></div>
     </div>
   </div>
 </section>
