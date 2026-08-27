@@ -63,28 +63,17 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .cover .pill{position:absolute;left:50%;transform:translateX(-50%);bottom:0;background:var(--accent);color:#fff;
   padding:26px 76px 32px;border-radius:20px 20px 0 0;font-size:30px;font-weight:600;white-space:nowrap}
 
-/* 5. CARDS */
-.cards{display:grid;gap:24px;margin-top:52px}
-.cards.c3{grid-template-columns:repeat(3,1fr)}
-.cards.c4{grid-template-columns:repeat(4,1fr)}
-/* 2x2 con el icono al costado: cuatro columnas dejaban las cards medio vacias
-   y el icono arriba las hacia ver como bloques repetidos */
-.cards.q4{grid-template-columns:1fr 1fr}
-.cards.q4 .card{display:grid;grid-template-columns:88px 1fr;gap:34px;align-items:start;
-  padding:46px 48px;min-height:272px}
-.cards.q4 .card .ico{width:88px;height:88px;margin-bottom:0}
-.cards.q4 .card .ico svg{width:44px;height:44px}
-.cards.q4 .card h3{margin-bottom:14px}
-.cards.q4 .card p{font-size:23px}
-.card{background:var(--accent);color:#fff;border-radius:20px;padding:48px 40px 46px;min-height:452px;
-  display:flex;flex-direction:column}
-/* el icono en su medallon: le da identidad a cada razon y saca el aire muerto
-   que quedaba abajo cuando la card era solo titulo y parrafo */
-.card .ico{width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,.17);
-  display:grid;place-items:center;margin-bottom:30px;flex:none}
-.card .ico svg{width:40px;height:40px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.card h3{font-size:31px;font-weight:700;line-height:1.18;margin-bottom:18px}
-.card p{font-size:22px;line-height:1.5;color:rgba(255,255,255,.9)}
+/* 5. RAZONES — filas horizontales, fondo blanco con sombra e ícono en teal.
+   El feature va primero y en negro: la gente escanea la columna izquierda y
+   recién si algo le interesa lee la línea de abajo. */
+.reasons{display:grid;gap:14px;margin-top:34px}
+.reason{display:grid;grid-template-columns:72px 1fr;gap:30px;align-items:center;
+  background:#fff;border-radius:16px;padding:21px 36px;
+  box-shadow:0 4px 20px rgba(16,18,20,.09),0 1px 3px rgba(16,18,20,.05)}
+.reason .ico{width:70px;height:70px;border-radius:50%;background:var(--accent-tint);display:grid;place-items:center}
+.reason .ico svg{width:38px;height:38px;stroke:var(--accent);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.reason b{display:block;font-size:27px;font-weight:700;line-height:1.2;color:var(--text);margin-bottom:6px}
+.reason span{font-size:22px;line-height:1.4;color:var(--mute)}
 
 /* 2+3. SPLIT CON FILAS — el layout de Bigbox Sessions.
    Panel charcoal a la izquierda (titular arriba, bajada anclada abajo) y a la
@@ -219,12 +208,12 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .slide.on .kicker{animation:fadeUp .5s .62s ease-out both}
 .slide.on .budget{animation:fadeUp .5s .68s ease-out both}
 
-.slide.on .cards>*,.slide.on .picks>*,.slide.on .strip>*,.slide.on .cats>*,.slide.on .rows>*{animation:fadeUp .5s ease-out both}
-.slide.on .rows>*:nth-child(1),.slide.on .cards>*:nth-child(1),.slide.on .picks>*:nth-child(1),.slide.on .cats>*:nth-child(1),.slide.on .strip>*:nth-child(1){animation-delay:.34s}
-.slide.on .rows>*:nth-child(2),.slide.on .cards>*:nth-child(2),.slide.on .picks>*:nth-child(2),.slide.on .cats>*:nth-child(2),.slide.on .strip>*:nth-child(2){animation-delay:.42s}
-.slide.on .rows>*:nth-child(3),.slide.on .cards>*:nth-child(3),.slide.on .picks>*:nth-child(3),.slide.on .cats>*:nth-child(3),.slide.on .strip>*:nth-child(3){animation-delay:.50s}
-.slide.on .cards>*:nth-child(4),.slide.on .cats>*:nth-child(4),.slide.on .strip>*:nth-child(4){animation-delay:.58s}
-.slide.on .cats>*:nth-child(5),.slide.on .strip>*:nth-child(5),.slide.on .gccats>*:nth-child(5){animation-delay:.66s}
+.slide.on .reasons>*,.slide.on .picks>*,.slide.on .strip>*,.slide.on .cats>*,.slide.on .rows>*{animation:fadeUp .5s ease-out both}
+.slide.on .rows>*:nth-child(1),.slide.on .reasons>*:nth-child(1),.slide.on .picks>*:nth-child(1),.slide.on .cats>*:nth-child(1),.slide.on .strip>*:nth-child(1){animation-delay:.34s}
+.slide.on .rows>*:nth-child(2),.slide.on .reasons>*:nth-child(2),.slide.on .picks>*:nth-child(2),.slide.on .cats>*:nth-child(2),.slide.on .strip>*:nth-child(2){animation-delay:.42s}
+.slide.on .rows>*:nth-child(3),.slide.on .reasons>*:nth-child(3),.slide.on .picks>*:nth-child(3),.slide.on .cats>*:nth-child(3),.slide.on .strip>*:nth-child(3){animation-delay:.50s}
+.slide.on .reasons>*:nth-child(4),.slide.on .cats>*:nth-child(4),.slide.on .strip>*:nth-child(4){animation-delay:.58s}
+.slide.on .reasons>*:nth-child(5),.slide.on .cats>*:nth-child(5),.slide.on .strip>*:nth-child(5),.slide.on .gccats>*:nth-child(5){animation-delay:.66s}
 .slide.on .gccats>*{animation:fadeUp .5s ease-out both}
 .slide.on .gccats>*:nth-child(1){animation-delay:.34s}
 .slide.on .gccats>*:nth-child(2){animation-delay:.42s}
@@ -504,24 +493,28 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
     <div class="eyebrow"><span>Por qué elegirnos</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:28px">Cuatro razones para cerrar el año con nosotros.</h2>
+    <h2 class="h1" style="margin-top:28px">Cinco razones para cerrar el año con nosotros.</h2>
     <p class="lead" style="margin-top:20px">No es solo el regalo: es todo lo que dejás de resolver vos.</p>
-    <div class="cards q4">
-      <div class="card">
+    <div class="reasons">
+      <div class="reason">
         <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
-        <div><h3>Llega como vos quieras.</h3><p>Físico a la oficina, digital al mail, o las dos cosas a la vez.</p></div>
+        <div><b>Formato físico o digital</b><span>Llega como vos quieras, o las dos cosas a la vez.</span></div>
       </div>
-      <div class="card">
+      <div class="reason">
         <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-        <div><h3>Y a donde esté cada uno.</h3><p>Todo el país, y también fuera de la Argentina.</p></div>
+        <div><b>Cobertura nacional e internacional</b><span>A donde esté cada uno, dentro y fuera de la Argentina.</span></div>
       </div>
-      <div class="card">
+      <div class="reason">
         <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2.5h16v19l-2.7-1.7-2.7 1.7-2.6-1.7-2.6 1.7L6.7 20.5 4 22.2z"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></span>
-        <div><h3>Se factura y es deducible.</h3><p>Con toda la documentación que te va a pedir administración.</p></div>
+        <div><b>Facturación y deducción</b><span>Con toda la documentación que te va a pedir administración.</span></div>
       </div>
-      <div class="card">
+      <div class="reason">
         <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 16.5V6.5h12v10M13.5 9.5H18l4 4v3h-8.5"/><circle cx="6" cy="17.5" r="2.2"/><circle cx="17" cy="17.5" r="2.2"/></svg></span>
-        <div><h3>La logística la ponemos nosotros.</h3><p>Vos no coordinás envíos, ni direcciones, ni reclamos.</p></div>
+        <div><b>Logística incluida</b><span>Vos no coordinás envíos, ni direcciones, ni reclamos.</span></div>
+      </div>
+      <div class="reason">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 14v-2a8.5 8.5 0 0 1 17 0v2"/><path d="M20.5 15.5a2 2 0 0 1-2 2h-1.2v-5.5h1.2a2 2 0 0 1 2 2zM3.5 15.5a2 2 0 0 0 2 2h1.2v-5.5H5.5a2 2 0 0 0-2 2z"/><path d="M18.5 17.5v.8a3 3 0 0 1-3 3H12"/></svg></span>
+        <div><b>Atención personalizada</b><span>Un ejecutivo te acompaña desde el armado hasta después de la entrega.</span></div>
       </div>
     </div>
   </div>
