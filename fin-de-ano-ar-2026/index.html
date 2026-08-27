@@ -60,6 +60,12 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   text-shadow:0 2px 24px rgba(0,0,0,.35)}
 .cover .slogan b{font-weight:700}
 .cover .mark img{height:150px;object-fit:contain}
+.closing .scrim{background:rgba(0,0,0,.52)}
+.closing .closing-line{color:#fff;font-size:62px;font-weight:400;line-height:1.28;letter-spacing:-.02em;
+  text-align:center;max-width:1420px;text-shadow:0 2px 28px rgba(0,0,0,.4)}
+.closing .closing-line b{font-weight:700}
+.closing .mark img{height:92px;margin-top:60px}
+
 .cover .pill{position:absolute;left:50%;transform:translateX(-50%);bottom:0;background:var(--accent);color:#fff;
   padding:26px 76px 32px;border-radius:20px 20px 0 0;font-size:30px;font-weight:600;white-space:nowrap}
 
@@ -232,6 +238,8 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .cover.on .mark img{animation:fadeIn .9s .15s ease both}
 .cover.on .slogan{animation:fadeUp .8s .55s ease-out both}
 .cover.on .pill{animation:pillUp .6s .4s cubic-bezier(.2,.8,.25,1) both}
+.closing.on .closing-line{animation:fadeUp .85s .2s ease-out both}
+.closing.on .mark img{animation:fadeIn .9s .75s ease both}
 .statement.on .breadcrumb{animation:fadeUp .55s .5s ease-out both}
 
 @media (prefers-reduced-motion:reduce){.slide.on,.slide.on *{animation:none!important}}
@@ -519,6 +527,20 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     </div>
   </div>
   <p class="kicker">Elegís un presupuesto. <b>Nosotros resolvemos todo lo demás.</b></p>
+</section>
+
+
+<!-- 11 — CIERRE -------------------------------------------------------------- -->
+<section class="slide cover closing">
+  <video class="bg" autoplay muted loop playsinline preload="metadata" poster="assets/poster-experiencias.jpg" aria-hidden="true">
+    <source src="assets/sol-experiencias.mp4" type="video/mp4">
+  </video>
+  <div class="scrim"></div>
+  <div class="mark">
+    <p class="closing-line">Que este fin de año,<br><b>cada uno se lleve lo que quiere.</b></p>
+    <img src="assets/logo-corpo-blanco.png" alt="Bigbox Corpo">
+  </div>
+  <div class="pill">Hablemos · bigboxcorpo.com</div>
 </section>
 
 </div></div>
