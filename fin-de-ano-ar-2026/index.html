@@ -113,21 +113,27 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .row .rtx h3{font-size:38px;font-weight:700;line-height:1.1;margin-bottom:16px}
 .row .rtx p{font-size:24px;line-height:1.5;color:var(--mute);max-width:440px}
 
-/* 20. EDICIONES — las cuatro del catálogo, con link real a cada una.
-   Los <a> funcionan: el deck es HTML, así que el ejecutivo abre el catálogo
-   desde la misma slide. */
-.edis{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:42px}
+/* 20. EDICIONES — el formato de card del catálogo: foto con el rótulo
+   "Box / Nombre.", descripción, precio y el botón coral que lleva a la
+   versión Gift Cards. */
+.edis{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:38px}
 .edi{background:var(--paper-2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-.edi>img{width:100%;height:348px;object-fit:cover;display:block}   /* casi cuadrado: las tapas vienen 1:1 y el marco no se corta */
-.edi .ebody{padding:26px 26px 28px;flex:1;display:flex;flex-direction:column}
-.edi h3{font-size:29px;font-weight:700;line-height:1.15;margin-bottom:8px}
-.edi .etx{font-size:20px;line-height:1.4;color:var(--mute)}
-.edi .elinks{margin-top:22px;display:flex;flex-direction:column;gap:10px}
-.edi .elinks a{display:flex;align-items:center;justify-content:center;gap:8px;
-  font-size:19px;font-weight:600;color:var(--accent);text-decoration:none;
-  border:2px solid var(--accent-tint);border-radius:999px;padding:11px 18px;transition:.15s}
-.edi .elinks a.gc{color:var(--mute);border-color:#e2e2e2}
-.edi .elinks a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.edi figure{position:relative;height:292px}
+.edi figure img{width:100%;height:100%;object-fit:cover;display:block}
+.edi figure:after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(16,18,20,0) 58%,rgba(16,18,20,.6))}
+.edi .ebody{position:relative;padding:26px 26px 30px;flex:1;display:flex;flex-direction:column}
+.edi h3{font-size:28px;font-weight:700;line-height:1.15;margin-bottom:10px}
+.edi .etx{font-size:19px;line-height:1.45;color:var(--mute)}
+.edi .eprice{margin-top:auto;padding-top:20px;font-size:24px;font-weight:700;color:var(--text)}
+.edi .eprice small{font-size:18px;font-weight:500;color:var(--mute)}
+.edi .elink{font-size:19px;font-weight:600;color:var(--accent);text-decoration:none;margin-top:8px;align-self:flex-start}
+.edi .elink:hover{text-decoration:underline}
+/* botón del catálogo: coral, como en el catálogo de Bigbox */
+.edi .add{position:absolute;right:24px;bottom:26px;width:58px;height:58px;border-radius:50%;
+  background:#ff827d;color:#fff;font-size:32px;line-height:1;display:grid;place-items:center;
+  text-decoration:none;transition:.15s}
+.edi .add:hover{background:#f2685f}
 
 /* 19. BENTO — un mosaico, no tres cards iguales.
    Tres cards del mismo tamaño se leen como tres productos sueltos; el bento
@@ -594,56 +600,64 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
     <div class="eyebrow"><span>El catálogo</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:28px">Las cuatro ediciones de fin de año.</h2>
-    <p class="lead" style="margin-top:20px">Cada una con su presupuesto, y todas con las mismas opciones adentro.</p>
+    <h2 class="h1" style="margin-top:26px">Las cuatro ediciones de fin de año.</h2>
+    <p class="lead" style="margin-top:18px">Todas incluyen canastas navideñas y gift cards. Lo que cambia es el presupuesto y las experiencias de adentro.</p>
     <div class="edis">
       <article class="edi">
-        <img src="assets/edi-brindis.jpg" alt="Brindis con copas">
+        <figure>
+          <img src="assets/edi-brindis.jpg" alt="Edición Brindis">
+        </figure>
         <div class="ebody">
           <h3>Edición Brindis</h3>
-          <p class="etx">Experiencias, canastas y gift cards.</p>
-          <div class="elinks">
-            <a href="https://www.bigbox.com.ar/catalogo/~/edicion-brindis/" target="_blank" rel="noopener">Ver catálogo</a>
-            <a class="gc" href="https://www.bigbox.com.ar/catalogo/~/edicion-brindis-gc/" target="_blank" rel="noopener">Versión Gift Cards</a>
-          </div>
+          <p class="etx">Gastronomía, relax y vinos para brindar y celebrar.</p>
+          <p class="eprice">$40.495,87 <small>+ IVA</small></p>
+          <a class="elink" href="https://www.bigbox.com.ar/catalogo/~/edicion-brindis/" target="_blank" rel="noopener">Ver catálogo →</a>
+          <a class="add" href="https://www.bigbox.com.ar/catalogo/~/edicion-brindis-gc/" target="_blank" rel="noopener"
+             title="Versión Gift Cards" aria-label="Ver la versión Gift Cards de Edición Brindis">+</a>
         </div>
       </article>
       <article class="edi">
-        <img src="assets/edi-fiesta.jpg" alt="Fachada iluminada de fin de año">
+        <figure>
+          <img src="assets/edi-fiesta.jpg" alt="Edición Fiesta">
+        </figure>
         <div class="ebody">
           <h3>Edición Fiesta</h3>
-          <p class="etx">Experiencias, canastas y gift cards.</p>
-          <div class="elinks">
-            <a href="https://www.bigbox.com.ar/catalogo/~/edicion-fiesta/" target="_blank" rel="noopener">Ver catálogo</a>
-            <a class="gc" href="https://www.bigbox.com.ar/catalogo/~/edicion-fiesta-gc/" target="_blank" rel="noopener">Versión Gift Cards</a>
-          </div>
+          <p class="etx">Cenas, parrillas, aventuras y bienestar.</p>
+          <p class="eprice">$81.818,18 <small>+ IVA</small></p>
+          <a class="elink" href="https://www.bigbox.com.ar/catalogo/~/edicion-fiesta/" target="_blank" rel="noopener">Ver catálogo →</a>
+          <a class="add" href="https://www.bigbox.com.ar/catalogo/~/edicion-fiesta-gc/" target="_blank" rel="noopener"
+             title="Versión Gift Cards" aria-label="Ver la versión Gift Cards de Edición Fiesta">+</a>
         </div>
       </article>
       <article class="edi">
-        <img src="assets/edi-deluxe.jpg" alt="Celebración a bordo">
+        <figure>
+          <img src="assets/edi-deluxe.jpg" alt="Edición Deluxe">
+        </figure>
         <div class="ebody">
           <h3>Edición Deluxe</h3>
-          <p class="etx">Experiencias, canastas y gift cards.</p>
-          <div class="elinks">
-            <a href="https://www.bigbox.com.ar/catalogo/~/edicion-deluxe/" target="_blank" rel="noopener">Ver catálogo</a>
-            <a class="gc" href="https://www.bigbox.com.ar/catalogo/~/edicion-deluxe-gc/" target="_blank" rel="noopener">Versión Gift Cards</a>
-          </div>
+          <p class="etx">Cenas espectaculares, días de spa, paseos náuticos y aventuras.</p>
+          <p class="eprice">$110.743,80 <small>+ IVA</small></p>
+          <a class="elink" href="https://www.bigbox.com.ar/catalogo/~/edicion-deluxe/" target="_blank" rel="noopener">Ver catálogo →</a>
+          <a class="add" href="https://www.bigbox.com.ar/catalogo/~/edicion-deluxe-gc/" target="_blank" rel="noopener"
+             title="Versión Gift Cards" aria-label="Ver la versión Gift Cards de Edición Deluxe">+</a>
         </div>
       </article>
       <article class="edi">
-        <img src="assets/edi-premier.jpg" alt="Bengalas en la mano">
+        <figure>
+          <img src="assets/edi-premier.jpg" alt="Edición Premier">
+        </figure>
         <div class="ebody">
           <h3>Edición Premier</h3>
-          <p class="etx">Experiencias, canastas y gift cards.</p>
-          <div class="elinks">
-            <a href="https://www.bigbox.com.ar/catalogo/~/edicion-premier/" target="_blank" rel="noopener">Ver catálogo</a>
-            <a class="gc" href="https://www.bigbox.com.ar/catalogo/~/edicion-premier-gc/" target="_blank" rel="noopener">Versión Gift Cards</a>
-          </div>
+          <p class="etx">Escapadas, spa para dos y los restaurantes más reconocidos del país.</p>
+          <p class="eprice">$180.991,74 <small>+ IVA</small></p>
+          <a class="elink" href="https://www.bigbox.com.ar/catalogo/~/edicion-premier/" target="_blank" rel="noopener">Ver catálogo →</a>
+          <a class="add" href="https://www.bigbox.com.ar/catalogo/~/edicion-premier-gc/" target="_blank" rel="noopener"
+             title="Versión Gift Cards" aria-label="Ver la versión Gift Cards de Edición Premier">+</a>
         </div>
       </article>
     </div>
   </div>
-  <p class="kicker">Los links abren el catálogo real: <b>lo mismo que ve quien recibe el regalo.</b></p>
+  <p class="kicker">Precios sin IVA, con vigencia hasta el 31/03/2027. El botón coral abre <b>la versión con Gift Cards.</b></p>
 </section>
 
 <!-- 12 — CIERRE -------------------------------------------------------------- -->
