@@ -122,24 +122,24 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
    versión Gift Cards. */
 .edis{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:38px}
 .edi{background:var(--paper-2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-.edi figure{position:relative;height:292px}
+.edi figure{position:relative;height:302px}
 .edi figure img{width:100%;height:100%;object-fit:cover;display:block}
 .edi figure:after{content:'';position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(16,18,20,0) 58%,rgba(16,18,20,.6))}
-.edi .ebody{position:relative;padding:26px 26px 30px;flex:1;display:flex;flex-direction:column}
-.edi h3{font-size:28px;font-weight:700;line-height:1.15;margin-bottom:10px}
+.edi .ebody{position:relative;padding:22px 24px 24px;flex:1;display:flex;flex-direction:column}
+.edi h3{font-size:27px;font-weight:700;line-height:1.15;margin-bottom:8px}
 .edi .etx{font-size:19px;line-height:1.45;color:var(--mute)}
-.edi .eprice{margin-top:auto;padding-top:20px;font-size:24px;font-weight:700;color:var(--text)}
+.edi .eprice{margin-top:auto;padding-top:14px;font-size:24px;font-weight:700;color:var(--text)}
 .edi .eprice small{font-size:18px;font-weight:500;color:var(--mute)}
 /* dos botones rotulados: cada uno dice adonde va */
-.edi .ebtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-.edi .ebtns a{display:flex;align-items:center;justify-content:center;text-align:center;
-  font-size:16px;font-weight:700;line-height:1.15;padding:13px 6px;border-radius:999px;
-  text-decoration:none;transition:.15s;white-space:nowrap}
-.edi .ebtns .sin{color:var(--accent);background:#fff;border:2px solid var(--accent)}
+.edi .ebtns{margin-top:12px}
+.edi .ebtns .sin{display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;
+  padding:14px 10px;border-radius:999px;text-decoration:none;transition:.15s;white-space:nowrap;
+  color:var(--accent);background:#fff;border:2px solid var(--accent)}
 .edi .ebtns .sin:hover{background:var(--accent);color:#fff}
-.edi .ebtns .con{background:#ff827d;color:#fff;border:2px solid #ff827d}
-.edi .ebtns .con:hover{background:#f2685f;border-color:#f2685f}
+.edi .ebtns .con{display:block;text-align:center;margin-top:10px;font-size:18px;font-weight:600;
+  color:var(--accent);text-decoration:none}
+.edi .ebtns .con:hover{text-decoration:underline}
 
 /* 19. BENTO — un mosaico, no tres cards iguales.
    Tres cards del mismo tamaño se leen como tres productos sueltos; el bento
@@ -625,7 +625,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <div class="pad">
     <div class="eyebrow"><span>El catálogo de fin de año</span><i class="dot"></i></div>
     <h2 class="h1" style="margin-top:26px">Las cuatro ediciones de fin de año.</h2>
-    <p class="lead" style="margin-top:18px">Todas incluyen canastas navideñas y gift cards. Lo que cambia es el presupuesto y las experiencias de adentro.</p>
+    <p class="lead" style="margin-top:18px">Todas incluyen canastas navideñas y gift cards. Lo que cambia es el presupuesto.</p>
     <div class="edis">
       <article class="edi">
         <figure>
@@ -633,7 +633,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
         </figure>
         <div class="ebody">
           <h3>Edición Brindis</h3>
-          <p class="etx">Gastronomía, relax y vinos para brindar y celebrar.</p>
+          <p class="etx">Gastronomía, relax y vinos para brindar.</p>
           <p class="eprice">$40.495,87 <small>+ IVA</small></p>
           <div class="ebtns">
             <a class="sin" href="https://www.bigbox.com.ar/catalogo/~/edicion-brindis/" target="_blank" rel="noopener">Catálogo Sin GC</a>
@@ -661,7 +661,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
         </figure>
         <div class="ebody">
           <h3>Edición Deluxe</h3>
-          <p class="etx">Cenas espectaculares, días de spa, paseos náuticos y aventuras.</p>
+          <p class="etx">Cenas, spa, paseos náuticos y aventuras.</p>
           <p class="eprice">$110.743,80 <small>+ IVA</small></p>
           <div class="ebtns">
             <a class="sin" href="https://www.bigbox.com.ar/catalogo/~/edicion-deluxe/" target="_blank" rel="noopener">Catálogo Sin GC</a>
@@ -675,7 +675,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
         </figure>
         <div class="ebody">
           <h3>Edición Premier</h3>
-          <p class="etx">Escapadas, spa para dos y los restaurantes más reconocidos del país.</p>
+          <p class="etx">Escapadas, spa para dos y los mejores restaurantes.</p>
           <p class="eprice">$180.991,74 <small>+ IVA</small></p>
           <div class="ebtns">
             <a class="sin" href="https://www.bigbox.com.ar/catalogo/~/edicion-premier/" target="_blank" rel="noopener">Catálogo Sin GC</a>
@@ -685,7 +685,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
       </article>
     </div>
   </div>
-  <p class="kicker">Precios sin IVA, con vigencia hasta el 31/03/2027. <b>Los dos botones abren el catálogo real.</b></p>
+  <p class="kicker">Precios sin IVA, con vigencia hasta el 31/03/2027 — y <b>la ajustamos a la fecha que necesite tu campaña.</b></p>
 </section>
 
 </div></div>
