@@ -142,7 +142,8 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .edi figure img{width:100%;height:100%;object-fit:cover;display:block}
 .edi figure:after{content:'';position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(16,18,20,0) 58%,rgba(16,18,20,.6))}
-.edi .ebody{position:relative;padding:22px 24px 24px;flex:1;display:flex;flex-direction:column}
+.edi>h3{padding:22px 24px 16px}
+.edi .ebody{position:relative;padding:18px 24px 24px;flex:1;display:flex;flex-direction:column}
 .edi h3{font-size:27px;font-weight:700;line-height:1.15}
 .edi .eprice{margin-top:auto;padding-top:14px;font-size:24px;font-weight:700;color:var(--text)}
 .edi .eprice small{font-size:18px;font-weight:500;color:var(--mute)}
@@ -164,13 +165,15 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .bcard{background:#fff;border:1px solid #ececec;border-radius:16px;overflow:hidden;
   display:flex;flex-direction:column;
   box-shadow:0 6px 28px rgba(16,18,20,.10),0 2px 6px rgba(16,18,20,.05)}
-.bcard figure{flex:1;min-height:0;padding:18px 26px 2px}
+.bcard>h3{padding:22px 28px 0;text-align:center}
+.bcard figure{flex:1;min-height:0;padding:12px 26px 2px}
 .bcard figure img{width:100%;height:100%;object-fit:contain;display:block}
-.bcard .bbody{padding:0 28px 20px;text-align:center}
+.bcard .bbody{padding:12px 28px 22px;text-align:center}
 .bcard h3{font-size:28px;font-weight:700;line-height:1.15;margin-bottom:6px}
 .bcard p{font-size:20px;line-height:1.45;color:var(--mute)}
 .bcard.tall{grid-column:2;grid-row:1/3}
-.bcard.tall figure{padding:32px 34px 8px}
+.bcard.tall>h3{padding:26px 34px 0}
+.bcard.tall figure{padding:16px 34px 8px}
 .bcard.tall .bbody{padding:0 34px 30px}
 .bcard.tall h3{font-size:33px;margin-bottom:8px}
 .bcard.tall p{font-size:21px}
@@ -210,10 +213,11 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .picks.shot .pick figure{height:372px;background:#fff;padding:30px 32px 0}
 .picks.shot .pick figure img{object-fit:contain}
 .picks.shot.tall .pick figure{height:432px}
-.picks.mid .pbody{text-align:center}
+.picks.mid .pbody,.picks.mid .pick>h3{text-align:center}
 
 .pick figure img,.pick figure video{width:100%;height:100%;object-fit:cover;display:block}
-.pick .pbody{padding:28px 32px 32px;flex:1}
+.pick>h3{padding:26px 32px 0}
+.pick .pbody{padding:14px 32px 32px;flex:1}
 .pick h3{font-size:31px;font-weight:700;line-height:1.15;margin-bottom:12px}
 .pick p{font-size:21px;line-height:1.5;color:var(--mute)}
 .pick p b{color:var(--text);font-weight:700}
@@ -499,16 +503,19 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <p class="lead" style="margin-top:22px">Los productos típicos de las fiestas, en la versión que mejor le va a tu equipo.</p>
     <div class="picks p3">
       <article class="pick">
+        <h3>Canasta Clásica</h3>
         <figure><img src="assets/can-clasica.png" alt="Canasta clásica"></figure>
-        <div class="pbody"><h3>Canasta Clásica</h3><p>Una selección de marcas destacadas: Bonafide, Georgalos, Nugatón, Vizzio, Musel, entre otras.</p></div>
+        <div class="pbody"><p>Una selección de marcas destacadas: Bonafide, Georgalos, Nugatón, Vizzio, Musel, entre otras.</p></div>
       </article>
       <article class="pick">
+        <h3>Canasta Artesanal</h3>
         <figure><img src="assets/can-artesanal.png" alt="Canasta artesanal de Nucha"></figure>
-        <div class="pbody"><h3>Canasta Artesanal</h3><p>Una propuesta de autor de Nucha, para un regalo cálido y hecho a mano.</p></div>
+        <div class="pbody"><p>Una propuesta de autor de Nucha, para un regalo cálido y hecho a mano.</p></div>
       </article>
       <article class="pick">
+        <h3>Canasta Sin TACC</h3>
         <figure><img src="assets/can-fiestas.png" alt="Canasta sin TACC"></figure>
-        <div class="pbody"><h3>Canasta Sin TACC</h3><p>La misma mesa de fiestas, apta para quienes no consumen gluten.</p></div>
+        <div class="pbody"><p>La misma mesa de fiestas, apta para quienes no consumen gluten.</p></div>
       </article>
     </div>
   </div>
@@ -547,16 +554,16 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <p class="lead" style="margin-top:20px">El mismo regalo, en el formato que más te sirva.</p>
     <div class="picks p2 shot tall mid">
       <article class="pick">
+        <h3>Formato físico</h3>
         <figure><img src="assets/fmt-box.webp" alt="Box con packaging personalizado"></figure>
         <div class="pbody">
-          <h3>Formato físico</h3>
           <p>Box con <b>packaging personalizado</b>. La entregás en la oficina, o la mandamos al domicilio de cada uno.</p>
         </div>
       </article>
       <article class="pick">
+        <h3>Formato digital</h3>
         <figure><img src="assets/fmt-email-1phone.png" alt="Email con el catálogo de canje"></figure>
         <div class="pbody">
-          <h3>Formato digital</h3>
           <p>Enviás los regalos por <b>email o WhatsApp</b>, con el catálogo de canje adentro. Sin logística y esté donde esté cada uno.</p>
         </div>
       </article>
@@ -574,16 +581,19 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <p class="lead" style="margin-top:20px">Del packaging al saludo en video: todo sale con tu identidad.</p>
     <div class="bentow">
       <article class="bcard">
+        <h3>Formato físico.</h3>
         <figure><img src="assets/fmt-dentro.webp" alt="Box, díptico y catálogo con tu logo"></figure>
-        <div class="bbody"><h3>Formato físico.</h3><p>Box, díptico y catálogo salen con la identidad de tu empresa.</p></div>
+        <div class="bbody"><p>Box, díptico y catálogo salen con la identidad de tu empresa.</p></div>
       </article>
       <article class="bcard">
+        <h3>Formato digital.</h3>
         <figure><img src="assets/pers-digital.png" alt="Email de entrega con tu logo"></figure>
-        <div class="bbody"><h3>Formato digital.</h3><p>El email de entrega y la apertura del regalo llevan tu logo.</p></div>
+        <div class="bbody"><p>El email de entrega y la apertura del regalo llevan tu logo.</p></div>
       </article>
       <article class="bcard tall">
+        <h3>Tu saludo en video.</h3>
         <figure><img src="assets/landing-cobrand.png" alt="Landing co-branded con video de saludo"></figure>
-        <div class="bbody"><h3>Tu saludo en video.</h3><p>El regalo abre en una página con tu logo y el video que le quieras mandar a tu equipo.</p></div>
+        <div class="bbody"><p>El regalo abre en una página con tu logo y el video que le quieras mandar a tu equipo.</p></div>
       </article>
     </div>
   </div>
@@ -643,11 +653,11 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <p class="lead" style="margin-top:18px">Todas tienen experiencias y canastas navideñas. Lo que cambia es el presupuesto.</p>
     <div class="edis">
       <article class="edi">
+        <h3>Edición Brindis</h3>
         <figure>
           <img src="assets/edi-brindis.jpg" alt="Edición Brindis">
         </figure>
         <div class="ebody">
-          <h3>Edición Brindis</h3>
           <p class="eprice">$40.495,87 <small>+ IVA</small></p>
           <div class="ebtns">
             <a class="sin" href="https://www.bigbox.com.ar/catalogo/~/edicion-brindis/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
@@ -655,11 +665,11 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
         </div>
       </article>
       <article class="edi">
+        <h3>Edición Fiesta</h3>
         <figure>
           <img src="assets/edi-fiesta.jpg" alt="Edición Fiesta">
         </figure>
         <div class="ebody">
-          <h3>Edición Fiesta</h3>
           <p class="eprice">$81.818,18 <small>+ IVA</small></p>
           <div class="ebtns">
             <a class="sin" href="https://www.bigbox.com.ar/catalogo/~/edicion-fiesta/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
@@ -667,11 +677,11 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
         </div>
       </article>
       <article class="edi">
+        <h3>Edición Deluxe</h3>
         <figure>
           <img src="assets/edi-deluxe.jpg" alt="Edición Deluxe">
         </figure>
         <div class="ebody">
-          <h3>Edición Deluxe</h3>
           <p class="eprice">$110.743,80 <small>+ IVA</small></p>
           <div class="ebtns">
             <a class="sin" href="https://www.bigbox.com.ar/catalogo/~/edicion-deluxe/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
@@ -679,11 +689,11 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
         </div>
       </article>
       <article class="edi">
+        <h3>Edición Premier</h3>
         <figure>
           <img src="assets/edi-premier.jpg" alt="Edición Premier">
         </figure>
         <div class="ebody">
-          <h3>Edición Premier</h3>
           <p class="eprice">$180.991,74 <small>+ IVA</small></p>
           <div class="ebtns">
             <a class="sin" href="https://www.bigbox.com.ar/catalogo/~/edicion-premier/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
