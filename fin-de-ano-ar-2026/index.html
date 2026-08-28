@@ -90,16 +90,17 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .reasons.row5 .reason .ico svg{width:48px;height:48px}
 .reasons.row5 .reason b{font-size:27px;line-height:1.22;margin-bottom:14px}
 .reasons.row5 .reason span{font-size:21px;line-height:1.45}
-.reasons.row3{grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px}
-.reasons.row3 .reason{display:flex;flex-direction:column;align-items:stretch;padding:0;overflow:hidden;
-  background:#fff;border:1px solid #e8e8e8;
+.reasons.row3{grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.reasons.row3 .reason{display:block;position:relative;overflow:hidden;padding:56px 44px 52px;min-height:520px;
+  background:#f5fafb;border:1px solid #e6eef0;
   box-shadow:6px 10px 26px rgba(16,18,20,.10),2px 3px 7px rgba(16,18,20,.05)}
-.reasons.row3 .reason figure{height:292px;background:#e6e6e6}
-.reasons.row3 .reason figure img{width:100%;height:100%;object-fit:cover;display:block}
-.reasons.row3 .reason .rbody{padding:38px 40px 44px;flex:1}
-.reasons.row3 .reason b{display:block;font-size:36px;font-weight:700;line-height:1.15;letter-spacing:-.01em;
-  color:var(--text);margin-bottom:16px;min-height:83px}
-.reasons.row3 .reason span{font-size:23px;line-height:1.5;color:var(--mute)}
+.reasons.row3 .reason .wm{position:absolute;right:-54px;bottom:-58px;width:276px;height:276px;
+  stroke:var(--accent);fill:none;stroke-width:1;opacity:.15;pointer-events:none}
+.reasons.row3 .reason b,.reasons.row3 .reason span{position:relative;z-index:2}
+.reasons.row3 .reason .ico{width:112px;height:112px;margin-bottom:42px}
+.reasons.row3 .reason .ico svg{width:56px;height:56px;stroke-width:1.6}
+.reasons.row3 .reason b{font-size:42px;line-height:1.14;letter-spacing:-.01em;margin-bottom:20px;min-height:96px}
+.reasons.row3 .reason span{font-size:24px;line-height:1.5}
 .reason{display:grid;grid-template-columns:72px 1fr;gap:30px;align-items:center;
   background:#fff;border-radius:16px;padding:21px 36px;
   box-shadow:0 4px 20px rgba(16,18,20,.09),0 1px 3px rgba(16,18,20,.05)}
@@ -569,16 +570,19 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <p class="lead" style="margin-top:20px">No es solo el regalo: es todo lo que dejás de resolver vos.</p>
     <div class="reasons row3">
       <div class="reason">
-        <figure><img src="assets/why-regalo.jpg" alt="Regalo de fin de año con moño"></figure>
-        <div class="rbody"><b>Un solo regalo resuelve todo.</b><span>Experiencias, canastas navideñas y gift cards en el mismo catálogo: cada persona elige la suya.</span></div>
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
+        <svg class="wm" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        <div><b>Un solo regalo resuelve todo.</b><span>Experiencias, canastas navideñas y gift cards en el mismo catálogo: cada persona elige la suya.</span></div>
       </div>
       <div class="reason">
-        <figure><img src="assets/why-cobertura.jpg" alt="Vuelo sobre las montañas"></figure>
-        <div class="rbody"><b>Cobertura nacional e internacional.</b><span>Llega a donde esté cada uno, dentro y fuera de la Argentina.</span></div>
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg></span>
+        <svg class="wm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>
+        <div><b>Cobertura nacional e internacional.</b><span>Llega a donde esté cada uno, dentro y fuera de la Argentina.</span></div>
       </div>
       <div class="reason">
-        <figure><img src="assets/why-logistica.jpg" alt="Entrega de un paquete en la puerta de casa" style="object-position:center 14%"></figure>
-        <div class="rbody"><b>Logística incluida.</b><span>Nos encargamos de la coordinación y de los envíos. Vos no seguís direcciones ni reclamos.</span></div>
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 16.5V6.5h12v10M13.5 9.5H18l4 4v3h-8.5"/><circle cx="6" cy="17.5" r="2.2"/><circle cx="17" cy="17.5" r="2.2"/></svg></span>
+        <svg class="wm" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 16.5V6.5h12v10M13.5 9.5H18l4 4v3h-8.5"/><circle cx="6" cy="17.5" r="2.2"/><circle cx="17" cy="17.5" r="2.2"/></svg>
+        <div><b>Logística incluida.</b><span>Nos encargamos de la coordinación y de los envíos. Vos no seguís direcciones ni reclamos.</span></div>
       </div>
     </div>
   </div>
