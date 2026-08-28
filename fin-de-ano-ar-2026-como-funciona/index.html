@@ -349,12 +349,14 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 #pdf svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.9;
   stroke-linecap:round;stroke-linejoin:round}
 
-@page{size:1920px 1080px;margin:0}
+@page{size:297mm 167.0625mm;margin:0}
 @media print{
-  html,body{width:1920px;height:1080px;background:#fff;overflow:visible}
-  #stage{position:static;overflow:visible}
-  #deck{position:static;transform:none;left:0;top:0;box-shadow:none}
-  .slide{position:relative;display:block;width:1920px;height:1080px;page-break-after:avoid}
+  html,body{width:297mm;height:167.0625mm;margin:0;padding:0;background:#fff;overflow:hidden}
+  #stage{position:absolute;left:0;top:0;width:297mm;height:167.0625mm;overflow:hidden}
+  /* 297mm a 96dpi = 1122,52px; 1122,52 / 1920 = 0,5846457 */
+  #deck{position:absolute;left:0 !important;top:0 !important;
+    transform:scale(.5846457) !important;transform-origin:0 0;box-shadow:none}
+  .slide{display:block}
   #pdf{display:none}
   *{animation:none !important;transition:none !important;
     -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
