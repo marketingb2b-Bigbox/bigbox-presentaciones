@@ -198,27 +198,48 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   font-size:32px;font-weight:700;line-height:1.15;letter-spacing:-.01em;margin-bottom:9px}
 .cats.gcex .ctx span{display:block;min-height:56px;font-size:20px;line-height:1.4;color:rgba(255,255,255,.9)}
 
-/* 23. ESCALERA DE PRECIOS — las seis boxes de fin de año.
-   No hay tapa cargada en el backoffice (el API devuelve el placeholder gris
-   para las seis), así que la slide no finge una foto: muestra el orden.
-   La barra de acento crece con el ticket para que la escalera se lea antes
-   que los números. */
-.ptable{display:grid;grid-template-rows:repeat(6,1fr);gap:10px;margin-top:32px;height:630px}
-.prow{display:grid;grid-template-columns:30px 330px 1fr 240px;align-items:center;gap:34px;
-  background:var(--paper-2);border-radius:14px;padding-right:38px;overflow:hidden}
-.prow .bar{height:100%;background:var(--accent)}
-.prow:nth-child(1) .bar{opacity:.28}
-.prow:nth-child(2) .bar{opacity:.42}
-.prow:nth-child(3) .bar{opacity:.56}
-.prow:nth-child(4) .bar{opacity:.70}
-.prow:nth-child(5) .bar{opacity:.85}
-.prow h3{font-size:33px;font-weight:700;line-height:1.1}
-.prow h3 a{color:inherit;text-decoration:none}
-.prow h3 a:hover{color:var(--accent)}
-.prow h3 i{font-style:normal;margin-left:9px;font-size:25px;color:var(--accent)}
-.prow p{font-size:22px;line-height:1.35;color:var(--mute)}
-.prow .amount{text-align:right;font-size:42px;font-weight:800;letter-spacing:-.02em;line-height:1}
-.prow .amount small{display:block;margin-top:7px;font-size:18px;font-weight:500;letter-spacing:0;color:var(--mute)}
+/* 20. EDICIONES — la ficha de catálogo de AR y MX: tapa con el nombre,
+   qué entra, precio y el botón que lleva al catálogo.
+   Las tapas de las seis boxes PE no están cargadas en el backoffice (el API
+   devuelve el mismo placeholder gris), así que son frames del video de Bigbox
+   con el mismo tratamiento cálido que las tapas de AR y MX. */
+.edis{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:36px}
+/* PE tiene seis boxes, no cuatro: la ficha se angosta y la foto baja de alto */
+.edis.seis{grid-template-columns:repeat(6,1fr);gap:16px;margin-top:30px}
+.edis.seis .edi figure{height:286px}
+.edis.seis .edi figure figcaption{font-size:25px;padding:0 12px}
+.edis.seis .edi>h3{font-size:23px;padding:18px 20px 12px;min-height:82px}
+.edis.seis .edi .ebody{padding:14px 20px 22px}
+.edis.seis .edi .etx{font-size:17px;line-height:1.4}
+.edis.seis .edi .eprice{font-size:27px;padding-top:14px}
+.edis.seis .edi .eprice small{font-size:15px}
+.edis.seis .edi .ebtns .sin{font-size:15px;padding:11px 18px}
+.edi{background:var(--paper-2);border:1px solid #e4e4e4;border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:5px 9px 22px rgba(16,18,20,.10),2px 3px 6px rgba(16,18,20,.06)}
+.edi figure{position:relative;height:344px;overflow:hidden}
+.edi figure img{width:100%;height:100%;object-fit:cover;display:block}
+.edi figure:after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(16,18,20,0) 58%,rgba(16,18,20,.6))}
+/* AR y MX traen el nombre quemado en la tapa; acá se compone en CSS para no
+   tener que rehacer el JPG cuando cambia el nombre de una box */
+.edi figure figcaption{position:absolute;left:0;right:0;bottom:20px;z-index:2;text-align:center;
+  color:#fff;font-size:29px;font-weight:400;letter-spacing:-.01em;line-height:1.1;
+  text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.edi>h3{padding:22px 24px 16px}
+.edi .ebody{position:relative;padding:18px 24px 24px;flex:1;display:flex;flex-direction:column}
+.edi h3{font-size:27px;font-weight:700;line-height:1.15}
+.edi .etx{font-size:20px;line-height:1.45;color:var(--mute)}
+.edi .eprice{margin-top:auto;padding-top:14px;font-size:24px;font-weight:700;color:var(--text)}
+.edi .eprice small{font-size:18px;font-weight:500;color:var(--mute)}
+.edi .ebtns{margin-top:14px}
+.edi .ebtns .sin{display:inline-flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;
+  padding:13px 26px;border-radius:999px;text-decoration:none;transition:.15s;white-space:nowrap;
+  color:var(--accent);background:#fff;border:2px solid var(--accent)}
+.edi .ebtns .sin:hover{background:var(--accent);color:#fff}
+.edi .ebtns .ar{font-style:normal;margin-left:5px}
+.edisnota{position:absolute;left:112px;right:112px;bottom:70px;font-size:25px;line-height:1.4;color:var(--mute)}
+.edisnota b{color:var(--text);font-weight:700}
 
 /* 8. MANIFIESTO */
 .statement{background:var(--accent-deep);color:#fff;text-align:center}
@@ -243,13 +264,13 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .slide.on .cobrand{animation:fadeIn .7s .1s ease both}
 .slide.on .kicker{animation:fadeUp .5s .62s ease-out both}
 
-.slide.on .bentow>*,.slide.on .bento>*,.slide.on .reasons>*,.slide.on .picks>*,.slide.on .cats>*,.slide.on .rows>*,.slide.on .ptable>*{animation:fadeUp .5s ease-out both}
-.slide.on .bentow>*:nth-child(1),.slide.on .rows>*:nth-child(1),.slide.on .bento>*:nth-child(1),.slide.on .reasons>*:nth-child(1),.slide.on .picks>*:nth-child(1),.slide.on .cats>*:nth-child(1),.slide.on .ptable>*:nth-child(1){animation-delay:.34s}
-.slide.on .bentow>*:nth-child(2),.slide.on .rows>*:nth-child(2),.slide.on .bento>*:nth-child(2),.slide.on .reasons>*:nth-child(2),.slide.on .picks>*:nth-child(2),.slide.on .cats>*:nth-child(2),.slide.on .ptable>*:nth-child(2){animation-delay:.42s}
-.slide.on .bentow>*:nth-child(3),.slide.on .rows>*:nth-child(3),.slide.on .bento>*:nth-child(3),.slide.on .reasons>*:nth-child(3),.slide.on .picks>*:nth-child(3),.slide.on .cats>*:nth-child(3),.slide.on .ptable>*:nth-child(3){animation-delay:.50s}
-.slide.on .picks>*:nth-child(4),.slide.on .reasons>*:nth-child(4),.slide.on .cats>*:nth-child(4),.slide.on .bento>*:nth-child(4),.slide.on .ptable>*:nth-child(4){animation-delay:.58s}
-.slide.on .cats>*:nth-child(5),.slide.on .bento>*:nth-child(5),.slide.on .ptable>*:nth-child(5){animation-delay:.66s}
-.slide.on .ptable>*:nth-child(6){animation-delay:.74s}
+.slide.on .bentow>*,.slide.on .bento>*,.slide.on .reasons>*,.slide.on .picks>*,.slide.on .cats>*,.slide.on .rows>*,.slide.on .edis>*{animation:fadeUp .5s ease-out both}
+.slide.on .bentow>*:nth-child(1),.slide.on .rows>*:nth-child(1),.slide.on .bento>*:nth-child(1),.slide.on .reasons>*:nth-child(1),.slide.on .picks>*:nth-child(1),.slide.on .cats>*:nth-child(1),.slide.on .edis>*:nth-child(1){animation-delay:.34s}
+.slide.on .bentow>*:nth-child(2),.slide.on .rows>*:nth-child(2),.slide.on .bento>*:nth-child(2),.slide.on .reasons>*:nth-child(2),.slide.on .picks>*:nth-child(2),.slide.on .cats>*:nth-child(2),.slide.on .edis>*:nth-child(2){animation-delay:.42s}
+.slide.on .bentow>*:nth-child(3),.slide.on .rows>*:nth-child(3),.slide.on .bento>*:nth-child(3),.slide.on .reasons>*:nth-child(3),.slide.on .picks>*:nth-child(3),.slide.on .cats>*:nth-child(3),.slide.on .edis>*:nth-child(3){animation-delay:.50s}
+.slide.on .picks>*:nth-child(4),.slide.on .reasons>*:nth-child(4),.slide.on .cats>*:nth-child(4),.slide.on .bento>*:nth-child(4),.slide.on .edis>*:nth-child(4){animation-delay:.58s}
+.slide.on .cats>*:nth-child(5),.slide.on .bento>*:nth-child(5),.slide.on .edis>*:nth-child(5){animation-delay:.66s}
+.slide.on .edis>*:nth-child(6){animation-delay:.74s}
 
 /* portada: la foto respira, la pill sube desde el borde */
 .cover.on img.bg{animation:kenburns 9s ease-out both}
@@ -421,36 +442,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <p class="kicker">De Lima a Cusco, Arequipa, Paracas y Trujillo: <b>experiencias locales con una sola gestión.</b></p>
 </section>
 
-<!-- 5 — GIFT CARDS DE EXPERIENCIAS ----------------------------------------- -->
-<section class="slide">
-  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
-  <div class="pad">
-    <div class="eyebrow"><span>Gift Cards de Experiencias</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:26px">Una sola Gift Card. Cuatro formas de usarla.</h2>
-    <p class="lead" style="margin-top:18px">Crédito para canjear en nuestro e-commerce, en la categoría que cada quien prefiera.</p>
-    <div class="cats gcex">
-      <article class="cat">
-        <img src="assets/cats-gastronomia.webp" alt="Mesa servida en un restaurante">
-        <div class="ctx"><b>Gastronomía</b><span>Restaurantes, cenas, brunches y catas.</span></div>
-      </article>
-      <article class="cat">
-        <img src="assets/cats-estar-bien.webp" alt="Circuito de spa y relax">
-        <div class="ctx"><b>Bienestar</b><span>Masajes, spa y autocuidado.</span></div>
-      </article>
-      <article class="cat">
-        <img src="assets/cats-aventura.webp" alt="Actividad al aire libre">
-        <div class="ctx"><b>Aventura</b><span>Adrenalina, actividades y planes en familia.</span></div>
-      </article>
-      <article class="cat">
-        <img src="assets/cats-estadias.webp" alt="Escapada a un hotel">
-        <div class="ctx"><b>Escapadas</b><span>Hospedajes, viajes cortos y salidas de la ciudad.</span></div>
-      </article>
-    </div>
-  </div>
-  <p class="kicker">Tú defines el monto. <b>Quien la recibe elige la experiencia.</b></p>
-</section>
-
-<!-- 6 — CANASTAS Y CENAS --------------------------------------------------- -->
+<!-- 5 — CANASTAS Y CENAS --------------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
@@ -478,7 +470,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <p class="kicker">Se arman a medida: <b>elegimos juntos qué entra en cada una según tu presupuesto.</b></p>
 </section>
 
-<!-- 7 — PRODUCTOS ---------------------------------------------------------- -->
+<!-- 6 — PRODUCTOS ---------------------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
@@ -647,46 +639,123 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <div class="eyebrow"><span>El catálogo de fin de año</span><i class="dot"></i></div>
     <h2 class="h1" style="margin-top:24px">Las seis boxes de fin de año.</h2>
     <p class="lead" style="margin-top:16px">Todas son boxes de experiencias con cobertura nacional. Lo que cambia es el nivel.</p>
-    <div class="ptable">
-      <article class="prow">
-        <span class="bar"></span>
-        <h3><a href="https://www.bigbox.com.pe/catalogo/~/boxcampanas/" target="_blank" rel="noopener">Campanas<i>&rarr;</i></a></h3>
-        <p>Solo gastronomía: desayunos, almuerzos y cenas.</p>
-        <p class="amount">S/ 85 <small>IGV incluido</small></p>
+    <div class="edis seis">
+      <article class="edi">
+        <h3>Box Campanas</h3>
+        <figure>
+          <img src="assets/edi-pe-campanas.jpg" alt="Box Campanas">
+          <figcaption>Campanas.</figcaption>
+        </figure>
+        <div class="ebody">
+          <p class="etx">Solo gastronomía: desayunos, almuerzos y cenas.</p>
+          <p class="eprice">S/ 85 <small>IGV incl.</small></p>
+          <div class="ebtns">
+            <a class="sin" href="https://www.bigbox.com.pe/catalogo/~/boxcampanas/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
       </article>
-      <article class="prow">
-        <span class="bar"></span>
-        <h3><a href="https://www.bigbox.com.pe/catalogo/~/boxguirnalda/" target="_blank" rel="noopener">Guirnalda<i>&rarr;</i></a></h3>
-        <p>La más amplia en cantidad de opciones. Suma bienestar y aventura a la gastronomía.</p>
-        <p class="amount">S/ 110 <small>IGV incluido</small></p>
+      <article class="edi">
+        <h3>Box Guirnalda</h3>
+        <figure>
+          <img src="assets/edi-pe-guirnalda.jpg" alt="Box Guirnalda">
+          <figcaption>Guirnalda.</figcaption>
+        </figure>
+        <div class="ebody">
+          <p class="etx">La más amplia en cantidad: suma bienestar y aventura.</p>
+          <p class="eprice">S/ 110 <small>IGV incl.</small></p>
+          <div class="ebtns">
+            <a class="sin" href="https://www.bigbox.com.pe/catalogo/~/boxguirnalda/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
       </article>
-      <article class="prow">
-        <span class="bar"></span>
-        <h3><a href="https://www.bigbox.com.pe/catalogo/~/boxestrella/" target="_blank" rel="noopener">Estrella<i>&rarr;</i></a></h3>
-        <p>El mismo mix, con restaurantes, spas y talleres de mayor nivel.</p>
-        <p class="amount">S/ 160 <small>IGV incluido</small></p>
+      <article class="edi">
+        <h3>Box Estrella</h3>
+        <figure>
+          <img src="assets/edi-pe-estrella.jpg" alt="Box Estrella">
+          <figcaption>Estrella.</figcaption>
+        </figure>
+        <div class="ebody">
+          <p class="etx">El mismo mix, con restaurantes y spas de mayor nivel.</p>
+          <p class="eprice">S/ 160 <small>IGV incl.</small></p>
+          <div class="ebtns">
+            <a class="sin" href="https://www.bigbox.com.pe/catalogo/~/boxestrella/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
       </article>
-      <article class="prow">
-        <span class="bar"></span>
-        <h3><a href="https://www.bigbox.com.pe/catalogo/~/boxnochebuena/" target="_blank" rel="noopener">Nochebuena<i>&rarr;</i></a></h3>
-        <p>Todo lo de Estrella, con casi el doble de opciones para elegir.</p>
-        <p class="amount">S/ 200 <small>IGV incluido</small></p>
+      <article class="edi">
+        <h3>Box Nochebuena</h3>
+        <figure>
+          <img src="assets/edi-pe-nochebuena.jpg" alt="Box Nochebuena">
+          <figcaption>Nochebuena.</figcaption>
+        </figure>
+        <div class="ebody">
+          <p class="etx">Todo lo de Estrella, con casi el doble de opciones.</p>
+          <p class="eprice">S/ 200 <small>IGV incl.</small></p>
+          <div class="ebtns">
+            <a class="sin" href="https://www.bigbox.com.pe/catalogo/~/boxnochebuena/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
       </article>
-      <article class="prow">
-        <span class="bar"></span>
-        <h3><a href="https://www.bigbox.com.pe/catalogo/~/boxnavidad/" target="_blank" rel="noopener">Navidad<i>&rarr;</i></a></h3>
-        <p>Suma resorts y spa: Aranwa Colca, Paracas, Valle Sagrado y Vichayito.</p>
-        <p class="amount">S/ 270 <small>IGV incluido</small></p>
+      <article class="edi">
+        <h3>Box Navidad</h3>
+        <figure>
+          <img src="assets/edi-pe-navidad.jpg" alt="Box Navidad">
+          <figcaption>Navidad.</figcaption>
+        </figure>
+        <div class="ebody">
+          <p class="etx">Suma resorts y spa: Aranwa Colca, Paracas y Valle Sagrado.</p>
+          <p class="eprice">S/ 270 <small>IGV incl.</small></p>
+          <div class="ebtns">
+            <a class="sin" href="https://www.bigbox.com.pe/catalogo/~/boxnavidad/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
       </article>
-      <article class="prow">
-        <span class="bar"></span>
-        <h3><a href="https://www.bigbox.com.pe/catalogo/~/boxblancanavidad/" target="_blank" rel="noopener">Blanca Navidad<i>&rarr;</i></a></h3>
-        <p>Suma una noche de hotel y alta gastronomía: Sheraton, Radisson, Cosme.</p>
-        <p class="amount">S/ 410 <small>IGV incluido</small></p>
+      <article class="edi">
+        <h3>Box Blanca Navidad</h3>
+        <figure>
+          <img src="assets/edi-pe-blancanavidad.jpg" alt="Box Blanca Navidad">
+          <figcaption>Blanca Navidad.</figcaption>
+        </figure>
+        <div class="ebody">
+          <p class="etx">Suma una noche de hotel y alta gastronomía.</p>
+          <p class="eprice">S/ 410 <small>IGV incl.</small></p>
+          <div class="ebtns">
+            <a class="sin" href="https://www.bigbox.com.pe/catalogo/~/boxblancanavidad/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
       </article>
     </div>
   </div>
-  <p class="kicker">Las canastas, cenas y productos <b>se suman a cualquiera de las seis.</b></p>
+  <p class="edisnota">Las canastas, cenas y productos <b>se suman a cualquiera de las seis.</b></p>
+</section>
+
+<!-- 14 — GIFT CARDS DE EXPERIENCIAS ---------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>Gift Cards de Experiencias</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:26px">Una sola Gift Card. Cuatro formas de usarla.</h2>
+    <p class="lead" style="margin-top:18px">Crédito para canjear en nuestro e-commerce, en la categoría que cada quien prefiera.</p>
+    <div class="cats gcex">
+      <article class="cat">
+        <img src="assets/cats-gastronomia.webp" alt="Mesa servida en un restaurante">
+        <div class="ctx"><b>Gastronomía</b><span>Restaurantes, cenas, brunches y catas.</span></div>
+      </article>
+      <article class="cat">
+        <img src="assets/cats-estar-bien.webp" alt="Circuito de spa y relax">
+        <div class="ctx"><b>Bienestar</b><span>Masajes, spa y autocuidado.</span></div>
+      </article>
+      <article class="cat">
+        <img src="assets/cats-aventura.webp" alt="Actividad al aire libre">
+        <div class="ctx"><b>Aventura</b><span>Adrenalina, actividades y planes en familia.</span></div>
+      </article>
+      <article class="cat">
+        <img src="assets/cats-estadias.webp" alt="Escapada a un hotel">
+        <div class="ctx"><b>Escapadas</b><span>Hospedajes, viajes cortos y salidas de la ciudad.</span></div>
+      </article>
+    </div>
+  </div>
+  <p class="kicker">Tú defines el monto. <b>Quien la recibe elige la experiencia.</b></p>
 </section>
 
 </div></div>
