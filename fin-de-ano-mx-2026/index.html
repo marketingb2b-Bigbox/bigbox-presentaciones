@@ -250,8 +250,11 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
    Las categorías van apiladas en barras horizontales (no columnas), así que la
    etiqueta va horizontal sobre un degradado desde la izquierda. Eso libera la
    otra mitad para que la tira de logos entre grande. */
-.gcsplit{display:grid;grid-template-columns:1fr;gap:44px;margin-top:38px}
-.gcsplit .gccats{grid-template-rows:repeat(5,1fr)}   /* la columna de categorias cede ancho para que los logos crezcan */
+.gcsplit{display:grid;grid-template-columns:.56fr 1.44fr;gap:40px;margin-top:38px}
+/* mural de marcas: cada placa lleva el fondo del propio logo */
+.gcwall{height:706px;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);gap:16px;align-content:center}
+.blogo{border-radius:14px;overflow:hidden;border:1px solid #e8e8e8;display:grid;place-items:center}
+.blogo img{width:100%;height:100%;object-fit:contain;display:block}   /* la columna de categorias cede ancho para que los logos crezcan */
 .gccats{display:grid;grid-template-rows:repeat(5,1fr);gap:14px;height:706px}
 .gcbar{position:relative;border-radius:14px;overflow:hidden;background:var(--ink)}
 .gcbar img{width:100%;height:100%;object-fit:cover;display:block}
@@ -347,7 +350,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .slide.on .gccats>*:nth-child(2){animation-delay:.42s}
 .slide.on .gccats>*:nth-child(3){animation-delay:.50s}
 .slide.on .gccats>*:nth-child(4){animation-delay:.58s}
-.slide.on .gcbrands{animation:fadeUp .5s .5s ease-out both}
+.slide.on .gcwall{animation:fadeUp .5s .5s ease-out both}
 .slide.on .strip>*:nth-child(6){animation-delay:.74s}
 
 /* el flujo entra en orden: tramo común, el rótulo de la bifurcación, y las dos ramas */
@@ -483,9 +486,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
         </div>
       </article>
       <article class="btile">
-        <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-giftcards.jpg" aria-hidden="true">
-          <source src="assets/sol-giftcards.mp4" type="video/mp4">
-        </video>
+        <img src="assets/gc-mano.jpg" alt="Gift card de Bigbox en la mano">
         <div class="btx">
           <h3>Gift Cards</h3>
           <p>Supermercado, deco, deportes y más.</p>
@@ -533,7 +534,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <div class="pad">
     <div class="eyebrow"><span>Canastas navideñas</span><i class="dot"></i></div>
     <h2 class="h1" style="margin-top:30px">Una canasta para cada presupuesto.</h2>
-    <p class="lead" style="margin-top:22px">El catálogo tiene once, del detalle para todos a la canasta de mimbre completa. Estas son cuatro.</p>
+    <p class="lead" style="margin-top:22px">El catálogo tiene once, del detalle para todos a la canasta de mimbre completa. Estos son solo algunos ejemplos.</p>
     <div class="picks p4">
       <article class="pick">
         <h3>Canasta Detalle</h3>
@@ -557,7 +558,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
       </article>
     </div>
   </div>
-  <p class="kicker">Te mostramos el catálogo completo y armamos la mezcla <b>que entre en tu presupuesto.</b></p>
+  <p class="kicker">Al final podrás ver el catálogo completo y armamos la mezcla <b>que entre en tu presupuesto.</b></p>
 </section>
 
 <!-- 6 — GIFT CARDS --------------------------------------------------------- -->
@@ -574,6 +575,20 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
         <article class="gcbar"><img src="assets/gcat-deportes.webp" alt="Entrenando en el gimnasio"><b>Deportes</b></article>
         <article class="gcbar"><img src="assets/gcat-indumentaria.webp" alt="Local de indumentaria"><b>Indumentaria</b></article>
         <article class="gcbar"><img src="assets/gcat-electrodomesticos.webp" alt="Cocina equipada"><b>Electrodomésticos</b></article>
+      </div>
+      <div class="gcwall">
+        <div class="blogo" style="background:#000000"><img src="assets/gcm-soriana.jpg" alt="Soriana"></div>
+        <div class="blogo" style="background:#000000"><img src="assets/gcm-amazon.jpg" alt="Amazon"></div>
+        <div class="blogo" style="background:#000000"><img src="assets/gcm-liverpool.jpg" alt="Liverpool"></div>
+        <div class="blogo" style="background:#000000"><img src="assets/gcm-starbucks.jpg" alt="Starbucks"></div>
+        <div class="blogo" style="background:#000000"><img src="assets/gcm-spotify.jpg" alt="Spotify"></div>
+        <div class="blogo" style="background:#13216a"><img src="assets/gcm-cinepolis.jpg" alt="Cinépolis"></div>
+        <div class="blogo" style="background:#000000"><img src="assets/gcm-xbox.jpg" alt="Xbox"></div>
+        <div class="blogo" style="background:#e70014"><img src="assets/gcm-nintendo.jpg" alt="Nintendo"></div>
+        <div class="blogo" style="background:#000000"><img src="assets/gcm-airbnb.jpg" alt="Airbnb"></div>
+        <div class="blogo" style="background:#ffffff"><img src="assets/gcm-walmart.jpg" alt="Walmart"></div>
+        <div class="blogo" style="background:#000000"><img src="assets/gcm-chedraui.jpg" alt="Chedraui"></div>
+        <div class="blogo" style="background:#ffffff"><img src="assets/gcm-innovasport.jpg" alt="Innovasport"></div>
       </div>
     </div>
   </div>
