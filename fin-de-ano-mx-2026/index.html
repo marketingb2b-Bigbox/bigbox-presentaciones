@@ -285,6 +285,13 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   background:linear-gradient(180deg,rgba(16,18,20,0) 42%,rgba(16,18,20,.78))}
 .cat b{position:absolute;left:24px;bottom:26px;z-index:2;color:#fff;font-size:27px;font-weight:600;
   writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.01em}
+.cats.gcex{grid-template-columns:repeat(4,1fr);gap:22px;margin-top:40px}
+.cats.gcex .cat{height:600px}
+.cats.gcex .cat:after{background:linear-gradient(180deg,rgba(16,18,20,0) 34%,rgba(16,18,20,.86))}
+.cats.gcex .ctx{position:absolute;left:30px;right:30px;bottom:30px;z-index:2;color:#fff}
+.cats.gcex .ctx b{position:static;writing-mode:horizontal-tb;transform:none;display:block;
+  font-size:32px;font-weight:700;line-height:1.15;letter-spacing:-.01em;margin-bottom:9px}
+.cats.gcex .ctx span{display:block;min-height:56px;font-size:20px;line-height:1.4;color:rgba(255,255,255,.9)}
 
 /* bloque de precio: ancla "desde", unidad explicita y que incluye */
 .budget{position:absolute;left:112px;right:112px;bottom:66px;display:flex;align-items:center;justify-content:center;gap:56px;
@@ -612,7 +619,36 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <p class="kicker">Estas son algunas de las categorías y algunos de los comercios: <b>el catálogo completo es más amplio.</b></p>
 </section>
 
-<!-- 7 — FORMATO DE ENTREGA --------------------------------------------------- -->
+<!-- 7 — GIFT CARDS DE EXPERIENCIAS ----------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>Gift Cards de Experiencias</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:26px">Una sola Gift Card. Cuatro formas de usarla.</h2>
+    <p class="lead" style="margin-top:18px">Crédito para canjear en nuestro e-commerce, en la categoría que cada quien prefiera.</p>
+    <div class="cats gcex">
+      <article class="cat">
+        <img src="assets/cats-gastronomia.webp" alt="Mesa servida en un restaurante">
+        <div class="ctx"><b>Gastronomía</b><span>Restaurantes, cenas, brunches y catas.</span></div>
+      </article>
+      <article class="cat">
+        <img src="assets/cats-estar-bien.webp" alt="Circuito de spa y relax">
+        <div class="ctx"><b>Bienestar</b><span>Masajes, spa y autocuidado.</span></div>
+      </article>
+      <article class="cat">
+        <img src="assets/cats-aventura.webp" alt="Actividad al aire libre">
+        <div class="ctx"><b>Aventura</b><span>Adrenalina, actividades y planes en familia.</span></div>
+      </article>
+      <article class="cat">
+        <img src="assets/cats-estadias.webp" alt="Escapada a un hotel">
+        <div class="ctx"><b>Escapadas</b><span>Hospedajes, viajes cortos y salidas de la ciudad.</span></div>
+      </article>
+    </div>
+  </div>
+  <p class="kicker">Tú defines el monto. <b>Quien la recibe elige la experiencia.</b></p>
+</section>
+
+<!-- 8 — FORMATO DE ENTREGA --------------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
@@ -639,7 +675,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <p class="kicker">Se puede combinar: <b>digital para los que están lejos, físico para los que están en la oficina.</b></p>
 </section>
 
-<!-- 8 — PERSONALIZACIÓN ----------------------------------------------------- -->
+<!-- 9 — PERSONALIZACIÓN ----------------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
@@ -666,7 +702,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   </div>
 </section>
 
-<!-- 9 — POR QUÉ ELEGIRNOS ------------------------------------------------- -->
+<!-- 10 — POR QUÉ ELEGIRNOS ------------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
@@ -695,7 +731,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 </section>
 
 
-<!-- 10 — OTRAS IDEAS -------------------------------------------------------- -->
+<!-- 11 — OTRAS IDEAS -------------------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
@@ -726,7 +762,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <p class="kicker">Y no solo en diciembre: <b>cumpleaños, aniversarios y programas de incentivos funcionan igual.</b></p>
 </section>
 
-<!-- 11 — CIERRE -------------------------------------------------------------- -->
+<!-- 12 — CIERRE -------------------------------------------------------------- -->
 <section class="slide cover closing">
   <video class="bg" autoplay muted loop playsinline preload="metadata" poster="assets/poster-experiencias.jpg" aria-hidden="true">
     <source src="assets/sol-experiencias.mp4" type="video/mp4">
@@ -742,7 +778,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   </div>
 </section>
 
-<!-- 12 — EL CATÁLOGO ------------------------------------------------------- -->
+<!-- 13 — EL CATÁLOGO ------------------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
