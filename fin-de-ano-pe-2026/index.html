@@ -205,16 +205,9 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
    devuelve el mismo placeholder gris), así que son frames del video de Bigbox
    con el mismo tratamiento cálido que las tapas de AR y MX. */
 .edis{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:36px}
-/* PE tiene seis boxes, no cuatro: la ficha se angosta y la foto baja de alto */
-.edis.seis{grid-template-columns:repeat(6,1fr);gap:16px;margin-top:30px}
-.edis.seis .edi figure{height:286px}
-.edis.seis .edi figure figcaption{font-size:25px;padding:0 12px}
-.edis.seis .edi>h3{font-size:23px;padding:18px 20px 12px;min-height:82px}
-.edis.seis .edi .ebody{padding:14px 20px 22px}
-.edis.seis .edi .etx{font-size:17px;line-height:1.4}
-.edis.seis .edi .eprice{font-size:27px;padding-top:14px}
-.edis.seis .edi .eprice small{font-size:15px}
-.edis.seis .edi .ebtns .sin{font-size:15px;padding:11px 18px}
+/* PE tiene seis boxes: van 4 + 2 en dos slides. Las dos que sobran mantienen
+   el ancho de la grilla de cuatro y quedan a la izquierda — no se estiran. */
+.edis.dos{grid-template-columns:repeat(2,calc((100% - 72px)/4));justify-content:start}
 .edi{background:var(--paper-2);border:1px solid #e4e4e4;border-radius:16px;overflow:hidden;
   display:flex;flex-direction:column;
   box-shadow:5px 9px 22px rgba(16,18,20,.10),2px 3px 6px rgba(16,18,20,.06)}
@@ -591,8 +584,8 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
     <div class="eyebrow"><span>Otras ideas de regalo</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:26px">¿Y si el regalo no es para todos?</h2>
-    <p class="lead" style="margin-top:18px">Cuando el presupuesto no alcanza para todo el equipo,<br>concentrarlo en un premio grande cambia el efecto.</p>
+    <h2 class="h1" style="margin-top:26px">El mismo presupuesto, otras formas de usarlo.</h2>
+    <p class="lead" style="margin-top:18px">Concentrarlo en un premio grande, en vez de repartirlo<br>entre todo el equipo, cambia el efecto.</p>
     <div class="picks p3 ideas">
       <article class="pick">
         <p class="ptag">Para la fiesta de fin de año</p>
@@ -637,10 +630,10 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
-    <div class="eyebrow"><span>El catálogo de fin de año</span><i class="dot"></i></div>
+    <div class="eyebrow"><span>El catálogo de fin de año · 1 de 2</span><i class="dot"></i></div>
     <h2 class="h1" style="margin-top:24px">Las seis boxes de fin de año.</h2>
     <p class="lead" style="margin-top:16px">Todas son boxes de experiencias con cobertura nacional. Lo que cambia es el nivel.</p>
-    <div class="edis seis">
+    <div class="edis">
       <article class="edi">
         <h3>Box Campanas</h3>
         <figure>
