@@ -178,6 +178,14 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .bcard.tall h3{font-size:33px;margin-bottom:8px}
 .bcard.tall p{font-size:21px}
 
+/* 22. CATÁLOGO DE CANASTAS — las once, en fichas chicas. */
+.cans{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin-top:40px}
+.can{width:265px;background:var(--paper-2);border:1px solid #e6e6e6;border-radius:14px;overflow:hidden;
+  box-shadow:4px 7px 18px rgba(16,18,20,.08),1px 2px 5px rgba(16,18,20,.05)}
+.can h3{font-size:21px;font-weight:700;line-height:1.15;padding:16px 18px 12px;text-align:center}
+.can figure{height:212px;background:#e6e6e6}
+.can figure img{width:100%;height:100%;object-fit:cover;display:block}
+
 /* 19. BENTO — un mosaico, no tres cards iguales.
    Tres cards del mismo tamaño se leen como tres productos sueltos; el bento
    con una pieza dominante se lee como un solo regalo con cosas adentro. */
@@ -543,22 +551,22 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <p class="lead" style="margin-top:22px">El catálogo tiene once, del detalle para todos a la canasta de mimbre completa. Estos son solo algunos ejemplos.</p>
     <div class="picks p4">
       <article class="pick">
-        <h3>Canasta Detalle</h3>
+        <h3>Detalle</h3>
         <figure><img src="assets/can-mx-detalle.jpg" alt="Canasta Detalle"></figure>
         <div class="pbody"><p>Vino tinto de 375 ml, galletas de mantequilla artesanales y almendras con cocoa, en bolsa de celofán.</p></div>
       </article>
       <article class="pick">
-        <h3>Canasta Brindis</h3>
+        <h3>Brindis</h3>
         <figure><img src="assets/can-mx-brindis.jpg" alt="Canasta Brindis"></figure>
         <div class="pbody"><p>Vino Santa Helena, chocolate Lindt, frasco de especias y aceitunas verdes, en caja con tapa de acetato.</p></div>
       </article>
       <article class="pick">
-        <h3>Canasta Sobremesa</h3>
+        <h3>Sobremesa</h3>
         <figure><img src="assets/can-mx-sobremesa.jpg" alt="Canasta Sobremesa"></figure>
         <div class="pbody"><p>Vino tinto mexicano, café gourmet, pasta italiana, pesto y charola de carnes frías, en caja de MDF.</p></div>
       </article>
       <article class="pick">
-        <h3>Canasta Legado</h3>
+        <h3>Legado</h3>
         <figure><img src="assets/can-mx-legado.jpg" alt="Canasta Legado"></figure>
         <div class="pbody"><p>Vino tinto, tequila añejo, queso azul, atún Ortiz, chocolate Lindt y más, en canasta de mimbre.</p></div>
       </article>
@@ -732,6 +740,63 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
       <img src="assets/qr-fin-de-ano-mx.png" alt="Código QR al sitio de Bigbox Corpo México">
     </a>
   </div>
+</section>
+
+<!-- 12 — EL CATÁLOGO ------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>El catálogo</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:24px">Las once canastas de fin de año.</h2>
+    <p class="lead" style="margin-top:16px">Del detalle para todos a la canasta de mimbre completa.</p>
+    <div class="cans">
+      <article class="can">
+        <h3>Detalle</h3>
+        <figure><img src="assets/can-mx-detalle.jpg" alt="Canasta Detalle"></figure>
+      </article>
+      <article class="can">
+        <h3>Serena</h3>
+        <figure><img src="assets/can-mx-serena.jpg" alt="Canasta Serena"></figure>
+      </article>
+      <article class="can">
+        <h3>Rosé</h3>
+        <figure><img src="assets/can-mx-rose.jpg" alt="Canasta Rosé"></figure>
+      </article>
+      <article class="can">
+        <h3>Brunch</h3>
+        <figure><img src="assets/can-mx-brunch.jpg" alt="Canasta Brunch"></figure>
+      </article>
+      <article class="can">
+        <h3>Amanecer</h3>
+        <figure><img src="assets/can-mx-amanecer.jpg" alt="Canasta Amanecer"></figure>
+      </article>
+      <article class="can">
+        <h3>Brindis</h3>
+        <figure><img src="assets/can-mx-brindis.jpg" alt="Canasta Brindis"></figure>
+      </article>
+      <article class="can">
+        <h3>Ébano</h3>
+        <figure><img src="assets/can-mx-ebano.jpg" alt="Canasta Ébano"></figure>
+      </article>
+      <article class="can">
+        <h3>Origen</h3>
+        <figure><img src="assets/can-mx-origen.jpg" alt="Canasta Origen"></figure>
+      </article>
+      <article class="can">
+        <h3>Sobremesa</h3>
+        <figure><img src="assets/can-mx-sobremesa.jpg" alt="Canasta Sobremesa"></figure>
+      </article>
+      <article class="can">
+        <h3>Gran Reserva</h3>
+        <figure><img src="assets/can-mx-gran-reserva.jpg" alt="Canasta Gran Reserva"></figure>
+      </article>
+      <article class="can">
+        <h3>Legado</h3>
+        <figure><img src="assets/can-mx-legado.jpg" alt="Canasta Legado"></figure>
+      </article>
+    </div>
+  </div>
+  <p class="kicker">Elegimos juntos <b>la que entra en tu presupuesto.</b></p>
 </section>
 
 </div></div>
