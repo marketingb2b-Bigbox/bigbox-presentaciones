@@ -251,10 +251,16 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
    etiqueta va horizontal sobre un degradado desde la izquierda. Eso libera la
    otra mitad para que la tira de logos entre grande. */
 .gcsplit{display:grid;grid-template-columns:.56fr 1.44fr;gap:40px;margin-top:38px}
-/* mural de marcas: cada placa lleva el fondo del propio logo */
-.gcwall{height:706px;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);gap:16px;align-content:center}
-.blogo{border-radius:14px;overflow:hidden;border:1px solid #e8e8e8;display:grid;place-items:center}
-.blogo img{width:100%;height:100%;object-fit:contain;display:block}   /* la columna de categorias cede ancho para que los logos crezcan */
+/* mural de marcas: logo recortado sobre la placa del color de cada marca */
+.gcwall{height:624px;display:flex;flex-direction:column;justify-content:center}
+.gcsplit .gccats{height:624px}
+.gcwall>p{font-size:20px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mute);text-align:center;margin-bottom:24px}
+.gclogos{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:16px}
+.blogo{border-radius:14px;overflow:hidden;border:1px solid #ececec;
+  display:flex;align-items:center;justify-content:center;padding:18px 30px}
+/* en flex el max-height en % si resuelve contra el alto de la placa */
+.blogo img{max-width:100%;max-height:100%;width:auto;height:auto;display:block}   /* la columna de categorias cede ancho para que los logos crezcan */
 .gccats{display:grid;grid-template-rows:repeat(5,1fr);gap:14px;height:706px}
 .gcbar{position:relative;border-radius:14px;overflow:hidden;background:var(--ink)}
 .gcbar img{width:100%;height:100%;object-fit:cover;display:block}
@@ -577,21 +583,25 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
         <article class="gcbar"><img src="assets/gcat-electrodomesticos.webp" alt="Cocina equipada"><b>Electrodomésticos</b></article>
       </div>
       <div class="gcwall">
-        <div class="blogo" style="background:#000000"><img src="assets/gcm-soriana.jpg" alt="Soriana"></div>
-        <div class="blogo" style="background:#000000"><img src="assets/gcm-amazon.jpg" alt="Amazon"></div>
-        <div class="blogo" style="background:#000000"><img src="assets/gcm-liverpool.jpg" alt="Liverpool"></div>
-        <div class="blogo" style="background:#000000"><img src="assets/gcm-starbucks.jpg" alt="Starbucks"></div>
-        <div class="blogo" style="background:#000000"><img src="assets/gcm-spotify.jpg" alt="Spotify"></div>
-        <div class="blogo" style="background:#13216a"><img src="assets/gcm-cinepolis.jpg" alt="Cinépolis"></div>
-        <div class="blogo" style="background:#000000"><img src="assets/gcm-xbox.jpg" alt="Xbox"></div>
-        <div class="blogo" style="background:#e70014"><img src="assets/gcm-nintendo.jpg" alt="Nintendo"></div>
-        <div class="blogo" style="background:#000000"><img src="assets/gcm-airbnb.jpg" alt="Airbnb"></div>
-        <div class="blogo" style="background:#ffffff"><img src="assets/gcm-walmart.jpg" alt="Walmart"></div>
-        <div class="blogo" style="background:#000000"><img src="assets/gcm-chedraui.jpg" alt="Chedraui"></div>
-        <div class="blogo" style="background:#ffffff"><img src="assets/gcm-innovasport.jpg" alt="Innovasport"></div>
+        <p>Algunos ejemplos de comercios</p>
+        <div class="gclogos">
+          <div class="blogo" style="background:#ffffff"><img src="assets/gcm-soriana.png" alt="Soriana"></div>
+          <div class="blogo" style="background:#232f3e"><img src="assets/gcm-amazon.png" alt="Amazon"></div>
+          <div class="blogo" style="background:#e5006d"><img src="assets/gcm-liverpool.png" alt="Liverpool"></div>
+          <div class="blogo" style="background:#ffffff"><img src="assets/gcm-starbucks.png" alt="Starbucks"></div>
+          <div class="blogo" style="background:#ffffff"><img src="assets/gcm-spotify.png" alt="Spotify"></div>
+          <div class="blogo" style="background:#13216a"><img src="assets/gcm-cinepolis.png" alt="Cinépolis"></div>
+          <div class="blogo" style="background:#107c10"><img src="assets/gcm-xbox.png" alt="Xbox"></div>
+          <div class="blogo" style="background:#e70014"><img src="assets/gcm-nintendo.png" alt="Nintendo"></div>
+          <div class="blogo" style="background:#ff5a5f"><img src="assets/gcm-airbnb.png" alt="Airbnb"></div>
+          <div class="blogo" style="background:#ffffff"><img src="assets/gcm-walmart.png" alt="Walmart"></div>
+          <div class="blogo" style="background:#ffffff"><img src="assets/gcm-chedraui.png" alt="Chedraui"></div>
+          <div class="blogo" style="background:#ffffff"><img src="assets/gcm-innovasport.png" alt="Innovasport"></div>
+        </div>
       </div>
     </div>
   </div>
+  <p class="kicker">Estas son algunas de las categorías y algunos de los comercios: <b>el catálogo completo es más amplio.</b></p>
 </section>
 
 <!-- 7 — FORMATO DE ENTREGA --------------------------------------------------- -->
