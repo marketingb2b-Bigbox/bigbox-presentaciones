@@ -133,6 +133,14 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
    "Box / Nombre.", descripción, precio y el botón coral que lleva a la
    versión Gift Cards. */
 .edis{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:36px}
+/* MX tiene tres ediciones, no cuatro: mas ancho por ficha y foto mas alta */
+.edis.tres{grid-template-columns:repeat(3,1fr);gap:26px;margin-top:32px}
+.edis.tres .edi figure{height:322px}
+.edis.tres .edi>h3{font-size:31px;padding:24px 28px 14px}
+.edis.tres .edi .ebody{padding:16px 28px 26px}
+.edi .etag{font-size:18px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--accent);line-height:1.3;margin-bottom:10px}
+.edi .etx{font-size:20px;line-height:1.45;color:var(--mute)}
 .edisnota{position:absolute;left:112px;right:112px;bottom:70px;font-size:25px;line-height:1.4;color:var(--mute)}
 .edisnota b{color:var(--text);font-weight:700}
 .edi{background:var(--paper-2);border:1px solid #e4e4e4;border-radius:16px;overflow:hidden;
@@ -789,7 +797,56 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   </div>
 </section>
 
-<!-- 13 — EL CATÁLOGO 1/3 --------------------------------------------- -->
+<!-- 13 — EL CATÁLOGO DE FIN DE AÑO ----------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>El catálogo de fin de año</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:24px">Las tres ediciones de fin de año.</h2>
+    <p class="lead" style="margin-top:16px">Todas combinan experiencias y productos. Lo que cambia es el presupuesto.</p>
+    <div class="edis tres">
+      <article class="edi">
+        <h3>Comparte</h3>
+        <figure><img src="assets/edi-mx-comparte.jpg" alt="Edición Comparte"></figure>
+        <div class="ebody">
+          <p class="etag">Un detalle flexible y accesible</p>
+          <p class="etx">Desayunos y gift cards seleccionadas.</p>
+          <p class="eprice">$X <small>+ IVA</small></p>
+          <div class="ebtns">
+            <a class="sin" href="#" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
+      </article>
+      <article class="edi">
+        <h3>Disfruta</h3>
+        <figure><img src="assets/edi-mx-disfruta.jpg" alt="Edición Disfruta"></figure>
+        <div class="ebody">
+          <p class="etag">La opción más completa para equipos</p>
+          <p class="etx">Gift cards, vinos, tecnología, masajes, cenas y actividades familiares.</p>
+          <p class="eprice">$X <small>+ IVA</small></p>
+          <div class="ebtns">
+            <a class="sin" href="#" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
+      </article>
+      <article class="edi">
+        <h3>Celebración</h3>
+        <figure><img src="assets/edi-mx-celebracion.jpg" alt="Edición Celebración"></figure>
+        <div class="ebody">
+          <p class="etag">Para clientes clave y reconocimientos</p>
+          <p class="etx">Tecnología superior, gastronomía premium, bienestar y experiencias exclusivas.</p>
+          <p class="eprice">$X <small>+ IVA</small></p>
+          <div class="ebtns">
+            <a class="sin" href="#" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+  <p class="edisnota">Cada persona elige qué se lleva <b>dentro de la edición que definas.</b></p>
+</section>
+
+<!-- 14 — EL CATÁLOGO DE CANASTAS 1/3 --------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
@@ -834,7 +891,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <p class="kicker">Precios sin IVA. <b>Elegimos juntos la que entra en tu presupuesto.</b></p>
 </section>
 
-<!-- 14 — EL CATÁLOGO 2/3 --------------------------------------------- -->
+<!-- 15 — EL CATÁLOGO DE CANASTAS 2/3 --------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
@@ -879,7 +936,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <p class="kicker">Precios sin IVA. <b>Elegimos juntos la que entra en tu presupuesto.</b></p>
 </section>
 
-<!-- 15 — EL CATÁLOGO 3/3 --------------------------------------------- -->
+<!-- 16 — EL CATÁLOGO DE CANASTAS 3/3 --------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
