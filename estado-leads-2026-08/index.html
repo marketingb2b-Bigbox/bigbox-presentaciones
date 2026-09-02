@@ -9,10 +9,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* Sistema de presentaciones Bigbox Corpo — ver presentaciones/_sistema/DESIGN-SYSTEM.md.
-   Slide de status para reunión gerencial. Canvas 1920x1080 escalado por JS. */
+   Slide de status para reunión gerencial. Canvas 1920x1080 escalado por JS.
+
+   ALTURAS: el canvas es fijo (1080), así que cada slide se compone para cerrar adentro.
+   El remate va absolute a bottom:44 y ocupa hasta ~964: todo lo de arriba tiene que
+   terminar antes. Verificado renderizando con Chrome headless, no a ojo.
+     Slide 1: 76 pad + 22 eyebrow + 22 + 67 h1 + 14 + 38 lead + 22 + 320 gráfico
+              + 22 + 272 cards = 875.
+     Slide 2: h1 y bajada van a 2 líneas; la tabla lleva los canales como GRUPOS DE
+              COLUMNAS (una fila por país). Apilada en dos secciones eran 15 filas
+              (~1229px) y la sección Referral se caía por debajo del remate.
+   Si se toca el alto del gráfico hay que reescalar las Y del SVG: y = 278*(25-v)/105,
+   donde v es el % interanual. Los puntos NO son coordenadas arbitrarias. */
 :root{
   --ink:#232427; --paper:#ffffff; --paper-2:#f1f1f1; --text:#1a1b1e; --mute:#6a6c70;
   --accent:#5cb2bd; --accent-tint:#cae6e9; --accent-soft:#9bcfd6; --accent-deep:#232427;
+  --neg:#b5453b; --pos:#3c7d52;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0d0d0f;overflow:hidden}
@@ -25,37 +37,43 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 
 .eyebrow{display:flex;align-items:center;gap:14px;font-size:20px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;line-height:1}
 .eyebrow .dot{width:22px;height:22px;border-radius:50%;background:var(--accent);flex:none}
-.h1{font-size:60px;font-weight:400;line-height:1.12;letter-spacing:-.02em;margin-top:26px}
+.h1{font-size:60px;font-weight:400;line-height:1.12;letter-spacing:-.02em;margin-top:22px}
 .h1 b{font-weight:700}
-.lead{font-size:26px;line-height:1.45;color:var(--mute);max-width:1400px;margin-top:16px}
-.kicker{position:absolute;left:112px;right:112px;bottom:52px;font-size:24px;line-height:1.5;color:var(--mute)}
+.kicker{position:absolute;left:112px;right:112px;bottom:44px;font-size:24px;line-height:1.5;color:var(--mute)}
 .kicker b{color:var(--text);font-weight:700}
 
-/* --- gráfico de la ruptura --------------------------------------------- */
-.chartwrap{margin-top:30px;height:296px;position:relative}
-.legend{position:absolute;right:0;top:-6px;display:flex;gap:26px;font-size:19px;color:var(--mute)}
-.legend i{display:inline-block;width:26px;height:4px;border-radius:2px;margin-right:9px;vertical-align:middle}
+/* fila de bajada + leyenda: la leyenda vive ACÁ y no dentro del gráfico,
+   donde chocaba con el rótulo de la banda gris. */
+.subrow{display:flex;align-items:flex-end;justify-content:space-between;gap:60px;margin-top:14px}
+.subrow .lead{font-size:26px;line-height:1.45;color:var(--mute);max-width:1180px}
+.legend{display:flex;gap:28px;font-size:20px;color:var(--mute);white-space:nowrap;flex:none}
+.legend i{display:inline-block;width:28px;height:5px;border-radius:3px;margin-right:10px;vertical-align:middle}
 
-/* --- cards de mensaje --------------------------------------------------- */
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:26px}
-.card{background:var(--accent);color:#fff;border-radius:20px;padding:30px 30px 32px;min-height:268px;display:flex;flex-direction:column}
+.chartwrap{margin-top:22px;height:320px}
+
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:22px}
+.card{background:var(--accent);color:#fff;border-radius:20px;padding:28px 28px 30px;min-height:272px;display:flex;flex-direction:column}
 .card.ink{background:var(--ink)}
-.card .n{font-size:56px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.card .n{font-size:54px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.card .n.sm{font-size:42px}
 .card .lbl{font-size:22px;font-weight:700;margin-top:8px;line-height:1.2}
-.card p{font-size:20px;line-height:1.45;color:rgba(255,255,255,.9);margin-top:16px}
+.card p{font-size:20px;line-height:1.45;color:rgba(255,255,255,.9);margin-top:14px}
 
-/* --- anexo: tabla por país ---------------------------------------------- */
-table.anx{width:100%;border-collapse:collapse;margin-top:38px;font-size:23px}
-table.anx th{font-size:19px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);
-  text-align:right;padding:0 18px 14px;border-bottom:2px solid var(--paper-2)}
+/* --- anexo: una fila por país, canales como grupos de columnas ----------- */
+table.anx{width:100%;border-collapse:collapse;margin-top:30px;font-size:23px;table-layout:fixed}
+table.anx col.c1{width:186px}
+table.anx th{font-weight:600;color:var(--mute);padding:0 14px 12px;text-align:right;
+  font-size:17px;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid var(--paper-2)}
 table.anx th:first-child{text-align:left}
-table.anx td{padding:15px 18px;text-align:right;border-bottom:1px solid var(--paper-2)}
+table.anx tr.grp th{font-size:18px;font-weight:700;letter-spacing:.08em;color:var(--accent);
+  text-align:center;padding:0 14px 10px;border-bottom:none}
+table.anx tr.grp th.b{border-left:1px solid var(--paper-2)}
+table.anx td{padding:19px 14px;text-align:right;border-bottom:1px solid var(--paper-2)}
 table.anx td:first-child{text-align:left;font-weight:600}
-table.anx tr.tot td{border-top:2px solid var(--accent);border-bottom:none;font-weight:700;padding-top:18px}
-table.anx .neg{color:#b5453b;font-weight:700}
-table.anx .pos{color:#3c7d52;font-weight:700}
-table.anx .grp td{padding:26px 18px 8px;font-size:19px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--accent);border-bottom:none;text-align:left}
+table.anx td.b{border-left:1px solid var(--paper-2)}
+table.anx tr.tot td{border-top:2px solid var(--accent);border-bottom:none;font-weight:700;padding-top:16px}
+table.anx .neg{color:var(--neg);font-weight:700}
+table.anx .pos{color:var(--pos);font-weight:700}
 
 #dots{position:fixed;left:0;right:0;bottom:18px;display:flex;justify-content:center;gap:8px;z-index:10}
 #dots b{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:.2s}
@@ -70,60 +88,63 @@ table.anx .grp td{padding:26px 18px 8px;font-size:19px;font-weight:700;letter-sp
   <div class="pad">
     <div class="eyebrow"><span class="dot"></span>EL ESTADO DE LOS LEADS</div>
     <h1 class="h1">El quiebre es en julio. <b>Y es solo de Publicidad.</b></h1>
-    <p class="lead">Leads calificados, los 5 países. Variación interanual mes a mes — cada punto compara contra el mismo mes de 2025.</p>
 
-    <div class="chartwrap">
+    <div class="subrow">
+      <p class="lead">Leads calificados, los 5 países. Cada punto compara contra el mismo mes de 2025.</p>
       <div class="legend">
         <span><i style="background:#232427"></i>Publicidad</span>
         <span><i style="background:#5cb2bd"></i>Referral</span>
       </div>
-      <svg viewBox="0 0 1696 296" width="1696" height="296" role="img" aria-label="Variación interanual de leads calificados por mes">
-        <!-- banda: desde que la gestión pasa a performance interno -->
-        <rect x="1272" y="0" width="388" height="252" fill="#f1f1f1"/>
-        <text x="1290" y="26" font-size="19" font-weight="700" fill="#6a6c70" letter-spacing=".06em">GESTIÓN PERFORMANCE INTERNO</text>
-        <line x1="1272" y1="0" x2="1272" y2="252" stroke="#6a6c70" stroke-width="2" stroke-dasharray="6 5"/>
+    </div>
 
-        <!-- eje 0% -->
-        <line x1="46" y1="59.5" x2="1660" y2="59.5" stroke="#d8d8d8" stroke-width="2"/>
-        <text x="0" y="66" font-size="19" fill="#6a6c70">0%</text>
-        <line x1="46" y1="178.6" x2="1660" y2="178.6" stroke="#ececec" stroke-width="1"/>
-        <text x="0" y="185" font-size="19" fill="#c2c2c2">-50%</text>
+    <div class="chartwrap">
+      <svg viewBox="0 0 1696 320" width="1696" height="320" role="img" aria-label="Variación interanual de leads calificados por mes, 2026 contra 2025">
+        <!-- banda: desde que la gestión pasa a performance interno -->
+        <rect x="1272" y="0" width="388" height="278" fill="#f1f1f1"/>
+        <line x1="1272" y1="0" x2="1272" y2="278" stroke="#6a6c70" stroke-width="2" stroke-dasharray="6 5"/>
+        <text x="1288" y="24" font-size="18" font-weight="700" fill="#6a6c70" letter-spacing=".05em">GESTIÓN PERFORMANCE INTERNO</text>
+
+        <!-- ejes de referencia -->
+        <line x1="46" y1="66.2" x2="1660" y2="66.2" stroke="#d8d8d8" stroke-width="2"/>
+        <text x="0" y="72" font-size="18" fill="#6a6c70">0%</text>
+        <line x1="46" y1="198.6" x2="1660" y2="198.6" stroke="#ececec" stroke-width="1"/>
+        <text x="0" y="205" font-size="18" fill="#c2c2c2">-50%</text>
 
         <!-- Referral -->
         <polyline fill="none" stroke="#5cb2bd" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"
-          points="70,185.7 288.6,166.7 507.1,135.7 725.7,100 944.3,83.3 1162.9,83.3 1381.4,90.5 1600,123.8"/>
+          points="70,206.5 288.6,185.3 507.1,150.9 725.7,111.2 944.3,92.7 1162.9,92.7 1381.4,100.6 1600,137.7"/>
         <g fill="#5cb2bd">
-          <circle cx="70" cy="185.7" r="6"/><circle cx="288.6" cy="166.7" r="6"/><circle cx="507.1" cy="135.7" r="6"/>
-          <circle cx="725.7" cy="100" r="6"/><circle cx="944.3" cy="83.3" r="6"/><circle cx="1162.9" cy="83.3" r="6"/>
-          <circle cx="1381.4" cy="90.5" r="8"/><circle cx="1600" cy="123.8" r="8"/>
+          <circle cx="70" cy="206.5" r="6"/><circle cx="288.6" cy="185.3" r="6"/><circle cx="507.1" cy="150.9" r="6"/>
+          <circle cx="725.7" cy="111.2" r="6"/><circle cx="944.3" cy="92.7" r="6"/><circle cx="1162.9" cy="92.7" r="6"/>
+          <circle cx="1381.4" cy="100.6" r="8"/><circle cx="1600" cy="137.7" r="8"/>
         </g>
-        <text x="1381.4" y="76" font-size="21" font-weight="700" fill="#5cb2bd" text-anchor="middle">-13%</text>
-        <text x="1600" y="110" font-size="21" font-weight="700" fill="#5cb2bd" text-anchor="middle">-27%</text>
+        <text x="1381.4" y="85" font-size="21" font-weight="700" fill="#5cb2bd" text-anchor="middle">-13%</text>
+        <text x="1600" y="122" font-size="21" font-weight="700" fill="#5cb2bd" text-anchor="middle">-27%</text>
 
         <!-- Publicidad -->
         <polyline fill="none" stroke="#232427" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"
-          points="70,178.6 288.6,88.1 507.1,14.3 725.7,128.6 944.3,83.3 1162.9,104.8 1381.4,223.8 1600,226.2"/>
+          points="70,198.6 288.6,98 507.1,15.9 725.7,143 944.3,92.7 1162.9,116.5 1381.4,248.8 1600,251.5"/>
         <g fill="#232427">
-          <circle cx="70" cy="178.6" r="6"/><circle cx="288.6" cy="88.1" r="6"/><circle cx="507.1" cy="14.3" r="6"/>
-          <circle cx="725.7" cy="128.6" r="6"/><circle cx="944.3" cy="83.3" r="6"/><circle cx="1162.9" cy="104.8" r="6"/>
-          <circle cx="1381.4" cy="223.8" r="9"/><circle cx="1600" cy="226.2" r="9"/>
+          <circle cx="70" cy="198.6" r="6"/><circle cx="288.6" cy="98" r="6"/><circle cx="507.1" cy="15.9" r="6"/>
+          <circle cx="725.7" cy="143" r="6"/><circle cx="944.3" cy="92.7" r="6"/><circle cx="1162.9" cy="116.5" r="6"/>
+          <circle cx="1381.4" cy="248.8" r="9"/><circle cx="1600" cy="251.5" r="9"/>
         </g>
-        <text x="1381.4" y="252" font-size="24" font-weight="700" fill="#232427" text-anchor="middle">-69%</text>
-        <text x="1600" y="254" font-size="24" font-weight="700" fill="#232427" text-anchor="middle">-70%</text>
+        <text x="1381.4" y="280" font-size="24" font-weight="700" fill="#232427" text-anchor="middle">-69%</text>
+        <text x="1600" y="282" font-size="24" font-weight="700" fill="#232427" text-anchor="middle">-70%</text>
 
         <!-- meses -->
         <g font-size="21" fill="#6a6c70" text-anchor="middle">
-          <text x="70" y="288">ene</text><text x="288.6" y="288">feb</text><text x="507.1" y="288">mar</text>
-          <text x="725.7" y="288">abr</text><text x="944.3" y="288">may</text><text x="1162.9" y="288">jun</text>
-          <text x="1381.4" y="288" font-weight="700" fill="#232427">jul</text>
-          <text x="1600" y="288" font-weight="700" fill="#232427">ago</text>
+          <text x="70" y="314">ene</text><text x="288.6" y="314">feb</text><text x="507.1" y="314">mar</text>
+          <text x="725.7" y="314">abr</text><text x="944.3" y="314">may</text><text x="1162.9" y="314">jun</text>
+          <text x="1381.4" y="314" font-weight="700" fill="#232427">jul</text>
+          <text x="1600" y="314" font-weight="700" fill="#232427">ago</text>
         </g>
       </svg>
     </div>
 
     <div class="cards">
       <div class="card ink">
-        <div class="n">-69% / -70%</div>
+        <div class="n sm">-69% / -70%</div>
         <div class="lbl">Publicidad en julio y agosto</div>
         <p>Hasta junio venía -18% interanual. Referral, que no cambió de gestión, siguió su curva: -13% y -27%.</p>
       </div>
@@ -153,36 +174,56 @@ table.anx .grp td{padding:26px 18px 8px;font-size:19px;font-weight:700;letter-sp
   <div class="pad">
     <div class="eyebrow"><span class="dot"></span>EL DETALLE</div>
     <h1 class="h1">La caída es en los cinco países. <b>Y la inversión subió en cuatro.</b></h1>
-    <p class="lead">Bimestre julio + agosto, leads calificados. La inversión es de julio: agosto todavía no está cargado en el sheet de origen.</p>
+
+    <div class="subrow">
+      <p class="lead">Leads calificados del bimestre julio + agosto. La inversión es de julio: agosto todavía no está cargado en el sheet de origen.</p>
+    </div>
 
     <table class="anx">
+      <colgroup><col class="c1"><col span="9"></colgroup>
       <thead>
+        <tr class="grp">
+          <th></th>
+          <th colspan="3" class="b">Publicidad</th>
+          <th colspan="3" class="b">Referral — sin cambio de gestión</th>
+          <th colspan="3" class="b">Inversión de julio · US$</th>
+        </tr>
         <tr>
           <th>País</th>
-          <th>jul+ago 2025</th><th>jul+ago 2026</th><th>Δ leads</th><th>Δ %</th>
-          <th>Inversión jul-25</th><th>Inversión jul-26</th><th>Δ inversión</th>
+          <th class="b">jul+ago 25</th><th>jul+ago 26</th><th>Δ %</th>
+          <th class="b">jul+ago 25</th><th>jul+ago 26</th><th>Δ %</th>
+          <th class="b">jul-25</th><th>jul-26</th><th>Δ %</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="grp"><td colspan="8">Publicidad</td></tr>
-        <tr><td>Argentina</td><td>256</td><td>57</td><td class="neg">-199</td><td class="neg">-77,7%</td><td>US$ 3.981</td><td>US$ 4.700</td><td class="pos">+18,1%</td></tr>
-        <tr><td>Chile</td><td>74</td><td>29</td><td class="neg">-45</td><td class="neg">-60,8%</td><td>US$ 3.782</td><td>US$ 4.000</td><td class="pos">+5,8%</td></tr>
-        <tr><td>México</td><td>87</td><td>44</td><td class="neg">-43</td><td class="neg">-49,4%</td><td>US$ 5.487</td><td>US$ 6.200</td><td class="pos">+13,0%</td></tr>
-        <tr><td>Perú</td><td>145</td><td>49</td><td class="neg">-96</td><td class="neg">-66,2%</td><td>US$ 3.838</td><td>US$ 4.300</td><td class="pos">+12,0%</td></tr>
-        <tr><td>Uruguay</td><td>37</td><td>2</td><td class="neg">-35</td><td class="neg">-94,6%</td><td>US$ 3.477</td><td>US$ 3.300</td><td class="neg">-5,1%</td></tr>
-        <tr class="tot"><td>Total Publicidad</td><td>599</td><td>181</td><td class="neg">-418</td><td class="neg">-69,8%</td><td>US$ 20.565</td><td>US$ 22.500</td><td class="pos">+9,4%</td></tr>
-
-        <tr class="grp"><td colspan="8">Referral — sin cambio de gestión</td></tr>
-        <tr><td>Argentina</td><td>156</td><td>116</td><td class="neg">-40</td><td class="neg">-25,6%</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td>Chile</td><td>30</td><td>20</td><td class="neg">-10</td><td class="neg">-33,3%</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td>México</td><td>29</td><td>20</td><td class="neg">-9</td><td class="neg">-31,0%</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td>Perú</td><td>33</td><td>41</td><td class="pos">+8</td><td class="pos">+24,2%</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td>Uruguay</td><td>21</td><td>17</td><td class="neg">-4</td><td class="neg">-19,0%</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr class="tot"><td>Total Referral</td><td>269</td><td>214</td><td class="neg">-55</td><td class="neg">-20,4%</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>Argentina</td>
+          <td class="b">256</td><td>57</td><td class="neg">-77,7%</td>
+          <td class="b">156</td><td>116</td><td class="neg">-25,6%</td>
+          <td class="b">3.981</td><td>4.700</td><td class="pos">+18,1%</td></tr>
+        <tr><td>Chile</td>
+          <td class="b">74</td><td>29</td><td class="neg">-60,8%</td>
+          <td class="b">30</td><td>20</td><td class="neg">-33,3%</td>
+          <td class="b">3.782</td><td>4.000</td><td class="pos">+5,8%</td></tr>
+        <tr><td>México</td>
+          <td class="b">87</td><td>44</td><td class="neg">-49,4%</td>
+          <td class="b">29</td><td>20</td><td class="neg">-31,0%</td>
+          <td class="b">5.487</td><td>6.200</td><td class="pos">+13,0%</td></tr>
+        <tr><td>Perú</td>
+          <td class="b">145</td><td>49</td><td class="neg">-66,2%</td>
+          <td class="b">33</td><td>41</td><td class="pos">+24,2%</td>
+          <td class="b">3.838</td><td>4.300</td><td class="pos">+12,0%</td></tr>
+        <tr><td>Uruguay</td>
+          <td class="b">37</td><td>2</td><td class="neg">-94,6%</td>
+          <td class="b">21</td><td>17</td><td class="neg">-19,0%</td>
+          <td class="b">3.477</td><td>3.300</td><td class="neg">-5,1%</td></tr>
+        <tr class="tot"><td>Total</td>
+          <td class="b">599</td><td>181</td><td class="neg">-69,8%</td>
+          <td class="b">269</td><td>214</td><td class="neg">-20,4%</td>
+          <td class="b">20.565</td><td>22.500</td><td class="pos">+9,4%</td></tr>
       </tbody>
     </table>
 
-    <p class="kicker">Referral cae 20% y Publicidad 70% con la misma demanda de mercado y más inversión. <b>Esa brecha entre los dos canales es la que hay que explicar.</b></p>
+    <p class="kicker">Referral cae 20% y Publicidad 70%, con la misma demanda de mercado y más inversión. <b>Esa brecha entre los dos canales es la que hay que explicar.</b></p>
   </div>
 </section>
 
