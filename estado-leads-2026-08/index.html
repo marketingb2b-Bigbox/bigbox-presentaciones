@@ -45,13 +45,13 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 /* fila de bajada + leyenda: la leyenda vive ACÁ y no dentro del gráfico,
    donde chocaba con el rótulo de la banda gris. */
 .subrow{display:flex;align-items:flex-end;justify-content:space-between;gap:60px;margin-top:14px}
-.subrow .lead{font-size:26px;line-height:1.45;color:var(--mute);max-width:1180px}
+.subrow .lead{font-size:26px;line-height:1.45;color:var(--mute);max-width:1300px}
 .legend{display:flex;gap:28px;font-size:20px;color:var(--mute);white-space:nowrap;flex:none}
 .legend i{display:inline-block;width:28px;height:5px;border-radius:3px;margin-right:10px;vertical-align:middle}
 
-.chartwrap{margin-top:22px;height:320px}
+.chartwrap{margin-top:22px;height:340px}
 
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:22px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:38px}
 .card{background:var(--accent);color:#fff;border-radius:20px;padding:28px 28px 30px;min-height:272px;display:flex;flex-direction:column}
 .card.ink{background:var(--ink)}
 .card .n{font-size:54px;font-weight:700;line-height:1;letter-spacing:-.03em}
@@ -90,7 +90,7 @@ table.anx .pos{color:var(--pos);font-weight:700}
     <h1 class="h1">El quiebre es en julio. <b>Y es solo de Publicidad.</b></h1>
 
     <div class="subrow">
-      <p class="lead">Leads calificados, los 5 países. Cada punto compara contra el mismo mes de 2025.</p>
+      <p class="lead">Cada punto compara contra el mismo mes de 2025 · leads calificados · 5 países.</p>
       <div class="legend">
         <span><i style="background:#232427"></i>Publicidad</span>
         <span><i style="background:#5cb2bd"></i>Referral</span>
@@ -98,46 +98,49 @@ table.anx .pos{color:var(--pos);font-weight:700}
     </div>
 
     <div class="chartwrap">
-      <svg viewBox="0 0 1696 320" width="1696" height="320" role="img" aria-label="Variación interanual de leads calificados por mes, 2026 contra 2025">
+      <svg viewBox="0 0 1696 340" width="1696" height="340" role="img" aria-label="Variación interanual de leads calificados por mes, 2026 contra 2025">
         <!-- banda: desde que la gestión pasa a performance interno -->
-        <rect x="1272" y="0" width="388" height="278" fill="#f1f1f1"/>
-        <line x1="1272" y1="0" x2="1272" y2="278" stroke="#6a6c70" stroke-width="2" stroke-dasharray="6 5"/>
+        <rect x="1272" y="0" width="388" height="268" fill="#f1f1f1"/>
+        <line x1="1272" y1="0" x2="1272" y2="268" stroke="#6a6c70" stroke-width="2" stroke-dasharray="6 5"/>
         <text x="1288" y="24" font-size="18" font-weight="700" fill="#6a6c70" letter-spacing=".05em">GESTIÓN PERFORMANCE INTERNO</text>
 
         <!-- ejes de referencia -->
-        <line x1="46" y1="66.2" x2="1660" y2="66.2" stroke="#d8d8d8" stroke-width="2"/>
-        <text x="0" y="72" font-size="18" fill="#6a6c70">0%</text>
-        <line x1="46" y1="198.6" x2="1660" y2="198.6" stroke="#ececec" stroke-width="1"/>
-        <text x="0" y="205" font-size="18" fill="#c2c2c2">-50%</text>
+        <line x1="46" y1="63.8" x2="1660" y2="63.8" stroke="#d8d8d8" stroke-width="2"/>
+        <text x="0" y="70" font-size="18" fill="#6a6c70">0%</text>
+        <line x1="46" y1="191.4" x2="1660" y2="191.4" stroke="#ececec" stroke-width="1"/>
+        <text x="0" y="198" font-size="18" fill="#c2c2c2">-50%</text>
 
         <!-- Referral -->
         <polyline fill="none" stroke="#5cb2bd" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"
-          points="70,206.5 288.6,185.3 507.1,150.9 725.7,111.2 944.3,92.7 1162.9,92.7 1381.4,100.6 1600,137.7"/>
+          points="70,199.1 288.6,178.7 507.1,145.5 725.7,107.2 944.3,89.3 1162.9,89.3 1381.4,97 1600,132.7"/>
         <g fill="#5cb2bd">
-          <circle cx="70" cy="206.5" r="6"/><circle cx="288.6" cy="185.3" r="6"/><circle cx="507.1" cy="150.9" r="6"/>
-          <circle cx="725.7" cy="111.2" r="6"/><circle cx="944.3" cy="92.7" r="6"/><circle cx="1162.9" cy="92.7" r="6"/>
-          <circle cx="1381.4" cy="100.6" r="8"/><circle cx="1600" cy="137.7" r="8"/>
+          <circle cx="70" cy="199.1" r="6"/><circle cx="288.6" cy="178.7" r="6"/><circle cx="507.1" cy="145.5" r="6"/>
+          <circle cx="725.7" cy="107.2" r="6"/><circle cx="944.3" cy="89.3" r="6"/><circle cx="1162.9" cy="89.3" r="6"/>
+          <circle cx="1381.4" cy="97" r="8"/><circle cx="1600" cy="132.7" r="8"/>
         </g>
-        <text x="1381.4" y="85" font-size="21" font-weight="700" fill="#5cb2bd" text-anchor="middle">-13%</text>
-        <text x="1600" y="122" font-size="21" font-weight="700" fill="#5cb2bd" text-anchor="middle">-27%</text>
+        <text x="1381.4" y="82" font-size="21" font-weight="700" fill="#5cb2bd" text-anchor="middle">-13%</text>
+        <text x="1600" y="118" font-size="21" font-weight="700" fill="#5cb2bd" text-anchor="middle">-27%</text>
 
         <!-- Publicidad -->
         <polyline fill="none" stroke="#232427" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"
-          points="70,198.6 288.6,98 507.1,15.9 725.7,143 944.3,92.7 1162.9,116.5 1381.4,248.8 1600,251.5"/>
+          points="70,191.4 288.6,94.4 507.1,15.3 725.7,137.8 944.3,89.3 1162.9,112.3 1381.4,239.9 1600,242.5"/>
         <g fill="#232427">
-          <circle cx="70" cy="198.6" r="6"/><circle cx="288.6" cy="98" r="6"/><circle cx="507.1" cy="15.9" r="6"/>
-          <circle cx="725.7" cy="143" r="6"/><circle cx="944.3" cy="92.7" r="6"/><circle cx="1162.9" cy="116.5" r="6"/>
-          <circle cx="1381.4" cy="248.8" r="9"/><circle cx="1600" cy="251.5" r="9"/>
+          <circle cx="70" cy="191.4" r="6"/><circle cx="288.6" cy="94.4" r="6"/><circle cx="507.1" cy="15.3" r="6"/>
+          <circle cx="725.7" cy="137.8" r="6"/><circle cx="944.3" cy="89.3" r="6"/><circle cx="1162.9" cy="112.3" r="6"/>
+          <circle cx="1381.4" cy="239.9" r="9"/><circle cx="1600" cy="242.5" r="9"/>
         </g>
-        <text x="1381.4" y="280" font-size="24" font-weight="700" fill="#232427" text-anchor="middle">-69%</text>
-        <text x="1600" y="282" font-size="24" font-weight="700" fill="#232427" text-anchor="middle">-70%</text>
+        <!-- el % solo no dice el tamaño del agujero: debajo va el absoluto -->
+        <text x="1381.4" y="272" font-size="24" font-weight="700" fill="#232427" text-anchor="middle">-69%</text>
+        <text x="1600" y="274" font-size="24" font-weight="700" fill="#232427" text-anchor="middle">-70%</text>
+        <text x="1381.4" y="296" font-size="19" fill="#6a6c70" text-anchor="middle">251 &#8594; 78 leads</text>
+        <text x="1600" y="298" font-size="19" fill="#6a6c70" text-anchor="middle">348 &#8594; 103 leads</text>
 
         <!-- meses -->
         <g font-size="21" fill="#6a6c70" text-anchor="middle">
-          <text x="70" y="314">ene</text><text x="288.6" y="314">feb</text><text x="507.1" y="314">mar</text>
-          <text x="725.7" y="314">abr</text><text x="944.3" y="314">may</text><text x="1162.9" y="314">jun</text>
-          <text x="1381.4" y="314" font-weight="700" fill="#232427">jul</text>
-          <text x="1600" y="314" font-weight="700" fill="#232427">ago</text>
+          <text x="70" y="330">ene</text><text x="288.6" y="330">feb</text><text x="507.1" y="330">mar</text>
+          <text x="725.7" y="330">abr</text><text x="944.3" y="330">may</text><text x="1162.9" y="330">jun</text>
+          <text x="1381.4" y="330" font-weight="700" fill="#232427">jul</text>
+          <text x="1600" y="330" font-weight="700" fill="#232427">ago</text>
         </g>
       </svg>
     </div>
@@ -165,7 +168,7 @@ table.anx .pos{color:var(--pos);font-weight:700}
       </div>
     </div>
 
-    <p class="kicker">Una migración de cuentas siempre tiene curva de aprendizaje, y puede haber quedado tracking sin reconfigurar. <b>Antes de leer esto como rendimiento del equipo hay que descartar esas dos causas: necesitamos el detalle de campañas de julio y agosto.</b></p>
+    <p class="kicker">Hasta junio los dos canales caían parejo. Desde julio Publicidad se despega: <b>418 leads calificados menos en el bimestre, gastando 9% más. Referral, con la misma demanda de mercado, perdió 55.</b></p>
   </div>
 </section>
 
