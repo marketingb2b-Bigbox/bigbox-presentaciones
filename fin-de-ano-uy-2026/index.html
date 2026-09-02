@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fin de Año 2026 — Bigbox Corpo Uruguay</title>
+<link rel="icon" href="../favicon.ico?v=4" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png?v=4">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png?v=4">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Sistema de presentaciones Bigbox Corpo — ver presentaciones/_sistema/DESIGN-SYSTEM.md */
+
+:root{
+  --ink:#232427;
+  --paper:#ffffff;
+  --paper-2:#f1f1f1;
+  --text:#1a1b1e;
+  --mute:#6a6c70;
+
+  /* ACENTO — muestreado del deck de Bigbox Sessions */
+  --accent:#5cb2bd;
+  --accent-tint:#cae6e9;
+  --accent-soft:#9bcfd6;
+  --accent-deep:#232427;   /* Sessions no tiene teal oscuro: usa el charcoal */
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#0d0d0f;overflow:hidden}
+body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
+
+#stage{position:fixed;inset:0;overflow:hidden}
+#deck{position:absolute;top:0;left:0;width:1920px;height:1080px;transform-origin:0 0;box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.slide{position:absolute;inset:0;background:var(--paper);overflow:hidden;display:none}
+.slide.on{display:block}
+
+.eyebrow{display:flex;align-items:center;gap:14px;font-size:20px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;line-height:1}
+.eyebrow .dot{width:22px;height:22px;border-radius:50%;background:var(--accent);flex:none}
+
+.h1{font-size:60px;font-weight:700;line-height:1.12;letter-spacing:-.02em}
+.h1.light{font-weight:400}
+.lead{font-size:28px;line-height:1.5;color:var(--mute);max-width:1400px}
+.lead.ancha{max-width:none}
+.lead b{color:var(--text);font-weight:700}
+.lead.big{font-size:34px;font-weight:700;color:var(--text)}
+
+.kicker{position:absolute;left:112px;right:112px;bottom:70px;font-size:26px;line-height:1.5;color:var(--mute)}
+.kicker b{color:var(--text);font-weight:700}
+
+.pad{position:absolute;inset:0;padding:92px 112px}
+.cobrand{position:absolute;top:64px;right:112px;height:46px;object-fit:contain}
+
+/* 1. COVER */
+.cover .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover video.bg{background:var(--ink)}
+.cover .scrim{position:absolute;inset:0;background:rgba(0,0,0,.42)}
+.cover .mark{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.cover .slogan{margin-top:40px;color:#fff;font-size:40px;font-weight:400;line-height:1.35;letter-spacing:-.01em;text-align:center;
+  text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.cover .slogan b{font-weight:700}
+.cover .mark img{height:150px;object-fit:contain}
+.closing .scrim{background:rgba(0,0,0,.52)}
+.closing .closing-line{color:#fff;font-size:54px;font-weight:400;line-height:1.26;letter-spacing:-.02em;
+  text-align:center;max-width:1420px;text-shadow:0 2px 28px rgba(0,0,0,.4)}
+.closing .closing-line b{font-weight:700}
+.closing .clogo{height:76px;margin-top:40px;object-fit:contain}
+.closing .ctalk{margin-top:38px;color:#fff;font-size:25px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+/* el QR va sobre placa blanca: sobre el video no escanea */
+.closing .qr{margin-top:16px;background:#fff;border-radius:20px;padding:18px;line-height:0;display:block}
+.closing .qr img{width:364px;height:364px;display:block;margin:0}
+
+.cover .pill{position:absolute;left:50%;transform:translateX(-50%);bottom:0;background:var(--accent);color:#fff;
+  padding:26px 76px 32px;border-radius:20px 20px 0 0;font-size:30px;font-weight:600;white-space:nowrap}
+
+/* 5. RAZONES — filas horizontales, fondo blanco con sombra e ícono en teal.
+   El feature va primero y en negro: la gente escanea la columna izquierda y
+   recién si algo le interesa lee la línea de abajo. */
+.reasons{display:grid;gap:14px;margin-top:34px}
+/* variante en fila: las cinco al lado, con el icono arriba. En columna angosta
+   el icono al costado no entra. */
+.reasons.row5{grid-template-columns:repeat(5,1fr);gap:18px;margin-top:52px}
+.reasons.row5 .reason{display:block;position:relative;overflow:hidden;padding:46px 34px 44px;min-height:516px;
+  background:#f5fafb;box-shadow:0 4px 22px rgba(16,18,20,.07),0 1px 3px rgba(16,18,20,.04)}
+.reasons.row5 .reason .wm{position:absolute;right:-42px;bottom:-46px;width:210px;height:210px;
+  stroke:var(--accent);fill:none;stroke-width:1;opacity:.16;pointer-events:none}
+.reasons.row5 .reason b,.reasons.row5 .reason span{position:relative;z-index:2}
+.reasons.row5 .reason .ico{width:94px;height:94px;margin-bottom:34px}
+.reasons.row5 .reason .ico svg{width:48px;height:48px}
+.reasons.row5 .reason b{font-size:27px;line-height:1.22;margin-bottom:14px}
+.reasons.row5 .reason span{font-size:21px;line-height:1.45}
+.reasons.row3{grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.reasons.row3 .reason{display:block;position:relative;overflow:hidden;padding:56px 44px 52px;min-height:520px;
+  background:#f5fafb;border:1px solid #e6eef0;
+  box-shadow:6px 10px 26px rgba(16,18,20,.10),2px 3px 7px rgba(16,18,20,.05)}
+.reasons.row3 .reason .wm{position:absolute;right:-54px;bottom:-58px;width:276px;height:276px;
+  stroke:var(--accent);fill:none;stroke-width:1;opacity:.15;pointer-events:none}
+.reasons.row3 .reason b,.reasons.row3 .reason span{position:relative;z-index:2}
+.reasons.row3 .reason .ico{width:112px;height:112px;margin-bottom:42px}
+.reasons.row3 .reason .ico svg{width:56px;height:56px;stroke-width:1.6}
+.reasons.row3 .reason b{font-size:42px;line-height:1.14;letter-spacing:-.01em;margin-bottom:20px;min-height:96px}
+.reasons.row3 .reason span{font-size:24px;line-height:1.5}
+.reason{display:grid;grid-template-columns:72px 1fr;gap:30px;align-items:center;
+  background:#fff;border-radius:16px;padding:21px 36px;
+  box-shadow:0 4px 20px rgba(16,18,20,.09),0 1px 3px rgba(16,18,20,.05)}
+.reason .ico{width:70px;height:70px;border-radius:50%;background:var(--accent-tint);display:grid;place-items:center}
+.reason .ico svg{width:38px;height:38px;stroke:var(--accent);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.reason b{display:block;font-size:27px;font-weight:700;line-height:1.2;color:var(--text);margin-bottom:6px}
+.reason span{font-size:22px;line-height:1.4;color:var(--mute)}
+
+/* 2+3. SPLIT CON FILAS — el layout de Bigbox Sessions.
+   Panel charcoal a la izquierda (titular arriba, bajada anclada abajo) y a la
+   derecha tres filas: foto cuadrada + card CLARA con título y dos líneas.
+   Las cards van claras: sobre oscuro la foto y el texto pelean. */
+.panel{position:absolute;left:0;top:0;width:960px;height:1080px;background:var(--ink);color:#fff;
+  padding:104px 96px;display:flex;flex-direction:column}
+.panel .h1{font-size:96px;line-height:.98;letter-spacing:-.03em;margin-top:44px}
+.panel .h1.two{font-size:84px;margin:auto 0}   /* titular corto: 2 lineas y centrado vertical */
+.panel .h1.three{font-size:78px;margin:auto 0}   /* 3 lineas */
+.panel .lead{font-size:26px;line-height:1.55;color:rgba(255,255,255,.8);max-width:660px}
+.panel .lead b{color:#fff;font-weight:700}
+
+.rows{position:absolute;left:960px;top:0;width:960px;height:1080px;
+  display:grid;grid-template-rows:repeat(3,1fr);gap:8px;background:var(--paper)}
+.row{display:grid;grid-template-columns:368px 1fr;background:var(--paper-2)}   /* #f1f1f1, muestreado del original */
+.row img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(1.08) saturate(1.04)}
+.row .rtx{padding:0 60px;display:flex;flex-direction:column;justify-content:center}
+.row .rtx h3{font-size:38px;font-weight:700;line-height:1.1;margin-bottom:16px}
+.row .rtx p{font-size:24px;line-height:1.5;color:var(--mute);max-width:440px}
+
+/* 20. EDICIONES — el formato de card del catálogo: foto con el rótulo
+   "Box / Nombre.", descripción, precio y el botón coral que lleva a la
+   versión Gift Cards. */
+.edis{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:36px}
+.edisnota{position:absolute;left:112px;right:112px;bottom:70px;font-size:25px;line-height:1.4;color:var(--mute)}
+.edisnota b{color:var(--text);font-weight:700}
+.edi{background:var(--paper-2);border:1px solid #e4e4e4;border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:5px 9px 22px rgba(16,18,20,.10),2px 3px 6px rgba(16,18,20,.06)}
+.edi figure{position:relative;height:344px}
+.edi figure img{width:100%;height:100%;object-fit:cover;display:block}
+.edi figure:after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(16,18,20,0) 58%,rgba(16,18,20,.6))}
+.edi>h3{padding:22px 24px 16px}
+.edi .ebody{position:relative;padding:18px 24px 24px;flex:1;display:flex;flex-direction:column}
+.edi h3{font-size:27px;font-weight:700;line-height:1.15}
+.edi .eprice{margin-top:auto;padding-top:14px;font-size:24px;font-weight:700;color:var(--text)}
+.edi .eprice small{font-size:18px;font-weight:500;color:var(--mute)}
+/* dos botones rotulados: cada uno dice adonde va */
+.edi .ebtns{margin-top:14px}
+.edi .ebtns .sin{display:inline-flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;
+  padding:13px 26px;border-radius:999px;text-decoration:none;transition:.15s;white-space:nowrap;
+  color:var(--accent);background:#fff;border:2px solid var(--accent)}
+.edi .ebtns .sin:hover{background:var(--accent);color:#fff}
+.edi .ebtns .con{text-align:center;font-size:18px;font-weight:600;white-space:nowrap;
+  color:var(--accent);text-decoration:none}
+.edi .ebtns .con:hover{text-decoration:underline}
+.edi .ebtns .ar{font-style:normal;margin-left:5px}
+
+/* 21. BENTO CLARO — mosaico de 2 columnas: dos cards apiladas a la
+   izquierda y una alta a la derecha. Misma card blanca que .pick.shot. */
+.bentow{display:grid;grid-template-columns:1.18fr 1fr;grid-template-rows:.92fr 1.08fr;
+  gap:22px;height:722px;margin-top:30px}
+.bcard{background:#fff;border:1px solid #ececec;border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:0 6px 28px rgba(16,18,20,.10),0 2px 6px rgba(16,18,20,.05)}
+.bcard>h3{padding:22px 28px 0;text-align:center}
+.bcard figure{flex:1;min-height:0;padding:12px 26px 2px}
+.bcard figure img{width:100%;height:100%;object-fit:contain;display:block}
+.bcard .bbody{padding:12px 28px 22px;text-align:center}
+.bcard h3{font-size:28px;font-weight:700;line-height:1.15;margin-bottom:6px}
+.bcard p{font-size:20px;line-height:1.45;color:var(--mute)}
+.bcard.tall{grid-column:2;grid-row:1/3}
+.bcard.tall>h3{padding:26px 34px 0}
+.bcard.tall figure{padding:16px 34px 8px}
+.bcard.tall .bbody{padding:0 34px 30px}
+.bcard.tall h3{font-size:33px;margin-bottom:8px}
+.bcard.tall p{font-size:21px}
+
+/* 19. BENTO — un mosaico, no tres cards iguales.
+   Tres cards del mismo tamaño se leen como tres productos sueltos; el bento
+   con una pieza dominante se lee como un solo regalo con cosas adentro. */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;
+  gap:20px;height:556px;margin-top:40px}
+.btile{position:relative;border-radius:18px;overflow:hidden;background:var(--ink)}
+.btile>img,.btile>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.btile:after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(16,18,20,0) 38%,rgba(16,18,20,.55) 68%,rgba(16,18,20,.88))}
+.btile .btx{position:absolute;left:34px;right:34px;bottom:30px;z-index:2;color:#fff}
+.btile h3{font-size:31px;font-weight:700;line-height:1.15;margin-bottom:8px}
+.btile p{font-size:21px;line-height:1.4;color:rgba(255,255,255,.9)}
+.btile.big{grid-column:1/3;grid-row:1/3}
+.btile.big .btx{left:44px;right:44px;bottom:40px}
+.btile.big h3{font-size:44px;margin-bottom:12px}
+.btile.big p{font-size:25px;max-width:700px}
+
+/* aclaración del ticket: una linea, no el bloque grande */
+.budget.slim{display:block;text-align:center;background:none;border-radius:0;padding:20px 34px;font-size:24px;
+  font-weight:500;color:var(--text);bottom:64px}
+.budget.slim b{font-weight:800}
+
+/* 15. PICKS — cards con foto arriba y texto abajo. El caballito para presentar
+   opciones de producto: 2 o 3 por fila. */
+.picks{display:grid;gap:24px;margin-top:44px}
+.picks.p2{grid-template-columns:1fr 1fr}
+.picks.p3{grid-template-columns:repeat(3,1fr)}
+.picks.p3.wide1{grid-template-columns:1.42fr 1fr 1fr}
+.pick{background:var(--paper-2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.pick figure{height:396px;background:#e6e6e6}
+.picks.big .pick figure{height:320px}   /* la slide de la propuesta va con foto grande */
+.picks.shot .pick{background:#fff;box-shadow:0 6px 28px rgba(16,18,20,.10),0 2px 6px rgba(16,18,20,.05)}
+.picks.shot .pick figure{height:372px;background:#fff;padding:30px 32px 0}
+.picks.shot .pick figure img{object-fit:contain}
+.picks.shot.tall .pick figure{height:432px}
+.picks.mid .pbody,.picks.mid .pick>h3{text-align:center}
+
+.pick figure img,.pick figure video{width:100%;height:100%;object-fit:cover;display:block}
+/* con rotulo + titulo + bajada arriba, la foto de 396 no entra */
+.picks.ideas{margin-top:36px}
+.picks.ideas .pick figure{height:344px}
+.pick>.ptag{padding:24px 32px 0;font-size:19px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent)}
+.pick>.ptag+h3{padding-top:10px}
+.pick>h3{padding:26px 32px 0}
+.pick .pbody{padding:14px 32px 32px;flex:1}
+.pick h3{font-size:31px;font-weight:700;line-height:1.15;margin-bottom:12px}
+.pick p{font-size:21px;line-height:1.5;color:var(--mute)}
+.pick p b{color:var(--text);font-weight:700}
+.pick ul{list-style:none;margin-top:14px}
+.pick li{font-size:20px;line-height:1.4;color:var(--mute);padding-left:22px;text-indent:-22px;margin-bottom:7px}
+.pick li:before{content:'• ';color:var(--accent);font-weight:700}
+
+/* 16. CATS — calcado de b2b.bigboxcorpo.com/ar/experiencias: cinco paneles
+   verticales con el nombre de la categoria rotado abajo a la izquierda. */
+.cats{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:46px}
+.cat{position:relative;height:524px;border-radius:16px;overflow:hidden;background:var(--ink)}
+/* 17. GCSPLIT — mitad categorías, mitad comercios.
+   Las categorías van apiladas en barras horizontales (no columnas), así que la
+   etiqueta va horizontal sobre un degradado desde la izquierda. Eso libera la
+   otra mitad para que la tira de logos entre grande. */
+.gcsplit{display:grid;grid-template-columns:.62fr 1.38fr;gap:44px;margin-top:38px}   /* la columna de categorias cede ancho para que los logos crezcan */
+.gccats{display:grid;grid-template-rows:repeat(5,1fr);gap:14px;height:706px}
+.gcbar{position:relative;border-radius:14px;overflow:hidden;background:var(--ink)}
+.gcbar img{width:100%;height:100%;object-fit:cover;display:block}
+.gcbar:after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(16,18,20,.85),rgba(16,18,20,.4) 52%,rgba(16,18,20,.08))}
+.gcbar b{position:absolute;left:30px;top:50%;transform:translateY(-50%);z-index:2;
+  color:#fff;font-size:29px;font-weight:600;letter-spacing:.01em}
+.gcbrands{height:706px;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.gcbrands p{font-size:20px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:26px}
+.gcbrands img{width:100%;height:auto;display:block}
+
+.cat img{width:100%;height:100%;object-fit:cover;display:block}
+.cat:after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(16,18,20,0) 42%,rgba(16,18,20,.78))}
+.cat b{position:absolute;left:24px;bottom:26px;z-index:2;color:#fff;font-size:27px;font-weight:600;
+  writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.01em}
+
+/* bloque de precio: ancla "desde", unidad explicita y que incluye */
+.budget{position:absolute;left:112px;right:112px;bottom:66px;display:flex;align-items:center;justify-content:center;gap:56px;
+  background:var(--accent-tint);color:var(--text);border-radius:16px;padding:26px 40px}
+.budget .btxt b{display:block;font-size:27px;font-weight:700;line-height:1.2;margin-bottom:6px}
+.budget .btxt em{font-style:normal;font-size:21px;line-height:1.4;color:rgba(26,27,30,.72)}
+.budget .bamount{display:flex;align-items:baseline;gap:14px;white-space:nowrap}
+.budget .bamount span{font-size:19px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(26,27,30,.6)}
+.budget .bamount strong{font-size:58px;font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--ink)}
+.budget .bamount u{text-decoration:none;font-size:22px;font-weight:600;color:rgba(26,27,30,.72)}
+
+/* 10. STRIP — tira de categorías a sangre */
+.strip{position:absolute;left:0;right:0;bottom:0;height:606px;display:grid;grid-template-columns:repeat(6,1fr)}
+.strip figure{position:relative;overflow:hidden;background:#e6e6e6}
+.strip figure img{width:100%;height:100%;object-fit:cover;display:block}
+.strip figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 22px;color:#fff;
+  background:linear-gradient(180deg,rgba(16,18,20,0),rgba(16,18,20,.88))}
+.strip figcaption b{display:block;font-size:24px;font-weight:700;line-height:1.15;margin-bottom:6px}
+.strip figcaption em{font-style:normal;font-size:17px;line-height:1.35;color:rgba(255,255,255,.8)}
+
+/* 14. RECORRIDOS — dos caminos completos de izquierda a derecha.
+   La version anterior mostraba los pasos comunes una vez y bifurcaba; obligaba
+   a rearmar el recorrido en la cabeza. Repetir los pasos compartidos cuesta
+   espacio pero se sigue de un vistazo. */
+.flows{display:grid;gap:26px;margin-top:42px}
+.flowtrack{display:grid;grid-template-columns:238px 1fr;background:var(--paper-2);border-radius:18px;overflow:hidden;min-height:300px}
+.flowtrack>img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(1.06)}
+.flowtrack .ft{padding:46px 46px 48px}
+.flowtrack h3{font-size:29px;font-weight:700;line-height:1.2;margin-bottom:36px}
+
+.track{list-style:none;display:grid}
+.track.n4{grid-template-columns:repeat(4,1fr)}
+.track.n5{grid-template-columns:repeat(5,1fr)}
+.tstep{position:relative;padding-right:26px}
+/* la linea une un paso con el siguiente y pasa por detras de los circulos */
+.tstep:not(:last-child):before{content:'';position:absolute;left:60px;top:25px;right:6px;height:2px;background:var(--accent);opacity:.45}
+.tstep i{position:relative;z-index:2;width:52px;height:52px;border-radius:50%;background:var(--accent);color:#fff;
+  font-style:normal;font-weight:700;font-size:24px;display:grid;place-items:center}
+.tstep p{margin-top:18px;font-size:22px;line-height:1.32;font-weight:600;color:var(--text);padding-right:16px}
+
+/* 8. MANIFIESTO */
+.statement{background:var(--accent-deep);color:#fff;text-align:center}
+.slide.statement.on{display:grid;place-items:center}
+.statement .h1{font-size:76px;font-weight:400;line-height:1.25;max-width:1500px}
+.statement .h1 b{font-weight:700}
+.statement .breadcrumb{margin-top:64px;font-size:26px;color:rgba(255,255,255,.75)}
+.statement .breadcrumb i{font-style:normal;margin:0 18px;opacity:.55}
+.statement .eyebrow{position:absolute;top:96px;left:112px;color:rgba(255,255,255,.85)}
+.statement .eyebrow .dot{background:var(--accent)}
+
+/* 22. EDICIONES x5 (UY) — cinco boxes en una fila. La grilla de cuatro no
+   entra: la foto baja de 344 a 270 y la tipografia de la card cede un escalon.
+   El nombre va por CSS sobre la tapa (como en PE): la tapa es un frame del
+   video, no una imagen con el nombre quemado. */
+.edis.cinco{grid-template-columns:repeat(5,1fr);gap:20px;margin-top:30px}
+.edis.cinco .edi figure{height:270px}
+.edis.cinco .edi>h3{padding:20px 22px 12px;font-size:24px}
+.edis.cinco .edi .ebody{padding:14px 22px 22px}
+.edis.cinco .edi .eprice{font-size:23px;padding-top:12px}
+.edis.cinco .edi .ebtns .sin{font-size:16px;padding:11px 20px}
+.edi figure{overflow:hidden}
+.edi figure figcaption{position:absolute;left:0;right:0;bottom:18px;z-index:2;text-align:center;
+  color:#fff;font-size:27px;font-weight:400;letter-spacing:-.01em;line-height:1.1;
+  text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.edi .etx{font-size:19px;line-height:1.4;color:var(--mute)}
+
+/* 23. CATS x4 — UY no tiene Entretenimiento; las cuatro categorias reales
+   de las boxes son Gastronomia, Estar Bien, Aventura y Estadias. */
+.cats.cuatro{grid-template-columns:repeat(4,1fr)}
+
+/* 24. CANLAY (UY) — la canasta cambia con la edicion, no es un catalogo
+   aparte de tres opciones como en AR. Foto a la izquierda y la escalera de
+   las cinco canastas a la derecha: lo que importa es que suma cada escalon. */
+.canlay{display:grid;grid-template-columns:582px 1fr;gap:48px;margin-top:38px}
+.canlay figure{border-radius:16px;overflow:hidden;height:620px;background:var(--paper-2)}
+.canlay figure img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(1.14) saturate(1.06)}
+.canlist{display:grid;grid-template-rows:repeat(5,1fr);gap:12px;height:620px}
+.canrow{background:var(--paper-2);border-radius:14px;padding:18px 32px;
+  display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:center}
+.canrow h3{font-size:26px;font-weight:700;line-height:1.15}
+.canrow h3 small{display:block;margin-top:5px;font-size:17px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.canrow p{font-size:21px;line-height:1.42;color:var(--mute)}
+.canrow p b{color:var(--text);font-weight:700}
+
+/* ============================ TRANSICIONES =============================== */
+/* Sin JS: el slide pasa de display:none a display:block al recibir .on, y eso
+   relanza cada animation. Entrada escalonada — rótulo, titular, bajada, cards. */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes pillUp{from{opacity:0;transform:translate(-50%,100%)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes kenburns{from{transform:scale(1.07)}to{transform:scale(1)}}
+
+.slide.on{animation:fadeIn .3s ease both}
+.slide.on .eyebrow{animation:fadeUp .5s .06s ease-out both}
+.slide.on .h1{animation:fadeUp .6s .14s ease-out both}
+.slide.on .lead{animation:fadeUp .6s .24s ease-out both}
+.slide.on .cobrand{animation:fadeIn .7s .1s ease both}
+.slide.on .kicker{animation:fadeUp .5s .62s ease-out both}
+.slide.on .budget{animation:fadeUp .5s .68s ease-out both}
+
+.slide.on .canlist>*,.slide.on .bentow>*,.slide.on .edis>*,.slide.on .bento>*,.slide.on .reasons>*,.slide.on .picks>*,.slide.on .strip>*,.slide.on .cats>*,.slide.on .rows>*{animation:fadeUp .5s ease-out both}
+.slide.on .bentow>*:nth-child(1),.slide.on .rows>*:nth-child(1),.slide.on .edis>*:nth-child(1),.slide.on .bento>*:nth-child(1),.slide.on .reasons>*:nth-child(1),.slide.on .picks>*:nth-child(1),.slide.on .canlist>*:nth-child(1),.slide.on .cats>*:nth-child(1),.slide.on .strip>*:nth-child(1){animation-delay:.34s}
+.slide.on .bentow>*:nth-child(2),.slide.on .rows>*:nth-child(2),.slide.on .edis>*:nth-child(2),.slide.on .bento>*:nth-child(2),.slide.on .reasons>*:nth-child(2),.slide.on .picks>*:nth-child(2),.slide.on .canlist>*:nth-child(2),.slide.on .cats>*:nth-child(2),.slide.on .strip>*:nth-child(2){animation-delay:.42s}
+.slide.on .bentow>*:nth-child(3),.slide.on .rows>*:nth-child(3),.slide.on .edis>*:nth-child(3),.slide.on .bento>*:nth-child(3),.slide.on .reasons>*:nth-child(3),.slide.on .picks>*:nth-child(3),.slide.on .canlist>*:nth-child(3),.slide.on .cats>*:nth-child(3),.slide.on .strip>*:nth-child(3){animation-delay:.50s}
+.slide.on .edis>*:nth-child(4),.slide.on .picks>*:nth-child(4),.slide.on .reasons>*:nth-child(4),.slide.on .canlist>*:nth-child(4),.slide.on .cats>*:nth-child(4),.slide.on .strip>*:nth-child(4){animation-delay:.58s}
+.slide.on .reasons>*:nth-child(5),.slide.on .canlist>*:nth-child(5),.slide.on .cats>*:nth-child(5),.slide.on .edis>*:nth-child(5),.slide.on .strip>*:nth-child(5),.slide.on .gccats>*:nth-child(5){animation-delay:.66s}
+.slide.on .gccats>*{animation:fadeUp .5s ease-out both}
+.slide.on .gccats>*:nth-child(1){animation-delay:.34s}
+.slide.on .gccats>*:nth-child(2){animation-delay:.42s}
+.slide.on .gccats>*:nth-child(3){animation-delay:.50s}
+.slide.on .gccats>*:nth-child(4){animation-delay:.58s}
+.slide.on .gcbrands{animation:fadeUp .5s .5s ease-out both}
+.slide.on .strip>*:nth-child(6){animation-delay:.74s}
+
+/* el flujo entra en orden: tramo común, el rótulo de la bifurcación, y las dos ramas */
+.slide.on .flows>*{animation:fadeUp .5s ease-out both}
+.slide.on .flows>*:nth-child(1){animation-delay:.32s}
+.slide.on .flows>*:nth-child(2){animation-delay:.46s}
+
+/* portada: la foto respira, la pill sube desde el borde */
+.cover.on img.bg{animation:kenburns 9s ease-out both}
+.cover.on .mark img{animation:fadeIn .9s .15s ease both}
+.cover.on .slogan{animation:fadeUp .8s .55s ease-out both}
+.cover.on .pill{animation:pillUp .6s .4s cubic-bezier(.2,.8,.25,1) both}
+.closing.on .closing-line{animation:fadeUp .85s .2s ease-out both}
+.closing.on .clogo{animation:fadeIn .9s .6s ease both}
+.closing.on .ctalk{animation:fadeUp .6s .9s ease-out both}
+.closing.on .qr{animation:fadeUp .7s 1.05s ease-out both}
+.statement.on .breadcrumb{animation:fadeUp .55s .5s ease-out both}
+
+@media (prefers-reduced-motion:reduce){.slide.on,.slide.on *{animation:none!important}}
+
+#dots{position:fixed;left:0;right:0;bottom:18px;display:flex;justify-content:center;gap:8px;z-index:10}
+#dots b{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:.2s}
+#dots b.on{background:#fff;width:22px;border-radius:4px}
+#hint{position:fixed;top:14px;right:18px;color:rgba(255,255,255,.35);font-size:12px;letter-spacing:.08em;z-index:10}
+
+/* ---- descarga a PDF ----
+   Sin librerias: se imprime a paginas de 297x167mm (A4 apaisado en 16:9),
+   una slide por pagina, y el usuario elige "Guardar como PDF". */
+#pdf{position:fixed;bottom:52px;right:24px;z-index:11;display:flex;align-items:center;gap:9px;
+  background:var(--ink);border:0;color:#fff;
+  font:600 14px 'Poppins',sans-serif;letter-spacing:.03em;border-radius:999px;padding:13px 22px;
+  cursor:pointer;transition:.18s;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+#pdf:hover{background:var(--accent)}
+#pdf svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round}
+
+@page{size:297mm 167.0625mm;margin:0}
+@media print{
+  html,body{width:297mm;height:auto;margin:0;padding:0;background:#fff;overflow:visible}
+  #stage{position:static;overflow:visible}
+  /* 297mm a 96dpi = 1122,52px; 1122,52 / 1920 = 0,5846457 */
+  #deck{position:static;width:1920px;height:auto;box-shadow:none;zoom:.5846457;
+    transform:none !important;left:auto !important;top:auto !important}
+  .slide{position:relative;display:block !important;width:1920px;height:1080px;overflow:hidden;
+    break-after:page;page-break-after:always}
+  /* la slide-frase centra por grid: display:block la desarmaria */
+  .slide.statement{display:grid !important;place-items:center}
+  .slide:last-child{break-after:auto;page-break-after:auto}
+  #dots,#hint,#pdf{display:none}
+  *{animation:none !important;transition:none !important;
+    -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+}
+</style>
+</head>
+<body>
+<div id="stage"><div id="deck">
+
+<!-- PORTADA ---------------------------------------------------------------- -->
+<section class="slide cover">
+  <video class="bg" autoplay muted loop playsinline poster="assets/hero-poster.webp" aria-hidden="true">
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
+  <div class="scrim"></div>
+  <div class="mark">
+    <img src="assets/logo-corpo-blanco.png" alt="Bigbox Corpo">
+    <p class="slogan">El mejor regalo de fin de año es<br><b>dejar que cada uno elija cómo disfrutarlo.</b></p>
+  </div>
+  <div class="pill">Fin de Año 2026 · Uruguay</div>
+</section>
+
+<!-- 1 — EL DESAFÍO ------------------------------------------------------- -->
+<section class="slide">
+  <div class="panel">
+    <div class="eyebrow"><span>¿Esto te suena?</span><i class="dot"></i></div>
+    <h2 class="h1 three">Un solo regalo<br>tiene que cubrir<br>cientos de gustos.</h2>
+    <p class="lead">Todos los años, la misma escena.<br><br><b>Lo que debería ser un momento para recordar termina siendo un trámite.</b></p>
+  </div>
+  <div class="rows">
+    <div class="row">
+      <img src="assets/pain-elige.jpg" alt="Escritorio de oficina con notas y planillas">
+      <div class="rtx">
+        <h3>Elegís por gustos que no conocés.</h3>
+        <p>Varias generaciones en el mismo equipo, y nadie tiene el detalle de qué le gusta a cada uno.</p>
+      </div>
+    </div>
+    <div class="row">
+      <img src="assets/pain-iguales-2.jpg" alt="Persona mirando con desgano el regalo que le tocó">
+      <div class="rtx">
+        <h3>Lo que a uno le encanta, a otro no le sirve.</h3>
+        <p>Preferencias, restricciones y edades distintas: un regalo único siempre deja gente afuera.</p>
+      </div>
+    </div>
+    <div class="row">
+      <img src="assets/pain-logistica.jpg" alt="Depósito lleno de cajas apiladas">
+      <div class="rtx">
+        <h3>Y el dolor de cabeza de la logística.</h3>
+        <p>Equipos entre Montevideo y el interior: cada envío suma costo, coordinación y reclamos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 — LA OPORTUNIDAD ----------------------------------------------------- -->
+<section class="slide statement">
+  <div>
+    <h2 class="h1">¿Y si mantenemos la tradición,<br>pero dejamos que <b>decida cada uno?</b></h2>
+    <p class="breadcrumb">Vos definís el presupuesto <i>&rsaquo;</i> Ellos eligen lo que más les gusta.</p>
+  </div>
+</section>
+
+<!-- 3 — LA PROPUESTA ------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>¿Qué te proponemos?</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Un solo regalo, múltiples opciones para elegir.</h2>
+    <p class="lead" style="margin-top:18px">Regalá un catálogo y que cada persona elija entre <b>experiencias o canastas navideñas.</b> Si querés, se le suman <b>gift cards.</b></p>
+    <div class="bento">
+      <article class="btile big">
+        <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-experiencias.jpg" aria-hidden="true">
+          <source src="assets/sol-experiencias.mp4" type="video/mp4">
+        </video>
+        <div class="btx">
+          <h3>Experiencias</h3>
+          <p>Más de 6.000 en todo el país: gastronomía, estar bien, aventura y estadías.</p>
+        </div>
+      </article>
+      <article class="btile">
+        <img src="assets/can-uy-panettone.jpg" alt="Panettone y luces de fin de año">
+        <div class="btx">
+          <h3>Canastas navideñas</h3>
+          <p>Una canasta distinta en cada edición.</p>
+        </div>
+      </article>
+      <article class="btile">
+        <img src="assets/gc-mano.jpg" alt="Gift Card de Bigbox en la mano">
+        <div class="btx">
+          <h3>Gift Cards</h3>
+          <p>Supermercado, deco, deportes, indumentaria y electro.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <p class="budget slim">Opciones a partir de <b>$890 + IVA</b> por persona.</p>
+</section>
+
+<!-- 4 — EXPERIENCIAS ------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>Experiencias</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Más de 6.000 experiencias para elegir.</h2>
+    <p class="lead" style="margin-top:20px">Desde <b>cenas</b> y <b>visitas a bodegas</b> hasta <b>escapadas de fin de semana</b>, pasando por <b>tardes de spa</b> y <b>salidas al aire libre</b>.</p>
+    <div class="cats cuatro">
+      <article class="cat"><img src="assets/cats-gastronomia.webp" alt="Cenas de autor y mesas memorables"><b>Gastronomía</b></article>
+      <article class="cat"><img src="assets/cats-estar-bien.webp" alt="Spa, masajes y circuitos de relax"><b>Estar Bien</b></article>
+      <article class="cat"><img src="assets/cats-aventura-uy.jpg" alt="Surf, trekking y parapente"><b>Aventura</b></article>
+      <article class="cat"><img src="assets/cats-estadias.webp" alt="Escapadas a hoteles y posadas"><b>Estadías</b></article>
+    </div>
+  </div>
+  <p class="kicker">De Montevideo y Colonia a Punta del Este, Rivera y Salto: <b>experiencias locales con una sola gestión.</b></p>
+</section>
+
+<!-- 5 — CANASTAS NAVIDEÑAS ------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>Canastas navideñas</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:26px">Una canasta distinta en cada edición.</h2>
+    <p class="lead" style="margin-top:18px">Los productos de las fiestas, en la versión que corresponde al presupuesto que elijas.</p>
+    <div class="canlay">
+      <figure><img src="assets/can-uy-canasta.jpg" alt="Canasta navideña con espumante y bombones"></figure>
+      <div class="canlist">
+        <article class="canrow">
+          <h3>Brindis 2026<small>12 productos</small></h3>
+          <p>Turrón, budín, chocolates, maníes, papas y <b>dos cervezas</b>.</p>
+        </article>
+        <article class="canrow">
+          <h3>Fiesta 2026<small>17 productos</small></h3>
+          <p>Suma <b>vino Cabernet Sauvignon</b>, aceitunas, bombones y dos budines más.</p>
+        </article>
+        <article class="canrow">
+          <h3>Celebración 2026<small>21 productos</small></h3>
+          <p>Suma <b>panettone</b>, un segundo vino, cervezas saborizadas y caramelos en lata.</p>
+        </article>
+        <article class="canrow">
+          <h3>Deluxe 2026<small>22 productos</small></h3>
+          <p>Suma <b>espumante</b>, vino reserva, bombones Lindor y panettone de 500 g.</p>
+        </article>
+        <article class="canrow">
+          <h3>Premiere 2026<small>23 productos</small></h3>
+          <p>Suma <b>vino rosé</b>, pistachos, maníes gourmet y Lindor de 200 g.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+  <p class="kicker">Envío a todo el país <b>&rsaquo; Nosotros nos encargamos de la logística.</b></p>
+</section>
+
+<!-- 6 — GIFT CARDS --------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>Gift Cards · opcional</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:26px">Gift Cards de las principales marcas.</h2>
+    <p class="lead" style="margin-top:18px">Créditos para usar en las mejores marcas, dentro de estas categorías.</p>
+    <div class="gcsplit">
+      <div class="gccats">
+        <article class="gcbar"><img src="assets/gcat-supermercado.webp" alt="Góndola de supermercado"><b>Supermercado</b></article>
+        <article class="gcbar"><img src="assets/gcat-homecenter-deco.webp" alt="Living con plantas y deco"><b>Homecenter &amp; Deco</b></article>
+        <article class="gcbar"><img src="assets/gcat-deportes.webp" alt="Entrenando en el gimnasio"><b>Deportes</b></article>
+        <article class="gcbar"><img src="assets/gcat-indumentaria.webp" alt="Local de indumentaria"><b>Indumentaria</b></article>
+        <article class="gcbar"><img src="assets/gcat-electrodomesticos.webp" alt="Cocina equipada"><b>Electrodomésticos</b></article>
+      </div>
+      <div class="gcbrands">
+        <p>Algunos ejemplos de comercios</p>
+        <img src="assets/gc-logos-uy.webp" alt="Comercios de Uruguay donde usar las gift cards">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 — FORMATO DE ENTREGA --------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>Formato de entrega</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Físico o digital. Vos elegís cómo llega.</h2>
+    <p class="lead" style="margin-top:20px">El mismo regalo, en el formato que más te sirva.</p>
+    <div class="picks p2 shot tall mid">
+      <article class="pick">
+        <h3>Formato físico</h3>
+        <figure><img src="assets/fmt-dentro.webp" alt="Box y catálogo con tu logo"></figure>
+        <div class="pbody">
+          <p>Box con <b>packaging personalizado</b>. La entregás en la oficina, o la mandamos al domicilio de cada uno.</p>
+        </div>
+      </article>
+      <article class="pick">
+        <h3>Formato digital</h3>
+        <figure><img src="assets/fmt-email-1phone.png" alt="Email con el catálogo de canje"></figure>
+        <div class="pbody">
+          <p>Enviás los regalos por <b>email</b>, con el catálogo de canje adentro. Sin logística y esté donde esté cada uno.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <p class="kicker">Se puede combinar: <b>digital para los que están lejos, físico para los que están en la oficina.</b></p>
+</section>
+
+<!-- 8 — PERSONALIZACIÓN ----------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>Personalización</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Cada envío lleva tu marca.</h2>
+    <p class="lead" style="margin-top:20px">Del packaging al saludo en video: todo sale con tu identidad.</p>
+    <div class="bentow">
+      <article class="bcard">
+        <h3>Tu marca en el catálogo físico</h3>
+        <figure><img src="assets/fmt-dentro.webp" alt="Box, díptico y catálogo con tu logo"></figure>
+        <div class="bbody"><p>Box y catálogo, con la identidad de tu empresa.</p></div>
+      </article>
+      <article class="bcard">
+        <h3>Tu marca en el catálogo digital</h3>
+        <figure><img src="assets/pers-digital.png" alt="Email de entrega con tu logo"></figure>
+        <div class="bbody"><p>El email de entrega y la apertura del regalo llevan tu logo.</p></div>
+      </article>
+      <article class="bcard tall">
+        <h3>Tu saludo en video</h3>
+        <figure><img src="assets/landing-cobrand.png" alt="Landing co-branded con video de saludo"></figure>
+        <div class="bbody"><p>El regalo abre en una página con tu logo y el video que le quieras mandar a tu equipo.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 9 — POR QUÉ ELEGIRNOS ------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>Por qué elegirnos</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Tres razones para cerrar el año con nosotros.</h2>
+    <p class="lead" style="margin-top:20px">No es solo el regalo: es todo lo que dejás de resolver vos.</p>
+    <div class="reasons row3">
+      <div class="reason">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
+        <svg class="wm" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        <div><b>Un solo regalo resuelve todo.</b><span>Experiencias y canastas navideñas en el mismo catálogo: cada persona elige la suya.</span></div>
+      </div>
+      <div class="reason">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg></span>
+        <svg class="wm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>
+        <div><b>Cobertura nacional e internacional.</b><span>Llega a donde esté cada uno, dentro y fuera de Uruguay.</span></div>
+      </div>
+      <div class="reason">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 16.5V6.5h12v10M13.5 9.5H18l4 4v3h-8.5"/><circle cx="6" cy="17.5" r="2.2"/><circle cx="17" cy="17.5" r="2.2"/></svg></span>
+        <svg class="wm" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 16.5V6.5h12v10M13.5 9.5H18l4 4v3h-8.5"/><circle cx="6" cy="17.5" r="2.2"/><circle cx="17" cy="17.5" r="2.2"/></svg>
+        <div><b>Logística incluida.</b><span>Nos encargamos de la coordinación y de los envíos. Vos no seguís direcciones ni reclamos.</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="kicker">Elegís un presupuesto. <b>Nosotros resolvemos todo lo demás.</b></p>
+</section>
+
+<!-- 10 — OTRAS IDEAS -------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>Otras ideas de regalo</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:26px">El mismo presupuesto, otras formas de usarlo.</h2>
+    <p class="lead ancha" style="margin-top:18px">Se puede concentrar en un premio grande para pocos, o llegar a más personas con una opción más accesible.</p>
+    <div class="picks p3 ideas">
+      <article class="pick">
+        <p class="ptag">Para la fiesta de fin de año</p>
+        <h3>¿Pensaste en hacer un sorteo?</h3>
+        <figure><img src="assets/idea-sorteo.webp" alt="Equipo festejando en la fiesta de fin de año"></figure>
+        <div class="pbody"><p>Un viaje, una experiencia del deporte o un box premium, sorteado adelante de todos. Con el mismo presupuesto que dabas por persona.</p></div>
+      </article>
+      <article class="pick">
+        <p class="ptag">Para talentos y clientes clave</p>
+        <h3>Viajes</h3>
+        <figure><img src="assets/idea-viajes.webp" alt="Avión despegando al atardecer"></figure>
+        <div class="pbody"><p>El viaje lo arma quien lo recibe. Nacionales e internacionales, todo incluido: vuelos, alojamiento, traslados y actividades.</p></div>
+      </article>
+      <article class="pick">
+        <p class="ptag">Para llegar a más personas</p>
+        <h3>Experiencias</h3>
+        <figure><img src="assets/idea-desayuno.jpg" alt="Desayuno servido en la mesa"></figure>
+        <div class="pbody"><p>Desayunos, almuerzos y tapeos, delivery y take away, bienestar, cursos y talleres. Para una o dos personas.</p></div>
+      </article>
+    </div>
+  </div>
+  <p class="kicker">Y no solo en diciembre: <b>cumpleaños, aniversarios y programas de incentivos funcionan igual.</b></p>
+</section>
+
+<!-- 11 — CIERRE -------------------------------------------------------------- -->
+<section class="slide cover closing">
+  <video class="bg" autoplay muted loop playsinline preload="metadata" poster="assets/poster-experiencias.jpg" aria-hidden="true">
+    <source src="assets/sol-experiencias.mp4" type="video/mp4">
+  </video>
+  <div class="scrim"></div>
+  <div class="mark">
+    <p class="closing-line">Que este fin de año,<br><b>cada uno se lleve lo que quiere.</b></p>
+    <img class="clogo" src="assets/logo-corpo-blanco.png" alt="Bigbox Corpo">
+    <p class="ctalk">Hablemos</p>
+    <a class="qr" href="https://b2b.bigboxcorpo.com/uy?utm_source=fecha_especial&amp;utm_medium=fecha_especial&amp;utm_campaign=UY_FinDeAno_2026&amp;utm_content=presentacion&amp;utm_term=#contacto" target="_blank" rel="noopener">
+      <img src="assets/qr-fin-de-ano-uy.png" alt="Código QR al sitio de Bigbox Corpo Uruguay">
+    </a>
+  </div>
+</section>
+
+<!-- 12 — EL CATÁLOGO -------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+  <div class="pad">
+    <div class="eyebrow"><span>El catálogo de fin de año</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:24px">Las cinco ediciones de fin de año.</h2>
+    <p class="lead" style="margin-top:16px">Todas tienen experiencias y canasta navideña. Lo que cambia es el presupuesto.</p>
+    <div class="edis cinco">
+      <article class="edi">
+        <h3>Brindis 2026</h3>
+        <figure>
+          <img src="assets/edi-uy-brindis.jpg" alt="Brindis 2026">
+          <figcaption>Brindis.</figcaption>
+        </figure>
+        <div class="ebody">
+          <p class="etx">Gastronomía: cafés, meriendas, brunch y cervecerías.</p>
+          <p class="eprice">$ 890 <small>+ IVA</small></p>
+          <div class="ebtns">
+            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/brindis-2026/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
+      </article>
+      <article class="edi">
+        <h3>Fiesta 2026</h3>
+        <figure>
+          <img src="assets/edi-uy-fiesta.jpg" alt="Fiesta 2026">
+          <figcaption>Fiesta.</figcaption>
+        </figure>
+        <div class="ebody">
+          <p class="etx">Suma aventura: trekking, surf, parapente y bike tours.</p>
+          <p class="eprice">$ 1.445 <small>+ IVA</small></p>
+          <div class="ebtns">
+            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/fiesta-2026/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
+      </article>
+      <article class="edi">
+        <h3>Celebración 2026</h3>
+        <figure>
+          <img src="assets/edi-uy-celebracion.jpg" alt="Celebración 2026">
+          <figcaption>Celebración.</figcaption>
+        </figure>
+        <div class="ebody">
+          <p class="etx">Suma estar bien: spa, masajes y estética.</p>
+          <p class="eprice">$ 2.030 <small>+ IVA</small></p>
+          <div class="ebtns">
+            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/celebracion-2026/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
+      </article>
+      <article class="edi">
+        <h3>Deluxe 2026</h3>
+        <figure>
+          <img src="assets/edi-uy-deluxe.jpg" alt="Deluxe 2026">
+          <figcaption>Deluxe.</figcaption>
+        </figure>
+        <div class="ebody">
+          <p class="etx">El mismo mix, con cenas de autor, bodegas y day spa.</p>
+          <p class="eprice">$ 3.600 <small>+ IVA</small></p>
+          <div class="ebtns">
+            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/deluxe-2026/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
+      </article>
+      <article class="edi">
+        <h3>Premiere 2026</h3>
+        <figure>
+          <img src="assets/edi-uy-premiere.jpg" alt="Premiere 2026">
+          <figcaption>Premiere.</figcaption>
+        </figure>
+        <div class="ebody">
+          <p class="etx">Suma estadías: hoteles boutique y aventura premium.</p>
+          <p class="eprice">$ 3.900 <small>+ IVA</small></p>
+          <div class="ebtns">
+            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/premiere-2026/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+  <p class="edisnota">¿Querés sumar gift cards? <b>Se agregan a cualquiera de las cinco ediciones.</b></p>
+</section>
+
+</div></div>
+<div id="dots"></div>
+<button id="pdf" title="Descargar la presentación en PDF">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5"/><path d="M4 17.5v1.8A1.7 1.7 0 0 0 5.7 21h12.6a1.7 1.7 0 0 0 1.7-1.7v-1.8"/></svg>
+  Descargar PDF
+</button>
+<div id="hint">← → navegar · F pantalla completa</div>
+
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+const dots = document.getElementById('dots');
+let i = 0;
+
+slides.forEach((_, n) => {
+  const b = document.createElement('b');
+  b.onclick = () => go(n);
+  dots.appendChild(b);
+});
+
+function go(n) {
+  i = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach((s, k) => s.classList.toggle('on', k === i));
+  [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
+}
+
+// Centrado calculado a mano: place-items:center sobre un hijo de 1920px
+// desborda antes de escalar y descentra el deck. Esto no falla.
+function fit() {
+  const deck = document.getElementById('deck');
+  const pad = document.fullscreenElement ? 0 : 44;   // aire para los dots
+  const s = Math.min(innerWidth / 1920, (innerHeight - pad) / 1080);
+  deck.style.transform = `scale(${s})`;
+  deck.style.left = Math.round((innerWidth - 1920 * s) / 2) + 'px';
+  deck.style.top = Math.round((innerHeight - pad - 1080 * s) / 2) + 'px';
+}
+
+addEventListener('resize', fit);
+document.addEventListener('fullscreenchange', fit);
+addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(i + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(i - 1);
+  if (e.key === 'Home') go(0);
+  if (e.key === 'End') go(slides.length - 1);
+  if (e.key.toLowerCase() === 'f') document.documentElement.requestFullscreen?.();
+});
+document.getElementById('stage').onclick = () => go(i + 1);
+document.getElementById('pdf').onclick = e => { e.stopPropagation(); print(); };
+
+fit(); go(0);
+</script>
+</body>
+</html>
