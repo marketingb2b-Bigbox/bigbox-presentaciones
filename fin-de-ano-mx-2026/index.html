@@ -450,8 +450,12 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
    engancha cada card con la slide que la explica: sin el, esas slides se leian como
    bloques sueltos y varios nos dijeron que no las entendian. */
 .btile .btop{position:absolute;left:34px;right:34px;top:26px;z-index:2;color:#fff;
-  font-size:31px;font-weight:700;line-height:1.15;display:flex;align-items:baseline;gap:11px}
-.btile .btop .bn{color:var(--accent);flex:none}
+  font-size:31px;font-weight:700;line-height:1.15;display:flex;align-items:center;gap:14px}
+.btile .btop .bn{flex:none;display:inline-flex;align-items:center;justify-content:center;
+  width:1.95em;height:1.95em;border-radius:50%;font-size:.58em;font-weight:700;line-height:1;
+  color:#fff;background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.45);
+  -webkit-backdrop-filter:blur(7px) saturate(1.25);backdrop-filter:blur(7px) saturate(1.25);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.38), 0 5px 16px -7px rgba(0,0,0,.7)}
 .btile.big .btop{left:44px;right:44px;top:36px;font-size:44px;gap:14px}
 .bento.cinco .btile .btop{font-size:26px;top:22px}
 .bento.cinco .btile.big .btop{font-size:40px}
@@ -537,28 +541,28 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
         <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-experiencias.jpg" aria-hidden="true">
           <source src="assets/sol-experiencias.mp4" type="video/mp4">
         </video>
-        <h3 class="btop"><span class="bn">1.</span>Experiencias</h3>
+        <h3 class="btop"><span class="bn">1</span>Experiencias</h3>
         <div class="btx">
           <p>Gastronomía, estadías, aventura, bienestar y más, en todo el país.</p>
         </div>
       </article>
       <article class="btile">
         <img src="assets/can-uy-panettone.jpg" alt="Panettone navideño con luces de fin de año">
-        <h3 class="btop"><span class="bn">2.</span>Canastas navideñas</h3>
+        <h3 class="btop"><span class="bn">2</span>Canastas navideñas</h3>
         <div class="btx">
           <p>Detalle, Brindis, Sobremesa y Legado.</p>
         </div>
       </article>
       <article class="btile">
         <img src="assets/gc-mano.jpg" alt="Gift card de Bigbox en la mano">
-        <h3 class="btop"><span class="bn">3.</span>Gift Cards</h3>
+        <h3 class="btop"><span class="bn">3</span>Gift Cards</h3>
         <div class="btx">
           <p>Supermercado, deco, deportes y más.</p>
         </div>
       </article>
       <article class="btile">
         <img src="assets/prod-tecno.jpg" alt="Audífonos inalámbricos sobre una mesa">
-        <h3 class="btop"><span class="bn">4.</span>Productos</h3>
+        <h3 class="btop"><span class="bn">4</span>Productos</h3>
         <div class="btx">
           <p>Audífonos y pantallas, vinos y chocolates.</p>
         </div>
