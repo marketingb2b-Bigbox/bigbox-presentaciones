@@ -149,7 +149,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .edi .eprice{margin-top:auto;padding-top:14px;font-size:24px;font-weight:700;color:var(--text)}
 .edi .eprice small{font-size:18px;font-weight:500;color:var(--mute)}
 /* dos botones rotulados: cada uno dice adonde va */
-.edi .ebtns{margin-top:14px}
+.edi .ebtns{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:14px}
 .edi .ebtns .sin{display:inline-flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;
   padding:13px 26px;border-radius:999px;text-decoration:none;transition:.15s;white-space:nowrap;
   color:var(--accent);background:#fff;border:2px solid var(--accent)}
@@ -316,8 +316,12 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .edis.cinco .edi>h3{padding:20px 22px 12px;font-size:24px}
 .edis.cinco .edi .ebody{padding:14px 22px 22px}
 .edis.cinco .edi .eprice{font-size:23px;padding-top:12px}
-.edis.cinco .edi .ebtns .sin{font-size:16px;padding:11px 20px}
-.edis.cinco .edi .ebtns .con{display:block;margin-top:11px;font-size:16px;text-align:left}
+.edis.cinco .edi .ebtns .sin{font-size:15px;padding:10px 16px}
+.edis.cinco .edi .ebtns{gap:10px}
+/* En la grilla de cinco la card mide 266px: el link secundario baja a 14px y
+   suelta la flecha —el boton de al lado ya la lleva— para que los dos entren. */
+.edis.cinco .edi .ebtns .con{font-size:14px}
+.edis.cinco .edi .ebtns .con .ar{display:none}
 .edi figure{overflow:hidden}
 .edi figure figcaption{position:absolute;left:0;right:0;bottom:18px;z-index:2;text-align:center;
   color:#fff;font-size:27px;font-weight:400;letter-spacing:-.01em;line-height:1.1;
@@ -740,7 +744,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
           <p class="etx">Gastronomía: cafés, meriendas, brunch y cervecerías.</p>
           <p class="eprice">$ 1.320 <small>IVA incl.</small></p>
           <div class="ebtns">
-            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/brindis-2026/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/brindis-2026/" target="_blank" rel="noopener">Sin Gift Cards <i class="ar">&rarr;</i></a>
             <a class="con" href="https://www.bigbox.com.uy/catalogo/~/brindis-2026-gc/" target="_blank" rel="noopener">Con Gift Cards <i class="ar">&rarr;</i></a>
           </div>
         </div>
@@ -755,7 +759,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
           <p class="etx">Suma aventura: trekking, surf, parapente y bike tours.</p>
           <p class="eprice">$ 2.200 <small>IVA incl.</small></p>
           <div class="ebtns">
-            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/fiesta-2026/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/fiesta-2026/" target="_blank" rel="noopener">Sin Gift Cards <i class="ar">&rarr;</i></a>
             <a class="con" href="https://www.bigbox.com.uy/catalogo/~/fiesta-2026-gc/" target="_blank" rel="noopener">Con Gift Cards <i class="ar">&rarr;</i></a>
           </div>
         </div>
@@ -770,7 +774,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
           <p class="etx">Suma estar bien: spa, masajes y estética.</p>
           <p class="eprice">$ 3.100 <small>IVA incl.</small></p>
           <div class="ebtns">
-            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/celebracion-2026/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/celebracion-2026/" target="_blank" rel="noopener">Sin Gift Cards <i class="ar">&rarr;</i></a>
             <a class="con" href="https://www.bigbox.com.uy/catalogo/~/celebracion-2026-gc/" target="_blank" rel="noopener">Con Gift Cards <i class="ar">&rarr;</i></a>
           </div>
         </div>
@@ -785,7 +789,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
           <p class="etx">El mismo mix, con cenas de autor, bodegas y day spa.</p>
           <p class="eprice">$ 5.500 <small>IVA incl.</small></p>
           <div class="ebtns">
-            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/deluxe-2026/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/deluxe-2026/" target="_blank" rel="noopener">Sin Gift Cards <i class="ar">&rarr;</i></a>
             <a class="con" href="https://www.bigbox.com.uy/catalogo/~/deluxe-2026-gc/" target="_blank" rel="noopener">Con Gift Cards <i class="ar">&rarr;</i></a>
           </div>
         </div>
@@ -800,7 +804,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
           <p class="etx">Suma estadías: hoteles boutique y aventura premium.</p>
           <p class="eprice">$ 6.000 <small>IVA incl.</small></p>
           <div class="ebtns">
-            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/premiere-2026/" target="_blank" rel="noopener">Ver catálogo <i class="ar">&rarr;</i></a>
+            <a class="sin" href="https://www.bigbox.com.uy/catalogo/~/premiere-2026/" target="_blank" rel="noopener">Sin Gift Cards <i class="ar">&rarr;</i></a>
             <a class="con" href="https://www.bigbox.com.uy/catalogo/~/premiere-2026-gc/" target="_blank" rel="noopener">Con Gift Cards <i class="ar">&rarr;</i></a>
           </div>
         </div>
