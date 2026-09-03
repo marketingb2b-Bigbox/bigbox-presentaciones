@@ -312,6 +312,28 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   *{animation:none !important;transition:none !important;
     -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
 }
+/* ---- Cards numeradas de "Que te proponemos" ----
+   El titulo va arriba y numerado; la bajada se queda abajo. El numero es lo que
+   engancha cada card con la slide que la explica: sin el, esas slides se leian como
+   bloques sueltos y varios nos dijeron que no las entendian. */
+.btile .btop{position:absolute;left:34px;right:34px;top:26px;z-index:2;color:#fff;
+  font-size:31px;font-weight:700;line-height:1.15;display:flex;align-items:baseline;gap:11px}
+.btile .btop .bn{color:var(--accent);flex:none}
+.btile.big .btop{left:44px;right:44px;top:36px;font-size:44px;gap:14px}
+.bento.cinco .btile .btop{font-size:26px;top:22px}
+.bento.cinco .btile.big .btop{font-size:40px}
+/* El degrade oscurecia solo el pie, que era donde estaba todo el texto. Ahora tambien
+   la franja de arriba: si no, el titulo cae sobre la parte clara de la foto. */
+.btile:after{background:linear-gradient(180deg,
+  rgba(16,18,20,.74) 0%, rgba(16,18,20,.30) 24%, rgba(16,18,20,0) 44%,
+  rgba(16,18,20,.55) 70%, rgba(16,18,20,.88))}
+/* Cuatro cards: la grande ocupa la mitad izquierda y las tres chicas se reparten la
+   derecha, la ultima a lo ancho. Con la grilla de cinco quedaba un hueco. */
+.bento.cuatro{grid-template-columns:repeat(4,1fr)}
+.bento.cuatro .btile.big{grid-column:1/3;grid-row:1/3}
+.bento.cuatro .btile:last-child{grid-column:3/5}
+.bento.cuatro .btile .btop{font-size:28px;top:24px}
+.bento.cuatro .btile.big .btop{font-size:42px}
 </style>
 </head>
 <body>
@@ -382,36 +404,36 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
         <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-experiencias.jpg" aria-hidden="true">
           <source src="assets/sol-experiencias.mp4" type="video/mp4">
         </video>
+        <h3 class="btop"><span class="bn">1.</span>Experiencias</h3>
         <div class="btx">
-          <h3>Experiencias</h3>
           <p>Gastronomía, estadías, aventura, bienestar y más, en todo el Perú.</p>
         </div>
       </article>
       <article class="btile">
         <img src="assets/can-uy-panettone.jpg" alt="Panettone navideño con luces de fin de año">
+        <h3 class="btop"><span class="bn">2.</span>Canastas navideñas</h3>
         <div class="btx">
-          <h3>Canastas navideñas</h3>
           <p>Panetón y los clásicos de la mesa de diciembre.</p>
         </div>
       </article>
       <article class="btile">
         <img src="assets/can-pe-basica.jpg" alt="Canasta básica de alimentos">
+        <h3 class="btop"><span class="bn">3.</span>Canastas básicas</h3>
         <div class="btx">
-          <h3>Canastas básicas</h3>
           <p>Los productos de la despensa de cada casa.</p>
         </div>
       </article>
       <article class="btile">
         <img src="assets/cena-pe.jpg" alt="Mesa navideña servida en casa">
+        <h3 class="btop"><span class="bn">4.</span>Cenas navideñas</h3>
         <div class="btx">
-          <h3>Cenas navideñas</h3>
           <p>Llegan listas para disfrutar en casa.</p>
         </div>
       </article>
       <article class="btile">
         <img src="assets/prod-pe-tabla.jpg" alt="Tabla de quesos y fiambres">
+        <h3 class="btop"><span class="bn">5.</span>Productos</h3>
         <div class="btx">
-          <h3>Productos</h3>
           <p>Velas, jabones, espumantes y tablas.</p>
         </div>
       </article>
@@ -423,7 +445,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
-    <div class="eyebrow"><span>Experiencias</span><i class="dot"></i></div>
+    <div class="eyebrow"><span>1. Experiencias</span><i class="dot"></i></div>
     <h2 class="h1" style="margin-top:28px">Más de 6.000 experiencias para elegir.</h2>
     <p class="lead" style="margin-top:20px">Desde <b>cenas</b> hasta <b>escapadas de fin de semana</b>, pasando por <b>tardes de spa</b> y <b>salidas al aire libre</b>.</p>
     <div class="cats">
@@ -441,7 +463,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
-    <div class="eyebrow"><span>Canastas y cenas</span><i class="dot"></i></div>
+    <div class="eyebrow"><span>2 · 3 · 4 Canastas y cenas</span><i class="dot"></i></div>
     <h2 class="h1" style="margin-top:28px">La tradición de diciembre, resuelta.</h2>
     <p class="lead" style="margin-top:20px">Para los que esperan la canasta de siempre, y para los que prefieren la cena servida.</p>
     <div class="picks p3">
@@ -469,7 +491,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 <section class="slide">
   <img class="cobrand" src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
   <div class="pad">
-    <div class="eyebrow"><span>Productos</span><i class="dot"></i></div>
+    <div class="eyebrow"><span>5. Productos</span><i class="dot"></i></div>
     <h2 class="h1" style="margin-top:28px">Detalles que suman al regalo.</h2>
     <p class="lead" style="margin-top:20px">Van solos o adentro de la canasta, según cómo quieras armar el regalo.</p>
     <div class="picks p4">
