@@ -7,416 +7,435 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png?v=4">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png?v=4">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png?v=4">
-<title>Presentaciones · bigbox · corpo</title>
+<title>Presentaciones · Bigbox Corpo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* Mismo sistema que los decks: presentaciones/_sistema/DESIGN-SYSTEM.md
+     Dos fondos (blanco / charcoal), acento teal de Bigbox Sessions, Poppins,
+     eyebrow con punto y titulares con punto final. */
   :root {
-    --teal: #2aa3b1;
-    --teal-dark: #1f8591;
-    --teal-deep: #155b65;
-    --navy: #03035e;
-    --gray: #6b7280;
+    --ink: #232427;
+    --paper: #ffffff;
+    --paper-2: #f1f1f1;
+    --text: #1a1b1e;
+    --mute: #6a6c70;
+    --line: #e4e4e4;
+    --accent: #5cb2bd;
+    --accent-tint: #cae6e9;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
   body {
-    font-family: "Sofia Pro", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
-    color: #fff;
-    min-height: 100vh;
-    padding: 7vh 7vw 5vh;
-    display: flex;
-    flex-direction: column;
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--paper);
+    color: var(--text);
     -webkit-font-smoothing: antialiased;
   }
-
-  .brand {
-    font-size: 1rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    margin-bottom: 60px;
-    opacity: 0.9;
-  }
-  .brand .dot {
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    background: currentColor;
-    border-radius: 50%;
-    margin: 0 8px;
-    vertical-align: middle;
-    transform: translateY(-2px);
-  }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+  /* sin esto, una palabra larga ensancha la columna y la página se corre de costado */
+  .hero > *, .row > *, .plan > * { min-width: 0; }
 
   .eyebrow {
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: .76rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; line-height: 1;
   }
+  .eyebrow i { width: 11px; height: 11px; border-radius: 50%; background: var(--accent); flex: none; }
 
-  h1 {
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    margin-bottom: 16px;
+  /* === HERO — el split del sistema: panel charcoal + foto a sangre === */
+  .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 540px; background: var(--ink); color: #fff; }
+  .hero .panel {
+    padding: 52px 64px 64px max(40px, calc((100vw - 1240px) / 2 + 40px));
+    display: flex; flex-direction: column;
   }
+  .hero .logo { height: 30px; width: auto; align-self: flex-start; }
+  .hero .eyebrow { margin-top: auto; color: rgba(255,255,255,.85); }
+  .hero h1 {
+    font-size: clamp(3rem, 5.6vw, 4.8rem); font-weight: 700;
+    letter-spacing: -.035em; line-height: .98; margin-top: 22px;
+  }
+  .hero .lead { font-size: 1.08rem; line-height: 1.6; color: rgba(255,255,255,.78); max-width: 470px; margin-top: 24px; }
+  .hero .lead b { color: #fff; font-weight: 600; }
+  .hero figure { position: relative; overflow: hidden; }
+  .hero figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(1.06); }
 
-  .subtitle {
-    font-size: 1.05rem;
-    opacity: 0.85;
-    max-width: 640px;
-    line-height: 1.5;
-    font-weight: 300;
+  /* === NAV — atajos a cada país y a cada tipo === */
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,.94); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
   }
+  .nav .wrap { display: flex; align-items: center; gap: 8px; height: 68px; overflow-x: auto; scrollbar-width: none; }
+  .nav .lbl { font-size: .7rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); margin-right: 8px; white-space: nowrap; }
+  .nav a {
+    white-space: nowrap; text-decoration: none; color: var(--text);
+    font-size: .88rem; font-weight: 500; padding: 8px 16px;
+    border-radius: 999px; border: 1px solid var(--line); transition: .15s;
+  }
+  .nav a:hover { border-color: var(--accent); background: var(--accent-tint); }
+  .nav .sep { width: 1px; height: 26px; background: var(--line); margin: 0 10px 0 12px; flex: none; }
 
-  /* === Pillars section === */
-  .pillars-block {
-    margin: 60px 0 50px;
-    max-width: 1200px;
+  /* === PARTES — "Por país" y "Para todos los países" === */
+  .part { padding-top: 84px; }
+  .part-head h2 {
+    font-size: clamp(2.2rem, 3.8vw, 3.2rem); font-weight: 700;
+    letter-spacing: -.03em; line-height: 1.04; margin-top: 16px;
   }
-  .pillars-block .section-eyebrow {
-    font-size: 0.74rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 12px;
-  }
-  .pillars-block h2 {
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-bottom: 14px;
-  }
-  .pillars-block .pillars-lead {
-    font-size: 1rem;
-    opacity: 0.88;
-    max-width: 720px;
-    line-height: 1.55;
-    font-weight: 300;
-    margin-bottom: 30px;
-  }
-  .pillars-block .pillars-lead strong { font-weight: 600; opacity: 1; }
+  .part-head h2 b { font-weight: 400; }
+  .part-head p { font-size: 1.05rem; line-height: 1.6; color: var(--mute); max-width: 640px; margin-top: 14px; }
 
-  .pillars-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-  }
-  .pillars-col {
-    background: rgba(255,255,255,0.10);
-    border: 1px solid rgba(255,255,255,0.20);
-    border-radius: 14px;
-    padding: 22px 24px 24px;
-    backdrop-filter: blur(6px);
-  }
-  .pillars-col-tag {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 16px;
-  }
-  .pillar-item {
-    display: grid;
-    grid-template-columns: 32px 1fr;
-    gap: 14px;
-    padding: 12px 0;
-    border-top: 1px dashed rgba(255,255,255,0.14);
-    align-items: start;
-  }
-  .pillar-item:first-of-type { border-top: 0; padding-top: 4px; }
-  .pillar-num {
-    width: 32px; height: 32px;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.20);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700;
-    font-size: 0.85rem;
-    color: #fff;
-  }
-  .pillar-text {
-    font-size: 0.92rem;
-    line-height: 1.45;
-    padding-top: 4px;
-  }
-  .pillar-text strong { font-weight: 700; }
-  .pillar-text .pillar-sub {
-    display: block;
-    font-size: 0.82rem;
-    opacity: 0.75;
-    margin-top: 2px;
-    font-weight: 300;
-  }
+  /* cada país / cada tipo: nombre a la izquierda, decks a la derecha */
+  .row { display: grid; grid-template-columns: 250px 1fr; gap: 40px; padding: 44px 0 8px; border-top: 1px solid var(--line); margin-top: 44px; }
+  .row + .row { margin-top: 0; }
+  .row-name { position: sticky; top: 108px; align-self: start; }
+  .row-name h3 { font-size: 1.9rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
+  .row-name p { font-size: .9rem; line-height: 1.5; color: var(--mute); margin-top: 8px; }
 
-  /* === Decks === */
-  .decks-section {
-    margin-top: 30px;
+  .group { margin-bottom: 40px; }
+  .gtype {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+    font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--mute);
   }
-  .decks-section .section-eyebrow {
-    font-size: 0.74rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 12px;
-  }
-  .decks-section h2 {
-    font-size: clamp(1.6rem, 2.6vw, 2rem);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-bottom: 24px;
-  }
+  .gtype:after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
 
-  .deck-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 18px;
-    max-width: 1200px;
+  /* === CARD — portada real del deck arriba, texto abajo (el .pick de los decks) === */
+  .deck {
+    display: flex; flex-direction: column; background: var(--paper-2);
+    border-radius: 16px; overflow: hidden; text-decoration: none; color: var(--text);
+    transition: transform .2s ease, box-shadow .2s ease;
   }
+  .deck:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(16,18,20,.12); }
+  .deck figure { aspect-ratio: 16 / 9; overflow: hidden; background: #dcdcdc; }
+  .deck figure img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s ease; }
+  .deck:hover figure img { transform: scale(1.03); }
+  .deck .db { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+  .deck .dm { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+  .deck h4 { font-size: 1.08rem; font-weight: 700; line-height: 1.3; margin-top: 8px; }
+  .deck .dd { font-size: .87rem; line-height: 1.55; color: var(--mute); margin-top: 8px; }
+  .deck .dl { margin-top: auto; padding-top: 16px; font-size: .85rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .deck .dl i { font-style: normal; color: var(--accent); font-size: 1.05rem; transition: transform .2s ease; }
+  .deck:hover .dl i { transform: translateX(4px); }
 
-  .deck-card {
-    background: #fff;
-    border: 1px solid rgba(255,255,255,0.4);
-    border-radius: 14px;
-    padding: 26px 28px 24px;
-    text-decoration: none;
-    color: var(--teal);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.10);
-    position: relative;
+  /* === PLAN 2026 — split: panel charcoal + filas claras === */
+  .plan { display: grid; grid-template-columns: 1fr 1fr; margin-top: 96px; }
+  .plan .panel {
+    background: var(--ink); color: #fff;
+    padding: 72px 64px 72px max(40px, calc((100vw - 1240px) / 2 + 40px));
+    display: flex; flex-direction: column;
   }
-  .deck-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 48px rgba(0,0,0,0.20);
+  .plan .panel .eyebrow { color: rgba(255,255,255,.85); }
+  .plan .panel h2 { font-size: clamp(2.2rem, 3.8vw, 3.2rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.04; margin-top: 18px; }
+  .plan .panel p { font-size: 1rem; line-height: 1.65; color: rgba(255,255,255,.78); max-width: 470px; margin-top: auto; padding-top: 40px; }
+  .plan .panel p b { color: #fff; font-weight: 600; }
+  .pillars { display: grid; grid-template-rows: repeat(4, 1fr); gap: 6px; background: var(--paper); }
+  .pillar {
+    display: grid; grid-template-columns: 52px 1fr; gap: 22px; align-items: center;
+    background: var(--paper-2); padding: 26px max(40px, calc((100vw - 1240px) / 2 + 40px)) 26px 44px;
   }
+  .pillar i {
+    width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: #fff;
+    font-style: normal; font-weight: 700; font-size: 1.15rem; display: grid; place-items: center;
+  }
+  .pillar small { display: block; font-size: .66rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); margin-bottom: 4px; }
+  .pillar b { display: block; font-size: 1.02rem; font-weight: 700; line-height: 1.3; }
+  .pillar span { display: block; font-size: .88rem; line-height: 1.45; color: var(--mute); margin-top: 3px; }
 
-  .deck-pillar {
-    position: absolute;
-    top: 14px; right: 14px;
-    background: rgba(42,163,177,0.12);
-    color: var(--teal-deep);
-    border: 1px solid rgba(42,163,177,0.25);
-    font-size: 0.66rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 4px 9px;
-    border-radius: 100px;
-  }
-  .deck-date {
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--teal);
-    opacity: 0.85;
-    font-weight: 700;
-  }
-  .deck-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--teal);
-    margin-bottom: 4px;
-    padding-right: 80px;
-  }
-  .deck-desc {
-    font-size: 0.92rem;
-    color: var(--navy);
-    opacity: 0.75;
-    line-height: 1.45;
-    font-weight: 400;
-  }
-  .deck-link {
-    margin-top: auto;
-    padding-top: 14px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: var(--teal);
-  }
+  footer { padding: 36px 0 44px; }
+  footer .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  footer img { height: 22px; width: auto; }
+  footer p { font-size: .8rem; color: var(--mute); }
+  footer a { color: inherit; }
 
-  footer {
-    margin-top: auto;
-    padding-top: 60px;
-    font-size: 0.8rem;
-    opacity: 0.6;
-    font-weight: 300;
-  }
-  footer a {
-    color: inherit;
-    text-decoration: underline;
-    opacity: 0.9;
-  }
-
-  @media (max-width: 760px) {
-    .pillars-grid { grid-template-columns: 1fr; }
-    .deck-title { padding-right: 0; }
-    .deck-pillar { position: static; align-self: flex-start; margin-bottom: 4px; }
+  @media (max-width: 900px) {
+    .wrap { padding: 0 22px; }
+    .hero, .plan { grid-template-columns: 1fr; }
+    .hero .panel, .plan .panel { padding: 40px 22px 44px; }
+    .hero .eyebrow { margin-top: 64px; }
+    .hero h1 { font-size: clamp(2rem, 9.5vw, 3rem); }
+    .hero figure { height: 240px; }
+    .row { grid-template-columns: 1fr; gap: 20px; }
+    .row-name { position: static; }
+    .pillar { padding: 22px; }
   }
 </style>
 </head>
 <body>
 
-<div class="brand">bigbox<span class="dot"></span>corpo</div>
-
-<div class="eyebrow">Marketing B2B</div>
-<h1>Presentaciones</h1>
-<p class="subtitle">Procesos, sistemas y resultados del equipo de Marketing B2B de Bigbox Corpo. Cada deck explica un proyecto que aporta a uno de los pilares estratégicos del año.</p>
-
-<!-- Pilares B2B 2026 -->
-<section class="pillars-block">
-  <div class="section-eyebrow">Plan estratégico 2026</div>
-  <h2>Los pilares B2B para 2026</h2>
-  <p class="pillars-lead">A principios de año nos pusimos <strong>cuatro desafíos</strong> para encarar todo el año, organizados en dos frentes: <strong>traer clientes nuevos</strong> y <strong>capturar más valor de los actuales</strong>. Cada proyecto del equipo se mapea a uno de estos pilares.</p>
-
-  <div class="pillars-grid">
-    <div class="pillars-col">
-      <div class="pillars-col-tag">Adquisición</div>
-      <div class="pillar-item">
-        <div class="pillar-num">1</div>
-        <div class="pillar-text"><strong>Desarrollo de canales comerciales complementarios</strong><span class="pillar-sub">Partnership B2B2C, whitelabel</span></div>
-      </div>
-      <div class="pillar-item">
-        <div class="pillar-num">2</div>
-        <div class="pillar-text"><strong>Incrementar ventas del segmento MKTG</strong><span class="pillar-sub">Ciclo de vinculación, sponsorship, generación de oportunidades</span></div>
-      </div>
-    </div>
-
-    <div class="pillars-col">
-      <div class="pillars-col-tag">Recurrencia</div>
-      <div class="pillar-item">
-        <div class="pillar-num">3</div>
-        <div class="pillar-text"><strong>Incrementar la Percepción de Valor de clientes actuales</strong><span class="pillar-sub">Medir entrega de valor, detectar dolores, accionar</span></div>
-      </div>
-      <div class="pillar-item">
-        <div class="pillar-num">4</div>
-        <div class="pillar-text"><strong>Programa Upselling TOP 100</strong><span class="pillar-sub">Cross-sell y nuevas ocasiones de compra</span></div>
-      </div>
-    </div>
+<header class="hero">
+  <div class="panel">
+    <img class="logo" src="assets/logo-corpo-blanco.png" alt="Bigbox Corpo">
+    <span class="eyebrow">Marketing B2B<i></i></span>
+    <h1>Presentaciones.</h1>
+    <p class="lead">Propuestas comerciales, campañas y proyectos del equipo de Marketing B2B. <b>Primero por país, después por tipo.</b></p>
   </div>
-</section>
+  <figure><img src="assets/landing-hero.jpg" alt="Equipo festejando al atardecer"></figure>
+</header>
 
-<!-- Decks -->
-<section class="decks-section">
-  <div class="section-eyebrow">Proyectos del equipo</div>
-  <h2>Explicadores</h2>
+<nav class="nav" aria-label="Atajos">
+  <div class="wrap">
+    <span class="lbl">Por país</span>
+    <a href="#ar">Argentina</a>
+    <a href="#cl">Chile</a>
+    <a href="#mx">México</a>
+    <a href="#pe">Perú</a>
+    <a href="#uy">Uruguay</a>
+    <span class="sep"></span>
+    <span class="lbl">Por tipo</span>
+    <a href="#resultados">Resultados</a>
+    <a href="#procesos">Procesos y sistemas</a>
+    <a href="#marca">Marca y estrategia</a>
+  </div>
+</nav>
 
-  <div class="deck-list">
-    <a class="deck-card" href="sancor-salud-2026/">
-      <span class="deck-pillar">Comercial</span>
-      <div class="deck-date">Septiembre 2026</div>
-      <div class="deck-title">Propuesta SanCor Salud 2026</div>
-      <div class="deck-desc">Tres iniciativas para SanCor Salud: experiencias de bienestar sumadas a los planes corporativos con una plataforma por empresa, boxes de experiencias para incentivar al equipo comercial, y cenas privadas con leyendas del deporte para las cuentas VIP.</div>
-      <div class="deck-link">Ver presentación →</div>
-    </a>
-    <a class="deck-card" href="estado-leads-2026-08/">
-      <span class="deck-pillar">Marketing</span>
-      <div class="deck-date">Septiembre 2026</div>
-      <div class="deck-title">Estado de leads — julio y agosto 2026</div>
-      <div class="deck-desc">El status de leads para la reunión gerencial: la caída se concentra desde julio y solo en Publicidad, con más inversión que el año pasado. Referral, sin cambio de gestión, sigue su curva. Incluye el detalle por país.</div>
-      <div class="deck-link">Ver presentación →</div>
-    </a>
-    <a class="deck-card" href="fin-de-ano-ar-2026/">
-      <span class="deck-pillar">Comercial</span>
-      <div class="deck-date">Agosto 2026</div>
-      <div class="deck-title">Fin de Año 2026 — Argentina</div>
-      <div class="deck-desc">La propuesta de fin de año para el equipo comercial AR: un solo regalo con experiencias, canastas navideñas y gift cards adentro, para que cada persona elija. Cierra con las cuatro ediciones del catálogo y sus precios.</div>
-      <div class="deck-link">Ver presentación →</div>
-    </a>
-    <a class="deck-card" href="fin-de-ano-mx-2026/">
-      <span class="deck-pillar">Comercial</span>
-      <div class="deck-date">Agosto 2026</div>
-      <div class="deck-title">Fin de Año 2026 — México</div>
-      <div class="deck-desc">La versión mexicana de la propuesta de fin de año: experiencias, canastas navideñas, gift cards y productos en un mismo catálogo, para que cada persona elija. Con las cuatro canastas del catálogo MX.</div>
-      <div class="deck-link">Ver presentación →</div>
-    </a>
-    <a class="deck-card" href="fin-de-ano-cl-2026/">
-      <span class="deck-pillar">Comercial</span>
-      <div class="deck-date">Septiembre 2026</div>
-      <div class="deck-title">Fin de Año 2026 — Chile</div>
-      <div class="deck-desc">La versión chilena: las cuatro boxes de fin de año traen los mismos dos catálogos adentro — experiencias y canastas navideñas — y lo único que cambia es el presupuesto. Cierra con las cuatro boxes del catálogo CL.</div>
-      <div class="deck-link">Ver presentación →</div>
-    </a>
-    <a class="deck-card" href="fin-de-ano-uy-2026/">
-      <span class="deck-pillar">Comercial</span>
-      <div class="deck-date">Septiembre 2026</div>
-      <div class="deck-title">Fin de Año 2026 — Uruguay</div>
-      <div class="deck-desc">La versión uruguaya: cinco ediciones que traen experiencias y canasta navideña adentro, con gift cards opcionales. Cada edición tiene su propia canasta, y el deck muestra qué suma cada escalón. Cierra con las cinco boxes del catálogo UY y sus precios.</div>
-      <div class="deck-link">Ver presentación →</div>
-    </a>
-    <a class="deck-card" href="fin-de-ano-pe-2026/">
-      <span class="deck-pillar">Comercial</span>
-      <div class="deck-date">Agosto 2026</div>
-      <div class="deck-title">Fin de Año 2026 — Perú</div>
-      <div class="deck-desc">La versión peruana de la propuesta de fin de año: experiencias, gift cards, canastas navideñas y básicas, cenas para disfrutar en casa y productos, en un mismo catálogo. Cierra con las seis boxes del catálogo PE y sus precios.</div>
-      <div class="deck-link">Ver presentación →</div>
-    </a>
-    <a class="deck-card" href="fin-de-ano-ar-2026-como-funciona/">
-      <span class="deck-pillar">Comercial</span>
-      <div class="deck-date">Agosto 2026</div>
-      <div class="deck-title">Fin de Año 2026 — Cómo funciona</div>
-      <div class="deck-desc">Una sola lámina para mandar suelta: los dos recorridos que hace quien recibe el regalo, según elija experiencias/gift cards o canasta navideña. Se descarga en PDF desde la misma página.</div>
-      <div class="deck-link">Ver lámina →</div>
-    </a>
-    <a class="deck-card" href="rebranding-corpo/">
-      <span class="deck-pillar">Marca</span>
-      <div class="deck-date">Julio 2026</div>
-      <div class="deck-title">Rebranding Bigbox Corpo — Más frescos, más vivos, más actuales</div>
-      <div class="deck-desc">Por qué la identidad pasa del teal al naranja #FC4C02, y qué cambia en el sistema visual y el dinamismo. Incluye el mapa de color de la categoría (los 7 competidores relevados usan colores fríos, 5 el mismo violeta), la regla de dosis, los guardrails de accesibilidad y qué NO cambia de la marca.</div>
-      <div class="deck-link">Ver explicador →</div>
-    </a>
-    <a class="deck-card" href="analisis-competencia-europa/">
-      <span class="deck-pillar">Estrategia</span>
-      <div class="deck-date">Junio 2026</div>
-      <div class="deck-title">Mercado de regalos, gift cards e incentivos — Europa y LATAM</div>
-      <div class="deck-desc">Foto global segmentada de los dos ecosistemas: tamaño del mercado, ranking por facturación, quiénes venden gift cards de terceros, cómo escalaron los líderes europeos (Smartbox/Wonderbox), y el paralelo Europa ↔ LATAM. Cada dato con su fuente.</div>
-      <div class="deck-link">Ver explicador →</div>
-    </a>
-    <a class="deck-card" href="scraping-icp-proceso-simple/">
-      <span class="deck-pillar">Pilar 2</span>
-      <div class="deck-date">Abril 2026</div>
-      <div class="deck-title">Scraping ICP — Sistema de prospección</div>
-      <div class="deck-desc">Cómo Bigbox Corpo genera contactos comerciales nuevos en los 5 países. Qué es, cómo funciona en 5 pasos y por qué cambia las reglas del equipo comercial.</div>
-      <div class="deck-link">Ver explicador →</div>
-    </a>
-    <a class="deck-card" href="scraping-icp-automation-v2/">
-      <span class="deck-pillar">Pilar 2</span>
-      <div class="deck-date">Abril 2026</div>
-      <div class="deck-title">Scraping ICP — Cómo encontramos clientes nuevos (v2)</div>
-      <div class="deck-desc">Versión para audiencia no familiarizada con B2B. Glosario, diagrama interactivo del flujo, pipeline en 3 fases, KPIs y roadmap 2026.</div>
-      <div class="deck-link">Ver explicador →</div>
-    </a>
-    <a class="deck-card" href="speed-to-lead/">
-      <span class="deck-pillar">Pilar 2</span>
-      <div class="deck-date">Abril 2026</div>
-      <div class="deck-title">Speed to Lead — Tiempo de respuesta</div>
-      <div class="deck-desc">Cómo medimos el tiempo que tarda el equipo comercial en responder cada lead nuevo. 8 fechas por contacto, dashboard mensual por ejecutivo y país.</div>
-      <div class="deck-link">Ver explicador →</div>
-    </a>
-    <a class="deck-card" href="encuestas-satisfaccion-proceso/">
-      <span class="deck-pillar">Pilar 3</span>
-      <div class="deck-date">Abril 2026</div>
-      <div class="deck-title">Encuestas de Satisfacción — Proceso</div>
-      <div class="deck-desc">Explicador del flujo de medición de NPS: 3 fases 100% automáticas, los 3 reportes (semanal, mensual, anual YTD) y cómo se distribuye al equipo comercial.</div>
-      <div class="deck-link">Ver explicador →</div>
-    </a>
+<main class="wrap">
+
+  <!-- ============================ POR PAÍS ============================ -->
+  <section class="part">
+    <div class="part-head">
+      <span class="eyebrow">Por país<i></i></span>
+      <h2>Lo que usa cada equipo comercial.</h2>
+      <p>Las propuestas a clientes y las campañas de cada mercado, con el tono y los precios de ese país.</p>
+    </div>
+
+    <div class="row" id="ar">
+      <div class="row-name"><h3>Argentina.</h3><p>Propuestas a clientes y campaña de fin de año.</p></div>
+      <div>
+        <div class="group">
+          <p class="gtype">Propuestas a clientes</p>
+          <div class="grid">
+            <a class="deck" href="sancor-salud-2026/">
+              <figure><img src="assets/thumbs/sancor-salud-2026.jpg" alt="" loading="lazy"></figure>
+              <div class="db">
+                <p class="dm">Septiembre 2026</p>
+                <h4>Propuesta SanCor Salud 2026</h4>
+                <p class="dd">Tres iniciativas para SanCor Salud: experiencias de bienestar sumadas a los planes corporativos con una plataforma por empresa, boxes de experiencias para incentivar al equipo comercial, y cenas privadas con leyendas del deporte para las cuentas VIP.</p>
+                <span class="dl">Ver presentación <i>&rarr;</i></span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="group">
+          <p class="gtype">Campañas comerciales</p>
+          <div class="grid">
+            <a class="deck" href="fin-de-ano-ar-2026/">
+              <figure><img src="assets/thumbs/fin-de-ano-ar-2026.jpg" alt="" loading="lazy"></figure>
+              <div class="db">
+                <p class="dm">Agosto 2026</p>
+                <h4>Fin de Año 2026</h4>
+                <p class="dd">La propuesta de fin de año para el equipo comercial AR: un solo regalo con experiencias, canastas navideñas y gift cards adentro, para que cada persona elija. Cierra con las cuatro ediciones del catálogo y sus precios.</p>
+                <span class="dl">Ver presentación <i>&rarr;</i></span>
+              </div>
+            </a>
+            <a class="deck" href="fin-de-ano-ar-2026-como-funciona/">
+              <figure><img src="assets/thumbs/fin-de-ano-ar-2026-como-funciona.jpg" alt="" loading="lazy"></figure>
+              <div class="db">
+                <p class="dm">Agosto 2026 · Lámina</p>
+                <h4>Fin de Año 2026 — Cómo funciona</h4>
+                <p class="dd">Una sola lámina para mandar suelta: los dos recorridos que hace quien recibe el regalo, según elija experiencias/gift cards o canasta navideña. Se descarga en PDF desde la misma página.</p>
+                <span class="dl">Ver lámina <i>&rarr;</i></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="cl">
+      <div class="row-name"><h3>Chile.</h3><p>Campaña de fin de año.</p></div>
+      <div>
+        <div class="group">
+          <p class="gtype">Campañas comerciales</p>
+          <div class="grid">
+            <a class="deck" href="fin-de-ano-cl-2026/">
+              <figure><img src="assets/thumbs/fin-de-ano-cl-2026.jpg" alt="" loading="lazy"></figure>
+              <div class="db">
+                <p class="dm">Septiembre 2026</p>
+                <h4>Fin de Año 2026</h4>
+                <p class="dd">La versión chilena: las cuatro boxes de fin de año traen los mismos dos catálogos adentro — experiencias y canastas navideñas — y lo único que cambia es el presupuesto. Cierra con las cuatro boxes del catálogo CL.</p>
+                <span class="dl">Ver presentación <i>&rarr;</i></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="mx">
+      <div class="row-name"><h3>México.</h3><p>Campaña de fin de año.</p></div>
+      <div>
+        <div class="group">
+          <p class="gtype">Campañas comerciales</p>
+          <div class="grid">
+            <a class="deck" href="fin-de-ano-mx-2026/">
+              <figure><img src="assets/thumbs/fin-de-ano-mx-2026.jpg" alt="" loading="lazy"></figure>
+              <div class="db">
+                <p class="dm">Agosto 2026</p>
+                <h4>Fin de Año 2026</h4>
+                <p class="dd">La versión mexicana de la propuesta de fin de año: experiencias, canastas navideñas, gift cards y productos en un mismo catálogo, para que cada persona elija. Con las cuatro canastas del catálogo MX.</p>
+                <span class="dl">Ver presentación <i>&rarr;</i></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="pe">
+      <div class="row-name"><h3>Perú.</h3><p>Campaña de fin de año.</p></div>
+      <div>
+        <div class="group">
+          <p class="gtype">Campañas comerciales</p>
+          <div class="grid">
+            <a class="deck" href="fin-de-ano-pe-2026/">
+              <figure><img src="assets/thumbs/fin-de-ano-pe-2026.jpg" alt="" loading="lazy"></figure>
+              <div class="db">
+                <p class="dm">Agosto 2026</p>
+                <h4>Fin de Año 2026</h4>
+                <p class="dd">La versión peruana de la propuesta de fin de año: experiencias, gift cards, canastas navideñas y básicas, cenas para disfrutar en casa y productos, en un mismo catálogo. Cierra con las seis boxes del catálogo PE y sus precios.</p>
+                <span class="dl">Ver presentación <i>&rarr;</i></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="uy">
+      <div class="row-name"><h3>Uruguay.</h3><p>Campaña de fin de año.</p></div>
+      <div>
+        <div class="group">
+          <p class="gtype">Campañas comerciales</p>
+          <div class="grid">
+            <a class="deck" href="fin-de-ano-uy-2026/">
+              <figure><img src="assets/thumbs/fin-de-ano-uy-2026.jpg" alt="" loading="lazy"></figure>
+              <div class="db">
+                <p class="dm">Septiembre 2026</p>
+                <h4>Fin de Año 2026</h4>
+                <p class="dd">La versión uruguaya: cinco ediciones que traen experiencias y canasta navideña adentro, con gift cards opcionales. Cada edición tiene su propia canasta, y el deck muestra qué suma cada escalón. Cierra con las cinco boxes del catálogo UY y sus precios.</p>
+                <span class="dl">Ver presentación <i>&rarr;</i></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= PARA TODOS LOS PAÍSES ======================= -->
+  <section class="part">
+    <div class="part-head">
+      <span class="eyebrow">Por tipo<i></i></span>
+      <h2>Lo que vale para los cinco países.</h2>
+      <p>Resultados, procesos del equipo y definiciones de marca, a nivel regional.</p>
+    </div>
+
+    <div class="row" id="resultados">
+      <div class="row-name"><h3>Resultados.</h3><p>Cómo vienen los leads y los canales.</p></div>
+      <div class="grid">
+        <a class="deck" href="estado-leads-2026-08/">
+          <figure><img src="assets/thumbs/estado-leads-2026-08.jpg" alt="" loading="lazy"></figure>
+          <div class="db">
+            <p class="dm">Septiembre 2026</p>
+            <h4>Estado de leads — julio y agosto 2026</h4>
+            <p class="dd">El status de leads para la reunión gerencial: la caída se concentra desde julio y solo en Publicidad, con más inversión que el año pasado. Referral, sin cambio de gestión, sigue su curva. Incluye el detalle por país.</p>
+            <span class="dl">Ver presentación <i>&rarr;</i></span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="row" id="procesos">
+      <div class="row-name"><h3>Procesos y sistemas.</h3><p>Cómo funciona lo que construimos para el equipo comercial.</p></div>
+      <div class="grid">
+        <a class="deck" href="scraping-icp-proceso-simple/">
+          <figure><img src="assets/thumbs/scraping-icp-proceso-simple.jpg" alt="" loading="lazy"></figure>
+          <div class="db">
+            <p class="dm">Abril 2026</p>
+            <h4>Scraping ICP — Sistema de prospección</h4>
+            <p class="dd">Cómo Bigbox Corpo genera contactos comerciales nuevos en los 5 países. Qué es, cómo funciona en 5 pasos y por qué cambia las reglas del equipo comercial.</p>
+            <span class="dl">Ver explicador <i>&rarr;</i></span>
+          </div>
+        </a>
+        <a class="deck" href="scraping-icp-automation-v2/">
+          <figure><img src="assets/thumbs/scraping-icp-automation-v2.jpg" alt="" loading="lazy"></figure>
+          <div class="db">
+            <p class="dm">Abril 2026</p>
+            <h4>Scraping ICP — Cómo encontramos clientes nuevos (v2)</h4>
+            <p class="dd">Versión para audiencia no familiarizada con B2B. Glosario, diagrama interactivo del flujo, pipeline en 3 fases, KPIs y roadmap 2026.</p>
+            <span class="dl">Ver explicador <i>&rarr;</i></span>
+          </div>
+        </a>
+        <a class="deck" href="speed-to-lead/">
+          <figure><img src="assets/thumbs/speed-to-lead.jpg" alt="" loading="lazy"></figure>
+          <div class="db">
+            <p class="dm">Abril 2026</p>
+            <h4>Speed to Lead — Tiempo de respuesta</h4>
+            <p class="dd">Cómo medimos el tiempo que tarda el equipo comercial en responder cada lead nuevo. 8 fechas por contacto, dashboard mensual por ejecutivo y país.</p>
+            <span class="dl">Ver explicador <i>&rarr;</i></span>
+          </div>
+        </a>
+        <a class="deck" href="encuestas-satisfaccion-proceso/">
+          <figure><img src="assets/thumbs/encuestas-satisfaccion-proceso.jpg" alt="" loading="lazy"></figure>
+          <div class="db">
+            <p class="dm">Abril 2026</p>
+            <h4>Encuestas de Satisfacción — Proceso</h4>
+            <p class="dd">Explicador del flujo de medición de NPS: 3 fases 100% automáticas, los 3 reportes (semanal, mensual, anual YTD) y cómo se distribuye al equipo comercial.</p>
+            <span class="dl">Ver explicador <i>&rarr;</i></span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="row" id="marca">
+      <div class="row-name"><h3>Marca y estrategia.</h3><p>Identidad visual y lectura del mercado.</p></div>
+      <div class="grid">
+        <a class="deck" href="rebranding-corpo/">
+          <figure><img src="assets/thumbs/rebranding-corpo.jpg" alt="" loading="lazy"></figure>
+          <div class="db">
+            <p class="dm">Julio 2026</p>
+            <h4>Rebranding Bigbox Corpo — Más frescos, más vivos, más actuales</h4>
+            <p class="dd">Por qué la identidad pasa del teal al naranja #FC4C02, y qué cambia en el sistema visual y el dinamismo. Incluye el mapa de color de la categoría, la regla de dosis, los guardrails de accesibilidad y qué NO cambia de la marca.</p>
+            <span class="dl">Ver explicador <i>&rarr;</i></span>
+          </div>
+        </a>
+        <a class="deck" href="analisis-competencia-europa/">
+          <figure><img src="assets/thumbs/analisis-competencia-europa.jpg" alt="" loading="lazy"></figure>
+          <div class="db">
+            <p class="dm">Junio 2026</p>
+            <h4>Mercado de regalos, gift cards e incentivos — Europa y LATAM</h4>
+            <p class="dd">Foto global segmentada de los dos ecosistemas: tamaño del mercado, ranking por facturación, quiénes venden gift cards de terceros, cómo escalaron los líderes europeos (Smartbox/Wonderbox), y el paralelo Europa ↔ LATAM. Cada dato con su fuente.</p>
+            <span class="dl">Ver explicador <i>&rarr;</i></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================ PLAN 2026 ============================ -->
+<section class="plan">
+  <div class="panel">
+    <span class="eyebrow">Plan estratégico 2026<i></i></span>
+    <h2>Los pilares B2B para 2026.</h2>
+    <p>A principios de año nos pusimos <b>cuatro desafíos</b>, organizados en dos frentes: <b>traer clientes nuevos</b> y <b>capturar más valor de los actuales</b>. Cada proyecto del equipo se mapea a uno de estos pilares.</p>
+  </div>
+  <div class="pillars">
+    <div class="pillar"><i>1</i><div><small>Adquisición</small><b>Desarrollo de canales comerciales complementarios</b><span>Partnership B2B2C, whitelabel</span></div></div>
+    <div class="pillar"><i>2</i><div><small>Adquisición</small><b>Incrementar ventas del segmento MKTG</b><span>Ciclo de vinculación, sponsorship, generación de oportunidades</span></div></div>
+    <div class="pillar"><i>3</i><div><small>Recurrencia</small><b>Incrementar la Percepción de Valor de clientes actuales</b><span>Medir entrega de valor, detectar dolores, accionar</span></div></div>
+    <div class="pillar"><i>4</i><div><small>Recurrencia</small><b>Programa Upselling TOP 100</b><span>Cross-sell y nuevas ocasiones de compra</span></div></div>
   </div>
 </section>
 
 <footer>
-  Código en <a href="https://github.com/marketingb2b-Bigbox/bigbox-presentaciones" target="_blank" rel="noopener">github.com/marketingb2b-Bigbox/bigbox-presentaciones</a>
+  <div class="wrap">
+    <img src="assets/logo-corpo-negro.png" alt="Bigbox Corpo">
+    <p>Código en <a href="https://github.com/marketingb2b-Bigbox/bigbox-presentaciones" target="_blank" rel="noopener">github.com/marketingb2b-Bigbox/bigbox-presentaciones</a></p>
+  </div>
 </footer>
 
 </body>
