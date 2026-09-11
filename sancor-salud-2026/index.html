@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SanCor Salud × Bigbox Corpo — Propuesta 2026</title>
+<link rel="icon" href="../favicon.ico?v=4" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png?v=4">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png?v=4">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Sistema de presentaciones Bigbox Corpo — ver presentaciones/_sistema/DESIGN-SYSTEM.md
+   Base: deck Fin de Año AR 2026. Propuesta a cliente: el logo de SanCor Salud va en .cobrand */
+
+:root{
+  --ink:#232427;
+  --paper:#ffffff;
+  --paper-2:#f1f1f1;
+  --text:#1a1b1e;
+  --mute:#6a6c70;
+
+  /* ACENTO — muestreado del deck de Bigbox Sessions */
+  --accent:#5cb2bd;
+  --accent-tint:#cae6e9;
+  --accent-soft:#9bcfd6;
+  --accent-deep:#232427;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#0d0d0f;overflow:hidden}
+body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
+
+#stage{position:fixed;inset:0;overflow:hidden}
+#deck{position:absolute;top:0;left:0;width:1920px;height:1080px;transform-origin:0 0;box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.slide{position:absolute;inset:0;background:var(--paper);overflow:hidden;display:none}
+.slide.on{display:block}
+
+.eyebrow{display:flex;align-items:center;gap:14px;font-size:20px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;line-height:1}
+.eyebrow .dot{width:22px;height:22px;border-radius:50%;background:var(--accent);flex:none}
+
+.h1{font-size:60px;font-weight:700;line-height:1.12;letter-spacing:-.02em}
+.lead{font-size:28px;line-height:1.5;color:var(--mute);max-width:1400px}
+.lead b{color:var(--text);font-weight:700}
+
+.kicker{position:absolute;left:112px;right:112px;bottom:70px;font-size:26px;line-height:1.5;color:var(--mute)}
+.kicker b{color:var(--text);font-weight:700}
+
+.pad{position:absolute;inset:0;padding:92px 112px}
+/* el logo de SanCor es apilado: a 46px no se lee */
+.cobrand{position:absolute;top:50px;right:112px;height:78px;object-fit:contain}
+
+/* 1. COVER — logo de Bigbox Corpo y de SanCor Salud lado a lado */
+.cover .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover video.bg{background:var(--ink)}
+.cover .scrim{position:absolute;inset:0;background:rgba(0,0,0,.46)}
+.cover .mark{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.lockup{display:flex;align-items:center;gap:64px}
+.lockup img{height:112px;object-fit:contain}
+.lockup img.cl{height:176px}
+.lockup i{width:2px;height:150px;background:rgba(255,255,255,.5)}
+.cover .slogan{margin-top:56px;color:#fff;font-size:40px;font-weight:400;line-height:1.35;letter-spacing:-.01em;text-align:center;
+  text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.cover .slogan b{font-weight:700}
+.cover .pill{position:absolute;left:50%;transform:translateX(-50%);bottom:0;background:var(--accent);color:#fff;
+  padding:26px 76px 32px;border-radius:20px 20px 0 0;font-size:30px;font-weight:600;white-space:nowrap}
+.closing .scrim{background:rgba(0,0,0,.52)}
+.closing .closing-line{color:#fff;font-size:54px;font-weight:400;line-height:1.26;letter-spacing:-.02em;
+  text-align:center;max-width:1420px;text-shadow:0 2px 28px rgba(0,0,0,.4)}
+.closing .closing-line b{font-weight:700}
+.closing .lockup{margin-top:60px;gap:48px}
+.closing .lockup img{height:70px}
+.closing .lockup img.cl{height:112px}
+.closing .lockup i{height:96px}
+.closing .ctalk{margin-top:54px;color:#fff;font-size:25px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+
+/* RAZONES — filas con ícono en teal */
+.reasons{display:grid;gap:14px;margin-top:34px}
+.reason{display:grid;grid-template-columns:72px 1fr;gap:30px;align-items:center;
+  background:#fff;border-radius:16px;padding:21px 36px;
+  box-shadow:0 4px 20px rgba(16,18,20,.09),0 1px 3px rgba(16,18,20,.05)}
+.reason .ico{width:70px;height:70px;border-radius:50%;background:var(--accent-tint);display:grid;place-items:center}
+.reason .ico svg{width:38px;height:38px;stroke:var(--accent);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.reason b{display:block;font-size:27px;font-weight:700;line-height:1.2;color:var(--text);margin-bottom:6px}
+.reason span{font-size:22px;line-height:1.4;color:var(--mute)}
+
+/* SHOTROW — captura de producto a la izquierda, razones a la derecha */
+.shotrow{display:grid;grid-template-columns:1.1fr 1fr;gap:52px;align-items:center;margin-top:46px}
+.shotrow figure{background:#fff;border:1px solid #ececec;border-radius:16px;overflow:hidden;
+  box-shadow:0 6px 28px rgba(16,18,20,.10),0 2px 6px rgba(16,18,20,.05)}
+.shotrow figure img{width:100%;display:block}
+.shotrow .reasons{margin-top:0}
+
+/* 2+3. SPLIT CON FILAS — el layout de Bigbox Sessions */
+.panel{position:absolute;left:0;top:0;width:960px;height:1080px;background:var(--ink);color:#fff;
+  padding:104px 96px;display:flex;flex-direction:column}
+.panel .h1{font-size:96px;line-height:.98;letter-spacing:-.03em;margin-top:44px}
+.panel .h1.three{font-size:78px;margin:auto 0}   /* 3 lineas, centrado vertical */
+.panel .lead{font-size:26px;line-height:1.55;color:rgba(255,255,255,.8);max-width:700px}
+.panel .lead.bottom{margin-top:auto}
+.panel .lead b{color:#fff;font-weight:700}
+.photo{position:absolute;right:0;top:0;width:960px;height:1080px;object-fit:cover;filter:brightness(1.06)}
+
+.rows{position:absolute;left:960px;top:0;width:960px;height:1080px;
+  display:grid;grid-template-rows:repeat(3,1fr);gap:8px;background:var(--paper)}
+.row{display:grid;grid-template-columns:368px 1fr;background:var(--paper-2)}
+.row img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(1.08) saturate(1.04)}
+.row .rtx{position:relative;padding:0 60px;display:flex;flex-direction:column;justify-content:center}
+.row .rtx h3{font-size:38px;font-weight:700;line-height:1.1;margin-bottom:16px}
+.row .rtx p{font-size:24px;line-height:1.5;color:var(--mute);max-width:440px}
+.row .num{position:absolute;right:44px;top:44px;width:58px;height:58px;border-radius:50%;
+  background:var(--accent);color:#fff;font-size:26px;font-weight:600;display:grid;place-items:center}
+.row .num~h3{padding-right:70px}
+
+/* BOXES — la card de edición del deck de fin de año */
+.edis{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:36px}
+.edisnota{position:absolute;left:112px;right:112px;bottom:70px;font-size:25px;line-height:1.4;color:var(--mute)}
+.edisnota b{color:var(--text);font-weight:700}
+.edi{background:var(--paper-2);border:1px solid #e4e4e4;border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:5px 9px 22px rgba(16,18,20,.10),2px 3px 6px rgba(16,18,20,.06)}
+.edi figure{height:300px}
+.edi figure img{width:100%;height:100%;object-fit:cover;display:block}
+.edi>h3{padding:22px 24px 16px;font-size:27px;font-weight:700;line-height:1.15}
+.edi .ebody{padding:18px 24px 24px;flex:1;display:flex;flex-direction:column}
+.edi .ewho{font-size:17px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.edi .edesc{font-size:20px;line-height:1.45;color:var(--mute)}
+.edi .eprice{margin-top:auto;padding-top:14px;font-size:26px;font-weight:700;color:var(--text)}
+.edi .eprice small{font-size:18px;font-weight:500;color:var(--mute)}
+
+/* la box a medida ocupa las tres columnas que deja libre la Exclusive Mix */
+.medida{grid-column:span 3;background:var(--paper-2);border:1px solid #e4e4e4;border-radius:16px;padding:52px 56px 56px;
+  display:flex;flex-direction:column;box-shadow:5px 9px 22px rgba(16,18,20,.10),2px 3px 6px rgba(16,18,20,.06)}
+.medida h3{font-size:52px;font-weight:700;line-height:1.1;letter-spacing:-.02em}
+.medida>p{font-size:27px;line-height:1.5;color:var(--mute);margin-top:16px;max-width:1000px}
+.medida .mcols{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:auto}
+.medida .ico{width:108px;height:108px;border-radius:50%;background:var(--accent-tint);display:grid;place-items:center;margin-bottom:34px}
+.medida .ico svg{width:54px;height:54px;stroke:var(--accent);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.medida .mcol b{display:block;font-size:33px;line-height:1.2;margin-bottom:12px}
+.medida .mcol span{font-size:23px;line-height:1.45;color:var(--mute)}
+
+/* BENTO — tres iniciativas numeradas, una dominante */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;
+  gap:20px;height:580px;margin-top:40px}
+.btile{position:relative;border-radius:18px;overflow:hidden;background:var(--ink)}
+.btile>img,.btile>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.btile:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,
+  rgba(16,18,20,.74) 0%, rgba(16,18,20,.30) 24%, rgba(16,18,20,0) 44%,
+  rgba(16,18,20,.55) 70%, rgba(16,18,20,.88))}
+.btile .btx{position:absolute;left:34px;right:34px;bottom:30px;z-index:2;color:#fff}
+.btile p{font-size:21px;line-height:1.4;color:rgba(255,255,255,.92)}
+.btile.big{grid-column:1/3;grid-row:1/3}
+.btile.big .btx{left:44px;right:44px;bottom:40px}
+.btile.big p{font-size:25px;max-width:760px}
+.btile .btop{position:absolute;left:34px;right:34px;top:26px;z-index:2;color:#fff;
+  font-size:31px;font-weight:700;line-height:1.15;display:flex;align-items:center;gap:14px}
+.btile .btop .bn{flex:none;display:inline-flex;align-items:center;justify-content:center;
+  width:1.95em;height:1.95em;border-radius:50%;font-size:.58em;font-weight:700;line-height:1;
+  color:#fff;background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.45);
+  -webkit-backdrop-filter:blur(7px) saturate(1.25);backdrop-filter:blur(7px) saturate(1.25);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.38), 0 5px 16px -7px rgba(0,0,0,.7)}
+.btile.big .btop{left:44px;right:44px;top:36px;font-size:44px}
+
+/* PICKS — foto arriba, texto abajo */
+.picks{display:grid;gap:24px;margin-top:44px}
+.picks.p3{grid-template-columns:repeat(3,1fr)}
+.pick{background:var(--paper-2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.pick figure{height:396px;background:#e6e6e6}
+.pick figure img{width:100%;height:100%;object-fit:cover;display:block}
+.picks.shot .pick{background:#fff;box-shadow:0 6px 28px rgba(16,18,20,.10),0 2px 6px rgba(16,18,20,.05)}
+.picks.shot .pick figure{height:400px;background:#fff;padding:30px 32px 0}
+.picks.shot .pick figure img{object-fit:contain}
+.picks.mid .pbody,.picks.mid .pick>h3{text-align:center}
+.pick>h3{padding:26px 32px 0}
+.pick .pbody{padding:14px 32px 32px;flex:1}
+.pick h3{font-size:31px;font-weight:700;line-height:1.15;margin-bottom:12px}
+.pick p{font-size:21px;line-height:1.5;color:var(--mute)}
+.pick p b{color:var(--text);font-weight:700}
+
+/* RECORRIDO — cinco pantallas con la línea de pasos debajo */
+.journey{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;margin-top:40px}
+.jstep figure{height:430px;background:#fff;border:1px solid #ececec;border-radius:16px;padding:26px 20px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 28px rgba(16,18,20,.10),0 2px 6px rgba(16,18,20,.05)}
+.jstep figure img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.jstep .jn{position:relative;margin-top:30px;height:52px}
+.jstep .jn i{position:relative;z-index:2;width:52px;height:52px;border-radius:50%;background:var(--accent);color:#fff;
+  font-style:normal;font-weight:700;font-size:24px;display:grid;place-items:center}
+.jstep:not(:last-child) .jn:before{content:'';position:absolute;left:62px;right:-16px;top:25px;height:2px;background:var(--accent);opacity:.45}
+.jstep p{margin-top:16px;font-size:23px;line-height:1.3;font-weight:600;color:var(--text);padding-right:12px}
+
+/* FIGURAS — retrato redondo + nombre */
+.figs{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:40px}
+.fig{background:var(--paper-2);border-radius:16px;padding:28px 14px 22px;text-align:center;height:286px}
+.fig img{width:150px;height:150px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 18px;filter:brightness(1.05)}
+.fig b{display:block;font-size:22px;font-weight:700;line-height:1.2}
+.fig em{display:block;margin-top:8px;font-style:normal;font-size:15px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+
+/* MÉTRICAS — cuatro numerones en fila */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:64px}
+.metric{background:var(--paper-2);border-radius:16px;padding:52px 38px 44px;min-height:420px}
+.metric:before{content:'';display:block;width:56px;height:6px;border-radius:3px;background:var(--accent);margin-bottom:44px}
+.metric .n{font-size:88px;font-weight:700;line-height:1;letter-spacing:-.03em;color:var(--text)}
+.metric .lbl{font-size:27px;font-weight:700;color:var(--text);margin-top:14px}
+.metric .sub{font-size:22px;line-height:1.45;color:var(--mute);margin-top:22px}
+
+/* 8. MANIFIESTO */
+.statement{background:var(--accent-deep);color:#fff;text-align:center}
+.slide.statement.on{display:grid;place-items:center}
+.statement .h1{font-size:76px;font-weight:400;line-height:1.25;max-width:1500px}
+.statement .h1 b{font-weight:700}
+.statement .breadcrumb{margin-top:64px;font-size:26px;color:rgba(255,255,255,.75)}
+.statement .breadcrumb i{font-style:normal;margin:0 18px;opacity:.55}
+
+/* ============================ TRANSICIONES =============================== */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes pillUp{from{opacity:0;transform:translate(-50%,100%)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes kenburns{from{transform:scale(1.07)}to{transform:scale(1)}}
+
+.slide.on{animation:fadeIn .3s ease both}
+.slide.on .eyebrow{animation:fadeUp .5s .06s ease-out both}
+.slide.on .h1{animation:fadeUp .6s .14s ease-out both}
+.slide.on .lead{animation:fadeUp .6s .24s ease-out both}
+.slide.on .cobrand{animation:fadeIn .7s .1s ease both}
+.slide.on .kicker,.slide.on .edisnota{animation:fadeUp .5s .62s ease-out both}
+.slide.on .photo{animation:fadeIn .8s .2s ease both}
+
+/* todo lo que va en grilla entra de a uno: el orden lo da --i */
+.slide.on :is(.rows,.edis,.bento,.reasons,.picks,.journey,.figs,.metrics)>*{animation:fadeUp .5s ease-out both;animation-delay:calc(.34s + var(--i,0) * .08s)}
+.slide.on .shotrow>figure{animation:fadeUp .6s .3s ease-out both}
+:is(.rows,.edis,.bento,.reasons,.picks,.journey,.metrics)>:nth-child(2){--i:1}
+:is(.rows,.edis,.bento,.reasons,.picks,.journey,.metrics)>:nth-child(3){--i:2}
+:is(.rows,.edis,.bento,.reasons,.picks,.journey,.metrics)>:nth-child(4){--i:3}
+:is(.rows,.edis,.bento,.reasons,.picks,.journey,.metrics)>:nth-child(5){--i:4}
+.figs>*{--i:0}
+.figs>:nth-child(n+2){--i:.5}.figs>:nth-child(n+3){--i:1}.figs>:nth-child(n+4){--i:1.5}.figs>:nth-child(n+5){--i:2}
+.figs>:nth-child(n+6){--i:2.5}.figs>:nth-child(n+7){--i:3}.figs>:nth-child(n+8){--i:3.5}.figs>:nth-child(n+9){--i:4}.figs>:nth-child(n+10){--i:4.5}
+
+.cover.on video.bg{animation:kenburns 9s ease-out both}
+.cover.on .lockup{animation:fadeIn .9s .15s ease both}
+.cover.on .slogan{animation:fadeUp .8s .55s ease-out both}
+.cover.on .pill{animation:pillUp .6s .4s cubic-bezier(.2,.8,.25,1) both}
+.closing.on .closing-line{animation:fadeUp .85s .2s ease-out both}
+.closing.on .lockup{animation:fadeIn .9s .6s ease both}
+.closing.on .ctalk{animation:fadeUp .6s .9s ease-out both}
+.statement.on .breadcrumb{animation:fadeUp .55s .5s ease-out both}
+
+@media (prefers-reduced-motion:reduce){.slide.on,.slide.on *{animation:none!important}}
+
+#dots{position:fixed;left:0;right:0;bottom:18px;display:flex;justify-content:center;gap:8px;z-index:10}
+#dots b{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:.2s}
+#dots b.on{background:#fff;width:22px;border-radius:4px}
+#hint{position:fixed;top:14px;right:18px;color:rgba(255,255,255,.35);font-size:12px;letter-spacing:.08em;z-index:10}
+
+/* ---- descarga a PDF: una slide por página de 297x167mm ---- */
+#pdf{position:fixed;bottom:52px;right:24px;z-index:11;display:flex;align-items:center;gap:9px;
+  background:var(--ink);border:0;color:#fff;
+  font:600 14px 'Poppins',sans-serif;letter-spacing:.03em;border-radius:999px;padding:13px 22px;
+  cursor:pointer;transition:.18s;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+#pdf:hover{background:var(--accent)}
+#pdf svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round}
+
+@page{size:297mm 167.0625mm;margin:0}
+@media print{
+  html,body{width:297mm;height:auto;margin:0;padding:0;background:#fff;overflow:visible}
+  #stage{position:static;overflow:visible}
+  #deck{position:static;width:1920px;height:auto;box-shadow:none;zoom:.5846457;
+    transform:none !important;left:auto !important;top:auto !important}
+  .slide{position:relative;display:block !important;width:1920px;height:1080px;overflow:hidden;
+    break-after:page;page-break-after:always}
+  .slide.statement{display:grid !important;place-items:center}
+  .slide:last-child{break-after:auto;page-break-after:auto}
+  #dots,#hint,#pdf{display:none}
+  *{animation:none !important;transition:none !important;
+    -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+}
+</style>
+</head>
+<body>
+<div id="stage"><div id="deck">
+
+<!-- PORTADA ---------------------------------------------------------------- -->
+<section class="slide cover">
+  <video class="bg" autoplay muted loop playsinline poster="assets/hero-poster.webp" aria-hidden="true">
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
+  <div class="scrim"></div>
+  <div class="mark">
+    <div class="lockup">
+      <img src="assets/logo-corpo-blanco.png" alt="Bigbox Corpo">
+      <i></i>
+      <img class="cl" src="assets/logo-sancor-blanco.png" alt="SanCor Salud">
+    </div>
+    <p class="slogan">Más valor para tus afiliados, tus clientes<br><b>y tu equipo comercial.</b></p>
+  </div>
+  <div class="pill">Propuesta para SanCor Salud · 2026</div>
+</section>
+
+<!-- 1 — LO QUE ENTENDIMOS ---------------------------------------------------- -->
+<section class="slide">
+  <div class="panel">
+    <div class="eyebrow"><span>Lo que entendimos</span><i class="dot"></i></div>
+    <h2 class="h1 three">Diferenciarse<br>ya no pasa solo<br>por la cartilla.</h2>
+    <p class="lead">Más de 890 mil afiliados, 2 mil colaboradores y 51 años de trayectoria.<br><br><b>Con cuotas en alza, el valor tiene que ir más allá del plan de salud.</b></p>
+  </div>
+  <div class="rows">
+    <div class="row">
+      <img src="assets/wb-masaje.webp" alt="Mujer recibiendo un masaje en un spa">
+      <div class="rtx">
+        <h3>Sumar clientes y planes superiores.</h3>
+        <p>Que el upselling tenga un argumento que no sea solo la cobertura.</p>
+      </div>
+    </div>
+    <div class="row">
+      <img src="assets/cena-mesa.jpg" alt="Mesa larga en una cena corporativa">
+      <div class="rtx">
+        <h3>Retener las cuentas clave.</h3>
+        <p>Las grandes cuentas corporativas necesitan un motivo más para renovar.</p>
+      </div>
+    </div>
+    <div class="row">
+      <img src="assets/portada.jpg" alt="Equipo festejando al atardecer">
+      <div class="rtx">
+        <h3>Motivar al equipo comercial.</h3>
+        <p>Reconocer a quienes traen altas y upgrades, con premios que se recuerdan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 — LA OPORTUNIDAD ------------------------------------------------------ -->
+<section class="slide statement">
+  <div>
+    <h2 class="h1">¿Y si el plan de salud también<br><b>regalara momentos para disfrutar?</b></h2>
+    <p class="breadcrumb">Afiliados <i>&rsaquo;</i> Clientes VIP <i>&rsaquo;</i> Equipo comercial</p>
+  </div>
+</section>
+
+<!-- 3 — QUÉ TE PROPONEMOS ---------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
+  <div class="pad">
+    <div class="eyebrow"><span>¿Qué te proponemos?</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Tres iniciativas, una por cada objetivo.</h2>
+    <p class="lead" style="margin-top:18px">Cada una responde a uno de los desafíos de SanCor Salud, <b>y se pueden implementar por separado.</b></p>
+    <div class="bento">
+      <article class="btile big">
+        <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-plataforma.jpg" aria-hidden="true">
+          <source src="assets/sol-plataforma.mp4" type="video/mp4">
+        </video>
+        <h3 class="btop"><span class="bn">1</span>Wellness para afiliados</h3>
+        <div class="btx">
+          <p>Experiencias de bienestar incluidas en los planes corporativos, con una plataforma propia para cada empresa.</p>
+        </div>
+      </article>
+      <article class="btile">
+        <img src="assets/fmt-fisico-mano.jpg" alt="Entrega de una box de experiencias">
+        <h3 class="btop"><span class="bn">2</span>Incentivos comerciales</h3>
+        <div class="btx">
+          <p>Boxes de experiencias para premiar altas, upgrades y renovaciones.</p>
+        </div>
+      </article>
+      <article class="btile">
+        <img src="assets/cena-grupo.jpg" alt="Leyendas del deporte en una cena privada">
+        <h3 class="btop"><span class="bn">3</span>Leyendas del Deporte</h3>
+        <div class="btx">
+          <p>Cenas privadas con figuras de la Selección para las cuentas VIP.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 4 — 1. WELLNESS ---------------------------------------------------------- -->
+<section class="slide">
+  <div class="panel">
+    <div class="eyebrow"><span>1. Wellness para afiliados</span><i class="dot"></i></div>
+    <h2 class="h1 three">Un plan de salud<br>que también cuida<br>el bienestar.</h2>
+    <p class="lead">Cada empresa que contrata la cobertura para su equipo suma un paquete de experiencias para repartir entre sus colaboradores.<br><br><b>Una razón más para elegir SanCor Salud.</b></p>
+  </div>
+  <div class="rows">
+    <div class="row">
+      <img src="assets/wb-spa.webp" alt="Masaje descontracturante a la luz de las velas">
+      <div class="rtx">
+        <h3>Bienestar físico y emocional.</h3>
+        <p>Sesiones de spa, tratamientos corporales, relajación y meditación, entre otras.</p>
+      </div>
+    </div>
+    <div class="row">
+      <img src="assets/plataforma-sancor.jpg" alt="Plataforma de canje con la marca de SanCor Salud" style="object-position:0 0;filter:none">
+      <div class="rtx">
+        <h3>Una plataforma por empresa.</h3>
+        <p>Con la marca del cliente y la de SanCor Salud. Los colaboradores canjean puntos por experiencias.</p>
+      </div>
+    </div>
+    <div class="row">
+      <img src="assets/wb-alvear.webp" alt="Recepción de un spa de hotel">
+      <div class="rtx">
+        <h3>Tecnología 100% bonificada.</h3>
+        <p>Solo se abonan los créditos que cada empresa entrega a sus colaboradores.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 — LA PLATAFORMA --------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
+  <div class="pad">
+    <div class="eyebrow"><span>1. Wellness · La plataforma</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Cada empresa cliente, con su propia plataforma.</h2>
+    <p class="lead" style="margin-top:18px">Los colaboradores reciben puntos y los canjean por experiencias de salud y bienestar, <b>en todo el país.</b></p>
+    <div class="shotrow">
+      <figure><img src="assets/plataforma-sancor.jpg" alt="Plataforma de canje con la marca de SanCor Salud"></figure>
+      <div class="reasons">
+        <div class="reason">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span>
+          <div><b>Marca del cliente + SanCor Salud.</b><span>Una plataforma web individual para cada empresa.</span></div>
+        </div>
+        <div class="reason">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+          <div><b>Experiencias a medida.</b><span>Preseleccionadas según los gustos de cada equipo.</span></div>
+        </div>
+        <div class="reason">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5l1.4 2.9 3.1.4-2.3 2.2.6 3.1L12 14.6l-2.8 1.5.6-3.1-2.3-2.2 3.1-.4z"/></svg></span>
+          <div><b>Créditos flexibles.</b><span>Carga inicial y recargas, según el cliente o los objetivos cumplidos.</span></div>
+        </div>
+        <div class="reason">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
+          <div><b>Estadísticas de uso.</b><span>Canjes, gustos y preferencias de los usuarios.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="kicker">Cada empresa administra usuarios y puntos. <b>Nosotros nos encargamos del alta, la personalización y el onboarding.</b></p>
+</section>
+
+<!-- 6 — 2. INCENTIVOS COMERCIALES -------------------------------------------- -->
+<section class="slide">
+  <div class="panel">
+    <div class="eyebrow"><span>2. Incentivos comerciales</span><i class="dot"></i></div>
+    <h2 class="h1 three">Premios que<br>empujan altas<br>y upgrades.</h2>
+    <p class="lead">Boxes de experiencias para complementar el esquema de reconocimientos actual del equipo comercial.<br><br><b>El que más vende, elige qué vivir.</b></p>
+  </div>
+  <div class="rows">
+    <div class="row">
+      <img src="assets/pain-elige.jpg" alt="Vendedora trabajando en su escritorio">
+      <div class="rtx">
+        <span class="num">1</span>
+        <h3>Definimos los objetivos.</h3>
+        <p>Altas, upgrades a planes superiores y renovaciones.</p>
+      </div>
+    </div>
+    <div class="row">
+      <img src="assets/why-regalo.jpg" alt="Regalo envuelto en papel madera">
+      <div class="rtx">
+        <span class="num">2</span>
+        <h3>Asignamos una box por resultado.</h3>
+        <p>Cumplimiento del objetivo, sobrecumplimiento y top performers.</p>
+      </div>
+    </div>
+    <div class="row">
+      <img src="assets/exp.jpg" alt="Brindis en una cena">
+      <div class="rtx">
+        <span class="num">3</span>
+        <h3>Cada ganador elige qué vivir.</h3>
+        <p>En box física o digital, con un catálogo para todos los gustos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 — LAS BOXES (1/2) ------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
+  <div class="pad">
+    <div class="eyebrow"><span>2. Incentivos · Las boxes</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Una box para cada nivel de premio.</h2>
+    <p class="lead" style="margin-top:18px">Cada box es un catálogo de experiencias para elegir. <b>Lo que cambia es el valor.</b></p>
+    <div class="edis">
+      <article class="edi">
+        <h3>Remix</h3>
+        <figure><img src="assets/box-remix.webp" alt="Box Remix"></figure>
+        <div class="ebody">
+          <p class="ewho">Para 1, 2 o más personas</p>
+          <p class="edesc">Dulces tentaciones, desayunos, teatro en casa, cursos y talleres.</p>
+          <p class="eprice">$19.834,71 <small>+ IVA</small></p>
+        </div>
+      </article>
+      <article class="edi">
+        <h3>Blend</h3>
+        <figure><img src="assets/box-blend.webp" alt="Box Blend"></figure>
+        <div class="ebody">
+          <p class="ewho">Para 1, 2 o más personas</p>
+          <p class="edesc">Gastronomía, bienestar, aventura o una selección de cursos y talleres.</p>
+          <p class="eprice">$36.363,64 <small>+ IVA</small></p>
+        </div>
+      </article>
+      <article class="edi">
+        <h3>Fusión</h3>
+        <figure><img src="assets/box-fusion.webp" alt="Box Fusión"></figure>
+        <div class="ebody">
+          <p class="ewho">Para 1, 2 o más personas</p>
+          <p class="edesc">Experiencias de gastronomía, bienestar, aventura o mix.</p>
+          <p class="eprice">$77.685,95 <small>+ IVA</small></p>
+        </div>
+      </article>
+      <article class="edi">
+        <h3>Selected Mix</h3>
+        <figure><img src="assets/box-selected-mix.webp" alt="Box Selected Mix"></figure>
+        <div class="ebody">
+          <p class="ewho">Para 1, 2 o más personas</p>
+          <p class="edesc">Cenas sublimes, aventura y momentos exclusivos de placer.</p>
+          <p class="eprice">$98.347,11 <small>+ IVA</small></p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <p class="edisnota">Todas se entregan en formato físico o digital, <b>con la marca de SanCor Salud.</b></p>
+</section>
+
+<!-- 8 — LAS BOXES (2/2) ------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
+  <div class="pad">
+    <div class="eyebrow"><span>2. Incentivos · Las boxes</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">La box más exclusiva. Y la que armamos a medida.</h2>
+    <p class="lead" style="margin-top:18px">Para los top performers, o para una acción que necesita algo propio.</p>
+    <div class="edis">
+      <article class="edi">
+        <h3>Exclusive Mix</h3>
+        <figure><img src="assets/box-exclusive-mix.webp" alt="Box Exclusive Mix"></figure>
+        <div class="ebody">
+          <p class="ewho">Para 1 o 2 personas</p>
+          <p class="edesc">Una selección de nuestras mejores experiencias.</p>
+          <p class="eprice">$164.462,81 <small>+ IVA</small></p>
+        </div>
+      </article>
+      <article class="medida">
+        <h3>Box a medida.</h3>
+        <p>Si ninguna box encaja con el esquema de premios, la diseñamos para SanCor Salud.</p>
+        <div class="mcols">
+          <div class="mcol">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></span>
+            <b>Catálogo ad hoc.</b>
+            <span>Desarrollamos un catálogo exclusivo para la acción.</span>
+          </div>
+          <div class="mcol">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 8l10 5 10-5z"/><path d="m2 13 10 5 10-5"/><path d="m2 18 10 5 10-5"/></svg></span>
+            <b>Un mix, un solo valor.</b>
+            <span>Combinamos categorías y experiencias bajo un único ticket.</span>
+          </div>
+          <div class="mcol">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 18 2.5-11 5 5L12 5l2.5 7 5-5L22 18z"/><path d="M2 21h20"/></svg></span>
+            <b>Experiencias exclusivas.</b>
+            <span>Pensadas para un segmento determinado de clientes.</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+  <p class="edisnota">Se pueden combinar: <b>una box por nivel de cumplimiento, y la más alta para los mejores del año.</b></p>
+</section>
+
+<!-- 9 — PERSONALIZACIÓN ------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
+  <div class="pad">
+    <div class="eyebrow"><span>Personalización</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Cada envío lleva la marca de SanCor Salud.</h2>
+    <p class="lead" style="margin-top:18px">Físico o digital: del packaging a la apertura del regalo, todo sale con tu identidad.</p>
+    <div class="picks p3 shot mid">
+      <article class="pick">
+        <h3>Box con tu marca</h3>
+        <figure><img src="assets/sancor-box.jpg" alt="Box con el logo de SanCor Salud"></figure>
+        <div class="pbody"><p>La caja física, con el diseño y el logo de SanCor Salud.</p></div>
+      </article>
+      <article class="pick">
+        <h3>Mail de entrega</h3>
+        <figure><img src="assets/sancor-mail.jpg" alt="Mail de entrega con la marca de SanCor Salud"></figure>
+        <div class="pbody"><p>Con tu marca y los detalles de la acción.</p></div>
+      </article>
+      <article class="pick">
+        <h3>Apertura del regalo</h3>
+        <figure><img src="assets/sancor-felicidades.jpg" alt="Pantalla de apertura del regalo con la marca de SanCor Salud"></figure>
+        <div class="pbody"><p>Con tu logo, y un saludo en foto o video.</p></div>
+      </article>
+    </div>
+  </div>
+  <p class="kicker">También se puede sumar <b>un micrositio web con la marca de SanCor Salud.</b></p>
+</section>
+
+<!-- 10 — CÓMO FUNCIONA -------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
+  <div class="pad">
+    <div class="eyebrow"><span>Cómo funciona</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Del mail a la reserva, en cinco pasos.</h2>
+    <p class="lead" style="margin-top:18px">Así vive el regalo cada persona que lo recibe.</p>
+    <div class="journey">
+      <div class="jstep">
+        <figure><img src="assets/sancor-mail.jpg" alt="Mail con el regalo"></figure>
+        <div class="jn"><i>1</i></div>
+        <p>Abrí tu regalo.</p>
+      </div>
+      <div class="jstep">
+        <figure><img src="assets/sancor-felicidades.jpg" alt="Pantalla de felicitaciones"></figure>
+        <div class="jn"><i>2</i></div>
+        <p>Dejate sorprender.</p>
+      </div>
+      <div class="jstep">
+        <figure><img src="assets/j-login.jpg" alt="Inicio de sesión"></figure>
+        <div class="jn"><i>3</i></div>
+        <p>Registrate o iniciá sesión.</p>
+      </div>
+      <div class="jstep">
+        <figure><img src="assets/j-elegir.jpg" alt="Catálogo de experiencias"></figure>
+        <div class="jn"><i>4</i></div>
+        <p>Elegí tu experiencia.</p>
+      </div>
+      <div class="jstep">
+        <figure><img src="assets/j-reserva.jpg" alt="Reserva online de la experiencia"></figure>
+        <div class="jn"><i>5</i></div>
+        <p>Reservá en un click.</p>
+      </div>
+    </div>
+  </div>
+  <p class="kicker">Con recordatorios automáticos y <b>un equipo de atención que acompaña cada canje.</b></p>
+</section>
+
+<!-- 11 — MÉTRICAS DE CAMPAÑA -------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
+  <div class="pad">
+    <div class="eyebrow"><span>Métricas de campaña</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">El regalo se entrega una vez. Los datos quedan.</h2>
+    <p class="lead" style="margin-top:18px">Reportes de impacto completos, para medir, aprender y optimizar cada iniciativa.</p>
+    <div class="shotrow">
+      <figure><img src="assets/reporte.jpg" alt="Reporte de impacto de una campaña"></figure>
+      <div class="reasons">
+        <div class="reason">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span>
+          <div><b>Preferencias de canje.</b><span>Qué experiencias conectan mejor con cada segmento.</span></div>
+        </div>
+        <div class="reason">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+          <div><b>Distribución geográfica.</b><span>Dónde se canjea, para ajustar campañas y cobertura.</span></div>
+        </div>
+        <div class="reason">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0M9 9.5h.01M15 9.5h.01"/></svg></span>
+          <div><b>Satisfacción y NPS.</b><span>Cómo se sienten al recibir y vivir la experiencia.</span></div>
+        </div>
+        <div class="reason">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
+          <div><b>ROI y objetivos comerciales.</b><span>El impacto en fidelización, engagement y ventas.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="kicker">A diferencia de otros proveedores de regalos, <b>medimos lo que pasa después de la entrega.</b></p>
+</section>
+
+<!-- 12 — 3. LEYENDAS DEL DEPORTE --------------------------------------------- -->
+<section class="slide">
+  <div class="panel">
+    <div class="eyebrow"><span>3. Leyendas del Deporte</span><i class="dot"></i></div>
+    <h2 class="h1">El Mundial, contado por los que lo jugaron.</h2>
+    <p class="lead bottom">Una cena privada en uno de los restaurantes más exclusivos del país, con una leyenda de la Selección en la mesa.<br><br><b>Para las cuentas corporativas que no se pueden perder.</b></p>
+  </div>
+  <img class="photo" src="assets/cena-grupo.jpg" alt="Leyendas del deporte en una cena privada">
+</section>
+
+<!-- 13 — LA CENA ---------------------------------------------------------------- -->
+<section class="slide">
+  <div class="panel">
+    <div class="eyebrow"><span>3. Leyendas · La cena</span><i class="dot"></i></div>
+    <h2 class="h1 three">Una mesa<br>para pocos,<br>con una leyenda.</h2>
+    <p class="lead">Posibles venues:<br><b>Osaka, Casa Cavia, Crizia, Alo's, Mengano, Ness y Faena.</b></p>
+  </div>
+  <div class="rows">
+    <div class="row">
+      <img src="assets/cena-privado.jpg" alt="Salón privado de un restaurante">
+      <div class="rtx">
+        <h3>Espacio privado y cerrado.</h3>
+        <p>Solo para SanCor Salud y sus invitados.</p>
+      </div>
+    </div>
+    <div class="row">
+      <img src="assets/cena-salon.jpg" alt="Cena en un restaurante de autor">
+      <div class="rtx">
+        <h3>Menú maridado.</h3>
+        <p>Con un sommelier que elige los vinos para cada paso.</p>
+      </div>
+    </div>
+    <div class="row">
+      <img src="assets/cena-bigbox.jpg" alt="Invitados en una cena organizada por Bigbox">
+      <div class="rtx">
+        <h3>Adicionales a medida.</h3>
+        <p>Se suman los extras que la acción necesite.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 — LOS FORMATOS ---------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
+  <div class="pad">
+    <div class="eyebrow"><span>3. Leyendas · Los formatos</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Tres formas de sumar una figura a tu evento.</h2>
+    <p class="lead" style="margin-top:18px">Para encuentros comerciales, lanzamientos, reconocimientos o grandes cierres.</p>
+    <div class="picks p3">
+      <article class="pick">
+        <h3>Presencial</h3>
+        <figure><img src="assets/dep-presencial.jpg" alt="Invitados con una leyenda del fútbol en un evento"></figure>
+        <div class="pbody"><p>La figura participa en vivo de tu evento.</p></div>
+      </article>
+      <article class="pick">
+        <h3>Virtual</h3>
+        <figure><img src="assets/dep-virtual.jpg" alt="Charla por videollamada con una figura del deporte"></figure>
+        <div class="pbody"><p>Una charla o interacción por videollamada.</p></div>
+      </article>
+      <article class="pick">
+        <h3>Video personalizado</h3>
+        <figure><img src="assets/dep-video.jpg" alt="Saludo en video en el celular" style="filter:brightness(1.45) contrast(1.05)"></figure>
+        <div class="pbody"><p>Para aniversarios, cierres de año, logros o acuerdos.</p></div>
+      </article>
+    </div>
+  </div>
+  <p class="kicker">Ideal para la fiesta del equipo comercial <b>o para agasajar a los clientes clave.</b></p>
+</section>
+
+<!-- 15 — LAS FIGURAS ------------------------------------------------------------ -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
+  <div class="pad">
+    <div class="eyebrow"><span>3. Leyendas · Las figuras</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Algunas de las figuras disponibles.</h2>
+    <p class="lead" style="margin-top:18px">Y si buscás a otra, <b>la conseguimos.</b></p>
+    <div class="figs">
+      <div class="fig"><img src="assets/fig-veron.jpg" alt=""><b>Juan Sebastián Verón</b></div>
+      <div class="fig"><img src="assets/fig-palermo.jpg" alt=""><b>Martín Palermo</b></div>
+      <div class="fig"><img src="assets/fig-ponzio.jpg" alt=""><b>Leonardo Ponzio</b></div>
+      <div class="fig"><img src="assets/fig-zanetti.jpg" alt=""><b>Javier Zanetti</b><em>Solo digital</em></div>
+      <div class="fig"><img src="assets/fig-redondo.jpg" alt=""><b>Fernando Redondo</b><em>Solo digital</em></div>
+      <div class="fig"><img src="assets/fig-ortega.jpg" alt=""><b>Ariel Ortega</b></div>
+      <div class="fig"><img src="assets/fig-goycochea.jpg" alt=""><b>Sergio Goycochea</b></div>
+      <div class="fig"><img src="assets/fig-ruggeri.jpg" alt=""><b>Oscar Ruggeri</b></div>
+      <div class="fig"><img src="assets/fig-battaglia.jpg" alt=""><b>Sebastián Battaglia</b></div>
+      <div class="fig"><img src="assets/fig-mascherano.jpg" alt=""><b>Javier Mascherano</b><em>Solo digital</em></div>
+    </div>
+  </div>
+  <p class="kicker">"Solo digital": <b>participa en formato virtual o con un video personalizado.</b></p>
+</section>
+
+<!-- 16 — POR QUÉ BIGBOX --------------------------------------------------------- -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
+  <div class="pad">
+    <div class="eyebrow"><span>Por qué Bigbox</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:28px">Más de 15 años reinventando el regalo corporativo.</h2>
+    <p class="lead" style="margin-top:18px">Nacimos en Argentina en 2009. Hoy somos más de 250 personas en Latinoamérica.</p>
+    <div class="metrics">
+      <div class="metric">
+        <div class="n">+7.000</div>
+        <div class="lbl">clientes corporativos</div>
+        <p class="sub">Entre ellos Zurich, Adidas, Amazon, Carrefour y Walmart.</p>
+      </div>
+      <div class="metric">
+        <div class="n">+6.000</div>
+        <div class="lbl">experiencias</div>
+        <p class="sub">Gastronomía, bienestar, aventura, entretenimiento y estadías.</p>
+      </div>
+      <div class="metric">
+        <div class="n">5</div>
+        <div class="lbl">países</div>
+        <p class="sub">Argentina, Chile, México, Perú y Uruguay.</p>
+      </div>
+      <div class="metric">
+        <div class="n">1</div>
+        <div class="lbl">sola gestión</div>
+        <p class="sub">Del alta y la personalización a la logística y el soporte.</p>
+      </div>
+    </div>
+  </div>
+  <p class="kicker">Afiliados, clientes y equipo comercial: <b>tres iniciativas, un mismo equipo detrás.</b></p>
+</section>
+
+<!-- 17 — CIERRE ------------------------------------------------------------------ -->
+<section class="slide cover closing">
+  <video class="bg" autoplay muted loop playsinline preload="metadata" poster="assets/poster-experiencias.jpg" aria-hidden="true">
+    <source src="assets/sol-experiencias.mp4" type="video/mp4">
+  </video>
+  <div class="scrim"></div>
+  <div class="mark">
+    <p class="closing-line">Potenciemos juntos la experiencia<br><b>de tus afiliados, clientes y equipos.</b></p>
+    <div class="lockup">
+      <img src="assets/logo-corpo-blanco.png" alt="Bigbox Corpo">
+      <i></i>
+      <img class="cl" src="assets/logo-sancor-blanco.png" alt="SanCor Salud">
+    </div>
+    <p class="ctalk">¡Muchas gracias!</p>
+  </div>
+</section>
+
+</div></div>
+<div id="dots"></div>
+<button id="pdf" title="Descargar la presentación en PDF">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5"/><path d="M4 17.5v1.8A1.7 1.7 0 0 0 5.7 21h12.6a1.7 1.7 0 0 0 1.7-1.7v-1.8"/></svg>
+  Descargar PDF
+</button>
+<div id="hint">← → navegar · F pantalla completa</div>
+
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+const dots = document.getElementById('dots');
+let i = 0;
+
+slides.forEach((_, n) => {
+  const b = document.createElement('b');
+  b.onclick = () => go(n);
+  dots.appendChild(b);
+});
+
+function go(n) {
+  i = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach((s, k) => s.classList.toggle('on', k === i));
+  [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
+}
+
+// Centrado calculado a mano: place-items:center sobre un hijo de 1920px
+// desborda antes de escalar y descentra el deck.
+function fit() {
+  const deck = document.getElementById('deck');
+  const pad = document.fullscreenElement ? 0 : 44;   // aire para los dots
+  const s = Math.min(innerWidth / 1920, (innerHeight - pad) / 1080);
+  deck.style.transform = `scale(${s})`;
+  deck.style.left = Math.round((innerWidth - 1920 * s) / 2) + 'px';
+  deck.style.top = Math.round((innerHeight - pad - 1080 * s) / 2) + 'px';
+}
+
+addEventListener('resize', fit);
+document.addEventListener('fullscreenchange', fit);
+addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(i + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(i - 1);
+  if (e.key === 'Home') go(0);
+  if (e.key === 'End') go(slides.length - 1);
+  if (e.key.toLowerCase() === 'f') document.documentElement.requestFullscreen?.();
+});
+document.getElementById('stage').onclick = () => go(i + 1);
+document.getElementById('pdf').onclick = e => { e.stopPropagation(); print(); };
+
+// ?s=N abre directo en la slide N (para revisar)
+fit(); go(+new URLSearchParams(location.search).get('s') || 0);
+</script>
+</body>
+</html>
