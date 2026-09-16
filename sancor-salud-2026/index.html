@@ -108,22 +108,33 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .duo-r .ans{font-size:30px;line-height:1.55;color:var(--mute);margin:48px 0 auto;padding-top:44px;border-top:6px solid var(--accent)}
 .duo-r .ans b{color:var(--text);font-weight:700}
 
-/* COMPARE — hoy vs. lo que suma, con un "+" en el medio */
-.compare{display:grid;grid-template-columns:1fr 110px 1fr;align-items:stretch;margin-top:52px}
-.col{border-radius:20px;padding:48px 56px}
-.col.weak{background:var(--paper-2)}
-.col.strong{background:var(--accent);color:#fff}
-.col h3{font-size:24px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:26px}
-.col.weak h3{color:var(--mute)}
-.col ul{list-style:none}
-.col li{font-size:38px;font-weight:600;line-height:1.2;padding:14px 0;display:flex;align-items:center;gap:22px}
-.col li:before{content:'→';font-weight:400;font-size:34px}
-.col.weak li{color:var(--text)}
-.col.weak li:before{color:var(--accent)}
-.col.strong li:before{color:rgba(255,255,255,.75)}
-.plus{display:grid;place-items:center}
-.plus span{width:78px;height:78px;border-radius:50%;background:var(--ink);color:#fff;font-size:48px;font-weight:300;
-  display:grid;place-items:center;line-height:1}
+/* OPORTUNIDAD — el territorio se amplía: la salud en el centro, el bienestar alrededor */
+.opp-copy{position:absolute;left:112px;top:92px;width:720px;height:896px;display:flex;flex-direction:column}
+.opp-copy .h1{font-size:68px;line-height:1.08;margin-top:30px}
+.legend{list-style:none;margin:auto 0 110px}
+.legend li{display:flex;align-items:center;gap:22px;font-size:30px;color:var(--mute);padding:14px 0}
+.legend li b{color:var(--text);font-weight:700;margin-right:10px}
+.sw{width:34px;height:34px;border-radius:50%;flex:none}
+.sw-in{background:var(--ink)}
+.sw-out{background:var(--accent-tint);box-shadow:inset 0 0 0 3px var(--accent)}
+.orbit{position:absolute;left:900px;top:60px;width:960px;height:960px}
+.orbit>*{position:absolute}
+.ring-dash{inset:0;border-radius:50%;border:2px dashed var(--accent);opacity:.55}
+.ring{left:40px;top:40px;width:880px;height:880px;border-radius:50%;background:var(--accent-tint)}
+.core{left:260px;top:260px;width:440px;height:440px;border-radius:50%;background:var(--ink);color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  box-shadow:0 0 0 14px var(--paper)}
+.core small{font-size:20px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.core strong{font-size:78px;font-weight:700;letter-spacing:-.03em;line-height:1;margin:14px 0 22px}
+.core span{font-size:23px;line-height:1.6;color:rgba(255,255,255,.72)}
+/* las cinco dimensiones, en pentágono sobre el radio medio del anillo (337px) */
+.w{transform:translate(-50%,-50%);font-size:34px;font-weight:700;line-height:1.1;color:var(--text);text-align:center;white-space:nowrap}
+.w:before{content:'';display:block;width:12px;height:12px;border-radius:50%;background:var(--accent);margin:0 auto 12px}
+.w1{left:480px;top:143px}
+.w2{left:800px;top:376px}
+.w3{left:678px;top:753px}
+.w4{left:282px;top:753px}
+.w5{left:160px;top:376px}
 
 /* RAZONES — filas con ícono en teal */
 .reasons{display:grid;gap:14px;margin-top:34px}
@@ -193,13 +204,20 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .slide.on .cobrand{animation:fadeIn .7s .1s ease both}
 .slide.on .kicker{animation:fadeUp .5s .7s ease-out both}
 .slide.on .photo{animation:fadeIn .8s .2s ease both}
-.slide.on .plus span{animation:fadeIn .5s .5s ease both}
 
 /* todo lo que va en grilla o lista entra de a uno: el orden lo da --i */
 .slide.on :is(.rows,.reasons,.journey,.metrics,.cats,.steps,.quotes)>*{animation:fadeUp .5s ease-out both;animation-delay:calc(.34s + var(--i,0) * .1s)}
 .slide.on .shotrow>figure{animation:fadeUp .6s .3s ease-out both}
-.slide.on .col.weak{animation:fadeUp .55s .34s ease-out both}
-.slide.on .col.strong{animation:fadeUp .55s .62s ease-out both}
+@keyframes pop{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
+@keyframes popw{from{opacity:0;transform:translate(-50%,-25%)}to{opacity:1;transform:translate(-50%,-50%)}}
+.slide.on .core{animation:pop .6s .25s cubic-bezier(.2,.8,.25,1) both}
+.slide.on .ring{animation:pop .7s .42s cubic-bezier(.2,.8,.25,1) both}
+.slide.on .ring-dash{animation:fadeIn .9s .8s ease both}
+.slide.on .w{animation:popw .5s ease-out both}
+.slide.on .w1{animation-delay:.72s}.slide.on .w2{animation-delay:.82s}.slide.on .w3{animation-delay:.92s}
+.slide.on .w4{animation-delay:1.02s}.slide.on .w5{animation-delay:1.12s}
+.slide.on .legend li{animation:fadeUp .5s ease-out both}
+.slide.on .legend li:nth-child(1){animation-delay:.4s}.slide.on .legend li:nth-child(2){animation-delay:.55s}
 :is(.rows,.reasons,.journey,.metrics,.cats,.steps,.quotes)>:nth-child(2){--i:1}
 :is(.reasons,.journey,.metrics,.cats,.steps,.quotes)>:nth-child(3){--i:2}
 :is(.reasons,.journey,.metrics,.cats,.steps)>:nth-child(4){--i:3}
@@ -307,34 +325,29 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 <!-- 4 — LA OPORTUNIDAD ESTRATÉGICA ---------------------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
-  <div class="pad">
+  <div class="opp-copy">
     <div class="eyebrow"><span>La oportunidad estratégica</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:28px;max-width:1500px">De competir en salud <span style="font-weight:400">a crear el estándar del bienestar.</span></h2>
-    <div class="compare">
-      <div class="col weak">
-        <h3>Hoy, SanCor Salud</h3>
-        <ul>
-          <li>Prevención</li>
-          <li>Prestadores</li>
-          <li>Atención</li>
-          <li>Tratamiento</li>
-          <li>Salud</li>
-        </ul>
-      </div>
-      <div class="plus"><span>+</span></div>
-      <div class="col strong">
-        <h3>La propuesta suma</h3>
-        <ul>
-          <li>Wellness</li>
-          <li>Disfrute</li>
-          <li>Mindfulness</li>
-          <li>Relax</li>
-          <li>Cuidado personal</li>
-        </ul>
-      </div>
-    </div>
+    <h2 class="h1">De competir en salud <span style="font-weight:400">a crear el estándar del bienestar.</span></h2>
+    <ul class="legend">
+      <li><i class="sw sw-in"></i><span><b>Hoy</b>la salud</span></li>
+      <li><i class="sw sw-out"></i><span><b>Suma</b>el bienestar</span></li>
+    </ul>
   </div>
-  <p class="kicker">De cuidar la salud <b>a acompañar el bienestar integral.</b></p>
+  <div class="orbit" role="img" aria-label="La salud en el centro, rodeada por wellness, disfrute, mindfulness, relax y cuidado personal">
+    <div class="ring-dash"></div>
+    <div class="ring"></div>
+    <div class="core">
+      <small>Hoy</small>
+      <strong>Salud</strong>
+      <span>Prevención · Prestadores<br>Atención · Tratamiento</span>
+    </div>
+    <b class="w w1">Wellness</b>
+    <b class="w w2">Disfrute</b>
+    <b class="w w3">Mindfulness</b>
+    <b class="w w4">Relax</b>
+    <b class="w w5">Cuidado<br>personal</b>
+  </div>
+  <p class="kicker" style="right:auto;max-width:760px">De cuidar la salud <b>a acompañar el bienestar integral.</b></p>
 </section>
 
 <!-- 5 — LA PROPUESTA ------------------------------------------------------------- -->
@@ -342,7 +355,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <div class="panel">
     <div class="eyebrow"><span>La propuesta</span><i class="dot"></i></div>
     <h2 class="h1 word">SanCor<br>Bienestar.</h2>
-    <p class="lead">Una plataforma de experiencias para los colaboradores de sus clientes corporativos.<br><br><b>Porque cuidar no es solo atender. También es ayudar a sentirse bien, desconectar y disfrutar.</b></p>
+    <p class="lead">Experiencias de bienestar para los equipos de sus clientes corporativos.<br><br><b>Cuidar no es solo atender: también es ayudar a sentirse bien.</b></p>
   </div>
   <img class="photo" src="assets/propuesta-bienestar.jpg" alt="Dos amigas sonriendo">
 </section>
