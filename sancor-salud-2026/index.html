@@ -191,6 +191,25 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .metric .lbl{font-size:34px;font-weight:700;color:var(--text);margin-top:20px}
 .metric .sub{font-size:22px;line-height:1.45;color:var(--mute);margin-top:22px}
 
+/* TEXTO LITERAL DE LA DIRECCIÓN — ajustes de escala para copys más largos */
+.panel .ctx-title{font-size:66px;line-height:1.06;letter-spacing:-.025em;margin:0}
+.panel .ctx-lead{margin-top:auto}
+.row .rtx h3.lit{font-size:36px}
+.duo-l .h1.lit{font-size:56px;line-height:1.1;margin-top:0}
+.duo-l .quotes li.lit{font-size:28px}
+.duo-r .q.lit{font-size:46px;line-height:1.18}
+.duo-r .ans.lit{font-size:28px}
+.plat-shot{margin:56px auto 0;width:1420px;border-radius:18px;overflow:hidden;border:1px solid #ececec;
+  box-shadow:0 18px 60px rgba(16,18,20,.14)}
+.plat-shot img{width:100%;display:block}
+.cats.tall{margin-top:56px}
+.cats.tall .cat{height:720px}
+.cats.tall .cat .ctx b{font-size:34px;margin:0}
+.steps.plain{margin-top:96px}
+.steps.plain .step{min-height:360px;padding:88px 44px 52px}
+.steps.plain .step p{font-size:32px;font-weight:600;line-height:1.35;color:#fff}
+.slide.on .plat-shot{animation:fadeUp .6s .3s ease-out both}
+
 /* ============================ TRANSICIONES =============================== */
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
@@ -275,50 +294,48 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
       <i></i>
       <img src="assets/logo-corpo-blanco.png" alt="Bigbox Corpo">
     </div>
-    <p class="slogan">Diferenciar los planes de salud<br><b>con bienestar para cada empresa y su equipo.</b></p>
+    <p class="slogan">Diferenciando los planes de salud,<br><b>sumando una propuesta integral de Bienestar para clientes y sus colaboradores</b></p>
   </div>
-  <div class="pill">SanCor Bienestar · Plataforma de experiencias</div>
+  <div class="pill">SanCor Bienestar - Plataforma de experiencias</div>
 </section>
 
-<!-- 2 — EL CONTEXTO ------------------------------------------------------------ -->
+<!-- 2 — CONTEXTO ------------------------------------------------------------------ -->
 <section class="slide">
   <div class="panel">
-    <div class="eyebrow"><span>El contexto</span><i class="dot"></i></div>
-    <h2 class="h1 three">La salud ya<br>no alcanza para<br>diferenciarse.</h2>
-    <p class="lead">+900 mil afiliados · 2 mil colaboradores · 51 años.<br><br><b>El valor tiene que ir más allá del plan.</b></p>
+    <h2 class="h1 ctx-title">La salud dejó de ser suficiente como único territorio de diferenciación.</h2>
+    <p class="lead ctx-lead">Más de 900 mil afiliados, 2 mil colaboradores y 51 años de trayectoria.<br><br><b>El valor tiene que ir más allá del plan de salud.</b></p>
   </div>
   <div class="rows">
     <div class="row">
       <img src="assets/ctx-cartilla.jpg" alt="Médico atendiendo a una paciente">
       <div class="rtx">
-        <h3>La cartilla ya no diferencia.</h3>
-        <p>Todos los operadores hablan de su red médica.</p>
+        <h3 class="lit">Diferenciarse ya no pasa solo por la cartilla.</h3>
+        <p>Todos los operadores hablan de su red de infraestructura médica, pero no todos pueden destacarse.</p>
       </div>
     </div>
     <div class="row">
       <img src="assets/ctx-descuentos.jpg" alt="Persona pasando pantallas en el celular">
       <div class="rtx">
-        <h3>Los descuentos ya no generan valor.</h3>
-        <p>Cupones que nadie valora y pocos usan.</p>
+        <h3 class="lit">Los clubes de descuentos ya no generan valor</h3>
+        <p>Todos ofrecen plataformas de cupones de descuentos en restaurantes, entretenimiento, etc. que los usuarios ya no valoran y pocos usan.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 3 — EL EMPLEADOR Y LA PREGUNTA ---------------------------------------------- -->
+<!-- 3 — EL EMPLEADOR / LA PREGUNTA --------------------------------------------------- -->
 <section class="slide">
   <div class="panel duo-l">
-    <div class="eyebrow"><span>El empleador hoy</span><i class="dot"></i></div>
-    <h2 class="h1">Tiene un problema más amplio.</h2>
+    <h2 class="h1 lit">El empleador hoy necesita resolver un problema mucho más amplio:</h2>
     <ul class="quotes">
-      <li>Pago un plan que mucha gente no usa.</li>
-      <li>¿Quién me ayuda con el bienestar de mi equipo?</li>
-      <li>¿Qué recibo si no se usa la cobertura?</li>
+      <li class="lit">Pago un plan de salud que mucha gente no usa.</li>
+      <li class="lit">Cómo me ayudan a trabajar en el bienestar más integral de mis colaboradores.</li>
+      <li class="lit">Cómo recibo valor aun cuando la cobertura médica no se utiliza.</li>
     </ul>
   </div>
   <div class="duo-r">
-    <h2 class="q">¿Cómo puede SanCor diferenciar su cobertura con bienestar?</h2>
-    <p class="ans">SanCor ya es fuerte en salud. El paso siguiente: un programa de bienestar que fidelice al colaborador <b>y, sobre todo, a RR.HH.</b></p>
+    <h2 class="q lit">¿Cómo puede SanCor complementar y diferenciar su cobertura médica sumando una propuesta integral de bienestar para los colaboradores de sus clientes corporativos?</h2>
+    <p class="ans lit">SanCor ya tiene una propuesta de salud robusta. Proponemos ahora complementarla con un programa de bienestar que fidelice al colaborador <b>y sobre todo al decisor de RRHH.</b></p>
   </div>
 </section>
 
@@ -354,8 +371,8 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 <section class="slide">
   <div class="panel">
     <div class="eyebrow"><span>La propuesta</span><i class="dot"></i></div>
-    <h2 class="h1 word">SanCor<br>Bienestar.</h2>
-    <p class="lead">Experiencias de bienestar para los equipos de sus clientes corporativos.<br><br><b>Cuidar no es solo atender: también es ayudar a sentirse bien.</b></p>
+    <h2 class="h1 word">SanCor<br>Bienestar</h2>
+    <p class="lead">Una plataforma de experiencias para contribuir al bienestar integral de los afiliados de los clientes corporativos.<br><br><b>Porque cuidar a las personas no es solamente atenderlas cuando necesitan salud. También es ayudarlas a sentirse bien, desconectar, disfrutar, compartir y vivir mejor.</b></p>
   </div>
   <img class="photo" src="assets/propuesta-bienestar.jpg" alt="Dos amigas sonriendo">
 </section>
@@ -364,209 +381,38 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 <section class="slide">
   <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
   <div class="pad">
-    <div class="eyebrow"><span>La plataforma</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:28px">Un portal propio, con la marca de SanCor.</h2>
-    <p class="lead" style="margin-top:18px">Cada colaborador ve sus puntos <b>y elige qué vivir.</b></p>
-    <div class="shotrow">
-      <figure><img src="assets/plataforma-sancor.jpg" alt="Plataforma de canje con la marca de SanCor Salud"></figure>
-      <div class="reasons">
-        <div class="reason">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
-          <div><b>Catálogo de bienestar.</b><span>Curado y en todo el país.</span></div>
-        </div>
-        <div class="reason">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9z"/></svg></span>
-          <div><b>Libertad de elección.</b><span>Cada uno elige lo suyo.</span></div>
-        </div>
-        <div class="reason">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span>
-          <div><b>Doble marca.</b><span>SanCor y cada empresa.</span></div>
-        </div>
-        <div class="reason">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
-          <div><b>Métricas.</b><span>Canjes y satisfacción, por empresa.</span></div>
-        </div>
-      </div>
-    </div>
+    <h2 class="h1">La plataforma</h2>
+    <figure class="plat-shot"><img src="assets/plataforma-sancor.jpg" alt="Plataforma de experiencias con la marca de SanCor Salud"></figure>
   </div>
-  <p class="kicker">Alta, onboarding y soporte: <b>de eso nos ocupamos nosotros.</b></p>
 </section>
 
-<!-- 7 — LAS EXPERIENCIAS ----------------------------------------------------------- -->
+<!-- 7 — DETALLE DE EXPERIENCIAS / CATEGORÍA DE WELLNESS --------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
   <div class="pad">
-    <div class="eyebrow"><span>Las experiencias</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:28px">Cinco formas de sentirse bien.</h2>
-    <div class="cats" style="margin-top:60px">
-      <article class="cat">
-        <img src="assets/wb-wellness.jpg" alt="Mujer junto a la pileta de un spa">
-        <div class="ctx"><b>Wellness</b><span>Spa, circuitos de agua y saunas.</span></div>
-      </article>
-      <article class="cat">
-        <img src="assets/wb-relax.jpg" alt="Masaje con piedras calientes">
-        <div class="ctx"><b>Relax</b><span>Masajes y tratamientos corporales.</span></div>
-      </article>
-      <article class="cat">
-        <img src="assets/wb-mindfulness.jpg" alt="Mujer meditando en el pasto">
-        <div class="ctx"><b>Mindfulness</b><span>Yoga y meditación.</span></div>
-      </article>
-      <article class="cat">
-        <img src="assets/wb-cuidado.jpg" alt="Tratamiento facial">
-        <div class="ctx"><b>Cuidado personal</b><span>Faciales y belleza.</span></div>
-      </article>
-      <article class="cat">
-        <img src="assets/wb-disfrute.webp" alt="Brindis en una cena">
-        <div class="ctx"><b>Disfrute</b><span>Gastronomía y escapadas.</span></div>
-      </article>
+    <h2 class="h1">Detalle de Experiencias / Categoría de Wellness</h2>
+    <div class="cats tall">
+      <article class="cat"><img src="assets/wb-wellness.jpg" alt="Mujer junto a la pileta de un spa"><div class="ctx"><b>Wellness</b></div></article>
+      <article class="cat"><img src="assets/wb-disfrute.webp" alt="Brindis en una cena"><div class="ctx"><b>Disfrute</b></div></article>
+      <article class="cat"><img src="assets/wb-mindfulness.jpg" alt="Mujer meditando en el pasto"><div class="ctx"><b>Mindfulness</b></div></article>
+      <article class="cat"><img src="assets/wb-relax.jpg" alt="Masaje con piedras calientes"><div class="ctx"><b>Relax</b></div></article>
+      <article class="cat"><img src="assets/wb-cuidado.jpg" alt="Tratamiento facial"><div class="ctx"><b>Cuidado personal</b></div></article>
     </div>
   </div>
-  <p class="kicker">Y si hace falta, el catálogo completo: <b>+6.000 experiencias en todo el país.</b></p>
 </section>
 
-<!-- 8 — CÓMO FUNCIONA ----------------------------------------------------------------- -->
+<!-- 8 — CÓMO FUNCIONA / MODELO DE FUNCIONAMIENTO ----------------------------------- -->
 <section class="slide">
   <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
   <div class="pad">
-    <div class="eyebrow"><span>Cómo funciona</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:28px">Un programa. Una plataforma por empresa.</h2>
-    <div class="steps">
-      <article class="step">
-        <span class="n">1</span>
-        <h3>Creamos la plataforma</h3>
-        <p>Exclusiva para SanCor Bienestar.</p>
-      </article>
-      <article class="step">
-        <span class="n">2</span>
-        <h3>Cada empresa, la suya</h3>
-        <p>Con acceso propio para su equipo.</p>
-      </article>
-      <article class="step">
-        <span class="n">3</span>
-        <h3>SanCor asigna puntos</h3>
-        <p>Todos los meses, a cada empresa.</p>
-      </article>
-      <article class="step">
-        <span class="n">4</span>
-        <h3>El equipo canjea</h3>
-        <p>Cada colaborador elige su experiencia.</p>
-      </article>
+    <h2 class="h1">Cómo funciona / Modelo de funcionamiento</h2>
+    <p class="lead" style="margin-top:22px;max-width:1500px">Proponemos desarrollar una plataforma web de bienestar (xxx) en la cual los colaboradores de los clientes puedan acceder y canjear puntos por las experiencias que deseen (xxx)</p>
+    <div class="steps plain">
+      <article class="step"><span class="n">1</span><p>Desarrollamos una plataforma exclusiva para este Programa</p></article>
+      <article class="step"><span class="n">2</span><p>Se le otorga a cada cliente corporativo</p></article>
+      <article class="step"><span class="n">3</span><p>Cada empresa puede tener su propia plataforma</p></article>
+      <article class="step"><span class="n">4</span><p>Sancor le brinda mensualmente a cada empresa una suma de puntos para que ellos entreguen a sus colaboradores.</p></article>
     </div>
-  </div>
-  <p class="kicker">SanCor define los puntos. <b>Nosotros, todo lo demás.</b></p>
-</section>
-
-<!-- 9 — LA EXPERIENCIA DEL COLABORADOR --------------------------------------------- -->
-<section class="slide">
-  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
-  <div class="pad">
-    <div class="eyebrow"><span>La experiencia del colaborador</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:28px">De los puntos a la reserva.</h2>
-    <div class="journey" style="margin-top:56px">
-      <div class="jstep">
-        <figure><img src="assets/sancor-mail.jpg" alt="Mail con los puntos"></figure>
-        <div class="jn"><i>1</i></div>
-        <p>Recibí tus puntos.</p>
-      </div>
-      <div class="jstep">
-        <figure><img src="assets/sancor-felicidades.jpg" alt="Pantalla de bienvenida"></figure>
-        <div class="jn"><i>2</i></div>
-        <p>Dejate sorprender.</p>
-      </div>
-      <div class="jstep">
-        <figure><img src="assets/j-login.jpg" alt="Inicio de sesión"></figure>
-        <div class="jn"><i>3</i></div>
-        <p>Entrá a la plataforma.</p>
-      </div>
-      <div class="jstep">
-        <figure><img src="assets/j-elegir.jpg" alt="Catálogo de experiencias"></figure>
-        <div class="jn"><i>4</i></div>
-        <p>Elegí tu experiencia.</p>
-      </div>
-      <div class="jstep">
-        <figure><img src="assets/j-reserva.jpg" alt="Reserva online de la experiencia"></figure>
-        <div class="jn"><i>5</i></div>
-        <p>Reservá en un click.</p>
-      </div>
-    </div>
-  </div>
-  <p class="kicker">Con recordatorios automáticos <b>y atención en cada canje.</b></p>
-</section>
-
-<!-- 10 — MÉTRICAS ---------------------------------------------------------------------- -->
-<section class="slide">
-  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
-  <div class="pad">
-    <div class="eyebrow"><span>Métricas</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:28px">El bienestar también se mide.</h2>
-    <p class="lead" style="margin-top:18px">Para mostrarle a RR.HH. <b>el valor que recibe.</b></p>
-    <div class="shotrow">
-      <figure><img src="assets/reporte.jpg" alt="Reporte de uso de la plataforma"></figure>
-      <div class="reasons">
-        <div class="reason">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
-          <div><b>Uso y activación.</b><span>Quién entra, canjea y vuelve.</span></div>
-        </div>
-        <div class="reason">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span>
-          <div><b>Preferencias.</b><span>Qué elige cada equipo.</span></div>
-        </div>
-        <div class="reason">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0M9 9.5h.01M15 9.5h.01"/></svg></span>
-          <div><b>Satisfacción.</b><span>NPS de cada experiencia.</span></div>
-        </div>
-        <div class="reason">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
-          <div><b>Geografía.</b><span>Dónde se canjea.</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <p class="kicker">Cada empresa ve lo suyo. <b>SanCor ve todo el programa.</b></p>
-</section>
-
-<!-- 11 — POR QUÉ BIGBOX --------------------------------------------------------------- -->
-<section class="slide">
-  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
-  <div class="pad">
-    <div class="eyebrow"><span>Por qué Bigbox</span><i class="dot"></i></div>
-    <h2 class="h1" style="margin-top:28px">Más de 15 años creando experiencias.</h2>
-    <div class="metrics">
-      <div class="metric">
-        <div class="n">+7.000</div>
-        <div class="lbl">clientes corporativos</div>
-      </div>
-      <div class="metric">
-        <div class="n">+6.000</div>
-        <div class="lbl">experiencias</div>
-      </div>
-      <div class="metric">
-        <div class="n">5</div>
-        <div class="lbl">países</div>
-      </div>
-      <div class="metric">
-        <div class="n">1</div>
-        <div class="lbl">sola gestión</div>
-      </div>
-    </div>
-  </div>
-  <p class="kicker">Nacimos en Argentina en 2009. <b>Hoy somos más de 250 personas en Latinoamérica.</b></p>
-</section>
-
-<!-- 12 — CIERRE ------------------------------------------------------------------------ -->
-<section class="slide cover closing">
-  <video class="bg" autoplay muted loop playsinline preload="metadata" poster="assets/poster-experiencias.jpg" aria-hidden="true">
-    <source src="assets/sol-experiencias.mp4" type="video/mp4">
-  </video>
-  <div class="scrim"></div>
-  <div class="mark">
-    <p class="closing-line">Cuidar la salud.<br><b>Y también el bienestar.</b></p>
-    <div class="lockup">
-      <img class="cl" src="assets/logo-sancor-blanco.png" alt="SanCor Salud">
-      <i></i>
-      <img src="assets/logo-corpo-blanco.png" alt="Bigbox Corpo">
-    </div>
-    <p class="ctalk">¡Muchas gracias!</p>
   </div>
 </section>
 
