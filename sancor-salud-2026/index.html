@@ -222,12 +222,17 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .top2 .h1{font-size:64px}
 .top2 .lead{font-size:26px;max-width:none;padding-top:58px}
 .h3{font-size:30px;font-weight:700;line-height:1.2;margin-top:48px}
-.steps.recv{margin-top:56px;gap:22px}
-.steps.recv .step{min-height:330px;padding:78px 40px 44px}
-.steps.recv .step p{font-size:25px;line-height:1.42;font-weight:500;color:#fff}
+.steps.recv{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:34px}
+.steps.recv .step{background:#fff;color:var(--text);border:1px solid #e9e9e9;border-radius:18px;min-height:400px;padding:34px 36px 40px;
+  display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(16,18,20,.07),0 1px 3px rgba(16,18,20,.04)}
+.steps.recv .step .n{position:static;width:auto;height:auto;border:0;background:none;display:block;
+  font-size:88px;font-weight:700;line-height:1;letter-spacing:-.04em;color:var(--accent-tint);margin-bottom:auto}
+.steps.recv .step .n:before{content:'0'}
+.steps.recv .step p{position:relative;font-size:24px;line-height:1.42;font-weight:500;color:var(--text);padding-top:26px}
+.steps.recv .step p:before{content:'';position:absolute;left:0;top:0;width:44px;height:4px;border-radius:2px;background:var(--accent)}
 .band{position:absolute;left:0;right:0;bottom:0;height:236px;background:var(--ink);color:#fff;padding:0 112px;
   display:grid;grid-template-columns:repeat(3,1fr);gap:56px;align-items:start;padding-top:56px}
-.band p{position:relative;font-size:21px;line-height:1.42;padding-top:22px;color:rgba(255,255,255,.92)}
+.band p{position:relative;font-size:22px;line-height:1.45;padding-top:24px;color:rgba(255,255,255,.9)}
 .band p:before{content:'';position:absolute;left:0;top:0;width:44px;height:5px;border-radius:3px;background:var(--accent)}
 .slide.on .band{animation:fadeUp .6s .8s ease-out both}
 
@@ -458,9 +463,9 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     <h3 class="h3">Cada empresa recibe:</h3>
     <div class="steps recv">
       <article class="step"><span class="n">1</span><p>Su propia versión de la plataforma SanCor Bienestar, la cual se puede brandear.</p></article>
-      <article class="step"><span class="n">2</span><p>SanCor le brinda mensualmente (o período a definir) un lote de puntos/créditos para que RRHH pueda distribuir entre sus colaboradores/afiliados.</p></article>
+      <article class="step"><span class="n">2</span><p>SanCor le brinda mensualmente (o período a definir) un lote de puntos/<wbr>créditos para que RRHH pueda distribuir entre sus colaboradores/<wbr>afiliados.</p></article>
       <article class="step"><span class="n">3</span><p>Los afiliados redimen sus puntos por las experiencias de su preferencia.</p></article>
-      <article class="step"><span class="n">4</span><p>La empresa accede a estadísticas de uso/preferencias/gustos/satisfacción de las experiencias vividas.</p></article>
+      <article class="step"><span class="n">4</span><p>La empresa accede a estadísticas de uso/<wbr>preferencias/<wbr>gustos/<wbr>satisfacción de las experiencias vividas.</p></article>
     </div>
   </div>
   <div class="band">
