@@ -217,19 +217,31 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .facts li:first-child{border-top:0}
 .facts li:before{content:'';position:absolute;left:0;top:30px;width:36px;height:36px;border-radius:50%;background:var(--accent-tint) center/20px no-repeat;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235cb2bd' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E")}
-.panel .mtitle{font-size:76px;line-height:1.04;letter-spacing:-.03em;margin:0}
-.panel .mlead{margin-top:48px;font-size:27px;max-width:760px}
-.side{position:absolute;left:960px;top:0;width:960px;height:1080px;background:var(--paper);
-  padding:96px 104px 96px 96px;display:flex;flex-direction:column;justify-content:center;gap:36px}
-.side h3{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:6px}
-.nlist{list-style:none;counter-reset:n}
-.nlist li{counter-increment:n;position:relative;font-size:24px;line-height:1.4;color:var(--text);padding:13px 0 13px 66px}
-.nlist li:before{content:counter(n);position:absolute;left:0;top:11px;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;
-  font-weight:700;font-size:21px;display:grid;place-items:center}
-.gain{list-style:none;background:var(--accent-tint);border-radius:16px;padding:28px 40px}
-.gain li{position:relative;font-size:23px;line-height:1.4;font-weight:600;color:var(--text);padding:10px 0 10px 30px}
-.gain li:before{content:'';position:absolute;left:0;top:21px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
-.slide.on .side h3{animation:fadeUp .5s .3s ease-out both}
+/* MODELO COMERCIAL — título+párrafo en dos columnas, cards teal, banda charcoal con lo que gana SanCor */
+.top2{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.top2 .h1{font-size:64px}
+.top2 .lead{font-size:26px;max-width:none;padding-top:58px}
+.h3{font-size:30px;font-weight:700;line-height:1.2;margin-top:48px}
+.steps.recv{margin-top:56px;gap:22px}
+.steps.recv .step{min-height:330px;padding:78px 40px 44px}
+.steps.recv .step p{font-size:25px;line-height:1.42;font-weight:500;color:#fff}
+.band{position:absolute;left:0;right:0;bottom:0;height:236px;background:var(--ink);color:#fff;padding:0 112px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:56px;align-items:start;padding-top:56px}
+.band p{position:relative;font-size:21px;line-height:1.42;padding-top:22px;color:rgba(255,255,255,.92)}
+.band p:before{content:'';position:absolute;left:0;top:0;width:44px;height:5px;border-radius:3px;background:var(--accent)}
+.slide.on .band{animation:fadeUp .6s .8s ease-out both}
+
+/* PROPUESTA COMERCIAL — cifras del piloto + dos columnas con listas de guión */
+.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+.fig{background:var(--paper-2);border-radius:16px;padding:42px 44px 44px;border-left:8px solid var(--accent)}
+.fig .n{font-size:72px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.fig .lbl{font-size:22px;color:var(--mute);margin-top:12px;line-height:1.35}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:72px;margin-top:60px}
+.cols h3{font-size:30px;font-weight:700;padding-bottom:16px;border-bottom:3px solid var(--text)}
+.dash{list-style:none}
+.dash li{position:relative;font-size:25px;line-height:1.42;padding:22px 0 22px 40px;border-bottom:1px solid #e4e4e4}
+.dash li:before{content:'';position:absolute;left:0;top:38px;width:20px;height:4px;border-radius:2px;background:var(--accent)}
+.slide.on .cols h3,.slide.on .h3{animation:fadeUp .5s .3s ease-out both}
 
 /* ============================ TRANSICIONES =============================== */
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -246,7 +258,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .slide.on .photo{animation:fadeIn .8s .2s ease both}
 
 /* todo lo que va en grilla o lista entra de a uno: el orden lo da --i */
-.slide.on :is(.rows,.reasons,.journey,.metrics,.cats,.steps,.quotes,.facts,.nlist,.gain)>*{animation:fadeUp .5s ease-out both;animation-delay:calc(.34s + var(--i,0) * .1s)}
+.slide.on :is(.rows,.reasons,.journey,.metrics,.cats,.steps,.quotes,.facts,.figs,.dash)>*{animation:fadeUp .5s ease-out both;animation-delay:calc(.34s + var(--i,0) * .1s)}
 .slide.on .shotrow>figure{animation:fadeUp .6s .3s ease-out both}
 @keyframes pop{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
 @keyframes popw{from{opacity:0;transform:translate(-50%,-25%)}to{opacity:1;transform:translate(-50%,-50%)}}
@@ -262,10 +274,10 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 :is(.reasons,.journey,.metrics,.cats,.steps,.quotes)>:nth-child(3){--i:2}
 :is(.reasons,.journey,.metrics,.cats,.steps)>:nth-child(4){--i:3}
 :is(.journey,.cats)>:nth-child(5){--i:4}
-:is(.facts,.nlist,.gain)>:nth-child(2){--i:1}
-:is(.facts,.nlist,.gain)>:nth-child(3){--i:2}
-:is(.facts,.nlist,.gain)>:nth-child(4){--i:3}
-:is(.facts,.nlist,.gain)>:nth-child(5){--i:4}
+:is(.facts,.figs,.dash)>:nth-child(2){--i:1}
+:is(.facts,.figs,.dash)>:nth-child(3){--i:2}
+:is(.facts,.figs,.dash)>:nth-child(4){--i:3}
+:is(.facts,.figs,.dash)>:nth-child(5){--i:4}
 
 .cover.on .bg{animation:kenburns 9s ease-out both}
 .cover.on .lockup{animation:fadeIn .9s .15s ease both}
@@ -437,49 +449,54 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 
 <!-- 8 — MODELO COMERCIAL ------------------------------------------------------------- -->
 <section class="slide">
-  <div class="panel">
-    <h2 class="h1 mtitle">Modelo Comercial<br>SanCor Bienestar</h2>
-    <p class="lead mlead">Proponemos que SanCor pueda utilizar esta plataforma para brindar una oferta diferencial a un segmento específico de clientes corporativos.</p>
-  </div>
-  <div class="side">
-    <div>
-      <h3>Cada empresa recibe:</h3>
-      <ol class="nlist">
-        <li>Su propia versión de la plataforma SanCor Bienestar, la cual se puede brandear.</li>
-        <li>SanCor le brinda mensualmente (o período a definir) un lote de puntos/créditos para que RRHH pueda distribuir entre sus colaboradores/afiliados.</li>
-        <li>Los afiliados redimen sus puntos por las experiencias de su preferencia.</li>
-        <li>La empresa accede a estadísticas de uso/preferencias/gustos/satisfacción de las experiencias vividas.</li>
-      </ol>
+  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
+  <div class="pad">
+    <div class="top2">
+      <h2 class="h1">Modelo Comercial<br>SanCor Bienestar</h2>
+      <p class="lead">Proponemos que SanCor pueda utilizar esta plataforma para brindar una oferta diferencial a un segmento específico de clientes corporativos.</p>
     </div>
-    <ul class="gain">
-      <li>Cientos de empresas y sus colaboradores perciben un valor adicional por el pago de su cuota.</li>
-      <li>El valor real y también el percibido tienen un costo considerablemente menor a la inversión realizada.</li>
-      <li>Se genera una barrera de salida, ante la posibilidad de una pérdida del beneficio que sufriría cada empresa (Pasivo de una plataforma activa)</li>
-    </ul>
+    <h3 class="h3">Cada empresa recibe:</h3>
+    <div class="steps recv">
+      <article class="step"><span class="n">1</span><p>Su propia versión de la plataforma SanCor Bienestar, la cual se puede brandear.</p></article>
+      <article class="step"><span class="n">2</span><p>SanCor le brinda mensualmente (o período a definir) un lote de puntos/créditos para que RRHH pueda distribuir entre sus colaboradores/afiliados.</p></article>
+      <article class="step"><span class="n">3</span><p>Los afiliados redimen sus puntos por las experiencias de su preferencia.</p></article>
+      <article class="step"><span class="n">4</span><p>La empresa accede a estadísticas de uso/preferencias/gustos/satisfacción de las experiencias vividas.</p></article>
+    </div>
+  </div>
+  <div class="band">
+    <p>Cientos de empresas y sus colaboradores perciben un valor adicional por el pago de su cuota.</p>
+    <p>El valor real y también el percibido tienen un costo considerablemente menor a la inversión realizada.</p>
+    <p>Se genera una barrera de salida, ante la posibilidad de una pérdida del beneficio que sufriría cada empresa (Pasivo de una plataforma activa)</p>
   </div>
 </section>
 
 <!-- 9 — PROPUESTA COMERCIAL ------------------------------------------------------------ -->
 <section class="slide">
-  <div class="panel">
-    <h2 class="h1 mtitle">Propuesta<br>comercial</h2>
-    <p class="lead mlead">Proponemos comenzar con un segmento de 50/100 clientes, otorgando lotes mensuales de 2 millones de puntos/pesos, durante 3 / 6 meses.<br><br>Luego escalar a otros segmentos de clientes.</p>
-  </div>
-  <div class="side">
-    <div>
-      <h3>Inversión</h3>
-      <ol class="nlist">
-        <li>Desarrollo de plataforma SanCor Bienestar</li>
-        <li>Apertura de 50/100 plataformas específicas para cada cliente inicial.</li>
-        <li>Compra de lote inicial de puntos/créditos a redimir en las diferentes plataformas, durante los primeros 3 / 6 meses.</li>
-      </ol>
+  <img class="cobrand" src="assets/logo-sancor-azul.png" alt="SanCor Salud">
+  <div class="pad">
+    <h2 class="h1">Propuesta comercial</h2>
+    <p class="lead" style="margin-top:22px;max-width:1500px">Proponemos comenzar con un segmento de 50/100 clientes, otorgando lotes mensuales de 2 millones de puntos/pesos, durante 3 / 6 meses. <b>Luego escalar a otros segmentos de clientes.</b></p>
+    <div class="figs">
+      <div class="fig"><div class="n">50/100</div><div class="lbl">clientes</div></div>
+      <div class="fig"><div class="n">2 millones</div><div class="lbl">de puntos/pesos mensuales</div></div>
+      <div class="fig"><div class="n">3 / 6</div><div class="lbl">meses</div></div>
     </div>
-    <div>
-      <h3>La propuesta contempla</h3>
-      <ol class="nlist">
-        <li>Servicio dedicado de servicio al cliente para atención de consultas.</li>
-        <li>Bonificación de la tecnología por compra de volúmen de créditos.</li>
-      </ol>
+    <div class="cols">
+      <div>
+        <h3>Inversión</h3>
+        <ul class="dash">
+          <li>Desarrollo de plataforma SanCor Bienestar</li>
+          <li>Apertura de 50/100 plataformas específicas para cada cliente inicial.</li>
+          <li>Compra de lote inicial de puntos/créditos a redimir en las diferentes plataformas, durante los primeros 3 / 6 meses.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>La propuesta contempla</h3>
+        <ul class="dash">
+          <li>Servicio dedicado de servicio al cliente para atención de consultas.</li>
+          <li>Bonificación de la tecnología por compra de volúmen de créditos.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
