@@ -254,6 +254,38 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .cols .dark .dash li:last-child{border-bottom:0}
 .slide.on .cols h3,.slide.on .h3{animation:fadeUp .5s .3s ease-out both}
 
+/* ALTERNATIVA MVP — la Box ilustrada a la izquierda, características + modelo comercial a la derecha */
+.boxstage{position:absolute;left:0;top:0;width:760px;height:1080px;overflow:hidden;
+  background:radial-gradient(circle at 50% 46%,#f4fafb 0,#dcefF1 48%,#bfe0e4 100%)}
+.boxstage .cap{position:absolute;left:0;right:0;bottom:56px;text-align:center;font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:#6f9499}
+.box3d{position:absolute;left:120px;top:250px;width:520px;height:520px;perspective:2200px}
+.box3d .body{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(-12deg) rotateY(-24deg) rotateZ(-1deg)}
+.box3d .front{position:absolute;inset:0;overflow:hidden;border-radius:6px;background:var(--ink) url(assets/wb-relax.jpg) center/cover}
+.box3d .front:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(35,36,39,.18),rgba(35,36,39,.5))}
+.box3d .notch{position:absolute;right:-46px;top:50%;width:92px;height:92px;margin-top:-46px;border-radius:50%;background:#1b1c1f}
+.box3d .frame{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:250px;padding:30px 0 26px;
+  border:3px solid rgba(255,255,255,.92);text-align:center;color:#fff}
+.box3d .frame img{height:92px;display:block;margin:0 auto}
+.box3d .frame span{display:block;margin-top:16px;font-size:30px;font-weight:300;letter-spacing:.04em}
+.box3d .side{position:absolute;top:0;right:0;width:64px;height:100%;transform-origin:right center;transform:rotateY(-90deg);
+  background:linear-gradient(90deg,#3a3c40,#232427)}
+.box3d .top{position:absolute;left:0;top:0;width:100%;height:64px;transform-origin:center top;transform:rotateX(-90deg);
+  background:linear-gradient(180deg,#4a4c50,#2c2d30)}
+.box3d .shadow{position:absolute;left:30px;right:-10px;bottom:-70px;height:60px;border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(16,40,44,.32),rgba(16,40,44,0) 70%)}
+.slide.on .box3d{animation:pop .8s .2s cubic-bezier(.2,.8,.25,1) both}
+.mvp{position:absolute;left:760px;top:0;right:0;bottom:0;padding:84px 96px 70px 88px}
+.mvp .h1{font-size:58px;margin-top:22px}
+.mvp .lead{font-size:23px;margin-top:20px;max-width:none}
+.mvp2{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:40px;align-items:start}
+.mvp2 h3{font-size:25px;font-weight:700;padding-bottom:12px;border-bottom:2px solid var(--text)}
+.mvp2 .dash li{font-size:19px;padding:14px 0 14px 34px}
+.mvp2 .dash li:before{top:27px;width:18px}
+.mvp2 .tint{background:#eef7f8;border-radius:18px;padding:30px 34px 20px}
+.mvp2 .tint h3{border-bottom-color:var(--accent)}
+.mvp2 .tint .dash li{border-bottom-color:#d6e9eb}
+.mvp2 .tint .dash li:last-child{border-bottom:0}
+
 /* ============================ TRANSICIONES =============================== */
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
@@ -512,7 +544,50 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   </div>
 </section>
 
-<!-- 10 — CIERRE ----------------------------------------------------------------------- -->
+<!-- 10 — ALTERNATIVA MVP: CATÁLOGO BOX SANCOR BIENESTAR ------------------------------- -->
+<section class="slide">
+  <div class="boxstage">
+    <div class="box3d" role="img" aria-label="Box de experiencias con la marca SanCor Bienestar">
+      <div class="shadow"></div>
+      <div class="body">
+        <div class="top"></div>
+        <div class="side"></div>
+        <div class="front">
+          <i class="notch"></i>
+          <div class="frame"><img src="assets/logo-sancor-blanco.png" alt=""><span>Bienestar</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="cap">Imagen ilustrativa</p>
+  </div>
+  <div class="mvp">
+    <div class="eyebrow"><span>Alternativa MVP</span><i class="dot"></i></div>
+    <h2 class="h1">Catálogo Box SanCor Bienestar</h2>
+    <p class="lead">Proponemos también comenzar generando una Box con experiencias exclusivas de Bienestar (en lugar de la plataforma) y poder entregar a diferentes empresas en cantidades a definir.</p>
+    <div class="mvp2">
+      <div>
+        <h3>Características</h3>
+        <ul class="dash">
+          <li>La Box contemplaría experiencias vinculadas al Wellness, Estar bien, Spa, etc. con cobertura nacional.</li>
+          <li>Podrían ser formato físicas o digitales (Cantidades a definir)</li>
+          <li>Personalizadas con la marca y otros assets de branding.</li>
+          <li>Se puede agregar un video de la marca.</li>
+          <li>Se pueden armar 2 o 3 Boxes de diferentes ticket (EJ: $100K, 150K, 200K)</li>
+        </ul>
+      </div>
+      <div class="tint">
+        <h3>Modelo comercial</h3>
+        <ul class="dash">
+          <li>Las Boxes las podrían entregar a clientes con cierto carácter recurrente. Ej: 20 Boxes por mes durante el primer año. Y sumar 10 adicionales en el 2do año, al renovar.</li>
+          <li>Los diferentes hitos se podrían ir estableciendo en función de las empresas (tamaño/importancia) y las necesidades de diferenciar propuesta.</li>
+          <li>Se podría plantear también $x presupuesto anual en Boxes SanCor Bienestar para su libre uso.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 — CIERRE ----------------------------------------------------------------------- -->
 <section class="slide cover closing">
   <video class="bg" autoplay muted loop playsinline preload="metadata" poster="assets/poster-experiencias.jpg" aria-hidden="true">
     <source src="assets/sol-experiencias.mp4" type="video/mp4">
