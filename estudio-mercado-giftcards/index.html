@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gift cards: estudio de mercado — Bigbox Corpo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================================
+   SISTEMA DE PRESENTACIONES — BIGBOX CORPO
+   Descompuesto de los decks de Canva (Catálogo MX / Bigbox Sessions / Payway).
+   Ver DESIGN-SYSTEM.md. Canvas fijo 1920x1080, escalado por JS.
+
+   PARA UN DECK NUEVO: copiar este archivo, cambiar el bloque ACENTO de abajo
+   y quedarse solo con las slides que se usen.
+   ========================================================================== */
+
+:root{
+  /* --- neutros: NO tocar --- */
+  --ink:#232427;
+  --paper:#ffffff;
+  --paper-2:#f1f1f1;
+  --text:#1a1b1e;
+  --mute:#6a6c70;
+
+  /* --- ACENTO: NO tocar salvo deck co-branded con un cliente (ver §2.2).
+         Es el teal de Bigbox Sessions, muestreado. Todos los decks van igual. --- */
+  --accent:#5cb2bd;        /* pill, cards, timeline, círculos, punto del eyebrow */
+  --accent-tint:#cae6e9;   /* cards secundarias */
+  --accent-soft:#9bcfd6;   /* cards de métrica */
+  --accent-deep:#232427;   /* superficies oscuras: manifiesto, cards de problema.
+                              Sessions no tiene teal oscuro — usa el charcoal. */
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#0d0d0f;overflow:hidden}
+body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* --- viewport / escalado ------------------------------------------------- */
+#stage{position:fixed;inset:0;overflow:hidden}
+#deck{position:absolute;top:0;left:0;width:1920px;height:1080px;transform-origin:0 0;box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.slide{position:absolute;inset:0;background:var(--paper);overflow:hidden;display:none}
+.slide.on{display:block}
+.slide.alt{background:var(--paper-2)}
+
+/* ============================ TIPOGRAFÍA ================================= */
+.eyebrow{display:flex;align-items:center;gap:14px;font-size:20px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;line-height:1}
+.eyebrow .dot{width:22px;height:22px;border-radius:50%;background:var(--accent);flex:none}
+.eyebrow em{font-style:normal;color:var(--accent)}
+
+.h1{font-size:60px;font-weight:700;line-height:1.12;letter-spacing:-.02em}
+.h1 b{font-weight:700}
+.h1.light{font-weight:400}                 /* para mezclar peso: .light + <b> */
+.lead{font-size:28px;line-height:1.5;color:var(--mute);max-width:1300px}
+
+/* línea de remate al pie de las slides claras — regla 4 del sistema */
+.kicker{position:absolute;left:112px;right:112px;bottom:76px;font-size:26px;line-height:1.5;color:var(--mute)}
+.kicker b{color:var(--text);font-weight:700}
+
+.pad{position:absolute;inset:0;padding:96px 112px}
+
+/* co-branding del cliente, presente en TODAS las slides del deck */
+.cobrand{position:absolute;top:64px;right:112px;height:46px;object-fit:contain}
+
+/* ============================ 1. COVER =================================== */
+.cover .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover .scrim{position:absolute;inset:0;background:rgba(0,0,0,.38)}
+.cover .mark{position:absolute;inset:0;display:grid;place-items:center;gap:0}
+.cover .mark img{height:150px;object-fit:contain}
+.cover .pill{position:absolute;left:50%;transform:translateX(-50%);bottom:0;background:var(--accent-deep);color:#fff;
+  padding:26px 76px 32px;border-radius:20px 20px 0 0;font-size:30px;font-weight:600;letter-spacing:.01em;white-space:nowrap}
+
+/* ====================== 13. HALFPHOTO (apertura) ========================= */
+/* Texto arriba sobre fondo claro, foto a sangre abajo. Es la slide de promesa
+   que abre el argumento — va inmediatamente después de la portada. */
+.halfphoto .top{position:absolute;left:0;right:0;top:0;height:470px;padding:96px 112px}
+.halfphoto .shot{position:absolute;left:0;right:0;bottom:0;height:610px;width:100%;object-fit:cover}
+
+/* ============================ 2. SPLIT =================================== */
+.panel{position:absolute;left:0;top:0;width:960px;height:1080px;background:var(--ink);color:#fff;
+  padding:104px 96px;display:flex;flex-direction:column}
+.panel .h1{font-size:96px;line-height:.98;letter-spacing:-.03em;margin-top:44px}
+.panel .h1.two{font-size:84px;margin:auto 0}   /* titular corto: 2 lineas y centrado vertical entre eyebrow y bajada */
+.panel .h1.word{font-size:128px;line-height:1}
+.panel .lead{font-size:26px;line-height:1.55;color:rgba(255,255,255,.8);margin-top:auto}
+.panel .h1.two~.lead{margin-top:0}   /* con .two el hueco lo reparte el titular */
+.panel ul{margin-top:auto;list-style:none}
+.panel ul li{font-size:26px;line-height:1.5;padding:18px 0 18px 40px;position:relative;border-top:1px solid rgba(255,255,255,.14)}
+.panel ul li:before{content:'›';position:absolute;left:0;color:var(--accent);font-size:30px;line-height:1.3}
+.photo{position:absolute;right:0;top:0;width:960px;height:1080px;object-fit:cover}
+
+/* --- 2b. timeline al pie del panel (ANTES / DURANTE / DESPUÉS) ----------- */
+.timeline{display:flex;align-items:center;margin-top:56px}
+.timeline .node{display:flex;flex-direction:column;align-items:center;gap:18px;flex:none;width:150px}
+.timeline .node i{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.28)}
+.timeline .node span{font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.timeline .node.on i{background:var(--accent)}
+.timeline .node.on span{color:var(--accent)}
+.timeline .bar{flex:1;height:1px;background:rgba(255,255,255,.22);margin-bottom:34px}
+
+/* ============================ 3. SPLIT + 3 FILAS ========================= */
+.rows{position:absolute;left:960px;top:0;width:960px;height:1080px;display:grid;grid-template-rows:repeat(3,1fr);gap:8px;background:var(--paper)}
+.row{display:grid;grid-template-columns:368px 1fr;background:var(--paper-2)}   /* #f1f1f1, muestreado */
+.row img{width:100%;height:100%;object-fit:cover;filter:brightness(1.08) saturate(1.04)}
+.row .rtx{padding:0 64px;display:flex;flex-direction:column;justify-content:center;position:relative}
+.row .rtx h3{font-size:38px;font-weight:700;line-height:1.1;margin-bottom:16px}
+.row .rtx p{font-size:24px;line-height:1.5;color:var(--mute);max-width:420px}
+.row .num{position:absolute;right:48px;bottom:40px;width:58px;height:58px;border-radius:50%;
+  background:var(--accent);color:#fff;font-size:26px;font-weight:600;display:grid;place-items:center}
+
+/* ============================ 4. SPLIT + 2x2 ============================= */
+.quad{position:absolute;left:960px;top:0;width:960px;height:1080px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;background:var(--paper)}
+.quad img{width:100%;height:100%;object-fit:cover}
+.quad .cell{background:var(--paper);padding:56px 52px;display:flex;flex-direction:column;justify-content:center}
+.quad .cell h3{font-size:40px;font-weight:700;line-height:1.1;margin-bottom:24px}
+.quad .cell p{font-size:23px;line-height:1.55;color:var(--mute)}
+.quad .cell p b{color:var(--text)}
+
+/* ============================ 5. CARDS (workhorse) ======================= */
+.cards{display:grid;gap:24px;margin-top:60px}
+.cards.c2{grid-template-columns:repeat(2,1fr)}
+.cards.c3{grid-template-columns:repeat(3,1fr)}
+.cards.c4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--accent);color:#fff;border-radius:20px;padding:44px 40px;min-height:410px}
+.card h3{font-size:34px;font-weight:700;line-height:1.15;margin-bottom:26px}
+.card p,.card li{font-size:23px;line-height:1.5;color:rgba(255,255,255,.92)}
+.card ul{list-style:none}
+.card li{padding-left:22px;text-indent:-22px;margin-bottom:14px}
+.card li:before{content:'• '}
+.card.soft{background:var(--accent-tint);color:var(--text)}
+.card.soft p,.card.soft li{color:var(--mute)}
+.card.ink{background:var(--ink)}
+.card.deep{background:var(--accent-deep)}
+
+/* fila de logos de clientes entre las cards y el remate */
+.logos{display:flex;align-items:center;justify-content:space-between;gap:40px;margin-top:56px;opacity:.9}
+.logos img{height:44px;object-fit:contain}
+
+/* ============================ 6. MÉTRICAS 2x2 ============================ */
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:56px}
+.metric{background:var(--accent-soft);border-radius:20px;padding:46px 40px;text-align:center}
+.metric .n{font-size:88px;font-weight:700;line-height:1;letter-spacing:-.03em;color:#fff}
+.metric .n.sm{font-size:56px}   /* cuando el numero es una frase, no una cifra */
+.metric .lbl{font-size:26px;font-weight:700;color:#fff;margin-top:6px}
+.metric .sub{font-size:23px;line-height:1.4;color:var(--text);margin-top:22px}
+
+/* ============================ 7. PASOS NUMERADOS ========================= */
+.steps{display:grid;gap:22px;margin-top:84px}
+.steps.s3{grid-template-columns:repeat(3,1fr)}
+.steps.s4{grid-template-columns:repeat(4,1fr)}
+.step{position:relative;background:var(--accent);color:#fff;border-radius:16px;padding:66px 34px 40px;min-height:400px}
+.step h3{font-size:30px;font-weight:700;line-height:1.2;margin-bottom:20px}
+.step p{font-size:22px;line-height:1.5;color:rgba(255,255,255,.85)}
+.step .n{position:absolute;top:-29px;left:34px;width:58px;height:58px;border-radius:50%;background:var(--paper);
+  border:2px solid var(--accent);color:var(--text);font-size:26px;font-weight:700;display:grid;place-items:center}
+
+/* 15. PICKS — cards con foto arriba y texto abajo. El caballito para presentar
+   opciones de producto: 2 o 3 por fila. */
+.picks{display:grid;gap:24px;margin-top:44px}
+.picks.p2{grid-template-columns:1fr 1fr}
+.picks.p3{grid-template-columns:repeat(3,1fr)}
+.pick{background:var(--paper-2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.pick figure{height:272px;background:#e6e6e6}
+.picks.big .pick figure{height:334px}   /* la slide de la propuesta va con foto grande */
+.pick figure img,.pick figure video{width:100%;height:100%;object-fit:cover;display:block}
+/* "*Imagen referencial": cuando la foto no es el producto real. <span class="imgref">*Imagen referencial</span> dentro de la figure */
+.pick figure{position:relative}
+.imgref{position:absolute;left:0;right:0;bottom:0;text-align:right;
+  padding:72px 28px 20px;background:linear-gradient(180deg,rgba(16,18,20,0),rgba(16,18,20,.28) 45%,rgba(16,18,20,.78));
+  color:#fff;font-size:13px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;line-height:1;
+  text-shadow:0 1px 6px rgba(0,0,0,.45)}
+.pick .pbody{padding:28px 32px 32px;flex:1}
+.pick h3{font-size:31px;font-weight:700;line-height:1.15;margin-bottom:12px}
+.pick p{font-size:21px;line-height:1.5;color:var(--mute)}
+.pick ul{list-style:none;margin-top:14px}
+.pick li{font-size:20px;line-height:1.4;color:var(--mute);padding-left:22px;text-indent:-22px;margin-bottom:7px}
+.pick li:before{content:'• ';color:var(--accent);font-weight:700}
+
+/* 16. EXPS — calcado de cómo presenta los productos b2b.bigboxcorpo.com:
+   foto, badge opcional, categoría en versalitas, nombre y una línea. */
+.exps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:42px}
+.exp{position:relative;background:var(--paper-2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.exp>img{width:100%;height:298px;object-fit:cover;display:block}
+.exp .badge{position:absolute;top:18px;left:18px;background:#fff;color:var(--text);border-radius:999px;
+  padding:8px 16px 8px 13px;font-size:17px;font-weight:700;display:flex;align-items:center;gap:7px}
+.exp .badge svg{width:15px;height:15px;fill:var(--accent)}
+.exp .body{padding:24px 26px 28px;flex:1}
+.exp .tag{font-size:17px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.exp h3{font-size:26px;font-weight:700;line-height:1.2;margin-bottom:8px}
+.exp .desc{font-size:19px;line-height:1.4;color:var(--mute)}
+
+/* bloque de presupuesto: la escala de 4 a la izquierda, el numero grande a la derecha */
+.budget{display:flex;align-items:center;justify-content:space-between;gap:48px;margin-top:26px;
+  background:var(--accent);color:#fff;border-radius:16px;padding:24px 40px}
+.budget .btxt b{display:block;font-size:30px;font-weight:700;line-height:1.2}
+.budget .scale{display:flex;align-items:flex-end;gap:9px;height:36px;margin-top:14px}
+.budget .scale i{width:24px;border-radius:5px;background:rgba(255,255,255,.42)}
+.budget .scale i:nth-child(1){height:45%;background:#fff}
+.budget .scale i:nth-child(2){height:63%}
+.budget .scale i:nth-child(3){height:81%}
+.budget .scale i:nth-child(4){height:100%}
+.budget .bamount{display:flex;align-items:baseline;gap:14px;white-space:nowrap}
+.budget .bamount span{font-size:19px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.budget .bamount strong{font-size:62px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.budget .bamount i{font-style:normal;font-size:24px;font-weight:600;color:rgba(255,255,255,.85)}
+
+/* 10. STRIP — tira de categorías a sangre */
+.strip{position:absolute;left:0;right:0;bottom:0;height:606px;display:grid;grid-template-columns:repeat(6,1fr)}
+.strip figure{position:relative;overflow:hidden;background:#e6e6e6}
+.strip figure img{width:100%;height:100%;object-fit:cover;display:block}
+.strip figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 22px;color:#fff;
+  background:linear-gradient(180deg,rgba(16,18,20,0),rgba(16,18,20,.88))}
+.strip figcaption b{display:block;font-size:24px;font-weight:700;line-height:1.15;margin-bottom:6px}
+.strip figcaption em{font-style:normal;font-size:17px;line-height:1.35;color:rgba(255,255,255,.8)}
+
+/* ====================== 14. FLUJO CON BIFURCACIÓN ======================= */
+/* 14. FLUJO CON BIFURCACIÓN — tramo común arriba, dos caminos abajo.
+   Cada bloque lleva su propia imagen: sin fotos son cuatro rectángulos de color. */
+.flow{margin-top:44px}
+.flow-common{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.fstep{position:relative;background:var(--accent);color:#fff;border-radius:16px;padding:50px 36px 30px;min-height:212px}
+.fstep .n{position:absolute;top:-26px;left:32px;z-index:3;width:52px;height:52px;border-radius:50%;background:var(--paper);
+  border:2px solid var(--accent);color:var(--text);font-size:24px;font-weight:700;display:grid;place-items:center}
+.fstep h3{font-size:29px;font-weight:700;line-height:1.2}
+.fstep p{font-size:21px;line-height:1.45;color:rgba(255,255,255,.88);margin-top:10px}
+
+/* los dos formatos de entrega, con ícono */
+.ways{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:20px}
+.way{display:grid;grid-template-columns:50px 1fr;gap:16px;align-items:start}
+.way svg{width:46px;height:46px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.way b{display:block;font-size:21px;font-weight:700;line-height:1.2;margin-bottom:3px}
+.way em{font-style:normal;font-size:18px;line-height:1.35;color:rgba(255,255,255,.82)}
+
+/* variante del paso con foto a sangre: la imagen es el fondo de la card */
+.fstep.shotstep{padding:0;background:var(--ink)}
+.fstep.shotstep img,.fstep.shotstep .scrim{position:absolute;inset:0;width:100%;height:100%;border-radius:16px}
+.fstep.shotstep img{object-fit:cover}
+.fstep.shotstep .scrim{background:linear-gradient(90deg,rgba(16,18,20,.9),rgba(16,18,20,.55) 62%,rgba(16,18,20,.2))}
+.fstep.shotstep .ov{position:relative;z-index:2;padding:50px 36px 30px}
+
+/* el rótulo de la bifurcación, con filete a los costados */
+.fork{display:flex;align-items:center;gap:24px;margin:30px 0 26px;font-size:22px;color:var(--mute);white-space:nowrap}
+.fork:before,.fork:after{content:'';flex:1;height:1px;background:#dedede}
+
+.branches{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.branch{background:var(--accent-tint);border-radius:16px;overflow:hidden;padding-bottom:24px}
+.branch figure{position:relative;height:148px}
+.branch figure img{width:100%;height:100%;object-fit:cover;display:block}
+.branch figcaption{position:absolute;inset:0;display:flex;align-items:flex-end;padding:18px 30px;color:#fff;
+  font-size:25px;font-weight:700;background:linear-gradient(180deg,rgba(16,18,20,.15),rgba(16,18,20,.8))}
+.branch ol{list-style:none;padding:24px 30px 0}
+.branch li{display:grid;grid-template-columns:44px 1fr;gap:18px;align-items:start;margin-bottom:18px}
+.branch li:last-child{margin-bottom:0}
+.branch li i{width:44px;height:44px;border-radius:50%;background:#fff;color:var(--text);font-style:normal;
+  font-size:21px;font-weight:700;display:grid;place-items:center}
+.branch li p{font-size:21px;line-height:1.45;color:rgba(26,27,30,.75)}   /* --mute sobre el tint queda en 3,9:1 */
+.branch li p b{display:block;font-size:24px;font-weight:700;line-height:1.25;color:var(--text);margin-bottom:5px}
+
+/* ============================ 8. MANIFIESTO ============================== */
+.statement{background:var(--accent-deep);color:#fff;text-align:center}
+.slide.statement.on{display:grid;place-items:center}   /* gana sobre .slide.on{display:block} */
+.statement .h1{font-size:76px;font-weight:400;line-height:1.25;max-width:1500px}
+.statement .h1 b{font-weight:700}
+.statement .breadcrumb{margin-top:64px;font-size:26px;color:rgba(255,255,255,.75)}
+.statement .breadcrumb i{font-style:normal;margin:0 18px;opacity:.55}
+.statement .eyebrow{position:absolute;top:96px;left:112px;color:rgba(255,255,255,.85)}
+
+/* ============================ 9. CATÁLOGO ================================ */
+.catalog{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:44px}
+.catalog.left{justify-content:start}
+.prod{position:relative;background:var(--paper-2);border-radius:12px;padding:22px 22px 34px}
+.prod figure{position:relative;height:330px;border-radius:8px;overflow:hidden}
+.prod figure img{width:100%;height:100%;object-fit:cover}
+.prod figcaption{position:absolute;left:24px;bottom:22px;color:#fff;font-size:26px;line-height:1.2;font-weight:400;text-shadow:0 1px 12px rgba(0,0,0,.4)}
+.prod h3{font-size:34px;font-weight:700;line-height:1.15;margin:28px 0 18px}
+.prod .who{font-size:22px;margin-bottom:16px}
+.prod p{font-size:22px;line-height:1.5;color:var(--mute)}
+.prod .price{font-size:24px;font-weight:500;margin-top:30px}
+.prod .add{position:absolute;right:24px;bottom:24px;width:64px;height:64px;border-radius:50%;background:var(--accent);
+  color:#fff;font-size:34px;font-weight:400;display:grid;place-items:center;text-decoration:none}
+
+/* ============================ 10. TIRA DE CATEGORÍAS ===================== */
+.strip{position:absolute;left:0;right:0;bottom:0;height:660px;display:grid;grid-template-columns:repeat(6,1fr)}
+.strip figure{position:relative;overflow:hidden}
+.strip img{width:100%;height:100%;object-fit:cover}
+.strip figcaption{position:absolute;left:26px;bottom:26px;color:#fff;font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+
+/* ============================ 11. COMPARATIVA ============================ */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:60px}
+.compare .col{border-radius:20px;overflow:hidden}
+.compare .col img{width:100%;height:300px;object-fit:cover;display:block}
+.compare .col .body{padding:40px}
+.compare .col.weak{background:var(--accent-tint)}
+.compare .col.weak .body{color:var(--text)}
+.compare .col.strong{background:var(--accent);color:#fff}
+.compare .col h3{font-size:34px;font-weight:700;margin-bottom:24px}
+.compare .col li{font-size:23px;line-height:1.5;list-style:none;padding-left:22px;text-indent:-22px;margin-bottom:14px}
+.compare .col li:before{content:'• '}
+.compare .col p{font-size:23px;line-height:1.55}
+
+/* ============================ 12. TILES 3x2 ============================== */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:60px}
+.tile{background:var(--accent);color:#fff;border-radius:14px;padding:38px 34px}
+.tile h3{font-size:30px;font-weight:700;margin-bottom:18px}
+.tile h3 span{margin-right:16px;opacity:.75}
+.tile p{font-size:22px;line-height:1.5;color:rgba(255,255,255,.88)}
+
+/* --- placeholder de foto: borrar al cargar imágenes reales --------------- */
+.ph{background:linear-gradient(135deg,#3a3d42,#6d7278);display:grid;place-items:center;color:rgba(255,255,255,.5);font-size:20px;letter-spacing:.1em;text-transform:uppercase}
+
+/* ============================ NAV ======================================== */
+/* ============================ TRANSICIONES =============================== */
+/* Sin JS: el slide pasa de display:none a display:block al recibir .on, y eso
+   relanza cada animation. Entrada escalonada — rótulo, titular, bajada, cards. */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes pillUp{from{opacity:0;transform:translate(-50%,100%)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes kenburns{from{transform:scale(1.07)}to{transform:scale(1)}}
+
+.slide.on{animation:fadeIn .3s ease both}
+.slide.on .eyebrow{animation:fadeUp .5s .06s ease-out both}
+.slide.on .h1{animation:fadeUp .6s .14s ease-out both}
+.slide.on .lead{animation:fadeUp .6s .24s ease-out both}
+.slide.on .cobrand{animation:fadeIn .7s .1s ease both}
+.slide.on .kicker{animation:fadeUp .5s .62s ease-out both}
+.slide.on .budget{animation:fadeUp .5s .68s ease-out both}
+
+/* todo lo que va en grilla entra de a uno */
+.slide.on .picks>*,.slide.on .exps>*,.slide.on .cards>*,.slide.on .steps>*,.slide.on .metrics>*,.slide.on .tiles>*,
+.slide.on .compare>*,.slide.on .rows>*,.slide.on .quad>*,.slide.on .strip>*,
+.slide.on .panel>ul>li{animation:fadeUp .5s ease-out both}
+.slide.on .picks>*:nth-child(1),.slide.on .exps>*:nth-child(1),.slide.on .cards>*:nth-child(1),.slide.on .steps>*:nth-child(1),.slide.on .metrics>*:nth-child(1),.slide.on .tiles>*:nth-child(1),.slide.on .compare>*:nth-child(1),.slide.on .rows>*:nth-child(1),.slide.on .quad>*:nth-child(1),.slide.on .strip>*:nth-child(1),.slide.on .panel>ul>li:nth-child(1){animation-delay:.34s}
+.slide.on .picks>*:nth-child(2),.slide.on .exps>*:nth-child(2),.slide.on .cards>*:nth-child(2),.slide.on .steps>*:nth-child(2),.slide.on .metrics>*:nth-child(2),.slide.on .tiles>*:nth-child(2),.slide.on .compare>*:nth-child(2),.slide.on .rows>*:nth-child(2),.slide.on .quad>*:nth-child(2),.slide.on .strip>*:nth-child(2),.slide.on .panel>ul>li:nth-child(2){animation-delay:.42s}
+.slide.on .picks>*:nth-child(3),.slide.on .exps>*:nth-child(3),.slide.on .cards>*:nth-child(3),.slide.on .steps>*:nth-child(3),.slide.on .metrics>*:nth-child(3),.slide.on .tiles>*:nth-child(3),.slide.on .compare>*:nth-child(3),.slide.on .rows>*:nth-child(3),.slide.on .quad>*:nth-child(3),.slide.on .strip>*:nth-child(3),.slide.on .panel>ul>li:nth-child(3){animation-delay:.50s}
+.slide.on .picks>*:nth-child(4),.slide.on .exps>*:nth-child(4),.slide.on .cards>*:nth-child(4),.slide.on .steps>*:nth-child(4),.slide.on .metrics>*:nth-child(4),.slide.on .tiles>*:nth-child(4),.slide.on .quad>*:nth-child(4),.slide.on .strip>*:nth-child(4){animation-delay:.58s}
+.slide.on .tiles>*:nth-child(5),.slide.on .strip>*:nth-child(5){animation-delay:.66s}
+.slide.on .tiles>*:nth-child(6),.slide.on .strip>*:nth-child(6){animation-delay:.74s}
+
+/* el flujo entra en orden: tramo común, el rótulo de la bifurcación, y las dos ramas */
+.slide.on .flow-common>*,.slide.on .branches>*{animation:fadeUp .5s ease-out both}
+.slide.on .flow-common>*:nth-child(1){animation-delay:.30s}
+.slide.on .flow-common>*:nth-child(2){animation-delay:.38s}
+.slide.on .fork{animation:fadeIn .5s .48s ease both}
+.slide.on .way{animation:fadeUp .45s ease-out both}
+.slide.on .way:nth-child(1){animation-delay:.44s}
+.slide.on .way:nth-child(2){animation-delay:.50s}
+.slide.on .branches>*:nth-child(1){animation-delay:.58s}
+.slide.on .branches>*:nth-child(2){animation-delay:.66s}
+
+/* portada: la foto respira, la pill sube desde el borde */
+.cover.on .bg{animation:kenburns 9s ease-out both}
+.cover.on .mark{animation:fadeIn .9s .15s ease both}
+.cover.on .pill{animation:pillUp .6s .4s cubic-bezier(.2,.8,.25,1) both}
+
+.halfphoto.on .shot{animation:fadeIn .8s .28s ease both}
+.statement.on .breadcrumb{animation:fadeUp .55s .5s ease-out both}
+
+@media (prefers-reduced-motion:reduce){.slide.on,.slide.on *{animation:none!important}}
+
+#dots{position:fixed;left:0;right:0;bottom:18px;display:flex;justify-content:center;gap:8px;z-index:10}
+#dots b{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:.2s}
+#dots b.on{background:#fff;width:22px;border-radius:4px}
+#hint{position:fixed;top:14px;right:18px;color:rgba(255,255,255,.35);font-size:12px;letter-spacing:.08em;z-index:10}
+/* ===== agregados para este deck: tabla de datos, barras, semáforo ===== */
+.dtable{width:100%;border-collapse:collapse;margin-top:48px;font-size:25px}
+.dtable th{text-align:left;font-size:17px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding:0 22px 16px;border-bottom:2px solid var(--ink)}
+.dtable td{padding:20px 22px;border-bottom:1px solid #e3e3e3;line-height:1.35;vertical-align:top}
+.dtable.sm{font-size:23px;margin-top:40px}
+.dtable.sm td{padding:17px 20px}
+.dtable tr.hl td{background:var(--accent-tint)}
+.sg,.sy,.so,.sr{display:inline-block;width:16px;height:16px;border-radius:50%;margin-right:12px;vertical-align:middle;position:relative;top:-2px}
+.sg{background:#3aa76d}.sy{background:#e6b422}.so{background:#f08a24}.sr{background:#d64545}
+.bars{display:grid;gap:18px;margin-top:44px}
+.bar-row{display:grid;grid-template-columns:300px 1fr 190px;gap:28px;align-items:center;font-size:25px}
+.bar-row i{font-style:normal;color:var(--accent);font-size:18px;margin-left:6px}
+.bar-row .track{height:46px;background:var(--paper-2);border-radius:10px;overflow:hidden}
+.bar-row .fill{height:100%;background:var(--accent);border-radius:10px;transform-origin:left}
+.bar-row .fill.ink{background:var(--ink)}
+.bar-row .v{font-weight:700;font-size:27px}
+.compare .col .body ul{margin-top:6px}
+.compare .col p.big{font-size:120px;font-weight:700;line-height:1;letter-spacing:-.03em;margin:4px 0 18px}
+.compare .col .body{padding:48px 44px}
+.tile.soft{background:var(--accent-tint);color:var(--text)}
+.tile.soft p{color:var(--mute)}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.slide.on .bar-row .fill{animation:grow .8s .35s cubic-bezier(.2,.8,.25,1) both}
+.slide.on .dtable{animation:fadeUp .6s .32s ease-out both}
+</style>
+</head>
+<body>
+<div id="stage"><div id="deck">
+<!-- 1. PORTADA -->
+<section class="slide cover">
+  <img class="bg" src="assets/cover.jpg" alt="amigos brindando en una cena">
+  <div class="scrim"></div>
+  <div class="mark"><img src="assets/logo-corpo-blanco.png" alt="Bigbox Corpo"></div>
+  <div class="pill">Estudio de mercado · Gift cards en LATAM, US y Europa · Nov 2026</div>
+</section>
+
+<!-- 2. PROMESA -->
+<section class="slide halfphoto">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="top">
+    <div class="eyebrow"><span>El punto de partida</span><i class="dot"></i></div>
+    <h2 class="h1 light" style="margin-top:34px">Un mercado de USD 600 mil millones. <b>Jugamos en la región que más crece.</b></h2>
+    <p class="lead" style="margin-top:26px">Cuánto vale el mercado, quién se lleva la plata y por qué, y dónde puede ganar Bigbox.</p>
+  </div>
+  <img class="shot" src="assets/promesa.jpg" alt="">
+</section>
+
+<!-- 3. LOS NÚMEROS -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>El mercado</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">LATAM es el más chico. Y el que más rápido crece.</h2>
+    <div class="metrics">
+      <div class="metric"><div class="n">USD 16,4B</div><div class="lbl">LATAM 2025</div><p class="sub">~USD 27B en 2030. Brasil es la mitad.</p></div>
+      <div class="metric"><div class="n">~10-11%</div><div class="lbl">crecimiento anual LATAM</div><p class="sub">Contra 6-7% en US y ~7% en Europa.</p></div>
+      <div class="metric"><div class="n">USD 207-234B</div><div class="lbl">Estados Unidos 2025</div><p class="sub">13 veces LATAM. ~USD 300B en 2031.</p></div>
+      <div class="metric"><div class="n">USD 74-80B</div><div class="lbl">Europa 2025</div><p class="sub">5 veces LATAM. USD 105-115B en 2030.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. MANIFIESTO -->
+<section class="slide statement">
+  <div class="eyebrow"><span>La tesis</span><i class="dot" style="background:#fff;opacity:.6"></i></div>
+  <div>
+    <h2 class="h1">El regalo es la excusa.<br><b>El negocio es el saldo, la recurrencia y el canal.</b></h2>
+    <p class="breadcrumb">Lo que dicen los datos de las tres regiones <i>›</i> Lo que significa para Bigbox.</p>
+  </div>
+</section>
+
+<!-- 5. SECCIÓN: DEFINICIÓN -->
+<section class="slide">
+  <div class="panel">
+    <div class="eyebrow"><span>Primero, la definición</span><i class="dot"></i></div>
+    <h2 class="h1">Qué cuenta<br>como gift<br>card.</h2>
+    <ul>
+      <li><b>De una marca.</b> Saldo en un solo comercio.</li>
+      <li><b>Multimarca.</b> Saldo en una red de comercios.</li>
+      <li><b>De experiencias.</b> Box o saldo en prestadores. Nuestro core.</li>
+      <li><b>Open-loop e incentivos.</b> Prepagas, premios y pagos por API.</li>
+    </ul>
+  </div>
+  <img class="photo" src="assets/giftcard.jpg" alt="gift card de regalo">
+</section>
+
+<!-- 6. CORRECCIÓN DE LA SLIDE -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>La corrección</span><i class="dot"></i></div>
+    <h2 class="h1 light" style="margin-top:34px">Las cifras que circulan. <b>Lo que resiste una pregunta.</b></h2>
+    <table class="dtable">
+      <tr><th>Lo que decía la slide</th><th>Veredicto</th><th>Cómo citarlo</th></tr>
+      <tr><td>LATAM 2026: USD 17,5B</td><td><span class="sg"></span>Plausible</td><td><b>USD 17,5-18B</b> (PayNXT360, estimación 2026)</td></tr>
+      <tr><td>+10,6% YoY</td><td><span class="so"></span>Es el dato de México</td><td><b>~10-11%</b> anual para LATAM</td></tr>
+      <tr class="hl"><td>B2B corporativo 45-55%</td><td><span class="sr"></span>Sin respaldo</td><td><b>~20% (rango 15-35%), ≈ USD 4B</b>. Estimación propia</td></tr>
+      <tr><td>Apuestas deportivas "explosivas" en AR/CL/PE</td><td><span class="so"></span>Sin datos</td><td>En Brasil lidera el <b>gaming</b> (PlayStation #1 de Blackhawk)</td></tr>
+    </table>
+  </div>
+  <p class="kicker">Las fuentes difieren hasta 90 veces según qué cuentan. <b>Usamos "gift + incentive cards, valor cargado" en las tres regiones.</b></p>
+</section>
+
+<!-- 7. LATAM POR PAÍS -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>El mapa</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Brasil solo es más grande que nuestros 5 países juntos.</h2>
+    <p class="lead" style="margin-top:20px">Mercado de gift cards 2025, en miles de millones de USD.</p>
+    <div class="bars">
+      <div class="bar-row"><span>Brasil</span><div class="track"><div class="fill ink" style="width:100%"></div></div><span class="v">8,1</span></div>
+      <div class="bar-row"><span>México <i>●</i></span><div class="track"><div class="fill" style="width:53%"></div></div><span class="v">4,3</span></div>
+      <div class="bar-row"><span>Chile <i>●</i></span><div class="track"><div class="fill" style="width:15.5%"></div></div><span class="v">1,3</span></div>
+      <div class="bar-row"><span>Argentina <i>●</i></span><div class="track"><div class="fill" style="width:14.8%"></div></div><span class="v">1,2</span></div>
+      <div class="bar-row"><span>Colombia</span><div class="track"><div class="fill ink" style="width:14.5%"></div></div><span class="v">1,1-1,3</span></div>
+      <div class="bar-row"><span>Perú <i>●</i></span><div class="track"><div class="fill" style="width:9%"></div></div><span class="v">0,6-0,85*</span></div>
+      <div class="bar-row"><span>Uruguay <i>●</i></span><div class="track"><div class="fill" style="width:2.5%"></div></div><span class="v">0,15-0,25*</span></div>
+    </div>
+  </div>
+  <p class="kicker"><i style="font-style:normal;color:var(--accent)">●</i> Países Bigbox: ~USD 7,5B, el 45% de la región. <b>* Perú y Uruguay: estimación propia por PBI.</b> Fuente: PayNXT360 2025-26.</p>
+</section>
+
+<!-- 8. COMPARATIVO REGIONES -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>La comparación</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Tres mercados. Tres motores distintos.</h2>
+    <table class="dtable">
+      <tr><th></th><th>LATAM</th><th>Estados Unidos</th><th>Europa</th></tr>
+      <tr><td><b>Tamaño 2025</b></td><td>USD 16,4B</td><td>USD 207-234B</td><td>USD 74-80B</td></tr>
+      <tr><td><b>Crecimiento anual</b></td><td>~10-11%</td><td>6-7%</td><td>~7%</td></tr>
+      <tr class="hl"><td><b>Lo que compran empresas</b></td><td>~20% · USD 3,6-4B</td><td>~20% · USD 35-55B</td><td>52-66% · USD 40-50B</td></tr>
+      <tr><td><b>Qué mueve el B2B</b></td><td>Ocasiones y beneficios regulados</td><td>Incentivos y pagos por API</td><td>Topes fiscales por empleado</td></tr>
+      <tr><td><b>Digital</b></td><td>49% lo prefiere (Brasil)</td><td>~58% del valor</td><td>~58% del valor</td></tr>
+      <tr><td><b>Confianza del dato B2B</b></td><td>Baja</td><td>Media-baja</td><td>Media</td></tr>
+    </table>
+  </div>
+  <p class="kicker">Fuentes: PayNXT360, Mordor, GCVA (UK), Incentive Federation e IRF. <b>El B2B de LATAM es el dato más débil del estudio.</b></p>
+</section>
+
+<!-- 9. B2B: EL MOTOR FISCAL -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>El motor europeo</span><i class="dot"></i></div>
+    <h2 class="h1 light" style="margin-top:34px">Europa no regala por ocasión. <b>Regala hasta el tope exento.</b></h2>
+    <div class="tiles">
+      <div class="tile"><h3>Italia</h3><p>€1.000-2.000 al año por empleado.</p></div>
+      <div class="tile"><h3>Alemania</h3><p>€50 por mes + €60 por ocasión. Recarga mensual.</p></div>
+      <div class="tile"><h3>Reino Unido</h3><p>£50 por regalo. El B2B es 52-64% del mercado.</p></div>
+      <div class="tile"><h3>Francia</h3><p>€200 por evento. El B2B crece +22%, el consumo +5%.</p></div>
+      <div class="tile"><h3>Bélgica</h3><p>€250 al año en eco-chèques.</p></div>
+      <div class="tile soft"><h3>España</h3><p>Sin exención. El mercado más chico de los grandes.</p></div>
+    </div>
+  </div>
+  <p class="kicker">En LATAM casi no hay exenciones: solo Brasil ("prêmio"), Perú ("canasta") y México (despensa). <b>Ahí hay producto para armar.</b></p>
+</section>
+
+<!-- 10. DÓNDE SE GASTA -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>El white space</span><i class="dot"></i></div>
+    <h2 class="h1 light" style="margin-top:34px">Reconocer empleados es un cuarto del gasto. <b>Lo grande está en ventas y clientes.</b></h2>
+    <p class="lead" style="margin-top:20px">Gasto anual de empresas de US en incentivos no monetarios, en miles de millones de USD.</p>
+    <div class="bars">
+      <div class="bar-row"><span>Fuerza de ventas</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="v">52,3</span></div>
+      <div class="bar-row"><span>Empleados</span><div class="track"><div class="fill ink" style="width:77%"></div></div><span class="v">40,3</span></div>
+      <div class="bar-row"><span>Lealtad de clientes</span><div class="track"><div class="fill" style="width:61%"></div></div><span class="v">31,9</span></div>
+      <div class="bar-row"><span>Regalos a clientes</span><div class="track"><div class="fill" style="width:52.6%"></div></div><span class="v">27,5</span></div>
+      <div class="bar-row"><span>Canal</span><div class="track"><div class="fill" style="width:46%"></div></div><span class="v">24,2</span></div>
+    </div>
+  </div>
+  <p class="kicker">Hoy vendemos sobre todo a RRHH. <b>Marketing y Trade Marketing manejan el presupuesto más grande.</b> Fuente: Incentive Federation 2022.</p>
+</section>
+
+<!-- 11. SECCIÓN: CÓMO SE GANA PLATA -->
+<section class="slide">
+  <div class="panel">
+    <div class="eyebrow"><span>La economía</span><i class="dot"></i></div>
+    <h2 class="h1">Cuatro<br>maneras de<br>ganar plata.</h2>
+    <ul>
+      <li><b>Suscripción por empleado.</b> Recurrente. El de mayor múltiplo.</li>
+      <li><b>Float del saldo prepagado.</b> Margen ~100%.</li>
+      <li><b>Comisión por canje.</b> En B2B directo, completa.</li>
+      <li><b>Breakage.</b> Se cobra, pero se achica.</li>
+    </ul>
+  </div>
+  <img class="photo" src="assets/experiencias.jpg" alt="amigos en una caminata">
+</section>
+
+<!-- 12. CADENA DE VALOR -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>La cadena de valor</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Quién se queda con qué.</h2>
+    <table class="dtable sm">
+      <tr><th>Eslabón</th><th>Cómo gana</th><th>Margen típico</th></tr>
+      <tr><td><b>Marca emisora</b></td><td>Cobra hoy, entrega después + breakage</td><td>Breakage 8-10%</td></tr>
+      <tr class="hl"><td><b>Experiencias (Bigbox, Smartbox)</b></td><td>Comisión del prestador + breakage + float</td><td>Margen bruto 93% sobre ingreso neto · EBITDA ~31%</td></tr>
+      <tr><td><b>Red de beneficios (Edenred, Pluxee)</b></td><td>Comisión al comercio + fee + float</td><td>Toma ~5% del volumen · EBITDA 37-46%</td></tr>
+      <tr><td><b>Agregador (Blackhawk)</b></td><td>Comisión de la marca</td><td>~71% de la comisión se va al retailer</td></tr>
+      <tr><td><b>Pagos por API (Tremendous, Tango)</b></td><td>Descuento de la marca + fees de pago</td><td>Fee cero al comprador</td></tr>
+      <tr><td><b>SaaS de reconocimiento</b></td><td>Suscripción + margen de canje</td><td>EBITDA 47% (Reward Gateway)</td></tr>
+    </table>
+  </div>
+  <p class="kicker">En la venta directa a empresas no hay retailer en el medio. <b>El canal B2B se queda con el descuento completo.</b></p>
+</section>
+
+<!-- 13. EL SALDO -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>Lo más valioso</span><i class="dot"></i></div>
+    <h2 class="h1 light" style="margin-top:34px">El negocio de los grandes no es el regalo. <b>Es el saldo.</b></h2>
+    <div class="metrics">
+      <div class="metric"><div class="n">34%</div><div class="lbl">del EBITDA de Pluxee</div><p class="sub">sale de los intereses sobre saldos de clientes. En Edenred, 17%.</p></div>
+      <div class="metric"><div class="n">~5%</div><div class="lbl">del volumen</div><p class="sub">es lo que cobran Edenred (5,6%) y Pluxee (4,6%).</p></div>
+      <div class="metric"><div class="n">&lt;2%</div><div class="lbl">breakage en B2B</div><p class="sub">contra ~11% en consumo (Francia). Las empresas hacen canjear.</p></div>
+      <div class="metric"><div class="n">÷10</div><div class="lbl">breakage tras regular</div><p class="sub">En US cayó de USD 7 a menos de 0,75 cada 100 al exigir 5 años de vigencia.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 14. PLAYERS -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>Los jugadores</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Cinco capas, tres regiones.</h2>
+    <table class="dtable sm">
+      <tr><th>Capa</th><th>LATAM</th><th>US</th><th>Europa</th></tr>
+      <tr><td><b>Redes de beneficios</b></td><td>Alelo, Ticket, Pluxee, Flash, Caju-iFood</td><td>—</td><td>Edenred (€2,7B), Pluxee (€1,3B), Up, Swile</td></tr>
+      <tr><td><b>SaaS de reconocimiento</b></td><td>Apprecio (+4.800 empresas), Bonda, GOintegro, Maslow, Happier</td><td>Awardco (&gt;USD 1B), Workhuman, Achievers</td><td>Reward Gateway, Perkbox, Benifex</td></tr>
+      <tr class="hl"><td><b>Experiencias</b></td><td><b>Bigbox</b>, FANBAG, IMMA, Funboxing</td><td>Virgin Exp. Days, Blueboard (quebró)</td><td>Smartbox (&gt;€350M), Wonderbox (€334M), mydays</td></tr>
+      <tr><td><b>Agregadores</b></td><td>Blackhawk BR (70% de terceros), Oh! Gift Card</td><td>Blackhawk, Tango, Tremendous, Giftbit</td><td>Tillo + Amilon (&gt;£3B), Runa, Prezzee</td></tr>
+      <tr><td><b>Gifting físico</b></td><td>Lobby (BR)</td><td>Sendoso, Snappy, Goody</td><td>—</td></tr>
+    </table>
+  </div>
+  <p class="kicker">Ningún grande junta experiencias propias con beneficios recurrentes. <b>Ni en Europa ni en LATAM.</b></p>
+</section>
+
+<!-- 15. LECCIONES US -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>La lección de Estados Unidos</span><i class="dot"></i></div>
+    <h2 class="h1 light" style="margin-top:34px">Ganan los que cobran recurrencia. <b>Caen los que cobran el envío.</b></h2>
+    <div class="compare">
+      <div class="col weak"><div class="body"><h3>Lo que cayó.</h3><ul>
+        <li><b>Blueboard</b>, experiencias como premio: quebró en 2024 y los clientes perdieron sus saldos.</li>
+        <li><b>Sendoso</b>, regalos para ventas: vale 84% menos que en 2021.</li>
+        <li><b>Snappy</b>: perdió la mitad de su facturación.</li>
+      </ul></div></div>
+      <div class="col strong"><div class="body"><h3>Lo que crece.</h3><ul>
+        <li><b>Awardco</b>, reconocimiento por suscripción: &gt;USD 1B de valuación, premios sin margen.</li>
+        <li><b>Tremendous y Tango</b>: plataforma gratis, sin mínimos, viven del descuento de la marca.</li>
+        <li><b>Goody</b>: "pagás solo lo aceptado", envío sin dirección.</li>
+      </ul></div></div>
+    </div>
+  </div>
+  <p class="kicker">7 de cada 10 empresas de US compran gift cards en el supermercado <b>porque los proveedores les ponen mínimos.</b></p>
+</section>
+
+<!-- 16. MÚLTIPLOS -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>El arbitraje</span><i class="dot"></i></div>
+    <h2 class="h1 light" style="margin-top:34px">El mismo dólar vale tres veces más <b>si es recurrente.</b></h2>
+    <div class="compare">
+      <div class="col weak"><div class="body"><h3>Experiencias por ocasión.</h3><p class="big">~4x</p><p>ingresos. Moonpig compró Buyagift (ex Smartbox UK) por £124M en 2022. Hoy esa unidad cae 4,5%.</p></div></div>
+      <div class="col strong"><div class="body"><h3>Reconocimiento recurrente.</h3><p class="big">12x</p><p>ingresos (26x EBITDA). Edenred compró Reward Gateway por £1.150M en 2023.</p></div></div>
+    </div>
+  </div>
+  <p class="kicker">Respalda la tesis de la estrategia 3x. <b>La condición: que lo recurrente sea visible y auditable.</b></p>
+</section>
+
+<!-- 17. DEALS -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>La consolidación</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Los grandes compran recurrencia. Nadie compró experiencias.</h2>
+    <table class="dtable sm">
+      <tr><th>Año</th><th>Comprador → Target</th><th>Qué es</th><th>Precio</th></tr>
+      <tr><td>2026</td><td><b>iFood → Caju</b> (BR)</td><td>Beneficios + HR</td><td>~R$ 1B · ~2,2x ingresos</td></tr>
+      <tr><td>2024</td><td><b>Pluxee → Cobee</b> (ES/MX) y <b>Benefício Fácil</b> (BR)</td><td>Beneficios flexibles</td><td>No divulgado</td></tr>
+      <tr><td>2024</td><td><b>Blackhawk → Tango</b> (US)</td><td>Pagos y premios por API</td><td>No divulgado</td></tr>
+      <tr class="hl"><td>2023</td><td><b>Edenred → Reward Gateway</b> (UK)</td><td>SaaS de reconocimiento</td><td>£1.150M · 12x ingresos</td></tr>
+      <tr><td>2023</td><td><b>Edenred → GOintegro</b> (AR, 75%)</td><td>SaaS de engagement, 7 países</td><td>No divulgado</td></tr>
+      <tr><td>2022</td><td><b>Moonpig → Buyagift</b> (UK)</td><td>Experiencias</td><td>£124M · ~4x ingresos</td></tr>
+      <tr><td>2026</td><td><b>Tillo → Amilon</b> (UK/IT)</td><td>Infraestructura de gift cards</td><td>No divulgado</td></tr>
+    </table>
+  </div>
+  <p class="kicker">Ninguna operación pública de experiencias en LATAM desde 2019. <b>El segmento sigue fragmentado: la ventana para consolidar está abierta.</b></p>
+</section>
+
+<!-- 18. TENDENCIAS -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>Hacia dónde va</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Seis tendencias que nos tocan.</h2>
+    <div class="tiles">
+      <div class="tile"><h3><span>01.</span>Sin mínimos</h3><p>Plataformas gratis para el comprador. El margen va dentro del producto.</p></div>
+      <div class="tile"><h3><span>02.</span>A elección</h3><p>Experiencia + marca en la misma tarjeta. +45% en UK.</p></div>
+      <div class="tile"><h3><span>03.</span>Dentro de plataformas</h3><p>En Francia, el 69% de los flujos pasa por plataformas de beneficios.</p></div>
+      <div class="tile"><h3><span>04.</span>Billeteras</h3><p>iFood, Mercado Pago, Nubank: el lugar de canje cambia.</p></div>
+      <div class="tile"><h3><span>05.</span>Agentes de IA</h3><p>Goody, Sendoso y Snappy ya mandan regalos desde asistentes de IA.</p></div>
+      <div class="tile"><h3><span>06.</span>Más regulación</h3><p>Vencimientos, antifraude y topes de comisión.</p></div>
+    </div>
+  </div>
+  <p class="kicker">Con Pix, regalar plata es trivial. <b>La gift card abierta pierde diferencial; la experiencia curada lo gana.</b></p>
+</section>
+
+<!-- 19. REGULACIÓN -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>El riesgo</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Dónde pisamos firme y dónde no.</h2>
+    <table class="dtable sm sem">
+      <tr><th>País</th><th>Saldo prepago</th><th>Gift cards de terceros</th><th>Breakage</th><th>Acción</th></tr>
+      <tr><td><b>Argentina</b></td><td><span class="so"></span>IVA al cobrar</td><td><span class="so"></span>BCRA</td><td><span class="sg"></span></td><td>Dictamen de IVA</td></tr>
+      <tr><td><b>Chile</b></td><td><span class="sg"></span>Sin IVA al vender</td><td><span class="so"></span>Ley 20.950</td><td><span class="sg"></span></td><td>Confirmar el box</td></tr>
+      <tr class="hl"><td><b>México</b></td><td><span class="so"></span>IVA del anticipo</td><td><span class="sr"></span>Ley antilavado</td><td><span class="sg"></span></td><td><b>Chequeo inmediato</b></td></tr>
+      <tr><td><b>Perú</b></td><td><span class="sg"></span>IGV al canjear</td><td><span class="sg"></span></td><td><span class="sg"></span></td><td>—</td></tr>
+      <tr><td><b>Uruguay</b></td><td><span class="sy"></span>Sin criterio</td><td><span class="sy"></span></td><td><span class="sg"></span></td><td>Consulta DGI</td></tr>
+      <tr><td><b>Colombia</b></td><td><span class="sg"></span>IVA al canjear</td><td><span class="sg"></span></td><td><span class="so"></span>Mínimo 1 año</td><td>T&amp;C de la SIC</td></tr>
+      <tr><td><b>Brasil</b></td><td><span class="sr"></span>Reforma sin regla</td><td><span class="so"></span>Banco Central</td><td><span class="sy"></span></td><td>Due diligence</td></tr>
+    </table>
+  </div>
+  <p class="kicker">El único diseño en verde en los 7 países: <b>self-service pospago, "pagás lo canjeado".</b> No es asesoramiento legal.</p>
+</section>
+
+<!-- 20. SECCIÓN: BIGBOX -->
+<section class="slide">
+  <div class="panel">
+    <div class="eyebrow"><span>Nosotros</span><i class="dot"></i></div>
+    <h2 class="h1">Dónde<br>está<br>Bigbox.</h2>
+    <ul>
+      <li><b>USD 8,4M</b> en el canal corporativo 2025. +12% en 2026.</li>
+      <li><b>Gift cards: ~8-9%</b> del mix. Somos un jugador de experiencias.</li>
+      <li><b>~0,5% de cuota</b> en nuestros 5 países.</li>
+      <li><b>+6.000 experiencias en 5 países.</b> Nadie más lo tiene.</li>
+    </ul>
+  </div>
+  <img class="photo" src="assets/brindis.jpg" alt="brindis">
+</section>
+
+<!-- 21. CUOTA POR PAÍS -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>La oportunidad</span><i class="dot"></i></div>
+    <h2 class="h1 light" style="margin-top:34px">México: el mercado más grande. <b>Nuestra cuota más chica.</b></h2>
+    <table class="dtable">
+      <tr><th>País</th><th>Mercado corporativo est.</th><th>Ventas Bigbox 2025</th><th>Cuota</th><th>2026 vs 2025</th></tr>
+      <tr><td><b>Uruguay</b></td><td>~USD 30M</td><td>USD 1,25M</td><td><b>~4%</b></td><td>−3%</td></tr>
+      <tr><td><b>Argentina</b></td><td>~USD 240M</td><td>USD 3,55M</td><td>~1,5%</td><td>+7%</td></tr>
+      <tr><td><b>Perú</b></td><td>~USD 150M</td><td>USD 1,39M</td><td>~0,9%</td><td>+7%</td></tr>
+      <tr><td><b>Chile</b></td><td>~USD 240M</td><td>USD 0,90M</td><td>~0,4%</td><td>+14%</td></tr>
+      <tr class="hl"><td><b>México</b></td><td><b>~USD 900M</b></td><td>USD 1,34M</td><td><b>~0,15%</b></td><td><b>+50%</b></td></tr>
+      <tr><td><b>Total</b></td><td>~USD 1.560M</td><td>USD 8,42M</td><td>~0,5%</td><td>+12%</td></tr>
+    </table>
+  </div>
+  <p class="kicker">Ventas: sheet de Ventas, canal corporativo, USD sin IVA. Mercado: estimación propia de confianza baja. <b>Llegar a 1% en México suma USD 7-8M.</b></p>
+</section>
+
+<!-- 22. POSICIONAMIENTO -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>El espejo</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Lo que el mercado premia. Lo que tenemos hoy.</h2>
+    <table class="dtable">
+      <tr><th>Lo que el mercado premia</th><th>Bigbox hoy</th></tr>
+      <tr><td><b>Ingreso recurrente</b></td><td><span class="so"></span>Plataforma de Incentivos existe, pesa poco</td></tr>
+      <tr><td><b>Self-service sin mínimo</b></td><td><span class="sr"></span>Mínimo de 20 unidades, venta con ejecutivo</td></tr>
+      <tr><td><b>Tarjeta a elección (experiencia + marca)</b></td><td><span class="so"></span>Tenemos las dos mitades por separado</td></tr>
+      <tr><td><b>Presencia en plataformas de terceros</b></td><td><span class="sr"></span>No</td></tr>
+      <tr><td><b>Integración por API</b></td><td><span class="sr"></span>No</td></tr>
+      <tr class="hl"><td><b>Catálogo propio multipaís</b></td><td><span class="sg"></span>+6.000 experiencias en 5 países. Diferencial real</td></tr>
+    </table>
+  </div>
+  <p class="kicker">Tenemos el activo difícil de copiar. <b>Nos falta la capa que lo vuelve recurrente y distribuible.</b></p>
+</section>
+
+<!-- 23. OPORTUNIDADES ALTAS -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>Las apuestas</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Cuatro oportunidades de prioridad alta.</h2>
+    <div class="cards c4">
+      <div class="card"><h3>México.</h3><p>2.º mercado, ~0,15% de cuota, +50% este año. Llegar a 1% = +USD 7-8M.</p></div>
+      <div class="card"><h3>Self-service pospago.</h3><p>Sin mínimo de unidades. "Pagás lo canjeado". El diseño en verde en los 7 países.</p></div>
+      <div class="card"><h3>Capa recurrente.</h3><p>Plataforma de Incentivos con suscripción y saldo prepagado. Es lo que se valúa 12x.</p></div>
+      <div class="card"><h3>Dentro de plataformas.</h3><p>Experiencias Bigbox en Pluxee, Edenred, Bonda, Flash y billeteras.</p></div>
+    </div>
+  </div>
+  <p class="kicker">Las cuatro se apoyan en lo que ya tenemos: <b>el catálogo multipaís.</b></p>
+</section>
+
+<!-- 24. OPORTUNIDADES SIGUIENTES -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>Lo que sigue</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Cinco más, para la segunda ola.</h2>
+    <div class="tiles">
+      <div class="tile"><h3><span>05.</span>Incentivos a canal</h3><p>El pool B2B más grande. Para Marketing y Trade.</p></div>
+      <div class="tile"><h3><span>06.</span>Tarjeta a elección</h3><p>Experiencia + marca. Marcas vía Runa o Blackhawk, sin construir.</p></div>
+      <div class="tile"><h3><span>07.</span>Topes fiscales</h3><p>Productos para "prêmio" en Brasil y "canasta" en Perú.</p></div>
+      <div class="tile"><h3><span>08.</span>Brasil</h3><p>La mitad del mercado. Entrar por clientes (Lobby), no por catálogo.</p></div>
+      <div class="tile"><h3><span>09.</span>API e IA</h3><p>Disparo automático por cumpleaños y aniversario: recurrencia sin vendedor.</p></div>
+      <div class="tile soft"><h3>Cuidado</h3><p>En Brasil, Pluxee, Flash e iFood bajan a premiación.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 25. CANDIDATOS M&A -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>La lista de compras</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Qué cambia en la lista de la estrategia 3x.</h2>
+    <table class="dtable sm">
+      <tr><th>Candidato</th><th>Lo nuevo</th><th>Qué hacer</th></tr>
+      <tr><td><b>FANBAG / Happier</b></td><td>FANBAG Colombia es chica (meta USD 600K) y ya planeamos abrir Colombia por nuestra cuenta</td><td>Recalcular el precio: el valor está en AR/PY + Happier</td></tr>
+      <tr><td><b>IMMA</b> (BR)</td><td>No pudimos verificar existencia ni cifras</td><td>Validar antes de avanzar</td></tr>
+      <tr class="hl"><td><b>Lobby</b> (BR) · nuevo</td><td>Regalos corporativos, +40% anual, rentable, sin VC. Boticário, Bayer, Tetra Pak</td><td>Entrada a Brasil por la base de clientes</td></tr>
+      <tr><td><b>Oh! Gift Card</b> · nuevo</td><td>Gift cards multimarca en AR, UY, CL y PE</td><td>Completa marcas sin depender de Blackhawk</td></tr>
+      <tr><td><b>Centiva</b> (MX) · nuevo</td><td>Incentivos a canal, 20+ años</td><td>Entrada al white space más grande</td></tr>
+    </table>
+  </div>
+  <p class="kicker">Rango orientativo: experiencias 4-7x EBITDA sin breakage; SaaS chico 3-6x ARR. <b>A validar con un asesor de M&amp;A.</b></p>
+</section>
+
+<!-- 26. RIESGOS -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>Lo que puede salir mal</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Seis riesgos y cómo cubrirlos.</h2>
+    <table class="dtable sm">
+      <tr><th>Riesgo</th><th>Cobertura</th></tr>
+      <tr><td><b>Un fondo valúa sobre ingreso neto, no sobre facturación bruta</b></td><td>Reexpresar el P&amp;L antes de levantar capital</td></tr>
+      <tr><td><b>Ley antilavado en México</b></td><td>Chequeo inmediato con un estudio</td></tr>
+      <tr><td><b>Licencia de pagos para vouchers multi-proveedor</b> (mydays: €3,9M de multa)</td><td>Separar experiencias propias de gift cards de terceros</td></tr>
+      <tr><td><b>IVA al vender el box o el saldo</b> (AR, MX, UY)</td><td>Dictamen por país</td></tr>
+      <tr><td><b>Dependencia del breakage</b></td><td>Medirlo por cohorte; no presentarlo como motor</td></tr>
+      <tr><td><b>Fondos de clientes mezclados</b> (caso Blueboard)</td><td>Cuentas separadas: además es argumento de venta</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 27. PLAN -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>El plan</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Qué hacemos y cuándo.</h2>
+    <div class="steps s3">
+      <div class="step"><span class="n">1</span><h3>Ya.</h3><p>Corregir las cifras que circulan. Chequear la ley antilavado en México. Dictamen de IVA en AR, MX y UY. Alinear la cifra base de Bigbox.</p></div>
+      <div class="step"><span class="n">2</span><h3>3 meses.</h3><p>Reexpresar el P&amp;L (neto + breakage + float). MVP del self-service pospago sin mínimo. Comprar el databook PayNXT. Cotizar marcas con Runa, Blackhawk y Tillo.</p></div>
+      <div class="step"><span class="n">3</span><h3>6-12 meses.</h3><p>Alianzas con plataformas de beneficios. Plan México. Oferta de incentivos a canal. Lista de compras actualizada y data rooms.</p></div>
+    </div>
+  </div>
+  <p class="kicker">Y en el modelo 3x: <b>el mercado crece ~10-11% en USD, no ~6%.</b></p>
+</section>
+
+<!-- 28. HUECOS -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>Lo que no sabemos</span><i class="dot"></i></div>
+    <h2 class="h1" style="margin-top:34px">Cinco datos que faltan y cómo conseguirlos.</h2>
+    <table class="dtable sm">
+      <tr><th>Hueco</th><th>Cómo se cierra</th><th>Costo</th></tr>
+      <tr class="hl"><td><b>Corte B2B real por país en LATAM</b></td><td>Databook PayNXT360 LATAM 2026 o encuesta a 100-200 compradores</td><td>USD 2-4K</td></tr>
+      <tr><td><b>Finanzas de los candidatos</b></td><td>NDA + bases de registros (EMIS, Cámara de Comercio, Receita)</td><td>Bajo-medio</td></tr>
+      <tr><td><b>Breakage por cohorte en experiencias</b></td><td>Nuestros propios datos</td><td>Interno</td></tr>
+      <tr><td><b>Criterio fiscal en AR, MX, UY y Brasil</b></td><td>Consultas formales o estudio local</td><td>Medio</td></tr>
+      <tr><td><b>Comprador corporativo LATAM</b></td><td>Encuesta a nuestra base (Doppler + HubSpot)</td><td>Bajo</td></tr>
+    </table>
+  </div>
+  <p class="kicker">Todo el detalle, con fuente y confianza por cifra, <b>está en el documento del estudio.</b></p>
+</section>
+
+<!-- 29. CIERRE -->
+<section class="slide statement">
+  <div class="eyebrow"><span>Gift cards 2026</span><i class="dot" style="background:#fff;opacity:.6"></i></div>
+  <div>
+    <h2 class="h1">LATAM no necesita otro Smartbox.<br><b>Necesita experiencias dentro de cada plataforma, con recurrencia debajo.</b></h2>
+    <p class="breadcrumb">El catálogo ya lo tenemos <i>›</i> Falta volverlo recurrente y distribuible.</p>
+  </div>
+</section>
+
+</div></div>
+<div id="dots"></div>
+<div id="hint">← → navegar · F pantalla completa</div>
+
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+const dots = document.getElementById('dots');
+let i = 0;
+
+slides.forEach((_, n) => {
+  const b = document.createElement('b');
+  b.onclick = () => go(n);
+  dots.appendChild(b);
+});
+
+function go(n) {
+  i = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach((s, k) => s.classList.toggle('on', k === i));
+  [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
+}
+
+// Centrado calculado a mano: place-items:center sobre un hijo de 1920px
+// desborda antes de escalar y descentra el deck. Esto no falla.
+function fit() {
+  const deck = document.getElementById('deck');
+  const pad = document.fullscreenElement ? 0 : 44;   // aire para los dots
+  const s = Math.min(innerWidth / 1920, (innerHeight - pad) / 1080);
+  deck.style.transform = `scale(${s})`;
+  deck.style.left = Math.round((innerWidth - 1920 * s) / 2) + 'px';
+  deck.style.top = Math.round((innerHeight - pad - 1080 * s) / 2) + 'px';
+}
+
+addEventListener('resize', fit);
+document.addEventListener('fullscreenchange', fit);
+addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(i + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(i - 1);
+  if (e.key === 'Home') go(0);
+  if (e.key === 'End') go(slides.length - 1);
+  if (e.key.toLowerCase() === 'f') document.documentElement.requestFullscreen?.();
+});
+document.getElementById('stage').onclick = () => go(i + 1);
+
+fit(); go(0);
+</script>
+</body>
+</html>
