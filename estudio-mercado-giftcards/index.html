@@ -400,6 +400,19 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .legend i{display:inline-block;width:22px;height:22px;border-radius:6px}
 .legend .lg-c{background:var(--accent)}
 .legend .lg-o{background:var(--ink);margin-left:18px}
+.ychart{display:grid;grid-template-columns:repeat(6,1fr);gap:36px;align-items:end;margin-top:22px;height:320px}
+.ycol{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.ytot{font-size:28px;font-weight:700;margin-bottom:10px}
+.stack{width:160px;display:flex;flex-direction:column;gap:4px}
+.seg{border-radius:10px;color:#fff;font-size:21px;font-weight:600;display:flex;align-items:center;justify-content:center;transform-origin:bottom}
+.seg.c{background:var(--accent)}
+.seg.o{background:var(--ink)}
+.yr{font-size:22px;color:var(--mute);margin-top:12px}
+.ytab{margin-top:20px}
+.ytab td,.ytab th{text-align:center}
+.ytab td:first-child,.ytab th:first-child{text-align:left}
+@keyframes rise{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.slide.on .seg{animation:rise .7s .35s cubic-bezier(.2,.8,.25,1) both}
 </style>
 </head>
 <body>
@@ -503,6 +516,27 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <p class="kicker"><i style="font-style:normal;color:var(--accent)">●</i> Países Bigbox: ~USD 7,5B, el 45% de la región. <b>Corte closed/open: estimación propia.</b></p>
   <p class="src">Fuentes: PayNXT360 ediciones 2025 y 2026 por país · IMARC y Expert Market Research (Colombia) · corte closed/open: estimación propia (no hay dato público; está en el reporte pago de PayNXT360) · * Perú y Uruguay: tamaño estimado con el % del PBI de los comparables (PBI FMI 2025).</p>
 </section>
+
+<!-- PROYECCIÓN POR LOOP -->
+<section class="slide">
+  <img class="cobrand" src="assets/logo-corpo-negro.png" alt="">
+  <div class="pad">
+    <div class="eyebrow"><span>La proyección por tipo</span><i class="dot"></i></div>
+    <h2 class="h1 light" style="margin-top:34px">De USD 16,3B a 27B en 2030. <b>Las marcas crecen más rápido.</b></h2>
+    <p class="lead" style="margin-top:16px">LATAM, en miles de millones de USD.
+      <span class="legend"><i class="lg-c"></i>Closed-loop: marcas · ~11,5% anual <i class="lg-o"></i>Open-loop: dinero · ~9% anual</span></p>
+    <div class="ychart"><div class="ycol"><b class="ytot">16,3</b><div class="stack"><div class="seg o" style="height:47px">5,6</div><div class="seg c" style="height:91px">10,7</div></div><span class="yr">2025</span></div><div class="ycol"><b class="ytot">18,0</b><div class="stack"><div class="seg o" style="height:52px">6,1</div><div class="seg c" style="height:101px">11,9</div></div><span class="yr">2026</span></div><div class="ycol"><b class="ytot">19,9</b><div class="stack"><div class="seg o" style="height:56px">6,6</div><div class="seg c" style="height:114px">13,3</div></div><span class="yr">2027</span></div><div class="ycol"><b class="ytot">22,1</b><div class="stack"><div class="seg o" style="height:61px">7,2</div><div class="seg c" style="height:126px">14,8</div></div><span class="yr">2028</span></div><div class="ycol"><b class="ytot">24,4</b><div class="stack"><div class="seg o" style="height:68px">7,9</div><div class="seg c" style="height:141px">16,5</div></div><span class="yr">2029</span></div><div class="ycol"><b class="ytot">27,0</b><div class="stack"><div class="seg o" style="height:73px">8,6</div><div class="seg c" style="height:157px">18,4</div></div><span class="yr">2030</span></div></div>
+    <table class="dtable xs ytab">
+      <tr><th>5 países Bigbox</th><th>2025</th><th>2026</th><th>2027</th><th>2028</th><th>2029</th><th>2030</th></tr>
+      <tr><td><b>Closed-loop</b></td><td>4,8</td><td>5,3</td><td>6,0</td><td>6,6</td><td>7,4</td><td>8,2</td></tr>
+      <tr><td><b>Open-loop</b></td><td>2,9</td><td>3,2</td><td>3,5</td><td>3,8</td><td>4,1</td><td>4,5</td></tr>
+    </table>
+  </div>
+  <p class="kicker">En 2030 las marcas serían ~68% del mercado, contra 66% hoy. <b>Es un escenario de confianza baja.</b></p>
+  <p class="src">Fuentes: total 2025-2030, PayNXT360 (USD 16,3B en 2025, crecimiento anual de 10,5%) · tasas por tipo: escenario propio del anexo F, consistente con Straits (el closed es el que más crece en LATAM) · 5 países: mismas tasas sobre el corte por país.</p>
+</section>
+
+
 
 <!-- LOOP A. DEFINICIÓN -->
 <section class="slide">
