@@ -392,6 +392,14 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .dtable.xs{font-size:19px;margin-top:36px}
 .dtable.xs td{padding:11px 18px}
 .dtable a{color:var(--text);text-decoration:none;border-bottom:2px solid var(--accent);white-space:nowrap}
+.bar-row.split{grid-template-columns:300px 1fr 300px}
+.bar-row.split .track{display:flex;gap:4px;background:var(--paper-2)}
+.bar-row.split .fill{border-radius:10px}
+.bar-row.split .v em{font-style:normal;font-weight:500;font-size:21px;color:var(--mute);margin-left:10px}
+.legend{display:flex;align-items:center;gap:12px;margin-top:12px;font-size:24px;color:var(--text)}
+.legend i{display:inline-block;width:22px;height:22px;border-radius:6px}
+.legend .lg-c{background:var(--accent)}
+.legend .lg-o{background:var(--ink);margin-left:18px}
 </style>
 </head>
 <body>
@@ -480,19 +488,20 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   <div class="pad">
     <div class="eyebrow"><span>El mapa</span><i class="dot"></i></div>
     <h2 class="h1" style="margin-top:34px">Brasil solo es más grande que nuestros 5 países juntos.</h2>
-    <p class="lead" style="margin-top:20px">Mercado de gift cards 2025, en miles de millones de USD.</p>
+    <p class="lead" style="margin-top:20px">Mercado de gift cards 2025, en miles de millones de USD.
+      <span class="legend"><i class="lg-c"></i>Closed-loop: marcas <i class="lg-o"></i>Open-loop: dinero</span></p>
     <div class="bars">
-      <div class="bar-row"><span>Brasil</span><div class="track"><div class="fill ink" style="width:100%"></div></div><span class="v">8,1</span></div>
-      <div class="bar-row"><span>México <i>●</i></span><div class="track"><div class="fill" style="width:53%"></div></div><span class="v">4,3</span></div>
-      <div class="bar-row"><span>Chile <i>●</i></span><div class="track"><div class="fill" style="width:15.5%"></div></div><span class="v">1,3</span></div>
-      <div class="bar-row"><span>Argentina <i>●</i></span><div class="track"><div class="fill" style="width:14.8%"></div></div><span class="v">1,2</span></div>
-      <div class="bar-row"><span>Colombia</span><div class="track"><div class="fill ink" style="width:14.5%"></div></div><span class="v">1,1-1,3</span></div>
-      <div class="bar-row"><span>Perú <i>●</i></span><div class="track"><div class="fill" style="width:9%"></div></div><span class="v">0,6-0,85*</span></div>
-      <div class="bar-row"><span>Uruguay <i>●</i></span><div class="track"><div class="fill" style="width:2.5%"></div></div><span class="v">0,15-0,25*</span></div>
+      <div class="bar-row split"><span>Brasil</span><div class="track"><div class="fill" style="width:72.8%"></div><div class="fill ink" style="width:27.2%"></div></div><span class="v">8,1 <em>5,9 + 2,2</em></span></div>
+      <div class="bar-row split"><span>México <i>●</i></span><div class="track"><div class="fill" style="width:30.9%"></div><div class="fill ink" style="width:22.2%"></div></div><span class="v">4,3 <em>2,5 + 1,8</em></span></div>
+      <div class="bar-row split"><span>Chile <i>●</i></span><div class="track"><div class="fill" style="width:11.1%"></div><div class="fill ink" style="width:4.3%"></div></div><span class="v">1,3 <em>0,9 + 0,35</em></span></div>
+      <div class="bar-row split"><span>Argentina <i>●</i></span><div class="track"><div class="fill" style="width:9.3%"></div><div class="fill ink" style="width:5.6%"></div></div><span class="v">1,2 <em>0,75 + 0,45</em></span></div>
+      <div class="bar-row split"><span>Colombia</span><div class="track"><div class="fill" style="width:5.7%"></div><div class="fill ink" style="width:7.8%"></div></div><span class="v">1,1 <em>0,46 + 0,63</em></span></div>
+      <div class="bar-row split"><span>Perú <i>●</i></span><div class="track"><div class="fill" style="width:6.2%"></div><div class="fill ink" style="width:3.1%"></div></div><span class="v">~0,75* <em>~0,5 + ~0,25</em></span></div>
+      <div class="bar-row split"><span>Uruguay <i>●</i></span><div class="track"><div class="fill" style="width:1.7%"></div><div class="fill ink" style="width:0.9%"></div></div><span class="v">~0,2* <em>~0,14 + ~0,07</em></span></div>
     </div>
   </div>
-  <p class="kicker"><i style="font-style:normal;color:var(--accent)">●</i> Países Bigbox: ~USD 7,5B, el 45% de la región. <b>* Perú y Uruguay: estimación propia.</b></p>
-  <p class="src">Fuentes: PayNXT360 ediciones 2025 y 2026 por país · IMARC y Expert Market Research (Colombia) · Perú y Uruguay: estimación propia con el % del PBI de los comparables (PBI FMI 2025).</p>
+  <p class="kicker"><i style="font-style:normal;color:var(--accent)">●</i> Países Bigbox: ~USD 7,5B, el 45% de la región. <b>Corte closed/open: estimación propia.</b></p>
+  <p class="src">Fuentes: PayNXT360 ediciones 2025 y 2026 por país · IMARC y Expert Market Research (Colombia) · corte closed/open: estimación propia (no hay dato público; está en el reporte pago de PayNXT360) · * Perú y Uruguay: tamaño estimado con el % del PBI de los comparables (PBI FMI 2025).</p>
 </section>
 
 <!-- LOOP A. DEFINICIÓN -->
